@@ -1,12 +1,13 @@
 # laminas-book
 
-This is a "migration" of the Zend Framework 3 book by Oleg Krivtsov to the Laminas framework.
+This is a "migration" of the Zend Framework 3 book by Oleg Krivtsov to the Laminas framework. The new Laminas version is now
+maintained by Raffael Luthiger.
+
+The book can be found at https://modir.github.io/laminas-book/
 
 ## Technical Information
 
-The whole documentation is now generated with https://www.mkdocs.org/
-
-The whole configuration is in mkdocs.yml.
+The whole documentation is now generated with https://www.mkdocs.org/ hence the configuration file mkdocs.yml.
 
 If you want to make bigger changes and test everything first locally then I recommend you to go through the Getting Started
 guide at https://www.mkdocs.org/getting-started/ first.
@@ -20,5 +21,9 @@ and should be updated as well. Everyone is welcome to make merge requests.
 
 In the first step I would like to resolve as many problems as possible. In the next step I would like to modernize the code
 and make everything type safe as it should be these days with PHP 8.x.
+
+The old book had other languages as well but while going through it I have seen that most of them have only one or two chapters.
+At the moment it is better to focus on the english version. The book can still be translated later with e.g. Google translate once
+the english version is in a good stable state.
 
 I welcome everyone to give feedback about the book. Helping hands are welcome.
