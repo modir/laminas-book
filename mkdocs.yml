@@ -1,6 +1,7 @@
 site_name: Using Laminas Framework
 site_url: https://modir.github.io/
 repo_url: https://github.com/modir/laminas-book
+edit_uri: edit/main/docs/
 nav:
   - index.md
   - intro.md
