@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/users/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>User Management, Authentication and Access Filtering - Using Laminas Framework</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "User Management, Authentication and Access Filtering";
+        var mkdocs_page_input_path = "users.md";
+        var mkdocs_page_url = "/users/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Using Laminas Framework
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Preface</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">None</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../acknowledgments/">Acknowledgments</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction to Laminas Framework</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../skeleton/">Laminas Skeleton Application</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operation/">Website Operation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../mvc/">Model-View-Controller</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../routing/">Routing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../appearance/">Page Appearance and Layout</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms/">Collecting User Input with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../filters/">Transforming Input Data with Filters</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../validators/">Checking Input Data with Validators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../uploads/">Uploading Files with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms_advanced/">Advanced Usage of Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine/">Database Management with Doctrine ORM</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_migrations/">Database Migrations</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../modules/">Creating a New Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../session/">Working with Sessions</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">User Management, Authentication and Access Filtering</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#get-user-demo-sample-from-github">Get User Demo Sample from GitHub</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creating-the-user-module">Creating the User Module</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-the-database">Setting Up the Database</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementing-user-entity">Implementing User Entity</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-usercontroller">Adding UserController</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-usermanager-service">Adding UserManager Service</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-new-user-storing-password-encrypted">Creating a New User &amp; Storing Password Encrypted</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#validating-encrypted-password">Validating Encrypted Password</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-admin-user">Creating Admin User</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#resetting-user-password">Resetting User Password</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementing-user-authentication">Implementing User Authentication</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#authenticationservice">AuthenticationService</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#writing-authentication-adapter">Writing Authentication Adapter</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-the-factory-for-authenticationservice">Creating the Factory for AuthenticationService</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-authcontroller">Adding AuthController</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-view-template-for-login-page">Adding View Template for Login Page</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-authmanager-service">Adding AuthManager Service</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#access-filtering">Access Filtering</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-dispatch-event-listener">Adding Dispatch Event Listener</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#implementing-access-filtering-algorithm">Implementing Access Filtering Algorithm</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-access-filter">Testing Access Filter</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#identity-controller-plugin-and-view-helper">Identity Controller Plugin and View Helper</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../roles/">Role-Based Access Control</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../devenv/">Appendix A. Configuring Web Development Environment</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../netbeans/">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bootstrap/">Appendix C. Introduction to Twitter Bootstrap</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_intro/">Appendix D. Introduction to Doctrine</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ec2_tutorial/">Appendix E. Installing a Laminas Web Application to Amazon EC2</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Using Laminas Framework</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">User Management, Authentication and Access Filtering</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/modir/laminas-book/edit/master/docs/users.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="user-management-authentication-and-access-filtering">User Management, Authentication and Access Filtering</h1>
+<p>Most websites on the Internet allow their visitors to register on the site and create a profile. After that, the
+visitor can log in and have a personalized experience. For example, in a E-commerce
+website, a registered user can buy goods, manage their shopping cart and make a payment with a credit card.</p>
+<p>In this chapter, you will learn how to implement user authentication with login and password in a Laminas website.
+We will show how to manage users (add, edit, view and change/reset password) in your web application and store users' passwords in the database
+securely. You will also learn how to implement an access filter and allow certain pages to be accessed by authenticated users only.</p>
+<p>Since you already know a lot about Laminas from reading previous chapters, in this chapter we will
+omit discussing some obvious things and concentrate on <em>conceptual</em> moments only. It is recommended that you refer to
+the <em>User Demo</em> sample bundle with this book, which is a complete website that you can run and see everything in action.
+All code discussed in this chapter is part of this sample application.</p>
+<p>Laminas components covered in this chapter:</p>
+<table>
+<thead>
+<tr>
+<th><em>Component</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@<code>Laminas\Authentication</code></td>
+<td>Provides user authentication feature.</td>
+</tr>
+<tr>
+<td>@<code>Laminas\Crypt</code></td>
+<td>Provides functionality for password encryption.</td>
+</tr>
+<tr>
+<td>@<code>Laminas\Math</code></td>
+<td>Provides functionality for generating secure random tokens.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="get-user-demo-sample-from-github">Get User Demo Sample from GitHub</h2>
+<p>For demonstration, in this chapter, we will create a real-life <em>User Demo</em> website
+that shows how to:</p>
+<ul>
+<li>Create a new module named <em>User</em>. This module will contain the functionality for user authentication and user management.</li>
+<li>Create <code>User</code> entity.</li>
+<li>Implement storing users' passwords in a database securely.</li>
+<li>Implement user authentication (with login and password).</li>
+<li>Implement an access filter to provide access to certain pages to authenticated users only.</li>
+<li>Implement user management UI that allows adding, editing, and viewing a user, and changing user's password.</li>
+<li>Implement main menu items differently based on whether the current user is logged in or not.</li>
+</ul>
+<p>To download the <em>User Demo</em> application, visit <a href="https://github.com/olegkrivtsov/using-laminas-book-samples">this page</a>
+and click the <em>Clone or Download</em> button to download the code as a ZIP archive.
+When download is complete, unpack the archive to some directory.</p>
+<p>Then navigate to the <code>userdemo</code> directory containing the
+source code of the <em>User Demo</em> web application:</p>
+<pre><code class="language-text">/using-laminas-book-samples
+  /userdemo
+  ...
+</code></pre>
+<p>The <em>User Demo</em> is a website which can be installed on your machine.</p>
+<blockquote>
+<p>Detailed instructions on how to install the <em>User Demo</em> sample can be found in <em>README.md</em> file located in the sample directory.</p>
+</blockquote>
+<h2 id="creating-the-user-module">Creating the User Module</h2>
+<p>In the <em>User Demo</em> sample, we create a new module called <em>User</em> and add all functionality
+related to user management and authentication to that module. If you are new
+to the concept of modules, refer to chapter <a href="#modules">Creating a New Module</a>.</p>
+<p>The <em>User</em> module will have very few dependencies on other
+modules of the website. The idea behind the <em>User</em> module is to give you a reusable unit that you can use in your own web
+application, without any changes or with some modifications.</p>
+<blockquote>
+<p>Ideally, you will be able to use the <em>User</em> module in your own website without any changes. But, in real-life
+websites, you'll probably have to add some fields to the <code>user</code> table, modify the user creation workflow, or
+modify the access filtering algorithm. It this case, you'll have to customize the code of the <em>User</em> module
+to feet your needs.</p>
+</blockquote>
+<p>The <em>User</em> module will have the following structure (see figure 16.1 below):</p>
+<p><img alt="Figure 16.1 Structure of the User module" src="../images/users/user_module_structure.png" /></p>
+<p>Let's briefly describe what classes we will have inside module's directory.</p>
+<p>We will have two controllers:</p>
+<ul>
+<li>The <em>UserController</em> will contain functionality for managing users (adding, editing, changing password, etc.)</li>
+<li>The <em>AuthController</em> will implement user authentication functionality (login/logout).</li>
+</ul>
+<p>There will be one Doctrine entity:</p>
+<ul>
+<li>The <em>User</em> entity will be used to store information about the user in database (email, full name, password, etc).</li>
+</ul>
+<p>We will have four forms used to collect data:</p>
+<ul>
+<li>The <em>LoginForm</em> will be used to collect data for authentication (login and password).</li>
+<li>The <em>PasswordChangeForm</em> will be used to collect data for changing or resetting user's password.</li>
+<li>The <em>PasswordResetForm</em> will be used to collect the E-mail of the person who forgot his/her password and wishes to reset the password.</li>
+<li>The <em>UserForm</em> will be used to collect data about the user (email, full name, password, etc).</li>
+</ul>
+<p>We will have several services:</p>
+<ul>
+<li>The <em>AuthAdapter</em> service will implement the authentication algorithm. It will check if the user login (E-mail address)
+    and password are correct. For performing that, it will retrieve the user information from a database.</li>
+<li>The <em>AuthManager</em> service will perform actual authentication (login/logout). It will also implement
+    the access filter allowing or denying unauthenticated users access to certain web pages.</li>
+<li>The <em>UserManager</em> will contain business logic of managing users (adding, editing, changing password).</li>
+</ul>
+<p>Most controllers and services will be instantiated with factories. You can find the factory classes under the
+<em>Factory</em> subdirectories.</p>
+<p>Inside the <em>view</em> directory, we will have several view templates which will render HTML markup of the web pages
+present in the user interface exposed by our module.</p>
+<p>As usual, inside the <em>config</em> directory, we will have the <em>module.config.php</em> file that will contain routes and registration for our controllers and
+services. It will also contain the <em>access_filter</em> key defining which pages will be accessible to an
+unauthenticated user (this key will be read by <em>AuthManager</em> service).</p>
+<p>As you can see, the <em>User</em> module is a typical Laminas module with the structure conforming to the MVC pattern.</p>
+<h2 id="setting-up-the-database">Setting Up the Database</h2>
+<p>We will need to set up a sample "userdemo" database. The database will have a single table named <code>user</code> for
+storing data associated with users of our website (see figure 16.2 below).</p>
+<p><img alt="Figure 16.2 User table" src="../images/users/userdemo_database_schema.png" /></p>
+<p>The <code>user</code> table contains the following fields:</p>
+<ul>
+<li>the <code>id</code> is an auto-incremented integer field (primary key).</li>
+<li>the <code>email</code> is a string field containing user's E-mail address. Each user will have a unique E-mail address, so this field is a unique key, too.</li>
+<li>the <code>full_name</code> string field will contain the full name of a user (like "John Doe").</li>
+<li>the <code>status</code> integer field will contain user's status (either "active" or "retired"). Retired users are not allowed to log in.</li>
+<li>the <code>date_created</code> contains date and time when the user was created.</li>
+<li>the <code>pwd_reset_token</code> and <code>pwd_reset_token_creation_date</code> fields are used for password resetting (when the user forgets his/her password and needs to reset it).</li>
+</ul>
+<blockquote>
+<p>In your own website, you will likely want to add more fields to the <code>user</code> table.
+In this sample, we only define some minimum set of fields.</p>
+</blockquote>
+<p>You can create the <code>user</code> table with the following SQL statement:</p>
+<pre><code>CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(128) NOT NULL,
+  `full_name` varchar(512) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `status` int(11) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `pwd_reset_token` varchar(32) DEFAULT NULL,
+  `pwd_reset_token_creation_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_idx` (`email`)
+);
+</code></pre>
+<p>You can find a migration, which creates the <code>user</code> table, in the <em>User Demo</em> sample application.</p>
+<blockquote>
+<p>If you are new to migrations, refer to chapter <a href="#migrations">Database Migrations</a>.</p>
+</blockquote>
+<h2 id="implementing-user-entity">Implementing User Entity</h2>
+<p>The <em>User Demo</em> sample uses Doctrine ORM for managing the database. We have already learned how to use Doctrine in
+<a href="#doctrine">Database Management with Doctrine ORM</a>.</p>
+<p>For storing information about users in the database, we will create the <code>User</code> entity. The <code>User</code> entity is mapped
+onto the <code>user</code> database table. It is a typical Doctrine entity class.</p>
+<p>Create the <em>User.php</em> file inside the <em>Entity</em> directory under the module's source directory. Put
+the following code into that file:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * This class represents a registered user.
+ * @ORM\Entity()
+ * @ORM\Table(name=&quot;user&quot;)
+ */
+class User
+{
+    // User status constants.
+    const STATUS_ACTIVE       = 1; // Active user.
+    const STATUS_RETIRED      = 2; // Retired user.
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(name=&quot;id&quot;)
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(name=&quot;email&quot;)
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(name=&quot;full_name&quot;)
+     */
+    protected $fullName;
+
+    /**
+     * @ORM\Column(name=&quot;password&quot;)
+     */
+    protected $password;
+
+    /**
+     * @ORM\Column(name=&quot;status&quot;)
+     */
+    protected $status;
+
+    /**
+     * @ORM\Column(name=&quot;date_created&quot;)
+     */
+    protected $dateCreated;
+
+    /**
+     * @ORM\Column(name=&quot;pwd_reset_token&quot;)
+     */
+    protected $passwordResetToken;
+
+    /**
+     * @ORM\Column(name=&quot;pwd_reset_token_creation_date&quot;)
+     */
+    protected $passwordResetTokenCreationDate;
+
+    /**
+     * Returns user ID.
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this-&gt;id;
+    }
+
+    /**
+     * Sets user ID.
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this-&gt;id = $id;
+    }
+
+    /**
+     * Returns email.
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this-&gt;email;
+    }
+
+    /**
+     * Sets email.
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this-&gt;email = $email;
+    }
+
+    /**
+     * Returns full name.
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this-&gt;fullName;
+    }
+
+    /**
+     * Sets full name.
+     * @param string $fullName
+     */
+    public function setFullName($fullName)
+    {
+        $this-&gt;fullName = $fullName;
+    }
+
+    /**
+     * Returns status.
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this-&gt;status;
+    }
+
+    /**
+     * Returns possible statuses as array.
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        return [
+            self::STATUS_ACTIVE =&gt; 'Active',
+            self::STATUS_RETIRED =&gt; 'Retired'
+        ];
+    }
+
+    /**
+     * Returns user status as string.
+     * @return string
+     */
+    public function getStatusAsString()
+    {
+        $list = self::getStatusList();
+        if (isset($list[$this-&gt;status]))
+            return $list[$this-&gt;status];
+
+        return 'Unknown';
+    }
+
+    /**
+     * Sets status.
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this-&gt;status = $status;
+    }
+
+    /**
+     * Returns password.
+     * @return string
+     */
+    public function getPassword()
+    {
+       return $this-&gt;password;
+    }
+
+    /**
+     * Sets password.
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this-&gt;password = $password;
+    }
+
+    /**
+     * Returns the date of user creation.
+     * @return string
+     */
+    public function getDateCreated()
+    {
+        return $this-&gt;dateCreated;
+    }
+
+    /**
+     * Sets the date when this user was created.
+     * @param string $dateCreated
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this-&gt;dateCreated = $dateCreated;
+    }
+
+    /**
+     * Returns password reset token.
+     * @return string
+     */
+    public function getResetPasswordToken()
+    {
+        return $this-&gt;passwordResetToken;
+    }
+
+    /**
+     * Sets password reset token.
+     * @param string $token
+     */
+    public function setPasswordResetToken($token)
+    {
+        $this-&gt;passwordResetToken = $token;
+    }
+
+    /**
+     * Returns password reset token's creation date.
+     * @return string
+     */
+    public function getPasswordResetTokenCreationDate()
+    {
+        return $this-&gt;passwordResetTokenCreationDate;
+    }
+
+    /**
+     * Sets password reset token's creation date.
+     * @param string $date
+     */
+    public function setPasswordResetTokenCreationDate($date)
+    {
+        $this-&gt;passwordResetTokenCreationDate = $date;
+    }
+}
+</code></pre>
+<p>As you can see from the code above, the <em>User</em> entity is a typical Doctrine entity having
+annotated properties and getter and setter methods for retrieving/setting those properties.</p>
+<h2 id="adding-usercontroller">Adding UserController</h2>
+<p>The <code>UserController</code> class will contain several action methods providing an administrative
+user interface for managing the registered users. It will have the following actions:</p>
+<ul>
+<li>The <code>indexAction()</code> action will display a web page containing the list of users (see figure 16.3).
+    Type "http://localhost/users" in your web browser's navigation bar to access this page.</li>
+<li>The <code>addAction()</code> will display a page allowing the creation of a new user (see figure 16.4).
+    Type "http://localhost/users/add" in your web browser's navigation bar to access this page.</li>
+<li>The <code>editAction()</code> action will display a page for updating an existing user (see figure 16.5).
+    Type "http://localhost/users/edit/&lt;id&gt;" in your web browser's navigation bar to access this page.</li>
+<li>The <code>viewAction()</code> will allow viewing an existing user (see figure 16.6).
+    Type "http://localhost/users/view/&lt;id&gt;" in your web browser's navigation bar to access this page.</li>
+<li>The <code>changePasswordAction()</code> action will give the admin the ability to change the password of an existing user (see figure 16.7).
+    Type "http://localhost/users/changePassword/&lt;id&gt;" in your web browser's navigation bar to access this page.</li>
+<li>The <code>resetPasswordAction()</code> action will allow a user to reset his own password (see figure 16.8).
+    Type "http://localhost/reset-password" in your web browser's navigation bar to access this page.</li>
+</ul>
+<p><img alt="Figure 16.3 The page allowing to see the list of users" src="../images/users/users_page.png" /></p>
+<p><img alt="Figure 16.4 Add a new user" src="../images/users/add_user_page.png" /></p>
+<p><img alt="Figure 16.5 Editing an existing user" src="../images/users/edit_user_page.png" /></p>
+<p><img alt="Figure 16.6 User profile" src="../images/users/view_user_page.png" /></p>
+<p><img alt="Figure 16.7 Change user's password" src="../images/users/change_password_page.png" /></p>
+<p><img alt="Figure 16.8 Reset password page" src="../images/users/reset_password_page.png" /></p>
+<p>The <code>UserController</code> controller class is designed to be as "thin" as possible. It contains only the code responsible for
+checking input data, instantiating the needed models, passing input data to the models and returning the output data for
+rendering in a view template. Because it is a typical controller class
+and because you can see its complete code in the <em>User Demo</em> sample, we will not describe it here in more detail.</p>
+<h2 id="adding-usermanager-service">Adding UserManager Service</h2>
+<p>The <code>UserController</code> works with the <em>UserManager</em> service, which contains all the business logic related to user management.
+The service allows an admin to create and update users, change a user's password and reset a user's password. We will describe some parts of it
+in more detail, omitting other obvious parts (you still can see the complete code in <em>User Demo</em> sample).</p>
+<h3 id="creating-a-new-user-storing-password-encrypted">Creating a New User &amp; Storing Password Encrypted</h3>
+<p>The <code>addUser()</code> method of the <code>UserManager</code> allows us to add a new user. It looks as follows:</p>
+<pre><code class="language-php">/**
+ * This method adds a new user.
+ */
+public function addUser($data)
+{
+    // Do not allow several users with the same email address.
+    if($this-&gt;checkUserExists($data['email'])) {
+        throw new \Exception(&quot;User with email address &quot; .
+                    $data['$email'] . &quot; already exists&quot;);
+    }
+
+    // Create new User entity.
+    $user = new User();
+    $user-&gt;setEmail($data['email']);
+    $user-&gt;setFullName($data['full_name']);
+
+    // Encrypt password and store the password in encrypted state.
+    $bcrypt = new Bcrypt();
+    $passwordHash = $bcrypt-&gt;create($data['password']);
+    $user-&gt;setPassword($passwordHash);
+
+    $user-&gt;setStatus($data['status']);
+
+    $currentDate = date('Y-m-d H:i:s');
+    $user-&gt;setDateCreated($currentDate);
+
+    // Add the entity to the entity manager.
+    $this-&gt;entityManager-&gt;persist($user);
+
+    // Apply changes to database.
+    $this-&gt;entityManager-&gt;flush();
+
+    return $user;
+}
+</code></pre>
+<p>You can see that in this method we first check if another user with the same E-mail address
+already exists (line 7), and if so we forbid creating the user by throwing an exception.</p>
+<p>If the user with such E-mail address doesn't exist, we create a new <code>User</code> entity (line 13) and set its properties
+accordingly.</p>
+<p>What is interesting here is how we save the user's password to the database. For security reasons, we do not
+save the password as is, but calculate a hash of it with the @<code>Bcrypt</code> class provided by @<code>Laminas\Crypt</code> component of
+Laminas Framework (lines 18-19) .</p>
+<blockquote>
+<p>You can install @<code>Laminas\Crypt</code> with the following command:</p>
+<p><code>php composer.phar require laminas/laminas-crypt</code></p>
+<p>The @<code>Laminas\Crypt</code> component also requires that you have <code>mcrypt</code> PHP extension installed.</p>
+</blockquote>
+<p>W&gt; The <em>Bcrypt</em> algorithm is a hashing algorithm that is widely used and recommended by the security community for storing user's password.
+W&gt; Encrypting password with @<code>Bcrypt</code> is considered secure nowadays. Some developers still encrypt passwords
+W&gt; with MD5 or SHA1 with salt, but this is not considered secure anymore (MD5 and SHA1 hashes can be hacked).</p>
+<h3 id="validating-encrypted-password">Validating Encrypted Password</h3>
+<p>When a user logs in, you'll need to check if the password hash stored in the database is the same as the hash
+calculated by the password entered by the visitor. You do that with the help of the <code>verify()</code> method provided
+by the @<code>Bcrypt</code> class, as follows:</p>
+<pre><code class="language-php">/**
+ * Checks that the given password is correct.
+ */
+public function validatePassword($user, $password)
+{
+    $bcrypt = new Bcrypt();
+    $passwordHash = $user-&gt;getPassword();
+
+    if ($bcrypt-&gt;verify($password, $passwordHash)) {
+        return true;
+    }
+
+    return false;
+}
+</code></pre>
+<h3 id="creating-admin-user">Creating Admin User</h3>
+<p>The next important thing to note in <code>UserManager</code> is how we create the Admin user.</p>
+<blockquote>
+<p>The Admin user is an initial user that is created automatically when there are not existing users
+in the database and allows you to login for the first time.</p>
+</blockquote>
+<pre><code class="language-php">/**
+ * This method checks if at least one user presents, and if not, creates
+ * 'Admin' user with email 'admin@example.com' and password 'Secur1ty'.
+ */
+public function createAdminUserIfNotExists()
+{
+    $user = $this-&gt;entityManager-&gt;getRepository(User::class)-&gt;findOneBy([]);
+    if ($user==null) {
+        $user = new User();
+        $user-&gt;setEmail('admin@example.com');
+        $user-&gt;setFullName('Admin');
+        $bcrypt = new Bcrypt();
+        $passwordHash = $bcrypt-&gt;create('Secur1ty');
+        $user-&gt;setPassword($passwordHash);
+        $user-&gt;setStatus(User::STATUS_ACTIVE);
+        $user-&gt;setDateCreated(date('Y-m-d H:i:s'));
+
+        $this-&gt;entityManager-&gt;persist($user);
+        $this-&gt;entityManager-&gt;flush();
+    }
+}
+</code></pre>
+<p>We set the Admin user's email to <code>admin@example.com</code> and password to <code>Secur1ty</code>, so you can login for the first
+time with these credentials.</p>
+<h3 id="resetting-user-password">Resetting User Password</h3>
+<p>Sometimes users forget their password. If that happens, you'll need to let the user <em>reset</em> the password - to
+securely change the password. Password resetting works as follows:</p>
+<ul>
+<li>A random <em>password reset token</em> is generated and its hash is saved to database.</li>
+<li>The password reset token is sent to user's email address as part of an E-mail message.</li>
+<li>The user checks his mailbox and clicks the password reset link in the E-mail message.</li>
+<li>The website validates the password reset token and checks it hasn't expired.</li>
+<li>The user is directed to the form allowing him to enter new password.</li>
+</ul>
+<blockquote>
+<p>You typically do not store raw password reset tokens in database. Instead, you store a <em>hash</em> of the token. This is done for security reasons.
+Even if some malicious hacker steals the DB, they won't be able to reset passwords of the users.</p>
+</blockquote>
+<p>The password reset token generation algorithm is implemented inside the <code>generatePasswordResetToken()</code> method of <code>UserManager</code>.
+To generate a random string, we use the @<code>Rand</code> class provided by @<code>Laminas\Math</code> component.</p>
+<pre><code class="language-php">/**
+ * Generates a password reset token for the user. This token is then stored in database and
+ * sent to the user's E-mail address. When the user clicks the link in E-mail message, he is
+ * directed to the Set Password page.
+ */
+public function generatePasswordResetToken($user)
+{
+    if ($user-&gt;getStatus() != User::STATUS_ACTIVE) {
+        throw new \Exception('Cannot generate password reset token for inactive user ' . $user-&gt;getEmail());
+    }
+
+    // Generate a token.
+    $token = Rand::getString(32, '0123456789abcdefghijklmnopqrstuvwxyz', true);
+
+    // Encrypt the token before storing it in DB.
+    $bcrypt = new Bcrypt();
+    $tokenHash = $bcrypt-&gt;create($token);
+
+    // Save token to DB
+    $user-&gt;setPasswordResetToken($tokenHash);
+
+    // Save token creation date to DB.
+    $currentDate = date('Y-m-d H:i:s');
+    $user-&gt;setPasswordResetTokenCreationDate($currentDate);
+
+    // Apply changes to DB.
+    $this-&gt;entityManager-&gt;flush();
+
+    // Send an email to user.
+    $subject = 'Password Reset';
+
+    $httpHost = isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:'localhost';
+    $passwordResetUrl = 'http://' . $httpHost . '/set-password?token=' . $token . &quot;&amp;email=&quot; . $user-&gt;getEmail();
+
+    // Produce HTML of password reset email
+    $bodyHtml = $this-&gt;viewRenderer-&gt;render(
+            'user/email/reset-password-email',
+            [
+                'passwordResetUrl' =&gt; $passwordResetUrl,
+            ]);
+
+    $html = new MimePart($bodyHtml);
+    $html-&gt;type = &quot;text/html&quot;;
+
+    $body = new MimeMessage();
+    $body-&gt;addPart($html);
+
+    $mail = new Mail\Message();
+    $mail-&gt;setEncoding('UTF-8');
+    $mail-&gt;setBody($body);
+    $mail-&gt;setFrom('no-reply@example.com', 'User Demo');
+    $mail-&gt;addTo($user-&gt;getEmail(), $user-&gt;getFullName());
+    $mail-&gt;setSubject($subject);
+
+    // Setup SMTP transport
+    $transport = new SmtpTransport();
+    $options   = new SmtpOptions($this-&gt;config['smtp']);
+    $transport-&gt;setOptions($options);
+
+    $transport-&gt;send($mail);
+}
+</code></pre>
+<blockquote>
+<p>Configuring mail system for your web server typically
+requires acquiring subscription of some mail service (like <a href="https://sendgrid.com/">SendGrid</a> or <a href="https://aws.amazon.com/en/ses">Amazon SES</a>).</p>
+</blockquote>
+<p>Password reset token validation is implemented inside the <code>validatePasswordResetToken()</code> method.
+We check that the token's hash is the same as we saved in database and that the token has not expired
+(it expires in 1 day since creation).</p>
+<pre><code class="language-php">/**
+ * Checks whether the given password reset token is a valid one.
+ */
+public function validatePasswordResetToken($email, $passwordResetToken)
+{
+    // Find user by email.
+    $user = $this-&gt;entityManager-&gt;getRepository(User::class)
+            -&gt;findOneByEmail($email);
+
+    if($user==null || $user-&gt;getStatus() != User::STATUS_ACTIVE) {
+        return false;
+    }
+
+    // Check that token hash matches the token hash in our DB.
+    $bcrypt = new Bcrypt();
+    $tokenHash = $user-&gt;getPasswordResetToken();
+
+    if (!$bcrypt-&gt;verify($passwordResetToken, $tokenHash)) {
+        return false; // mismatch
+    }
+
+    // Check that token was created not too long ago.
+    $tokenCreationDate = $user-&gt;getPasswordResetTokenCreationDate();
+    $tokenCreationDate = strtotime($tokenCreationDate);
+
+    $currentDate = strtotime('now');
+
+    if ($currentDate - $tokenCreationDate &gt; 24*60*60) {
+        return false; // expired
+    }
+
+    return true;
+}
+</code></pre>
+<p>And finally, the <code>setPasswordByToken()</code> allows to set new password for the user.</p>
+<pre><code class="language-php">/**
+ * This method sets new password by password reset token.
+ */
+public function setNewPasswordByToken($email, $passwordResetToken, $newPassword)
+{
+    if (!$this-&gt;validatePasswordResetToken($email, $passwordResetToken)) {
+       return false;
+    }
+
+    // Find user with the given email.
+    $user = $this-&gt;entityManager-&gt;getRepository(User::class)
+            -&gt;findOneByEmail($email);
+
+    if ($user==null || $user-&gt;getStatus() != User::STATUS_ACTIVE) {
+        return false;
+    }
+
+    // Set new password for user
+    $bcrypt = new Bcrypt();
+    $passwordHash = $bcrypt-&gt;create($newPassword);
+    $user-&gt;setPassword($passwordHash);
+
+    // Remove password reset token
+    $user-&gt;setPasswordResetToken(null);
+    $user-&gt;setPasswordResetTokenCreationDate(null);
+
+    $this-&gt;entityManager-&gt;flush();
+
+    return true;
+}
+</code></pre>
+<h2 id="implementing-user-authentication">Implementing User Authentication</h2>
+<p><em>Authentication</em> is the process performed when a user provides his login and password and you decide whether these credentials
+are correct. Authentication typically means you check your database for the given login, and if such login exists, you
+check if the hash calculated by the given password matches the hash of the password stored in the database.</p>
+<blockquote>
+<p>You typically do not store raw passwords in database. Instead, you store a <em>hash</em> of the password. This is done for security reasons.</p>
+</blockquote>
+<p>Once the authentication algorithm determines that the login and password are correct, it returns user <em>identity</em> - a unique
+ID of the user. The identity is typically stored to session, so the visitor doesn't need to pass authentication for every
+HTTP request.</p>
+<p>In Laminas, there is a special component allowing you to implement user authentication - @<code>Laminas\Authentication</code>.
+You can install this component with Composer by typing the following command:</p>
+<pre><code>php composer.phar require laminas/laminas-authentication
+</code></pre>
+<blockquote>
+<p>For authentication to work, you also need to have @<code>Laminas\Session</code> component installed and session manager configured. For information
+on how to do that, refer to <a href="#session">Working with Sessions</a> chapter.</p>
+</blockquote>
+<h3 id="authenticationservice">AuthenticationService</h3>
+<p>The @<code>Laminas\Authentication</code> component provides the special service class called <code>AuthenticationService</code> living
+in @<code>Laminas\Authentication</code> namespace. Most useful methods of this service are shown in table 16.1 below.</p>
+<table>
+<thead>
+<tr>
+<th><em>Method</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>authenticate()</code></td>
+<td>Performs user authentication using the adapter.</td>
+</tr>
+<tr>
+<td><code>getAdapter()</code></td>
+<td>Gets authentication adapter.</td>
+</tr>
+<tr>
+<td><code>setAdapter()</code></td>
+<td>Sets authentication adapter implementing the actual authentication algorithm.</td>
+</tr>
+<tr>
+<td><code>getStorage()</code></td>
+<td>Returns storage handler.</td>
+</tr>
+<tr>
+<td><code>setStorage()</code></td>
+<td>Sets storage handler.</td>
+</tr>
+<tr>
+<td><code>hasIdentity()</code></td>
+<td>Returns <code>true</code> if user identity is already stored in session.</td>
+</tr>
+<tr>
+<td><code>getIdentity()</code></td>
+<td>Retrieves user identity from session.</td>
+</tr>
+<tr>
+<td><code>clearIdentity()</code></td>
+<td>Removes user identity from session.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 16.1. Methods of AuthenticationService class</p>
+<p>As you can see from the table, you can use the <code>authenticate()</code> method to perform user authentication.
+Besides that you can use <code>hasIdentity()</code>, <code>getIdentity()</code> and <code>clearIdentity()</code> methods for testing,
+retrieving and clearing user identity, respectively.</p>
+<p>However, the @<code>AuthenticationService</code> service is very generic - it knows nothing about how
+to actually match login and password against the database. It also knows nothing about how to save the user identity
+to session. This design allows you to implement any suitable authentication algorithm and any suitable storage.</p>
+<p>The @<code>Laminas\Authentication</code> component provides several <em>authentication adapters</em> implementing some standard authentication
+algorithms (see figure 16.9), and several <em>storage handlers</em> allowing you to save and retrieve the user identity (see figure 16.10).</p>
+<p><img alt="Figure 16.9 Standard authentication adapters" src="../images/users/std_auth_adapters.png" /></p>
+<p><img alt="Figure 16.10 Standard storage handlers" src="../images/users/std_auth_storage_handlers.png" /></p>
+<p>For our purposes, we can use @<code>Session</code>[Laminas\Authentication\Storage\Session] storage handler without needing to change any code. However, standard authentication
+adapters are not suitable for us, because we use Doctrine ORM. We will have to write our custom authentication adapter.
+Luckily, this is rather simple to do.</p>
+<h3 id="writing-authentication-adapter">Writing Authentication Adapter</h3>
+<p>An authentication adapter must implement the @<code>AdapterInterface</code>[Laminas\Authentication\Adapter\AdapterInterface] interface, which has the single method <code>authenticate()</code>.
+This method should check the user email and password against the database. We will do this as follows:</p>
+<ul>
+<li>Find the user with the given <code>email</code> (we use the E-mail address as the user's login).</li>
+<li>If user with such <code>email</code> doesn't exist - return failure status.</li>
+<li>Check the <code>status</code> of the user. If the user is "retired" - forbid the user to login.</li>
+<li>Calculate password hash and compare it against the hash stored in database for the user found.</li>
+<li>If password hash doesn't match, return failure status.</li>
+<li>If password is correct, return success status.</li>
+</ul>
+<p>The <code>authenticate()</code> method returns an instance of the @<code>Laminas\Authentication\Result</code> class.
+The @<code>Result</code>[Laminas\Authentication\Result] class contains the authentication status, the error message and the user identity.</p>
+<p>The adapter can also have additional methods. For example, we will add the <code>setEmail()</code> and <code>setPassword()</code> methods
+that we will use to pass user email and password to the adapter.</p>
+<p>To create the authentication adapter, add the file <em>AuthAdapter.php</em> to the <em>Service</em> directory of the module's source directory.</p>
+<blockquote>
+<p>In the <em>User Demo</em> sample, we create a separate module called <em>User</em> and add functionality related to authentication
+and user management to that module.</p>
+</blockquote>
+<p>Put the following code into that file:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Service;
+
+use Laminas\Authentication\Adapter\AdapterInterface;
+use Laminas\Authentication\Result;
+use Laminas\Crypt\Password\Bcrypt;
+use User\Entity\User;
+
+/**
+ * Adapter used for authenticating user. It takes login and password on input
+ * and checks the database if there is a user with such login (email) and password.
+ * If such user exists, the service returns his identity (email). The identity
+ * is saved to session and can be retrieved later with Identity view helper provided
+ * by Laminas.
+ */
+class AuthAdapter implements AdapterInterface
+{
+    /**
+     * User email.
+     * @var string
+     */
+    private $email;
+
+    /**
+     * Password
+     * @var string
+     */
+    private $password;
+
+    /**
+     * Entity manager.
+     * @var Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * Constructor.
+     */
+    public function __construct($entityManager)
+    {
+        $this-&gt;entityManager = $entityManager;
+    }
+
+    /**
+     * Sets user email.
+     */
+    public function setEmail($email)
+    {
+        $this-&gt;email = $email;
+    }
+
+    /**
+     * Sets password.
+     */
+    public function setPassword($password)
+    {
+        $this-&gt;password = (string)$password;
+    }
+
+    /**
+     * Performs an authentication attempt.
+     */
+    public function authenticate()
+    {
+        // Check the database if there is a user with such email.
+        $user = $this-&gt;entityManager-&gt;getRepository(User::class)
+                -&gt;findOneByEmail($this-&gt;email);
+
+        // If there is no such user, return 'Identity Not Found' status.
+        if ($user==null) {
+            return new Result(
+                Result::FAILURE_IDENTITY_NOT_FOUND,
+                null,
+                ['Invalid credentials.']);
+        }
+
+        // If the user with such email exists, we need to check if it is active or retired.
+        // Do not allow retired users to log in.
+        if ($user-&gt;getStatus()==User::STATUS_RETIRED) {
+            return new Result(
+                Result::FAILURE,
+                null,
+                ['User is retired.']);
+        }
+
+        // Now we need to calculate hash based on user-entered password and compare
+        // it with the password hash stored in database.
+        $bcrypt = new Bcrypt();
+        $passwordHash = $user-&gt;getPassword();
+
+        if ($bcrypt-&gt;verify($this-&gt;password, $passwordHash)) {
+            // Great! The password hash matches. Return user identity (email) to be
+            // saved in session for later use.
+            return new Result(
+                    Result::SUCCESS,
+                    $this-&gt;email,
+                    ['Authenticated successfully.']);
+        }
+
+        // If password check didn't pass return 'Invalid Credential' failure status.
+        return new Result(
+                Result::FAILURE_CREDENTIAL_INVALID,
+                null,
+                ['Invalid credentials.']);
+    }
+}
+</code></pre>
+<h3 id="creating-the-factory-for-authenticationservice">Creating the Factory for AuthenticationService</h3>
+<p>Once we've implemented the adapter, we can actually create the @<code>AuthenticationService</code>.
+Laminas's @<code>AuthenticationService</code> should be registered in the service manager before you can use it.
+First of all, we will create a factory for it. Add the <em>AuthenticationServiceFactory.php</em> file under the
+<em>Service/Factory</em> directory and put the following code there:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Service\Factory;
+
+use Interop\Container\ContainerInterface;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Session\SessionManager;
+use Laminas\Authentication\Storage\Session as SessionStorage;
+use User\Service\AuthAdapter;
+
+/**
+ * The factory responsible for creating of authentication service.
+ */
+class AuthenticationServiceFactory implements FactoryInterface
+{
+    /**
+     * This method creates the Laminas\Authentication\AuthenticationService service
+     * and returns its instance.
+     */
+    public function __invoke(ContainerInterface $container,
+                    $requestedName, array $options = null)
+    {
+        $sessionManager = $container-&gt;get(SessionManager::class);
+        $authStorage = new SessionStorage('Laminas_Auth', 'session', $sessionManager);
+        $authAdapter = $container-&gt;get(AuthAdapter::class);
+
+        // Create the service and inject dependencies into its constructor.
+        return new AuthenticationService($authStorage, $authAdapter);
+    }
+}
+</code></pre>
+<p>In the factory we do the following: First, we create an instance of the session manager (you should have
+set up the session manager already) and create an instance of @<code>Session</code>[Laminas\Authentication\Storage\Session] storage handler. Then we create
+an instance of <code>AuthAdapter</code>. Finally, we instantiate the @<code>AuthenticationService</code> and inject dependencies
+(storage handler and adapter) into it.</p>
+<p>Register the @<code>AuthenticationService</code> in your <em>module.config.php</em> config file as follows:</p>
+<pre><code class="language-php">&lt;?php
+return [
+    'service_manager' =&gt; [
+        'factories' =&gt; [
+            \Laminas\Authentication\AuthenticationService::class
+                =&gt; Service\Factory\AuthenticationServiceFactory::class,
+            // ...
+        ],
+    ],
+];
+</code></pre>
+<h3 id="adding-authcontroller">Adding AuthController</h3>
+<p>The <code>AuthController</code> class will have two actions:</p>
+<ul>
+<li>
+<p>The <code>loginAction()</code> will allow logging in to the website (see figures 16.11 and 16.12).
+    You can access this page by typing "http://localhost/login" URL into your web browser's navigation bar.</p>
+</li>
+<li>
+<p>The <code>logoutAction()</code> will allow logging out from the website.
+    You can access this page by typing "http://localhost/logout" URL into your web browser's navigation bar.</p>
+</li>
+</ul>
+<p><img alt="Figure 16.11 Login page" src="../images/users/login_page.png" /></p>
+<p><img alt="Figure 16.12 Login page - Invalid Credentials" src="../images/users/login_page_errors.png" /></p>
+<p>The code of the <code>AuthController</code> controller class is presented below:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace User\Controller;
+
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+use Laminas\Authentication\Result;
+use Laminas\Uri\Uri;
+use User\Form\LoginForm;
+use User\Entity\User;
+
+/**
+ * This controller is responsible for letting the user to log in and log out.
+ */
+class AuthController extends AbstractActionController
+{
+    /**
+     * Entity manager.
+     * @var Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * Auth manager.
+     * @var User\Service\AuthManager
+     */
+    private $authManager;
+
+    /**
+     * Auth service.
+     * @var \Laminas\Authentication\AuthenticationService
+     */
+    private $authService;
+
+    /**
+     * User manager.
+     * @var User\Service\UserManager
+     */
+    private $userManager;
+
+    /**
+     * Constructor.
+     */
+    public function __construct($entityManager, $authManager, $authService, $userManager)
+    {
+        $this-&gt;entityManager = $entityManager;
+        $this-&gt;authManager = $authManager;
+        $this-&gt;authService = $authService;
+        $this-&gt;userManager = $userManager;
+    }
+
+    /**
+     * Authenticates user given email address and password credentials.
+     */
+    public function loginAction()
+    {
+        // Retrieve the redirect URL (if passed). We will redirect the user to this
+        // URL after successfull login.
+        $redirectUrl = (string)$this-&gt;params()-&gt;fromQuery('redirectUrl', '');
+        if (strlen($redirectUrl)&gt;2048) {
+            throw new \Exception(&quot;Too long redirectUrl argument passed&quot;);
+        }
+
+        // Check if we do not have users in database at all. If so, create
+        // the 'Admin' user.
+        $this-&gt;userManager-&gt;createAdminUserIfNotExists();
+
+        // Create login form
+        $form = new LoginForm();
+        $form-&gt;get('redirect_url')-&gt;setValue($redirectUrl);
+
+        // Store login status.
+        $isLoginError = false;
+
+        // Check if user has submitted the form
+        if ($this-&gt;getRequest()-&gt;isPost()) {
+
+            // Fill in the form with POST data
+            $data = $this-&gt;params()-&gt;fromPost();
+
+            $form-&gt;setData($data);
+
+            // Validate form
+            if($form-&gt;isValid()) {
+
+                // Get filtered and validated data
+                $data = $form-&gt;getData();
+
+                // Perform login attempt.
+                $result = $this-&gt;authManager-&gt;login($data['email'],
+                        $data['password'], $data['remember_me']);
+
+                // Check result.
+                if ($result-&gt;getCode()==Result::SUCCESS) {
+
+                    // Get redirect URL.
+                    $redirectUrl = $this-&gt;params()-&gt;fromPost('redirect_url', '');
+
+                    if (!empty($redirectUrl)) {
+                        // The below check is to prevent possible redirect attack
+                        // (if someone tries to redirect user to another domain).
+                        $uri = new Uri($redirectUrl);
+                        if (!$uri-&gt;isValid() || $uri-&gt;getHost()!=null)
+                            throw new \Exception('Incorrect redirect URL: ' . $redirectUrl);
+                    }
+
+                    // If redirect URL is provided, redirect the user to that URL;
+                    // otherwise redirect to Home page.
+                    if(empty($redirectUrl)) {
+                        return $this-&gt;redirect()-&gt;toRoute('home');
+                    } else {
+                        $this-&gt;redirect()-&gt;toUrl($redirectUrl);
+                    }
+                } else {
+                    $isLoginError = true;
+                }
+            } else {
+                $isLoginError = true;
+            }
+        }
+
+        return new ViewModel([
+            'form' =&gt; $form,
+            'isLoginError' =&gt; $isLoginError,
+            'redirectUrl' =&gt; $redirectUrl
+        ]);
+    }
+
+    /**
+     * The &quot;logout&quot; action performs logout operation.
+     */
+    public function logoutAction()
+    {
+        $this-&gt;authManager-&gt;logout();
+
+        return $this-&gt;redirect()-&gt;toRoute('login');
+    }
+}
+</code></pre>
+<p>The <code>loginAction()</code> method accepts the <code>redirectUrl</code> GET parameter. The "redirect URL" is a convenience
+feature working with the <em>access filter</em> that we will describe later in this chapter. When the site
+visitor tries to access a web page, the access filter forbids access, and he/she is redirected
+to the "Login" page, passing the URL of the original page as the "redirect URL". When the user logs in, he/she
+is redirected back to the original page automatically, improving user experience.</p>
+<h3 id="adding-view-template-for-login-page">Adding View Template for Login Page</h3>
+<p>The view template (<em>.phtml</em> file) for our <em>Login</em> page looks as follows:</p>
+<pre><code class="language-php">&lt;?php
+$this-&gt;headTitle('Sign in');
+
+$this-&gt;mainMenu()-&gt;setActiveItemId('login');
+
+$form-&gt;get('email')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    'placeholder'=&gt;'Email address',
+    'required' =&gt; true,
+    'autofocus' =&gt; true
+    ])
+    -&gt;setLabelAttributes([
+        'class' =&gt; 'sr-only'
+    ]);
+
+$form-&gt;get('password')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    'placeholder'=&gt;'Password',
+    'required' =&gt; true,
+    ])
+    -&gt;setLabelAttributes([
+        'class' =&gt; 'sr-only'
+    ]);
+?&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-offset-4 col-md-3&quot;&gt;
+        &lt;form class=&quot;form-signin&quot; method=&quot;post&quot;&gt;
+            &lt;h2 class=&quot;form-signin-heading&quot;&gt;Please sign in&lt;/h2&gt;
+            &lt;?php if ($isLoginError): ?&gt;
+            &lt;div class=&quot;alert alert-warning&quot; role=&quot;alert&quot;&gt;
+                Incorrect login and/or password.
+                &lt;a href=&quot;&lt;?= $this-&gt;url('reset-password') ?&gt;&quot;&gt;Forgot password?&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;?php endif; ?&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('email')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('email')); ?&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('password')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('password')); ?&gt;
+            &lt;div class=&quot;checkbox&quot;&gt;
+                &lt;label&gt;
+                    &lt;?= $this-&gt;formElement($form-&gt;get('remember_me')); ?&gt; Remember me
+                &lt;/label&gt;
+            &lt;/div&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('redirect_url')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('csrf')) ?&gt;
+            &lt;button class=&quot;btn btn-lg btn-primary btn-block&quot; type=&quot;submit&quot;&gt;Sign in&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<blockquote>
+<p>The view template uses the <em>Sign In</em> page template provided by Bootstrap CSS Framework.
+You can find the original template <a href="https://getbootstrap.com/examples/signin/">here</a>.</p>
+</blockquote>
+<h3 id="adding-authmanager-service">Adding AuthManager Service</h3>
+<p>The <code>AuthController</code> works with the <code>AuthManager</code> service. The main business logic behind the authentication
+is implemented in the service. Let's describe the <code>AuthManager</code> in detail.</p>
+<p>The <code>AuthManager</code> service has the following methods responsible for authentication:</p>
+<ul>
+<li>the <code>login()</code> method</li>
+<li>the <code>logout()</code> method.</li>
+</ul>
+<p>The <code>login()</code> method (see below) uses the Laminas's @<code>AuthenticationService</code> and the <code>AuthAdapter</code> we wrote earlier
+for performing user authentication. The method additionally accepts the <code>$rememberMe</code> argument which
+extends the session cookie lifetime to 30 days.</p>
+<pre><code class="language-php">/**
+ * Performs a login attempt. If $rememberMe argument is true, it forces the session
+ * to last for one month (otherwise the session expires on one hour).
+ */
+public function login($email, $password, $rememberMe)
+{
+    // Check if user has already logged in. If so, do not allow to log in
+    // twice.
+    if ($this-&gt;authService-&gt;getIdentity()!=null) {
+        throw new \Exception('Already logged in');
+    }
+
+    // Authenticate with login/password.
+    $authAdapter = $this-&gt;authService-&gt;getAdapter();
+    $authAdapter-&gt;setEmail($email);
+    $authAdapter-&gt;setPassword($password);
+    $result = $this-&gt;authService-&gt;authenticate();
+
+    // If user wants to &quot;remember him&quot;, we will make session to expire in
+    // one month. By default session expires in 1 hour (as specified in our
+    // config/global.php file).
+    if ($result-&gt;getCode()==Result::SUCCESS &amp;&amp; $rememberMe) {
+        // Session cookie will expire in 1 month (30 days).
+        $this-&gt;sessionManager-&gt;rememberMe(60*60*24*30);
+    }
+
+    return $result;
+}
+</code></pre>
+<p>The <code>logout()</code> method removes the user identity from session, so the visitor becomes unauthenticated.</p>
+<pre><code class="language-php">/**
+ * Performs user logout.
+ */
+public function logout()
+{
+    // Allow to log out only when user is logged in.
+    if ($this-&gt;authService-&gt;getIdentity()==null) {
+        throw new \Exception('The user is not logged in');
+    }
+
+    // Remove identity from session.
+    $this-&gt;authService-&gt;clearIdentity();
+}
+</code></pre>
+<h2 id="access-filtering">Access Filtering</h2>
+<p>The last thing we implement in the <code>User</code> module is the <em>access filter</em>. The access filter will be used for
+restricting access to certain web pages to authenticated users only.</p>
+<p>The access filter will work as follows:</p>
+<ul>
+<li>
+<p>When someone tries to access a web page, check the <code>access_filter</code> key of the app configuration
+    and check whether this page is allowed to access by anyone or by authenticated users only.</p>
+</li>
+<li>
+<p>If the page is allowed to be accessed by anyone, allow the visitor to see the page.</p>
+</li>
+<li>
+<p>If the page is allowed to be accessed by authenticated users only, check if the user is authenticated or not.</p>
+</li>
+<li>
+<p>If the user is not authenticated, redirect him to the <em>Login</em> page and ask to log in.</p>
+</li>
+<li>
+<p>Once the user logs in, redirect him back to the original page automatically.</p>
+</li>
+</ul>
+<p>The access filter is designed to function in one of two modes: restrictive (default) and permissive. In restrictive mode
+the filter forbids access to any page not listed under the <code>access_filter</code> key.</p>
+<p>The <code>access_filter</code> configuration key will be located inside the <em>module.config.php</em> file and will be used
+by the access filter. It will contain the list of controllers and action names, and for each
+action it will either allow to anyone to see the page or allow to authenticated users only to see the page. An example structure
+of the key is presented below:</p>
+<pre><code class="language-php">// The 'access_filter' key is used by the User module to restrict or permit
+// access to certain controller actions for unauthenticated visitors.
+'access_filter' =&gt; [
+    'options' =&gt; [
+        // The access filter can work in 'restrictive' (recommended) or 'permissive'
+        // mode. In restrictive mode all controller actions must be explicitly listed
+        // under the 'access_filter' config key, and access is denied to any not listed
+        // action for users not logged in. In permissive mode, if an action is not listed
+        // under the 'access_filter' key, access to it is permitted to anyone (even for
+        // users not logged in. Restrictive mode is more secure and recommended.
+        'mode' =&gt; 'restrictive'
+    ],
+    'controllers' =&gt; [
+        Controller\IndexController::class =&gt; [
+            // Allow anyone to visit &quot;index&quot; and &quot;about&quot; actions
+            ['actions' =&gt; ['index', 'about'], 'allow' =&gt; '*'],
+            // Allow authenticated users to visit &quot;settings&quot; action
+            ['actions' =&gt; ['settings'], 'allow' =&gt; '@']
+        ],
+    ]
+],
+</code></pre>
+<p>Under the <code>access_filter</code> key, we have two subkeys:</p>
+<ul>
+<li>The <code>options</code> key can be used to define the mode in which the filter functions ("restrictive" or "permissive").</li>
+<li>The <code>controllers</code> key lists the controllers and their actions, specifying the access type for each action. The asterisk
+    character (*) means that everyone will be able to access the web page. The "at" character (@) means that only authenticated
+    users will be able to access the page.</li>
+</ul>
+<blockquote>
+<p>The access filter implementation is very simple. It can't, for example, allow access based on username or by user role. However,
+you can easily modify and extend it as you wish. If you plan to introduce role-based access control (RBAC), refer to the
+<a href="#roles">Role-Based Access Control</a> chapter.</p>
+</blockquote>
+<h3 id="adding-dispatch-event-listener">Adding Dispatch Event Listener</h3>
+<p>To implement access filtering, we will use an event listener. You have already become familiar with event listening
+in the <a href="#modules">Creating a New Module</a> chapter.</p>
+<p>Particularly, we will listen to the <em>Dispatch</em> event. The <em>Dispatch</em> event is triggered after the <em>Route</em> event, when the
+controller and action are already determined. To implement the listener, we modify the <em>Module.php</em> file of the <em>User</em> module
+as follows:</p>
+<pre><code class="language-php">&lt;?php
+namespace User;
+
+use Laminas\Mvc\MvcEvent;
+use Laminas\Mvc\Controller\AbstractActionController;
+use User\Controller\AuthController;
+use User\Service\AuthManager;
+
+class Module
+{
+    /**
+     * This method returns the path to module.config.php file.
+     */
+    public function getConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+
+    /**
+     * This method is called once the MVC bootstrapping is complete and allows
+     * to register event listeners.
+     */
+    public function onBootstrap(MvcEvent $event)
+    {
+        // Get event manager.
+        $eventManager = $event-&gt;getApplication()-&gt;getEventManager();
+        $sharedEventManager = $eventManager-&gt;getSharedManager();
+        // Register the event listener method.
+        $sharedEventManager-&gt;attach(AbstractActionController::class,
+                MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch'], 100);
+    }
+
+    /**
+     * Event listener method for the 'Dispatch' event. We listen to the Dispatch
+     * event to call the access filter. The access filter allows to determine if
+     * the current visitor is allowed to see the page or not. If he/she
+     * is not authenticated and is not allowed to see the page, we redirect the user
+     * to the login page.
+     */
+    public function onDispatch(MvcEvent $event)
+    {
+        // Get controller and action to which the HTTP request was dispatched.
+        $controller = $event-&gt;getTarget();
+        $controllerName = $event-&gt;getRouteMatch()-&gt;getParam('controller', null);
+        $actionName = $event-&gt;getRouteMatch()-&gt;getParam('action', null);
+
+        // Convert dash-style action name to camel-case.
+        $actionName = str_replace('-', '', lcfirst(ucwords($actionName, '-')));
+
+        // Get the instance of AuthManager service.
+        $authManager = $event-&gt;getApplication()-&gt;getServiceManager()-&gt;get(AuthManager::class);
+
+        // Execute the access filter on every controller except AuthController
+        // (to avoid infinite redirect).
+        if ($controllerName!=AuthController::class &amp;&amp;
+            !$authManager-&gt;filterAccess($controllerName, $actionName)) {
+
+            // Remember the URL of the page the user tried to access. We will
+            // redirect the user to that URL after successful login.
+            $uri = $event-&gt;getApplication()-&gt;getRequest()-&gt;getUri();
+            // Make the URL relative (remove scheme, user info, host name and port)
+            // to avoid redirecting to other domain by a malicious user.
+            $uri-&gt;setScheme(null)
+                -&gt;setHost(null)
+                -&gt;setPort(null)
+                -&gt;setUserInfo(null);
+            $redirectUrl = $uri-&gt;toString();
+
+            // Redirect the user to the &quot;Login&quot; page.
+            return $controller-&gt;redirect()-&gt;toRoute('login', [],
+                    ['query'=&gt;['redirectUrl'=&gt;$redirectUrl]]);
+        }
+    }
+}
+</code></pre>
+<h3 id="implementing-access-filtering-algorithm">Implementing Access Filtering Algorithm</h3>
+<p>The <code>onDispatch()</code> event listener calls the <code>filterAccess()</code> method of <code>AuthManager</code> service to determine
+if the page can be seen or not. The code of the <code>filterAccess()</code> method is presented below:</p>
+<pre><code class="language-php">/**
+ * This is a simple access control filter. It allows vistors to visit certain pages only,
+ * the rest requiring the user to be authenticated.
+ *
+ * This method uses the 'access_filter' key in the config file and determines
+ * whenther the current visitor is allowed to access the given controller action
+ * or not. It returns true if allowed; otherwise false.
+ */
+public function filterAccess($controllerName, $actionName)
+{
+    // Determine mode - 'restrictive' (default) or 'permissive'. In restrictive
+    // mode all controller actions must be explicitly listed under the 'access_filter'
+    // config key, and access is denied to any not listed action for unauthenticated users.
+    // In permissive mode, if an action is not listed under the 'access_filter' key,
+    // access to it is permitted to anyone (even for not logged in users.
+    // Restrictive mode is more secure and recommended to use.
+    $mode = isset($this-&gt;config['options']['mode'])?$this-&gt;config['options']['mode']:'restrictive';
+    if ($mode!='restrictive' &amp;&amp; $mode!='permissive')
+        throw new \Exception('Invalid access filter mode (expected either restrictive or permissive mode');
+
+    if (isset($this-&gt;config['controllers'][$controllerName])) {
+        $items = $this-&gt;config['controllers'][$controllerName];
+        foreach ($items as $item) {
+            $actionList = $item['actions'];
+            $allow = $item['allow'];
+            if (is_array($actionList) &amp;&amp; in_array($actionName, $actionList) ||
+                $actionList=='*') {
+                if ($allow=='*')
+                    return true; // Anyone is allowed to see the page.
+                else if ($allow=='@' &amp;&amp; $this-&gt;authService-&gt;hasIdentity()) {
+                    return true; // Only authenticated user is allowed to see the page.
+                } else {
+                    return false; // Access denied.
+                }
+            }
+        }
+    }
+
+    // In restrictive mode, we forbid access for authenticated users to any
+    // action not listed under 'access_filter' key (for security reasons).
+    if ($mode=='restrictive' &amp;&amp; !$this-&gt;authService-&gt;hasIdentity())
+        return false;
+
+    // Permit access to this page.
+    return true;
+}
+</code></pre>
+<h3 id="testing-access-filter">Testing Access Filter</h3>
+<p>To test the access filter, try to visit the "http://localhost/users" or "http://localhost/settings" page when you are not logged in. The access filter
+will direct you to <em>Login</em> page. However, you can easily visit the "http://localhost/about" page - it is open to anyone.</p>
+<h2 id="identity-controller-plugin-and-view-helper">Identity Controller Plugin and View Helper</h2>
+<p>One last thing we will discuss is how to check in your website if the user is logged in
+or not and retrieve the user identity. You can do that with the help of the @<code>Identity</code>[Laminas\Mvc\Plugin\Identity] controller plugin and the @<code>Identity</code>[Laminas\View\Helper\Identity] view helper.</p>
+<blockquote>
+<p>To use the @<code>Identity</code>[Laminas\Mvc\Plugin\Identity] plugin, you need to install <code>laminas/laminas-mvc-plugins</code> package with Composer, as follows:</p>
+<p><code>php composer.phar require laminas/laminas-mvc-plugins</code></p>
+</blockquote>
+<p>In your controller action method, you can check if user is logged in with the following code:</p>
+<pre><code class="language-php">if ($this-&gt;identity()!=null) {
+    // User is logged in
+
+    // Retrieve user identity
+    $userEmail = $this-&gt;identity();
+}
+</code></pre>
+<p>In your view template, you can use @<code>Identity</code>[Laminas\View\Helper\Identity] view helper for the same purpose:</p>
+<pre><code class="language-php">// Echo user identity
+&lt;?= $this-&gt;escapeHtml($this-&gt;identity()) ?&gt;
+</code></pre>
+<h2 id="summary">Summary</h2>
+<p>In this chapter, we learned about user management, user authentication and access filtering.</p>
+<p>User management means providing the UI for adding, editing, viewing users and changing their password.</p>
+<p>Authentication is when a user provides his login and password and you decide whether these credentials
+are correct. Laminas provides the special service called @<code>AuthenticationService</code> that you can use for this purpose, but
+first you need to implement an authentication adapter.</p>
+<p>Access filtering allows access to certain pages to authenticated users only. You can implement
+access filtering with the help of an event listener.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../session/" class="btn btn-neutral float-left" title="Working with Sessions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../roles/" class="btn btn-neutral float-right" title="Role-Based Access Control">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/modir/laminas-book" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../session/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../roles/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

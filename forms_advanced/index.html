@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/forms_advanced/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Advanced Usage of Forms - Using Laminas Framework</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Advanced Usage of Forms";
+        var mkdocs_page_input_path = "forms_advanced.md";
+        var mkdocs_page_url = "/forms_advanced/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Using Laminas Framework
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Preface</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">None</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../acknowledgments/">Acknowledgments</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction to Laminas Framework</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../skeleton/">Laminas Skeleton Application</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operation/">Website Operation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../mvc/">Model-View-Controller</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../routing/">Routing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../appearance/">Page Appearance and Layout</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms/">Collecting User Input with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../filters/">Transforming Input Data with Filters</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../validators/">Checking Input Data with Validators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../uploads/">Uploading Files with Forms</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Advanced Usage of Forms</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#form-security-elements">Form Security Elements</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#captcha">CAPTCHA</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#captcha-types">CAPTCHA Types</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#captcha-form-element-view-helper">CAPTCHA Form Element &amp; View Helper</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#example-1-adding-image-captcha-to-the-contactform">Example 1: Adding Image CAPTCHA to the ContactForm</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#example-2-adding-a-figlet-captcha-to-the-contactform">Example 2: Adding a FIGlet CAPTCHA to the ContactForm</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#csrf-prevention">CSRF Prevention</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#example-adding-a-csrf-element-to-form">Example: Adding a CSRF Element to Form</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-validation-groups">Using Validation Groups</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementing-multi-step-forms-multi-step-forms">Implementing Multi-Step Forms {#multi-step-forms}</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#enabling-sessions">Enabling Sessions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-registrationform">Adding RegistrationForm</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-registrationcontroller">Adding RegistrationController</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#adding-registrationcontrollerfactory">Adding RegistrationControllerFactory</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-view-templates">Adding View Templates</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-route">Adding Route</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results">Results</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine/">Database Management with Doctrine ORM</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_migrations/">Database Migrations</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../modules/">Creating a New Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../session/">Working with Sessions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../users/">User Management, Authentication and Access Filtering</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../roles/">Role-Based Access Control</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../devenv/">Appendix A. Configuring Web Development Environment</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../netbeans/">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bootstrap/">Appendix C. Introduction to Twitter Bootstrap</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_intro/">Appendix D. Introduction to Doctrine</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ec2_tutorial/">Appendix E. Installing a Laminas Web Application to Amazon EC2</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Using Laminas Framework</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Advanced Usage of Forms</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/modir/laminas-book/edit/master/docs/forms_advanced.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="advanced-usage-of-forms">Advanced Usage of Forms</h1>
+<p>In previous chapters, you've learned about form usage basics: what
+HTML forms are and how you define form models and form presentation in Laminas Framework.
+In this chapter, you will learn some advanced form usage topics such as security
+form elements (CAPTCHA and CSRF), and so on.</p>
+<p>Laminas components covered in this chapter:</p>
+<table>
+<thead>
+<tr>
+<th><em>Component</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@<code>Laminas\Captcha</code></td>
+<td>Implements various CAPTCHA algorithms.</td>
+</tr>
+<tr>
+<td>@<code>Laminas\Form</code></td>
+<td>Contains base form model classes.</td>
+</tr>
+<tr>
+<td>@<code>Laminas\Filter</code></td>
+<td>Contains various filters classes.</td>
+</tr>
+<tr>
+<td>@<code>Laminas\Validator</code></td>
+<td>Implements various validator classes.</td>
+</tr>
+<tr>
+<td>@<code>Laminas\InputFilter</code></td>
+<td>Implements a container for filters/validators.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="form-security-elements">Form Security Elements</h2>
+<p>We will consider the usage of two form security elements provided by
+Laminas Framework: @<code>Captcha</code>[Laminas\Form\Element\Captcha] and @<code>Csrf</code>[Laminas\Form\Element\Csrf] (both classes belong to
+@<code>Laminas\Form\Element</code>[Laminas\Form] namespace). By adding those elements to your form
+model (and rendering them in a view template), you will make your form
+resistant to hacker attacks.</p>
+<h3 id="captcha">CAPTCHA</h3>
+<p>A CAPTCHA (stands for "Completely Automated Public Turing test to
+tell Computers and Humans Apart") is a challenge-response test
+used in web sites for determining whether the user is a human or a robot.</p>
+<p>There are several types of CAPTCHA. The most widely used one requires that
+the user type the letters of a distorted image that is shown on the web page (see
+figure 11.1 for some examples).</p>
+<p><img alt="Figure 11.1. CAPTCHA examples" src="../images/forms_advanced/captcha_types.png" /></p>
+<p>A typical CAPTCHA test works using the following algorithm:</p>
+<ol>
+<li>Some secret sequence of characters (word) is generated server-side.</li>
+<li>The secret word is saved in a PHP session variable.</li>
+<li>The distorted image is generated based on the secret word.
+   The image is then displayed on the web page to site user.</li>
+<li>The site user is asked to type characters shown on the image.</li>
+<li>If the characters typed by user are the same as the secret word
+   saved in the session, the test is considered passed.</li>
+</ol>
+<p>The goal of the CAPTCHA test is to protect your form from filling and
+submission by an automated process (so called robot). Usually, such
+robots send spam messages to forums, hack passwords on site login forms,
+or perform some other malicious actions.</p>
+<blockquote>
+<p>The CAPTCHA test allows to reliably distinguish humans from robots, because
+humans are easily able to recognise and reproduce characters from the
+distorted image, while robots are not (at the current stage of evolution of
+computer vision algorithms).</p>
+</blockquote>
+<h4 id="captcha-types">CAPTCHA Types</h4>
+<p>In Laminas Framework, there are several CAPTCHA types available (they all belong
+to the @<code>Laminas\Captcha</code> component):</p>
+<ul>
+<li>
+<p><em>Dumb.</em> This is a very simple CAPTCHA algorithm which requires that
+  site user enter the word letters in reverse order. We will not consider this
+  type in details here, because it provides too low protection level.</p>
+</li>
+<li>
+<p><em>Image.</em> A CAPTCHA algorithm distorting an image with addition of
+   some noise in form of dots and line curves (figure 11.1, a).</p>
+</li>
+<li>
+<p><em>Figlet.</em> An unusual CAPTCHA type using FIGlet program instead of an image
+   distortion algorithm. The FIGlet is an open-source program which generates the
+   CAPTCHA image of many small ASCII letters (figure 11.1, b).</p>
+</li>
+</ul>
+<p>The @<code>Laminas\Captcha</code> component provides a unified interface for all CAPTCHA
+types (the @<code>AdapterInterface</code>[Laminas\Captcha\AdapterInterface] interface). The @<code>AbstractAdapter</code>[Laminas\Captcha\AdapterInterface] base class implements
+that interface, and all other CAPTCHA algorithms are derived from the abstract adapter
+class <sup id="fnref:adapter"><a class="footnote-ref" href="#fn:adapter">1</a></sup>. The class inheritance diagram is shown in figure 11.2 below.</p>
+<p><img alt="Figure 11.2. CAPTCHA adapter classes" src="../images/forms_advanced/captcha_adapters.png" /></p>
+<p>As you can see from the figure 11.2, there is another base class for all
+CAPTCHA types that utilize some secret word of characters: the @<code>AbstractWord</code>[Laminas\Captcha\AbstractWord] class. This
+base class provides methods for generating random sequence of characters and for adjusting
+word generation options.</p>
+<h4 id="captcha-form-element-view-helper">CAPTCHA Form Element &amp; View Helper</h4>
+<p>Laminas provides the dedicated form element class and view helper class for letting you use CAPTCHA fields on your forms.</p>
+<p>To add a CAPTCHA field to a form model, you use the @<code>Captcha</code>[Laminas\Form\Element\Captcha] class that belongs
+to @<code>Laminas\Form</code> component and lives in @<code>Laminas\Form\Element</code>[Laminas\Form] namespace.</p>
+<p>The @<code>Captcha</code>[Laminas\Form\Element\Captcha] element class can be used with any CAPTCHA algorithm (listed
+in the previous section) from @<code>Laminas\Captcha</code> component. For this purpose,
+the element class has the <code>setCaptcha()</code> method which takes either an instance of a
+class implementing @<code>Laminas\Captcha\AdapterInterface</code> interface, or an array containing CAPTCHA
+configuration <sup id="fnref:array"><a class="footnote-ref" href="#fn:array">2</a></sup>. By the <code>setCaptcha()</code> method, you can attach the desired CAPTCHA type to the element.</p>
+<p>You add the @<code>Captcha</code> element to a form model as usual, with the <code>add()</code> method
+provided by the @<code>Laminas\Form\Form</code> base class. As usual, you can pass it either an instance of
+the @<code>Laminas\Form\Element\Captcha</code> class or provide an array of configuration options specific
+to certain CAPTCHA algorithm (in that case, the element and its associated CAPTCHA algorithm
+will automatically be instantiated and configured by the factory class).</p>
+<p>The code example below shows how to use the latter method (passing a configuration array).
+We prefer this method because it requires less code to write. It is assumed that you call
+this code inside of form model's <code>addElements()</code> protected method:</p>
+<pre><code class="language-php">&lt;?php
+// Add the CAPTCHA field to the form model
+$this-&gt;add([
+  'type'  =&gt; 'captcha',
+  'name' =&gt; 'captcha',
+  'options' =&gt; [
+    'label' =&gt; 'Human check',
+    'captcha' =&gt; [
+      'class' =&gt; '&lt;captcha_class_name&gt;', //
+      // Certain-class-specific options follow here ...
+    ],
+  ],
+]);
+</code></pre>
+<p>In the example above, we call the <code>add()</code> method provided by the @<code>Form</code>[Laminas\Form\Form] base class
+and pass it an array describing the element to insert (line 3):</p>
+<ul>
+<li>The <code>type</code> key of the array (line 4), as usual, may either be a fully qualified class name of the element
+   (@<code>Laminas\Form\Element\Captcha</code>) or its short alias ("captcha").</li>
+<li>The <code>name</code> key (line 5) is the value for the "name" attribute of the HTML form field.</li>
+<li>The <code>options</code> key contains the options for the attached CAPTCHA algorithm.
+   The <code>class</code> key (line 9) may either contain the full CAPTCHA class name (e.g. @<code>Laminas\Captcha\Image</code>)
+   or its short alias (e.g. "Image"). Other, adapter-specific, options may be added to the key
+   as well. We will show how to do that a little bit later.</li>
+</ul>
+<p>For generating the HTML markup for the element, you may use the @<code>FormCaptcha</code>
+view helper class (belonging to @<code>Laminas\Form\View\Helper</code>[Laminas\Form] namespace). But, as you might
+learn from the previous chapter, typically you use the generic @<code>FormElement</code> view helper instead,
+like shown in the code below:</p>
+<pre><code class="language-text">&lt;?= $this-&gt;formElement($form-&gt;get('captcha')); ?&gt;
+</code></pre>
+<p>It is assumed that you call the view helper inside of your view template.</p>
+<p>Next, we provide two examples illustrating how to use different CAPTCHA types provided by Laminas:
+the @<code>Image</code>[Laminas\Captcha\Image] and @<code>Figlet</code>[Laminas\Captcha\Figlet]. We will show how to add a CAPTCHA field to the
+feedback form that we used in examples of the previous chapters.</p>
+<h4 id="example-1-adding-image-captcha-to-the-contactform">Example 1: Adding Image CAPTCHA to the ContactForm</h4>
+<p>W&gt; Image CAPTCHA requires that you have PHP GD extension installed with PNG
+W&gt; support and FT fonts.</p>
+<p>To add the @<code>Image</code>[Laminas\Captcha\Image] CAPTCHA to your form model, call the form's <code>add()</code>
+method as follows:</p>
+<pre><code class="language-php">&lt;?php
+namespace Application\Form;
+// ...
+
+class ContactForm extends Form
+{
+    // ...
+    protected function addElements()
+    {
+        // ...
+
+        // Add the CAPTCHA field
+        $this-&gt;add([
+            'type'  =&gt; 'captcha',
+            'name' =&gt; 'captcha',
+            'attributes' =&gt; [
+            ],
+            'options' =&gt; [
+                'label' =&gt; 'Human check',
+                'captcha' =&gt; [
+                    'class' =&gt; 'Image',
+                    'imgDir' =&gt; 'public/img/captcha',
+                    'suffix' =&gt; '.png',
+                    'imgUrl' =&gt; '/img/captcha/',
+                    'imgAlt' =&gt; 'CAPTCHA Image',
+                    'font'   =&gt; './data/font/thorne_shaded.ttf',
+                    'fsize'  =&gt; 24,
+                    'width'  =&gt; 350,
+                    'height' =&gt; 100,
+                    'expiration' =&gt; 600,
+                    'dotNoiseLevel' =&gt; 40,
+                    'lineNoiseLevel' =&gt; 3
+                ],
+            ],
+        ]);
+    }
+}
+</code></pre>
+<p>Above, the <code>captcha</code> key of the configuration array (see line 20) contains the following
+parameters for configuring the @<code>Image</code>[Laminas\Captcha\Image] CAPTCHA algorithm attached to the form element:</p>
+<ul>
+<li>
+<p>the <code>class</code> parameter (line 21) should be either the fully qualified CAPTCHA adapter
+   class name (@<code>\Laminas\Captcha\Image</code>) or its short alias (@<code>Image</code>[Laminas\Captcha\Image]).</p>
+</li>
+<li>
+<p>the <code>imgDir</code> parameter (line 22) should be the path to the directory where to save
+   the generated distorted images (in this example, we will save the images to the
+   <em>APP_DIR/public/img/captcha</em> directory).</p>
+</li>
+<li>
+<p>the <code>suffix</code> parameter (line 23) defines the extension for a generated image
+   file (".png" in this example).</p>
+</li>
+<li>
+<p>the <code>imgUrl</code> parameter (line 24) defines the base part of the URL for opening generated
+   CAPTCHA images in a web browser. In this example, site visitors will be able to access CAPTCHA
+   images using URLs like "http://localhost/img/captcha/&lt;ID&gt;", where ID is a unique ID of certain
+   image.</p>
+</li>
+<li>
+<p>the <code>imgAlt</code> parameter (line 25) is an (optional) alternative text to show if CAPTCHA
+   image can't be loaded by the web browser (the "alt" attribute of <code>&lt;img&gt;</code> tag).</p>
+</li>
+<li>
+<p>the <code>font</code> parameter (line 26) is the path to the font file. You can download a free TTF font,
+   for example, from <a href="http://www.1001freefonts.com/">here</a>. In this example, we use <em>Thorne Shaded</em>
+   font, which we downloaded and put into the <em>APP_DIR/data/font/thorne_shaded.ttf</em> file.</p>
+</li>
+<li>
+<p>the <code>fsize</code> parameter (line 27) is a positive integer number defining the font size.</p>
+</li>
+<li>
+<p>the <code>width</code> (line 28) and <code>height</code> parameters (line 29) define the width and height (in pixels)
+   of the generated  image, respectively.</p>
+</li>
+<li>
+<p>the <code>expiration</code> parameter (line 30) defines the expiration period (in seconds)
+   of the CAPTCHA images. Once an image expires, it is removed from disk.</p>
+</li>
+<li>
+<p>the <code>dotNoiseLevel</code> parameter (line 31) and <code>lineNoiseLevel</code> parameter (line 32) define
+   the image generation options (dot noise level and line noise level, respectively).</p>
+</li>
+</ul>
+<p>To render the CAPTCHA field, add the following lines to your <em>contact-us.phtml</em>
+view template file:</p>
+<pre><code class="language-php">&lt;div class=&quot;form-group&quot;&gt;
+  &lt;?= $this-&gt;formLabel($form-&gt;get('captcha')); ?&gt;
+  &lt;?= $this-&gt;formElement($form-&gt;get('captcha')); ?&gt;
+  &lt;?= $this-&gt;formElementErrors($form-&gt;get('captcha')); ?&gt;
+  &lt;p class=&quot;help-block&quot;&gt;Enter the letters above as you see them.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Finally, create the <em>APP_DIR/public/img/captcha</em> directory that will store generated CAPTCHA
+images. Adjust directory permissions to make the directory writeable by the Apache Web Server.
+In Linux Ubuntu, this is typically accomplished by the following shell commands (replace the <code>APP_DIR</code>
+placeholder with the actual directory name of your web application):</p>
+<p><code>mkdir APP_DIR/public/img/captcha</code></p>
+<p><code>chown -R www-data:www-data APP_DIR</code></p>
+<p><code>chmod -R 775 APP_DIR</code></p>
+<p>Above, the <code>mkdir</code> command creates the directory, and <code>chown</code> and <code>chmod</code> commands
+set the Apache user to be the owner of the directory and allow the web server to write
+to the directory, respectively.</p>
+<p>Now, if you open the "http://localhost/contactus" page in your web browser,
+the CAPTCHA image will be generated based on a random sequence of letters and
+digits saved in session. You should see something like in the figure 11.3 below.</p>
+<p><img alt="Figure 11.3. Image CAPTCHA" src="../images/forms_advanced/image_captcha_page.png" /></p>
+<p>When you fill the form fields in and press the <em>Submit</em> button, the letters
+entered into the <em>Human check</em> field will be transferred to server as part of
+HTTP request. Then, on form validation, the @<code>Laminas\Form\Element\Captcha</code> class
+will compare the submitted letters to those stored in PHP session. If the letters
+are identical, the form is considered valid; otherwise form validation fails.</p>
+<p>Once the PHP renderer processes the view template, it generates HTML markup for
+the CAPTCHA element as shown below:</p>
+<pre><code class="language-text">&lt;div class=&quot;form-group&quot;&gt;
+  &lt;label for=&quot;captcha&quot;&gt;Human check&lt;/label&gt;
+  &lt;img width=&quot;350&quot; height=&quot;100&quot; alt=&quot;CAPTCHA Image&quot;
+       src=&quot;/img/captcha/df344b37500dcbb0c4d32f7351a65574.png&quot;&gt;
+  &lt;input name=&quot;captcha[id]&quot; type=&quot;hidden&quot;
+         value=&quot;df344b37500dcbb0c4d32f7351a65574&quot;&gt;
+  &lt;input name=&quot;captcha[input]&quot; type=&quot;text&quot;&gt;
+  &lt;p class=&quot;help-block&quot;&gt;Enter the letters above as you see them.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h4 id="example-2-adding-a-figlet-captcha-to-the-contactform">Example 2: Adding a FIGlet CAPTCHA to the ContactForm</h4>
+<p>To use the FIGlet CAPTCHA element with your form, replace the form element definition
+from the previous example with the following code:</p>
+<pre><code class="language-php">&lt;?php
+// Add the CAPTCHA field
+$this-&gt;add([
+    'type'  =&gt; 'captcha',
+    'name' =&gt; 'captcha',
+    'attributes' =&gt; [
+    ],
+    'options' =&gt; [
+        'label' =&gt; 'Human check',
+        'captcha' =&gt; [
+            'class' =&gt; 'Figlet',
+            'wordLen' =&gt; 6,
+            'expiration' =&gt; 600,
+        ],
+    ],
+]);
+</code></pre>
+<p>Above, the <code>captcha</code> key of the configuration array (see line 10) contains the following
+parameters for configuring the @<code>Figlet</code>[Laminas\Captcha\Figlet] CAPTCHA algorithm attached to the form element:</p>
+<ul>
+<li>
+<p>the <code>class</code> parameter (line 11) should be either the full CAPTCHA adapter
+   class name (@<code>\Laminas\Captcha\Figlet</code>) or its short alias (@<code>Figlet</code>[Laminas\Captcha\Figlet]).</p>
+</li>
+<li>
+<p>the <code>wordLen</code> parameter (line 12) defines the length of the secret word to be generated.</p>
+</li>
+<li>
+<p>the <code>expiration</code> parameter (line 13) defines the CAPTCHA expiration period (in seconds).</p>
+</li>
+</ul>
+<p>Now, open the "http://localhost/contactus" page in your web browser. Once that is done,
+you should see a page like in the figure 11.4 below.</p>
+<p><img alt="Figure 11.4. FIGlet CAPTCHA" src="../images/forms_advanced/figlet_captcha_page.png" /></p>
+<p>Once the PHP renderer processes the view template, it generates HTML markup for
+the CAPTCHA element like shown below:</p>
+<pre><code class="language-text">&lt;div class=&quot;form-group&quot;&gt;
+  &lt;label for=&quot;captcha&quot;&gt;Human check&lt;/label&gt;
+    &lt;pre&gt;
+ __   _    __   __   _    _      ___     _    _    __   __
+| || | ||  \ \\/ // | \  / ||   / _ \\  | || | ||  \ \\/ //
+| '--' ||   \ ` //  |  \/  ||  | / \ || | || | ||   \ ` //
+| .--. ||    | ||   | .  . ||  | \_/ || | \\_/ ||    | ||
+|_|| |_||    |_||   |_|\/|_||   \___//   \____//     |_||
+`-`  `-`     `-`'   `-`  `-`    `---`     `---`      `-`'
+
+&lt;/pre&gt;
+&lt;input name=&quot;captcha[id]&quot; type=&quot;hidden&quot;
+       value=&quot;b68b010eccc22e78969764461be62714&quot;&gt;
+&lt;input name=&quot;captcha[input]&quot; type=&quot;text&quot;&gt;
+&lt;p class=&quot;help-block&quot;&gt;Enter the letters above as you see them.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="csrf-prevention">CSRF Prevention</h3>
+<p>Cross-site request forgery (CSRF) is a kind of hacker attack which forces the user's
+browser to transmit an HTTP request to an arbitrary site. Through the CSRF attack, the
+malicious script is able to send unauthorized commands from a user that the website trusts.
+This attack is typically performed on pages containing forms for submission of some
+sensitive data (e.g. money transfer forms, shopping carts etc.)</p>
+<p>To better understand how this attack works, take a look at figure 11.5.</p>
+<p><img alt="Figure 11.5. A CSRF attack example" src="../images/forms_advanced/csrf_scheme.png" /></p>
+<p>Figure 11.5 illustrates an example CSRF attack on a payment gateway website:</p>
+<ol>
+<li>
+<p>You log into your account at payment gateway web site <em>https://payment.com</em>. Please
+   note that the SSL-protected connection (HTTPS) is used here, but it doesn't protect
+   from such kind of attacks.</p>
+</li>
+<li>
+<p>Typically, you set check on the "Remember Me" check box of the login form to avoid entering
+   user name and password too often. Once you logged in to your account, your web browser saves
+   your session information to a cookie variable on your machine.</p>
+</li>
+<li>
+<p>On the payment gateway site, you use the payment form
+   <em>https://payment.com/moneytransfer.php</em> to buy some goods. Please note that this
+   payment form will later be used as a vulnerability allowing to perform the CSRF attack.</p>
+</li>
+<li>
+<p>Next you use the same web browser to visit some website you like. Assume the website
+   contains cool pictures <em>http://coolpictures.com</em>. Unfortunately,
+   this web site is infected by a malicious script, masqueraded by an
+   <code>&lt;img src="image.php"&gt;</code> HTML tag. Once you open the HTML page in your web browser,
+   it loads all its images, thus executing the malicious <em>image.php</em> script.</p>
+</li>
+<li>
+<p>The malicious script checks the cookie variable, and if it presents, it
+   performs the "session riding" and can act on behalf of the logged in user.
+   It is now able to submit the payment form to the payment gateway site.</p>
+</li>
+</ol>
+<blockquote>
+<p>The above described CSRF attack is possible it the web form on the payment gateway site
+does not check the source of the HTTP request. The people who maintain the payment
+gateway site must put more attention in making its forms more secure.</p>
+</blockquote>
+<p>To prevent CSRF attacks to a form, one has to require a special token with the form, as follows:</p>
+<ol>
+<li>
+<p>For certain form, generate a random sequence of bytes (token) and
+   save it server-side in PHP session data.</p>
+</li>
+<li>
+<p>Add a hidden field to form and set its value with the token.</p>
+</li>
+<li>
+<p>Once the form is submitted by the user, compare the hidden value passed in the form
+   with the token saved server-side. If they match, consider the form data secure.</p>
+</li>
+</ol>
+<blockquote>
+<p>If a malicious user will try to attack the site by submitting the form, he
+will not be able to put right token in the form submissions, because the token
+is not stored in cookies.</p>
+</blockquote>
+<h4 id="example-adding-a-csrf-element-to-form">Example: Adding a CSRF Element to Form</h4>
+<p>In Laminas Framework, to add a CSRF protection to your form model,
+you use the @<code>Laminas\Form\Element\Csrf</code> form element class.</p>
+<blockquote>
+<p>The @<code>Csrf</code>[Laminas\Form\Element\Csrf] element has no visual representation (you will not see it on the screen).</p>
+</blockquote>
+<p>To insert a CSRF element to your form model, add the following lines in its <code>addElements()</code> method:</p>
+<pre><code class="language-php">// Add the CSRF field
+$this-&gt;add([
+  'type'  =&gt; 'csrf',
+  'name' =&gt; 'csrf',
+  'options' =&gt; [
+    'csrf_options' =&gt; [
+      'timeout' =&gt; 600
+    ]
+  ],
+]);
+</code></pre>
+<p>Above, we use the @<code>Form</code>[Laminas\Form\Form]'s <code>add()</code> method (line 2), to which we pass a configuration array
+describing the CSRF element. The element will be automatically instantiated and initialized
+by the factory.</p>
+<p>In line 3, we specify the class name for the CSRF element. This either may be the fully qualified class
+name (@<code>Laminas\Form\Element\Csrf</code>) or a short alias ("csrf").</p>
+<p>In line 4, we set the "name" attribute for the element. In this example, we use "csrf" name,
+but you may use any other name, on your choice.</p>
+<p>In  line 6, inside of <code>csrf_options</code> array, we specify the options specific to
+@<code>Laminas\Form\Element\Csrf</code> class. We set the <code>timeout</code> option to 600 (look at line 7),
+which means the CSRF check expires in 600 seconds (10 minutes) after form creation.</p>
+<p>To render the CSRF field, in your view template <em>.phtml</em> file, add the following line:</p>
+<pre><code class="language-php">&lt;?= $this-&gt;formElement($form-&gt;get('csrf')); ?&gt;
+</code></pre>
+<p>When the PHP renderer evaluates the view template, it generates the HTML markup
+for the CSRF field like shown below:</p>
+<pre><code class="language-text">&lt;input type=&quot;hidden&quot; name=&quot;csrf&quot; value=&quot;1bc42bd0da4800fb55d16e81136fe177&quot;&gt;
+</code></pre>
+<blockquote>
+<p>As you can see from the HTML markup code above, the form now contains a hidden field with a
+randomly generated token. Since the attacker script doesn't know this token, it won't
+be able to submit its correct value, thus the CSRF attack becomes prevented.</p>
+<p><strong>What happens if CSRF element validation fails?</strong></p>
+<p>If during the form validation the CSRF check fails, the form is considered
+invalid and the user will see it again to fix input errors, but he won't see
+the error message for the CSRF element (we don't want hackers to know for sure
+what's wrong with the form).</p>
+</blockquote>
+<h2 id="using-validation-groups">Using Validation Groups</h2>
+<p>Sometimes it may be useful to temporarily disable validation of some form elements. You can do that with a feature
+called <em>validation groups</em>.</p>
+<blockquote>
+<p>By default, all form elements are validated. A validation group allows to disable validation of certain fields.</p>
+</blockquote>
+<p>For example, assume you implement a form named <code>PaymentForm</code>, which allows you to select a payment method of several alternatives (credit card, bank transfer and cash).
+If the user selects <em>credit card</em>, you also want him to enter the credit card number; else if user selects <em>bank transfer</em>, you
+want him to enter bank account number; and finally, if the <em>cash</em> is selected, user does not need to enter additional information.</p>
+<blockquote>
+<p>For this form, you will have to dynamically hide and display dependent fields in client's browser with JavaScript.</p>
+</blockquote>
+<p>How would you validate such form in your controller's action? The problem is that some fields <em>depend</em> on others. The <code>card_number</code> field is required
+only when <code>payment_method</code> is the "credit card", otherwise it is optional. The same is for the <code>bank_account</code> field - it is required
+only when <code>payment_method</code> is the "bank transfer".</p>
+<p>We can handle this case elegantly with the validation group. The @<code>Form</code>[Laminas\Form\Form] class provides the <code>setValidationGroup()</code> method,
+which accepts the list of fields that you want to validate; all other fields will be suppressed and not validated.</p>
+<pre><code class="language-php">// First, we will validate the &quot;payment_method&quot; field.
+$form-&gt;setValidationGroup(['payment_method']);
+if ($form-&gt;isValid())
+{
+    $data = $form-&gt;getData();
+
+    $paymentMethod = $data['payment_method'];
+
+    // Next, validate the dependent fields
+    if ($paymentMethod=='credit_card') {
+        $form-&gt;setValidationGroup(['payment_method', 'card_number']);
+    } else if ($paymentMethod=='bank_account') {
+        $form-&gt;setValidationGroup(['payment_method', 'bank_account']);
+    }
+
+    if ($form-&gt;isValid()) {
+        $data = $form-&gt;getData();
+
+        // Do something with the data
+        // ...
+    }
+}
+</code></pre>
+<blockquote>
+<p>You can see this example in action in the <em>Form Demo</em> sample web application bundled with this book. Just type
+"http://localhost/payment" URL in your browser.</p>
+</blockquote>
+<h2 id="implementing-multi-step-forms-multi-step-forms">Implementing Multi-Step Forms {#multi-step-forms}</h2>
+<p>In this section, we will provide instructions on how to implement a <em>multi-step</em> form with Laminas. A multi-step form
+is a form having a lot of fields, and which is displayed in several steps. To store the current step and user-entered data
+between page requests, PHP <em>sessions</em> are utilized.</p>
+<blockquote>
+<p>For example, user registration can be performed in several steps: on the first step you display the page allowing to enter
+login and password, on the second step you display the page where the site visitor can enter his personal information,
+and on the third step, the visitor can enter billing information.</p>
+<p>Another example of a multi-step form is a Survey form. This form would display a question and possible variants of the answer.
+This form would have as many steps as many questions are in the survey.</p>
+</blockquote>
+<p>In this section we will implement the <em>User Registration</em> form allowing to collect information about the user being registered.</p>
+<blockquote>
+<p>You can see this complete working example in action as part of <em>Form Demo</em> sample web application bundled with this book.</p>
+</blockquote>
+<h3 id="enabling-sessions">Enabling Sessions</h3>
+<blockquote>
+<p>If you are new to the PHP sessions feature, please refer to <a href="#session">Working with Sessions</a> before reading this section.</p>
+</blockquote>
+<p>Session support is implemented in @<code>Laminas\Session</code> component, so you have to install it if you hadn't done that before.</p>
+<p>Next, modify your <em>APP_DIR/config/global.php</em> config file as follows:</p>
+<pre><code class="language-php">&lt;?php
+use Laminas\Session\Storage\SessionArrayStorage;
+use Laminas\Session\Validator\RemoteAddr;
+use Laminas\Session\Validator\HttpUserAgent;
+
+return [
+    // Session configuration.
+    'session_config' =&gt; [
+        // Session cookie will expire in 1 hour.
+        'cookie_lifetime' =&gt; 60*60*1,
+        // Store session data on server maximum for 30 days.
+        'gc_maxlifetime'  =&gt; 60*60*24*30,
+    ],
+    // Session manager configuration.
+    'session_manager' =&gt; [
+        // Session validators (used for security).
+        'validators' =&gt; [
+            RemoteAddr::class,
+            HttpUserAgent::class,
+        ]
+    ],
+    // Session storage configuration.
+    'session_storage' =&gt; [
+        'type' =&gt; SessionArrayStorage::class
+    ],
+
+    // ...
+];
+</code></pre>
+<p>Then add the following lines to your <em>module.config.php</em> to register the <em>UserRegistration</em> session container:</p>
+<pre><code class="language-php">&lt;?php
+return [
+    // ...
+    'session_containers' =&gt; [
+        'UserRegistration'
+    ],
+];
+</code></pre>
+<p>Done! Now we can use session container in our code. Next, we will implement the <code>RegistrationForm</code>
+form model.</p>
+<h3 id="adding-registrationform">Adding RegistrationForm</h3>
+<p>The <code>RegistrationForm</code> form model will be used for collecting data about the user (email, full name,
+password, personal information and billing information). We will add elements to this form in three portions,
+thus allowing to use it as a multi-step form.</p>
+<p>To add the form model, create the <em>RegistrationForm.php</em> file
+in the <em>Form</em> directory under the <em>Application</em> module's source directory:</p>
+<pre><code class="language-php">&lt;?php
+namespace Application\Form;
+
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilter;
+use Application\Validator\PhoneValidator;
+
+/**
+ * This form is used to collect user registration data. This form is multi-step.
+ * It determines which fields to create based on the $step argument you pass to
+ * its constructor.
+ */
+class RegistrationForm extends Form
+{
+    /**
+     * Constructor.
+     */
+    public function __construct($step)
+    {
+        // Check input.
+        if (!is_int($step) || $step&lt;1 || $step&gt;3)
+            throw new \Exception('Step is invalid');
+
+        // Define form name
+        parent::__construct('registration-form');
+
+        // Set POST method for this form
+        $this-&gt;setAttribute('method', 'post');
+
+        $this-&gt;addElements($step);
+        $this-&gt;addInputFilter($step);
+    }
+
+    /**
+     * This method adds elements to form (input fields and submit button).
+     */
+    protected function addElements($step)
+    {
+        if ($step==1) {
+
+            // Add &quot;email&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'text',
+                'name' =&gt; 'email',
+                'attributes' =&gt; [
+                    'id' =&gt; 'email'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Your E-mail',
+                ],
+            ]);
+
+            // Add &quot;full_name&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'text',
+                'name' =&gt; 'full_name',
+                'attributes' =&gt; [
+                    'id' =&gt; 'full_name'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Full Name',
+                ],
+            ]);
+
+            // Add &quot;password&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'password',
+                'name' =&gt; 'password',
+                'attributes' =&gt; [
+                    'id' =&gt; 'password'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Choose Password',
+                ],
+            ]);
+
+            // Add &quot;confirm_password&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'password',
+                'name' =&gt; 'confirm_password',
+                'attributes' =&gt; [
+                    'id' =&gt; 'confirm_password'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Type Password Again',
+                ],
+            ]);
+
+        } else if ($step==2) {
+
+            // Add &quot;phone&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'text',
+                'name' =&gt; 'phone',
+                'attributes' =&gt; [
+                    'id' =&gt; 'phone'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Mobile Phone',
+                ],
+            ]);
+
+            // Add &quot;street_address&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'text',
+                'name' =&gt; 'street_address',
+                'attributes' =&gt; [
+                    'id' =&gt; 'street_address'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Street address',
+                ],
+            ]);
+
+            // Add &quot;city&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'text',
+                'name' =&gt; 'city',
+                'attributes' =&gt; [
+                    'id' =&gt; 'city'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'City',
+                ],
+            ]);
+
+            // Add &quot;state&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'text',
+                'name' =&gt; 'state',
+                'attributes' =&gt; [
+                    'id' =&gt; 'state'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'State',
+                ],
+            ]);
+
+            // Add &quot;post_code&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'text',
+                'name' =&gt; 'post_code',
+                'attributes' =&gt; [
+                    'id' =&gt; 'post_code'
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Post Code',
+                ],
+            ]);
+
+            // Add &quot;country&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'select',
+                'name' =&gt; 'country',
+                'attributes' =&gt; [
+                    'id' =&gt; 'country',
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Country',
+                    'empty_option' =&gt; '-- Please select --',
+                    'value_options' =&gt; [
+                        'US' =&gt; 'United States',
+                        'CA' =&gt; 'Canada',
+                        'BR' =&gt; 'Brazil',
+                        'GB' =&gt; 'Great Britain',
+                        'FR' =&gt; 'France',
+                        'IT' =&gt; 'Italy',
+                        'DE' =&gt; 'Germany',
+                        'RU' =&gt; 'Russia',
+                        'IN' =&gt; 'India',
+                        'CN' =&gt; 'China',
+                        'AU' =&gt; 'Australia',
+                        'JP' =&gt; 'Japan'
+                    ],
+                ],
+            ]);
+
+
+        } else if ($step==3) {
+
+            // Add &quot;billing_plan&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'select',
+                'name' =&gt; 'billing_plan',
+                'attributes' =&gt; [
+                    'id' =&gt; 'billing_plan',
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Billing Plan',
+                    'empty_option' =&gt; '-- Please select --',
+                    'value_options' =&gt; [
+                        'Free' =&gt; 'Free',
+                        'Bronze' =&gt; 'Bronze',
+                        'Silver' =&gt; 'Silver',
+                        'Gold' =&gt; 'Gold',
+                        'Platinum' =&gt; 'Platinum'
+                    ],
+                ],
+            ]);
+
+            // Add &quot;payment_method&quot; field
+            $this-&gt;add([
+                'type'  =&gt; 'select',
+                'name' =&gt; 'payment_method',
+                'attributes' =&gt; [
+                    'id' =&gt; 'payment_method',
+                ],
+                'options' =&gt; [
+                    'label' =&gt; 'Payment Method',
+                    'empty_option' =&gt; '-- Please select --',
+                    'value_options' =&gt; [
+                        'Visa' =&gt; 'Visa',
+                        'MasterCard' =&gt; 'Master Card',
+                        'PayPal' =&gt; 'PayPal'
+                    ],
+                ],
+            ]);
+        }
+
+        // Add the CSRF field
+        $this-&gt;add([
+            'type'  =&gt; 'csrf',
+            'name' =&gt; 'csrf',
+            'attributes' =&gt; [],
+            'options' =&gt; [
+                'csrf_options' =&gt; [
+                     'timeout' =&gt; 600
+                ]
+            ],
+        ]);
+
+        // Add the submit button
+        $this-&gt;add([
+            'type'  =&gt; 'submit',
+            'name' =&gt; 'submit',
+            'attributes' =&gt; [
+                'value' =&gt; 'Next Step',
+                'id' =&gt; 'submitbutton',
+            ],
+        ]);
+    }
+
+    /**
+     * This method creates input filter (used for form filtering/validation).
+     */
+    private function addInputFilter($step)
+    {
+        $inputFilter = new InputFilter();
+        $this-&gt;setInputFilter($inputFilter);
+
+        if ($step==1) {
+
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'email',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                        ['name' =&gt; 'StringTrim'],
+                    ],
+                    'validators' =&gt; [
+                        [
+                            'name' =&gt; 'EmailAddress',
+                            'options' =&gt; [
+                                'allow' =&gt; \Laminas\Validator\Hostname::ALLOW_DNS,
+                                'useMxCheck'    =&gt; false,
+                            ],
+                        ],
+                    ],
+                ]);
+
+            $inputFilter-&gt;add([
+                'name'     =&gt; 'full_name',
+                'required' =&gt; true,
+                'filters'  =&gt; [
+                    ['name' =&gt; 'StringTrim'],
+                    ['name' =&gt; 'StripTags'],
+                    ['name' =&gt; 'StripNewlines'],
+                ],
+                'validators' =&gt; [
+                    [
+                        'name'    =&gt; 'StringLength',
+                        'options' =&gt; [
+                            'min' =&gt; 1,
+                            'max' =&gt; 128
+                        ],
+                    ],
+                ],
+            ]);
+
+            // Add input for &quot;password&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'password',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                    ],
+                    'validators' =&gt; [
+                        [
+                            'name'    =&gt; 'StringLength',
+                            'options' =&gt; [
+                                'min' =&gt; 6,
+                                'max' =&gt; 64
+                            ],
+                        ],
+                    ],
+                ]);
+
+            // Add input for &quot;confirm_password&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'confirm_password',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                    ],
+                    'validators' =&gt; [
+                        [
+                            'name'    =&gt; 'Identical',
+                            'options' =&gt; [
+                                'token' =&gt; 'password',
+                            ],
+                        ],
+                    ],
+                ]);
+
+        } else if ($step==2) {
+
+            $inputFilter-&gt;add([
+                'name'     =&gt; 'phone',
+                'required' =&gt; true,
+                'filters'  =&gt; [
+                ],
+                'validators' =&gt; [
+                    [
+                        'name'    =&gt; 'StringLength',
+                        'options' =&gt; [
+                            'min' =&gt; 3,
+                            'max' =&gt; 32
+                        ],
+                    ],
+                    [
+                        'name' =&gt; PhoneValidator::class,
+                        'options' =&gt; [
+                            'format' =&gt; PhoneValidator::PHONE_FORMAT_INTL
+                        ]
+                    ],
+                ],
+            ]);
+
+            // Add input for &quot;street_address&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'street_address',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                        ['name' =&gt; 'StringTrim'],
+                    ],
+                    'validators' =&gt; [
+                        ['name'=&gt;'StringLength', 'options'=&gt;['min'=&gt;1, 'max'=&gt;255]]
+                    ],
+                ]);
+
+            // Add input for &quot;city&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'city',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                        ['name' =&gt; 'StringTrim'],
+                    ],
+                    'validators' =&gt; [
+                        ['name'=&gt;'StringLength', 'options'=&gt;['min'=&gt;1, 'max'=&gt;255]]
+                    ],
+                ]);
+
+            // Add input for &quot;state&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'state',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                        ['name' =&gt; 'StringTrim'],
+                    ],
+                    'validators' =&gt; [
+                        ['name'=&gt;'StringLength', 'options'=&gt;['min'=&gt;1, 'max'=&gt;32]]
+                    ],
+                ]);
+
+            // Add input for &quot;post_code&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'post_code',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                    ],
+                    'validators' =&gt; [
+                        ['name' =&gt; 'IsInt'],
+                        ['name'=&gt;'Between', 'options'=&gt;['min'=&gt;0, 'max'=&gt;999999]]
+                    ],
+                ]);
+
+            // Add input for &quot;country&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'country',
+                    'required' =&gt; false,
+                    'filters'  =&gt; [
+                        ['name' =&gt; 'Alpha'],
+                        ['name' =&gt; 'StringTrim'],
+                        ['name' =&gt; 'StringToUpper'],
+                    ],
+                    'validators' =&gt; [
+                        ['name'=&gt;'StringLength', 'options'=&gt;['min'=&gt;2, 'max'=&gt;2]]
+                    ],
+                ]);
+
+        } else if ($step==3) {
+
+            // Add input for &quot;billing_plan&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'billing_plan',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                    ],
+                    'validators' =&gt; [
+                        [
+                            'name' =&gt; 'InArray',
+                            'options' =&gt; [
+                                'haystack'=&gt;[
+                                    'Free',
+                                    'Bronze',
+                                    'Silver',
+                                    'Gold',
+                                    'Platinum'
+                                ]
+                            ]
+                        ]
+                    ],
+                ]);
+
+            // Add input for &quot;payment_method&quot; field
+            $inputFilter-&gt;add([
+                    'name'     =&gt; 'payment_method',
+                    'required' =&gt; true,
+                    'filters'  =&gt; [
+                    ],
+                    'validators' =&gt; [
+                        [
+                            'name' =&gt; 'InArray',
+                            'options' =&gt; [
+                                'haystack'=&gt;[
+                                    'PayPal',
+                                    'Visa',
+                                    'MasterCard',
+                                ]
+                            ]
+                        ]
+                    ],
+                ]);
+        }
+    }
+}
+</code></pre>
+<p>As you can see from the code above, the <code>RegistrationForm</code> is a usual form model, but it accepts the <code>$step</code> argument
+in its constructor allowing to specify what form elements to use on the current step.</p>
+<h3 id="adding-registrationcontroller">Adding RegistrationController</h3>
+<p>Next, we'll add the <code>RegistrationController</code> controller class. To do that, create the <em>RegistrationController.php</em>
+file under the <em>Controller</em> directory and add the following code into it:</p>
+<pre><code class="language-php">&lt;?php
+namespace Application\Controller;
+
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+use Application\Form\RegistrationForm;
+use Laminas\Session\Container;
+
+/**
+ * This is the controller class displaying a page with the User Registration form.
+ * User registration has several steps, so we display different form elements on
+ * each step. We use session container to remember user's choices on the previous
+ * steps.
+ */
+class RegistrationController extends AbstractActionController
+{
+    /**
+     * Session container.
+     * @var Laminas\Session\Container
+     */
+    private $sessionContainer;
+
+    /**
+     * Constructor. Its goal is to inject dependencies into controller.
+     */
+    public function __construct($sessionContainer)
+    {
+        $this-&gt;sessionContainer = $sessionContainer;
+    }
+
+    /**
+     * This is the default &quot;index&quot; action of the controller. It displays the
+     * User Registration page.
+     */
+    public function indexAction()
+    {
+        // Determine the current step.
+        $step = 1;
+        if (isset($this-&gt;sessionContainer-&gt;step)) {
+            $step = $this-&gt;sessionContainer-&gt;step;
+        }
+
+        // Ensure the step is correct (between 1 and 3).
+        if ($step&lt;1 || $step&gt;3)
+            $step = 1;
+
+        if ($step==1) {
+            // Init user choices.
+            $this-&gt;sessionContainer-&gt;userChoices = [];
+        }
+
+        $form = new RegistrationForm($step);
+
+        // Check if user has submitted the form
+        if($this-&gt;getRequest()-&gt;isPost()) {
+
+            // Fill in the form with POST data
+            $data = $this-&gt;params()-&gt;fromPost();
+
+            $form-&gt;setData($data);
+
+            // Validate form
+            if($form-&gt;isValid()) {
+
+                // Get filtered and validated data
+                $data = $form-&gt;getData();
+
+                // Save user choices in session.
+                $this-&gt;sessionContainer-&gt;userChoices[&quot;step$step&quot;] = $data;
+
+                // Increase step
+                $step ++;
+                $this-&gt;sessionContainer-&gt;step = $step;
+
+                // If we completed all 3 steps, redirect to Review page.
+                if ($step&gt;3) {
+                    return $this-&gt;redirect()-&gt;toRoute('registration',
+                                ['action'=&gt;'review']);
+                }
+
+                // Go to the next step.
+                return $this-&gt;redirect()-&gt;toRoute('registration');
+            }
+        }
+
+        $viewModel = new ViewModel([
+            'form' =&gt; $form
+        ]);
+        $viewModel-&gt;setTemplate(&quot;application/registration/step$step&quot;);
+
+        return $viewModel;
+    }
+
+    /**
+     * The &quot;review&quot; action shows a page allowing to review data entered on previous
+     * three steps.
+     */
+    public function reviewAction()
+    {
+        // Validate session data.
+        if(!isset($this-&gt;sessionContainer-&gt;step) ||
+           $this-&gt;sessionContainer-&gt;step&lt;=3 ||
+           !isset($this-&gt;sessionContainer-&gt;userChoices)) {
+            throw new \Exception('Sorry, the data is not available for review yet');
+        }
+
+        // Retrieve user choices from session.
+        $userChoices = $this-&gt;sessionContainer-&gt;userChoices;
+
+        return new ViewModel([
+            'userChoices' =&gt; $userChoices
+        ]);
+    }
+}
+</code></pre>
+<p>In the class above, we have three methods:</p>
+<ul>
+<li>
+<p>The <code>__construct()</code> constructor is used to inject the dependency - the session container - into the controller.</p>
+</li>
+<li>
+<p>The <code>indexAction()</code> action method extracts the current step from session and initializes the form model.
+    If the user has submitted the form, we extract data from form and save it to session, incrementing the step.
+    If the step is greater than 3, we redirect the user to the "Review" page.</p>
+</li>
+<li>
+<p>The <code>reviewAction()</code> action method extracts the data entered by the user on all three steps and passes it to
+    the view for rendering.</p>
+</li>
+</ul>
+<h4 id="adding-registrationcontrollerfactory">Adding RegistrationControllerFactory</h4>
+<p>Next, we add the factory for the <code>RegistrationController</code>. To do that, add the <em>RegistrationControllerFactory.php</em> file
+inside the <em>Controller/Form</em> directory under the module's source directory. Put the following code into it:</p>
+<pre><code class="language-php">&lt;?php
+namespace Application\Controller\Factory;
+
+use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Application\Controller\RegistrationController;
+
+/**
+ * This is the factory for RegistrationController. Its purpose is to instantiate the
+ * controller and inject dependencies into it.
+ */
+class RegistrationControllerFactory implements FactoryInterface
+{
+    public function __invoke(ContainerInterface $container,
+                       $requestedName, array $options = null)
+    {
+        $sessionContainer = $container-&gt;get('UserRegistration');
+
+        // Instantiate the controller and inject dependencies
+        return new RegistrationController($sessionContainer);
+    }
+}
+</code></pre>
+<blockquote>
+<p>Do not forget to register the controller in the <em>module.config.php</em> file!</p>
+</blockquote>
+<h3 id="adding-view-templates">Adding View Templates</h3>
+<p>Now, let's add the view templates for the controller actions. We have four view templates: <em>step1.phtml</em>, <em>step2.phtml</em>,
+<em>step3.phtml</em> and <em>review.phtml</em>. The first three ones are used by the <code>indexAction()</code> and the last is used by the <code>reviewAction()</code>.</p>
+<p>Add <em>step1.phtml</em> file inside the <em>application/registration</em> directory and put the following code into it:</p>
+<pre><code class="language-php">&lt;?php
+$form-&gt;get('email')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    'placeholder'=&gt;'name@yourcompany.com'
+    ]);
+
+$form-&gt;get('full_name')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    'placeholder'=&gt;'John Doe'
+    ]);
+
+$form-&gt;get('password')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    'placeholder'=&gt;'Type password here (6 characters at minimum)'
+    ]);
+
+$form-&gt;get('confirm_password')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    'placeholder'=&gt;'Repeat password'
+    ]);
+
+$form-&gt;get('submit')-&gt;setAttributes(array('class'=&gt;'btn btn-primary'));
+
+$form-&gt;prepare();
+?&gt;
+
+&lt;h1&gt;User Registration - Step 1&lt;/h1&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-6&quot;&gt;
+        &lt;?= $this-&gt;form()-&gt;openTag($form); ?&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('email')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('email')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('email')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('full_name')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('full_name')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('full_name')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('password')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('password')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('password')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('confirm_password')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('confirm_password')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('confirm_password')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+        &lt;?= $this-&gt;formElement($form-&gt;get('submit')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;?= $this-&gt;formElement($form-&gt;get('csrf')); ?&gt;
+
+        &lt;?= $this-&gt;form()-&gt;closeTag(); ?&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Next, add <em>step2.phtml</em> file inside the <em>application/registration</em> directory and put the following code into it:</p>
+<pre><code class="language-php">&lt;?php
+$form-&gt;get('phone')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    'placeholder'=&gt;'Phone number in international format'
+    ]);
+
+$form-&gt;get('street_address')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    ]);
+
+$form-&gt;get('city')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    ]);
+
+$form-&gt;get('state')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    ]);
+
+$form-&gt;get('post_code')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    ]);
+
+$form-&gt;get('country')-&gt;setAttributes([
+    'class'=&gt;'form-control'
+    ]);
+
+$form-&gt;get('submit')-&gt;setAttributes(array('class'=&gt;'btn btn-primary'));
+
+$form-&gt;prepare();
+?&gt;
+
+&lt;h1&gt;User Registration - Step 2 - Personal Information&lt;/h1&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-6&quot;&gt;
+        &lt;?= $this-&gt;form()-&gt;openTag($form); ?&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('phone')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('phone')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('phone')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('street_address')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('street_address')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('street_address')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('city')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('city')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('city')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('state')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('state')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('state')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('post_code')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('post_code')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('post_code')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('country')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('country')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('country')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+        &lt;?= $this-&gt;formElement($form-&gt;get('submit')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;?= $this-&gt;formElement($form-&gt;get('csrf')); ?&gt;
+
+        &lt;?= $this-&gt;form()-&gt;closeTag(); ?&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Next, add <em>step3.phtml</em> file inside the <em>application/registration</em> directory and put the following code into it:</p>
+<pre><code class="language-php">&lt;?php
+$form-&gt;get('billing_plan')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    ]);
+
+$form-&gt;get('payment_method')-&gt;setAttributes([
+    'class'=&gt;'form-control',
+    ]);
+
+$form-&gt;get('submit')-&gt;setAttributes(array('class'=&gt;'btn btn-primary'));
+
+$form-&gt;prepare();
+?&gt;
+
+&lt;h1&gt;User Registration - Step 3 - Billing Information&lt;/h1&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-6&quot;&gt;
+        &lt;?= $this-&gt;form()-&gt;openTag($form); ?&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('billing_plan')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('billing_plan')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('billing_plan')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;?= $this-&gt;formLabel($form-&gt;get('payment_method')); ?&gt;
+            &lt;?= $this-&gt;formElement($form-&gt;get('payment_method')); ?&gt;
+            &lt;?= $this-&gt;formElementErrors($form-&gt;get('payment_method')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+        &lt;?= $this-&gt;formElement($form-&gt;get('submit')); ?&gt;
+        &lt;/div&gt;
+
+        &lt;?= $this-&gt;formElement($form-&gt;get('csrf')); ?&gt;
+
+        &lt;?= $this-&gt;form()-&gt;closeTag(); ?&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>And finally, add <em>review.phtml</em> file inside the <em>application/registration</em> directory and put the following code into it:</p>
+<pre><code class="language-php">&lt;h1&gt;User Registration - Review&lt;/h1&gt;
+
+&lt;p&gt;Thank you! Now please review the data you entered in previous three steps.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;?php print_r($userChoices); ?&gt;
+&lt;/pre&gt;
+</code></pre>
+<h3 id="adding-route">Adding Route</h3>
+<p>Add the following route inside your <em>module.config.php</em> config file:</p>
+<pre><code class="language-php">'registration' =&gt; [
+    'type'    =&gt; Segment::class,
+    'options' =&gt; [
+        'route'    =&gt; '/registration[/:action]',
+        'constraints' =&gt; [
+            'action' =&gt; '[a-zA-Z][a-zA-Z0-9_-]*'
+        ],
+        'defaults' =&gt; [
+            'controller'    =&gt; Controller\RegistrationController::class,
+            'action'        =&gt; 'index',
+        ],
+    ],
+],
+</code></pre>
+<p>Great! Now everything is ready for seeing the results!</p>
+<h3 id="results">Results</h3>
+<p>To see our multi-step form in action, enter the "http://localhost/registration" URL into your browser's
+navigation bar. The <em>User Registration - Step 1</em> page appears (see figure 11.6 below):</p>
+<p><img alt="Figure 11.6. User Registration - Step 1" src="../images/forms_advanced/registration_step1.png" /></p>
+<p>Once the user enters his E-mail, full name and password and clicks <em>Next</em>, he is redirected to the next step
+(see figure 11.7):</p>
+<p><img alt="Figure 11.7. User Registration - Step 2" src="../images/forms_advanced/registration_step2.png" /></p>
+<p>And the final step is shown in figure 11.8 below:</p>
+<p><img alt="Figure 11.8. User Registration - Step 3" src="../images/forms_advanced/registration_step3.png" /></p>
+<p>Clicking <em>Next</em> results in displaying the <em>Review</em> page allowing to see the data entered on the previous three steps:</p>
+<p><img alt="Figure 11.9. User Registration - Review" src="../images/forms_advanced/registration_review.png" /></p>
+<blockquote>
+<p>You can find this complete example in the <em>Form Demo</em> sample application bundled with this book.</p>
+</blockquote>
+<h2 id="summary">Summary</h2>
+<p>In this chapter, we have discussed some advanced form usage capabilities.</p>
+<p>Laminas Framework provides two classes whose purpose is enhancing form security: @<code>Captcha</code>
+and @<code>Csrf</code>[Laminas\Form\Element\Csrf]. A CAPTCHA is a type of challenge-response test used to determine whether or
+not the user is a human. CAPTCHA elements are used on form to prevent form submission by a
+malicious automated process (a robot). The latter element, @<code>Csrf</code>[Laminas\Form\Element\Csrf], is used for Cross-Site
+Request Forgery (abbreviated as CSRF) hacker attack prevention.</p>
+<p>We have also learned of how to implement a multi-step forms with the help of sessions.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:adapter">
+<p>The <em>adapter</em> is a design pattern that translates one interface for a class into a compatible
+        interface, which helps two (or several) incompatible
+        interfaces to work together. Typically, CAPTCHA algorithms have different public methods, but
+        since they all implement @<code>AbstractAdapter</code>[Laminas\Captcha\AdapterInterface] interface, the caller may use any
+        CAPTCHA algorithm in the same common manner (by calling the methods provided by the base interface).&#160;<a class="footnote-backref" href="#fnref:adapter" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:array">
+<p>In the latter case (configuration array), the CAPTCHA algorithm will
+      be automatically instantiated and initialized by the factory class @<code>Laminas\Captcha\Factory</code>.&#160;<a class="footnote-backref" href="#fnref:array" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../uploads/" class="btn btn-neutral float-left" title="Uploading Files with Forms"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../doctrine/" class="btn btn-neutral float-right" title="Database Management with Doctrine ORM">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/modir/laminas-book" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../uploads/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../doctrine/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

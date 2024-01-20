@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/roles/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Role-Based Access Control - Using Laminas Framework</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Role-Based Access Control";
+        var mkdocs_page_input_path = "roles.md";
+        var mkdocs_page_url = "/roles/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Using Laminas Framework
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Preface</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">None</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../acknowledgments/">Acknowledgments</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction to Laminas Framework</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../skeleton/">Laminas Skeleton Application</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operation/">Website Operation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../mvc/">Model-View-Controller</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../routing/">Routing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../appearance/">Page Appearance and Layout</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms/">Collecting User Input with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../filters/">Transforming Input Data with Filters</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../validators/">Checking Input Data with Validators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../uploads/">Uploading Files with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms_advanced/">Advanced Usage of Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine/">Database Management with Doctrine ORM</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_migrations/">Database Migrations</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../modules/">Creating a New Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../session/">Working with Sessions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../users/">User Management, Authentication and Access Filtering</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Role-Based Access Control</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#get-role-demo-sample-from-github">Get Role Demo Sample from GitHub</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#introduction-to-rbac">Introduction to RBAC</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#roles-and-permissions">Roles and Permissions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rbac-container">RBAC Container</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#checking-permissions">Checking Permissions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#default-roles-in-the-role-demo-sample">Default Roles in the Role Demo Sample</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#introduction-to-dynamic-assertions">Introduction to Dynamic Assertions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-the-database">Setting Up the Database</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementing-entities">Implementing Entities</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementing-role-management">Implementing Role Management</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementing-permission-management">Implementing Permission Management</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#assigning-roles-to-a-user">Assigning Roles to a User</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementing-rbacmanager">Implementing RbacManager</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-up-caching">Setting Up Caching</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#writing-the-rbacmanager-service">Writing the RbacManager Service</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-the-not-authorized-page">Adding the Not Authorized Page</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modifying-the-authmanager-service">Modifying the AuthManager Service</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modifying-the-dispatch-event-listener">Modifying the Dispatch Event Listener</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-access-controller-plugin-and-view-helper">Adding Access Controller Plugin and View Helper</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#access-controller-plugin">Access Controller Plugin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#access-view-helper">Access View Helper</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-the-user-module">Using the User Module</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../devenv/">Appendix A. Configuring Web Development Environment</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../netbeans/">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bootstrap/">Appendix C. Introduction to Twitter Bootstrap</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_intro/">Appendix D. Introduction to Doctrine</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ec2_tutorial/">Appendix E. Installing a Laminas Web Application to Amazon EC2</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Using Laminas Framework</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Role-Based Access Control</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/modir/laminas-book/edit/master/docs/roles.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="role-based-access-control">Role-Based Access Control</h1>
+<p>If you remember, in the previous chapter we created the User Demo website which allowed us to manage
+users and permit access to some web pages to authenticated users only.
+In this chapter, we will extend the User Demo and show how to implement the Role-Based Access Control (RBAC).
+The RBAC allows to permit or deny access for certain users to certain website
+pages based on <em>roles</em> and <em>permissions</em>.</p>
+<p>Since you have already known a lot about Laminas from reading previous chapters, in this chapter we will
+omit discussing some obvious things and concentrate on <em>conceptual</em> moments only. It is recommended that you refer to
+the <em>Role Demo</em> sample bundled with this book, which is a complete website that you can run and see everything in action.
+All code discussed in this chapter is part of this sample application.</p>
+<p>Laminas components covered in this chapter:</p>
+<table>
+<thead>
+<tr>
+<th><em>Component</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@<code>Laminas\Permissions\Rbac</code></td>
+<td>Provides RBAC container implementation.</td>
+</tr>
+<tr>
+<td>@<code>Laminas\Cache</code></td>
+<td>Provides functionality for storing data in cache.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="get-role-demo-sample-from-github">Get Role Demo Sample from GitHub</h2>
+<p>For demonstration, in this chapter, we will create a real-life <em>Role Demo</em> website
+that shows how to:</p>
+<ul>
+<li>Implement roles and permissions in your website</li>
+<li>Organize roles in database into an hierarchy</li>
+<li>Manage roles and permissions in user interface</li>
+<li>Use @<code>Laminas\Permissions\Rbac</code> component to implement role-based access control</li>
+<li>Use dynamic assertions to implement complex access control rules</li>
+</ul>
+<p>The <em>Role Demo</em> sample will be based on the <em>User Demo</em> sample that we created in the previous chapter.</p>
+<p>To download the <em>Role Demo</em> application, visit <a href="https://github.com/olegkrivtsov/using-laminas-book-samples">this page</a>
+and click the <em>Clone or Download</em> button to download the code as a ZIP archive.
+When download is complete, unpack the archive to some directory.</p>
+<p>Then navigate to the <code>roledemo</code> directory containing the
+source code of the <em>Role Demo</em> web application:</p>
+<pre><code class="language-text">/using-laminas-book-samples
+  /roledemo
+  ...
+</code></pre>
+<p>The <em>Role Demo</em> is a website which can be installed on your machine.</p>
+<blockquote>
+<p>Detailed instructions on how to install the <em>Role Demo</em> sample can be found in <em>README.md</em> file located in the sample directory.</p>
+</blockquote>
+<h2 id="introduction-to-rbac">Introduction to RBAC</h2>
+<p>Laminas provides a special component named @<code>Laminas\Permissions\Rbac</code> which implements a container for roles and permissions.</p>
+<p>To install the @<code>Laminas\Permissions\Rbac</code> component in your web application, type the following command:</p>
+<pre><code>php composer.phar require laminas/laminas-permissions-rbac
+</code></pre>
+<h3 id="roles-and-permissions">Roles and Permissions</h3>
+<p>A <em>role</em> is a group of users. For example, in a Blog application, there may be the following roles:
+Viewer, Author, Editor, and Administrator.</p>
+<table>
+<thead>
+<tr>
+<th><em>Role Name</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Viewer</code></td>
+<td>Can read any post and can do nothing else.</td>
+</tr>
+<tr>
+<td><code>Author</code></td>
+<td>Can view posts plus create a post, edit it and finally publish it.</td>
+</tr>
+<tr>
+<td><code>Editor</code></td>
+<td>Can view posts plus edit and publish any post.</td>
+</tr>
+<tr>
+<td><code>Administrator</code></td>
+<td>Can do anything a Viewer and Editor can do plus delete posts.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 17.1. Example roles in a Blog website</p>
+<p>A <em>user</em> may be assigned a role or several roles at once. For example, user John may be a Viewer
+and Editor at the same time.</p>
+<p>A role may <em>inherit</em> permissions from other roles. In other words, roles may be organized into an hierarchy when
+parent roles inherit permissions of child roles. For example, in our Blog application, Administrator role would
+inherit permissions from Editor role (see figure 17.1 below). This is because Administrator can do the same things as Editor plus delete posts.
+Editor and Author roles would inherit permissions from the Viewer role.</p>
+<p><img alt="Figure 17.1 Role hierarchy in a Blog website" src="../images/roles/role_hierarchy_in_a_blog_app.png" /></p>
+<p>A role may be assigned with several <em>permissions</em>. A permission is a single typical action in the system. Here are several examples
+of permissions in a Blog website:</p>
+<table>
+<thead>
+<tr>
+<th><em>Permission Name</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>post.view</code></td>
+<td>View any post.</td>
+</tr>
+<tr>
+<td><code>post.edit</code></td>
+<td>Edit any post.</td>
+</tr>
+<tr>
+<td><code>post.own.edit</code></td>
+<td>Edit only owned posts.</td>
+</tr>
+<tr>
+<td><code>post.publish</code></td>
+<td>Publish any post.</td>
+</tr>
+<tr>
+<td><code>post.own.publish</code></td>
+<td>Publish only owned post.</td>
+</tr>
+<tr>
+<td><code>post.delete</code></td>
+<td>Delete any post.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 17.2. Example permissions in a Blog website</p>
+<p>For example, the Viewer role would be assigned the <code>post.view</code> permission. The Editor role would be assigned
+the <code>post.edit</code> and <code>post.publish</code> permissions. The Author role would be assigned with
+the <code>post.own.edit</code> and <code>post.own.publish</code> permissions. And the role Administrator would be assigned
+with the <code>post.delete</code> permission.</p>
+<h3 id="rbac-container">RBAC Container</h3>
+<p>In Laminas, you can use the @<code>Rbac</code> class living in @<code>Laminas\Permissions\Rbac</code> namespace as a simple container for your
+roles and permissions. With this container, you store your roles in memory organized in an hierarchy and assigned
+with permissions.</p>
+<p>For example, let's create an @<code>Rbac</code> container for the Blog application and fill it with roles and permissions:</p>
+<pre><code class="language-php">use Laminas\Permissions\Rbac\Rbac;
+
+// Create Rbac container.
+$rbac = new Rbac();
+
+// The following is to tell Rbac to create some parent roles if not exist yet
+$rbac-&gt;setCreateMissingRoles(true);
+
+// Create role hierarchy
+$rbac-&gt;addRole('Viewer', ['Editor', 'Author']);
+$rbac-&gt;addRole('Editor', ['Administrator']);
+$rbac-&gt;addRole('Author');
+$rbac-&gt;addRole('Administrator');
+
+// Assign permissions to the Viewer role.
+$rbac-&gt;getRole('Viewer')-&gt;addPermission('post.view');
+
+// Assign permissions to the Author role.
+$rbac-&gt;getRole('Author')-&gt;addPermission('post.own.edit');
+$rbac-&gt;getRole('Author')-&gt;addPermission('post.own.publish');
+
+// Assign permissions to the Editor role.
+$rbac-&gt;getRole('Editor')-&gt;addPermission('post.edit');
+$rbac-&gt;getRole('Editor')-&gt;addPermission('post.publish');
+
+// Assign permissions to the Administrator role.
+$rbac-&gt;getRole('Administrator')-&gt;addPermission('post.delete');
+</code></pre>
+<p>As you can see, a role is added to the @<code>Rbac</code> container with the help of the <code>addRole()</code> method.
+The <code>addRole()</code> method takes two arguments: the name of the role to be created, and the name(s)
+of its parent role(s). If the parent roles do not exist yet, they are created automatically
+(for that purpose we use the <code>setCreateMissingRoles()</code> method).</p>
+<p>Permissions are assigned to the created role with the help of role's <code>addPermission()</code> method.</p>
+<h3 id="checking-permissions">Checking Permissions</h3>
+<p>When you have an @<code>Rbac</code> container set up, you can query if the role has certain permission
+with the <code>isGranted()</code> method, as follows:</p>
+<pre><code class="language-php">// The following will return false, because the Viewer can't delete posts
+$rbac-&gt;isGranted('Viewer', 'post.delete');
+
+// The following will return true, because admins can delete posts
+$rbac-&gt;isGranted('Administrator', 'post.delete');
+</code></pre>
+<p>The <code>isGranted()</code> method checks the role and its children and looks for the given permission. If it finds
+the permission, it returns <code>true</code>; otherwise <code>false</code>.</p>
+<h2 id="default-roles-in-the-role-demo-sample">Default Roles in the Role Demo Sample</h2>
+<p>Since our Role Demo application is designed to be the base for your own more complex websites,
+for our Role Demo sample, we will have only the following simple default roles: Administrator and Guest.</p>
+<blockquote>
+<p>You will be able to add more roles via user interface of the website.</p>
+</blockquote>
+<p>We will have the following default permissions:</p>
+<table>
+<thead>
+<tr>
+<th><em>Permission Name</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user.manage</code></td>
+<td>Manage users (add/edit/delete).</td>
+</tr>
+<tr>
+<td><code>role.manage</code></td>
+<td>Manage roles (add/edit/delete).</td>
+</tr>
+<tr>
+<td><code>permission.manage</code></td>
+<td>Manage permissions (add/edit/delete).</td>
+</tr>
+<tr>
+<td><code>profile.any.view</code></td>
+<td>View any user profile in the system.</td>
+</tr>
+<tr>
+<td><code>profile.own.view</code></td>
+<td>View own profile.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 17.3. Default permissions in the Role Demo website</p>
+<p>The first three permissions will allow Administrator to manage users, roles and permissions via user interface.</p>
+<p>The last two permissions (<code>profile.any.view</code> and <code>profile.own.view</code>) are mostly for demonstration of
+how Rbac works and can in theory be deleted from your own website if you do not have the user profile page.</p>
+<p>The <code>profile.any.view</code> allows Administrator to access <em>http://localhost/application/settings/&lt;user_id&gt;</em> page,
+which is the user profile of a user with the given ID.</p>
+<p>The <code>profile.own.view</code> allows Guest to access their own profile page <em>http://localhost/application/settings</em>.</p>
+<blockquote>
+<p>You will be able to create additional permissions via the user interface of the website.</p>
+</blockquote>
+<h2 id="introduction-to-dynamic-assertions">Introduction to Dynamic Assertions</h2>
+<p>You might notice that for the Blog example we had two "special" permissions named <code>post.own.edit</code> and <code>post.own.publish</code>.
+Those permissions are special, because they allow the author to edit <em>only</em> the posts he is the creator of.</p>
+<p>To "check" such permission against the real user, we need to additionally determine if the post really
+belongs to that user. This is called a <em>dynamic assertion</em>.</p>
+<p>In the Role Demo website, we also will have a special permission called <code>profile.own.view</code>. What makes it special
+is that it allows the user to view a profile the user is the owner of.</p>
+<p>To implement dynamic assertions in the <em>Role Demo</em> sample, we will use a special service called the <em>assertion manager</em>.
+This assertion manager will be implemented as the <code>RbacAssertionManager</code> class, which lives in the
+<code>Application\Service</code> namespace and looks like the following:</p>
+<pre><code class="language-php">&lt;?php
+namespace Application\Service;
+
+use Laminas\Permissions\Rbac\Rbac;
+use User\Entity\User;
+
+/**
+ * This service is used for invoking user-defined RBAC dynamic assertions.
+ */
+class RbacAssertionManager
+{
+    /**
+     * Entity manager.
+     * @var Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * Auth service.
+     * @var Laminas\Authentication\AuthenticationService
+     */
+    private $authService;
+
+    /**
+     * Constructs the service.
+     */
+    public function __construct($entityManager, $authService)
+    {
+        $this-&gt;entityManager = $entityManager;
+        $this-&gt;authService = $authService;
+    }
+
+    /**
+     * This method is used for dynamic assertions.
+     */
+    public function assert(Rbac $rbac, $permission, $params)
+    {
+        $currentUser = $this-&gt;entityManager-&gt;getRepository(User::class)
+                -&gt;findOneByEmail($this-&gt;authService-&gt;getIdentity());
+
+        if ($permission=='profile.own.view' &amp;&amp; $params['user']-&gt;getId()==$currentUser-&gt;getId())
+            return true;
+
+        return false;
+    }
+}
+</code></pre>
+<p>As you can see from the code above, the class has the <code>assert()</code> method which accepts three arguments:</p>
+<ul>
+<li>the <code>$rbac</code> is the container of our roles and permissions;</li>
+<li>the <code>$permission</code> is the name of the permission to check;</li>
+<li>the <code>$params</code> is an array of parameters (it can be used for example to pass the user owning the blog post).</li>
+</ul>
+<p>Inside the <code>assert()</code> method, we can get the currently logged in user and compare it with the user passed, this
+way we can return <code>true</code> if the user is trying to open its own profile; otherwise <code>false</code>.</p>
+<blockquote>
+<p>In theory, you can have many assertion managers in your website (for example, if your Blog module has some
+dynamic assertions, you can create and register an assertion manager for that module).</p>
+</blockquote>
+<h2 id="setting-up-the-database">Setting Up the Database</h2>
+<p>In our Role Demo sample, we will store the role hierarchy in the "roledemo" database.
+We will create the following tables (see figure 17.2):</p>
+<ul>
+<li><code>role</code> table will contain data related to a role (its name and description)</li>
+<li><code>role_hierarchy</code> table will contain parent-child relationships between roles</li>
+<li><code>permission</code> table will contain permissions</li>
+<li><code>role_permission</code> table will allow to assign permissions to roles</li>
+<li><code>user_role</code> table will allow to assign roles to users</li>
+<li><code>user</code> table will contain data of users (we created this table earlier in <em>User Demo</em> sample)</li>
+</ul>
+<p><img alt="Figure 17.2 Database Schema of Role Demo Sample" src="../images/roles/roledemo_db_schema.png" /></p>
+<p>You can find a database migration, which creates these tables, in the <em>Role Demo</em> sample application. To run migrations,
+type the following command:</p>
+<pre><code class="language-php">./vendor/bin/doctrine-module migrations:migrate
+</code></pre>
+<blockquote>
+<p>If you are new to migrations, refer to chapter <a href="#migrations">Database Migrations</a>.</p>
+</blockquote>
+<h2 id="implementing-entities">Implementing Entities</h2>
+<p>The <em>Role Demo</em> sample uses Doctrine ORM for managing database. We have already learned how to use Doctrine in
+<a href="#doctrine">Database Management with Doctrine ORM</a>.</p>
+<p>For storing information about roles and permissions in database, we will create the <code>Role</code> and <code>Permission</code>
+entities. The <code>Role</code> entity is mapped
+onto the <code>role</code> database table, while the <code>Permission</code> entity is mapped onto the <code>permission</code> table.
+Those are typical Doctrine entity classes.</p>
+<p>Create the <em>Role.php</em> file inside the <em>Entity</em> directory under the <em>User</em> module's source directory. Put
+the following code into that file:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * This class represents a role.
+ * @ORM\Entity()
+ * @ORM\Table(name=&quot;role&quot;)
+ */
+class Role
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name=&quot;id&quot;)
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(name=&quot;name&quot;)
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(name=&quot;description&quot;)
+     */
+    protected $description;
+
+    /**
+     * @ORM\Column(name=&quot;date_created&quot;)
+     */
+    protected $dateCreated;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=&quot;User\Entity\Role&quot;)
+     * @ORM\JoinTable(name=&quot;role_hierarchy&quot;,
+     *      joinColumns={@ORM\JoinColumn(name=&quot;child_role_id&quot;, referencedColumnName=&quot;id&quot;)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name=&quot;parent_role_id&quot;, referencedColumnName=&quot;id&quot;)}
+     *      )
+     */
+    private $parentRoles;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=&quot;User\Entity\Role&quot;)
+     * @ORM\JoinTable(name=&quot;role_hierarchy&quot;,
+     *      joinColumns={@ORM\JoinColumn(name=&quot;parent_role_id&quot;, referencedColumnName=&quot;id&quot;)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name=&quot;child_role_id&quot;, referencedColumnName=&quot;id&quot;)}
+     *      )
+     */
+    protected $childRoles;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=&quot;User\Entity\Permission&quot;)
+     * @ORM\JoinTable(name=&quot;role_permission&quot;,
+     *      joinColumns={@ORM\JoinColumn(name=&quot;role_id&quot;, referencedColumnName=&quot;id&quot;)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name=&quot;permission_id&quot;, referencedColumnName=&quot;id&quot;)}
+     *      )
+     */
+    private $permissions;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this-&gt;parentRoles = new ArrayCollection();
+        $this-&gt;childRoles = new ArrayCollection();
+        $this-&gt;permissions = new ArrayCollection();
+    }
+
+    /**
+     * Returns role ID.
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this-&gt;id;
+    }
+
+    /**
+     * Sets role ID.
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this-&gt;id = $id;
+    }
+
+    public function getName()
+    {
+        return $this-&gt;name;
+    }
+
+    public function setName($name)
+    {
+        $this-&gt;name = $name;
+    }
+
+    public function getDescription()
+    {
+        return $this-&gt;description;
+    }
+
+    public function setDescription($description)
+    {
+        $this-&gt;description = $description;
+    }
+
+    public function getDateCreated()
+    {
+        return $this-&gt;dateCreated;
+    }
+
+    public function setDateCreated($dateCreated)
+    {
+        $this-&gt;dateCreated = $dateCreated;
+    }
+
+    public function getParentRoles()
+    {
+        return $this-&gt;parentRoles;
+    }
+
+    public function getChildRoles()
+    {
+        return $this-&gt;childRoles;
+    }
+
+    public function getPermissions()
+    {
+        return $this-&gt;permissions;
+    }
+
+    public function addParent(Role $role)
+    {
+        if ($this-&gt;getId() == $role-&gt;getId()) {
+            return false;
+        }
+        if (!$this-&gt;hasParent($role)) {
+            $this-&gt;parentRoles[] = $role;
+            return true;
+        }
+        return false;
+    }
+
+    public function clearParentRoles()
+    {
+        $this-&gt;parentRoles = new ArrayCollection();
+    }
+
+    public function hasParent(Role $role)
+    {
+        if ($this-&gt;getParentRoles()-&gt;contains($role)) {
+            return true;
+        }
+        return false;
+    }
+}
+</code></pre>
+<p>As you could determine from the code above, the <em>Role</em> entity is a typical Doctrine entity having
+annotated properties and getter and setter methods for retrieving/setting those properties.</p>
+<p>Next, create the <em>Permission.php</em> file inside the <em>Entity</em> directory under the <em>User</em> module's source directory. Put
+the following code into that file:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * This class represents a permission.
+ * @ORM\Entity()
+ * @ORM\Table(name=&quot;permission&quot;)
+ */
+class Permission
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name=&quot;id&quot;)
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(name=&quot;name&quot;)
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(name=&quot;description&quot;)
+     */
+    protected $description;
+
+    /**
+     * @ORM\Column(name=&quot;date_created&quot;)
+     */
+    protected $dateCreated;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=&quot;User\Entity\Role&quot;)
+     * @ORM\JoinTable(name=&quot;role_permission&quot;,
+     *      joinColumns={@ORM\JoinColumn(name=&quot;permission_id&quot;, referencedColumnName=&quot;id&quot;)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name=&quot;role_id&quot;, referencedColumnName=&quot;id&quot;)}
+     *      )
+     */
+    private $roles;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this-&gt;roles = new ArrayCollection();
+    }
+
+    public function getId()
+    {
+        return $this-&gt;id;
+    }
+
+    public function setId($id)
+    {
+        $this-&gt;id = $id;
+    }
+
+    public function getName()
+    {
+        return $this-&gt;name;
+    }
+
+    public function setName($name)
+    {
+        $this-&gt;name = $name;
+    }
+
+    public function getDescription()
+    {
+        return $this-&gt;description;
+    }
+
+    public function setDescription($description)
+    {
+        $this-&gt;description = $description;
+    }
+
+    public function getDateCreated()
+    {
+        return $this-&gt;dateCreated;
+    }
+
+    public function setDateCreated($dateCreated)
+    {
+        $this-&gt;dateCreated = $dateCreated;
+    }
+
+    public function getRoles()
+    {
+        return $this-&gt;roles;
+    }
+}
+</code></pre>
+<p>Finally, we will slightly extend the <code>User</code> entity that already created in the <em>User Demo</em> website and add
+the property and methods related to roles:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * This class represents a registered user.
+ * @ORM\Entity()
+ * @ORM\Table(name=&quot;user&quot;)
+ */
+class User
+{
+    // User status constants.
+    const STATUS_ACTIVE       = 1; // Active user.
+    const STATUS_RETIRED      = 2; // Retired user.
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(name=&quot;id&quot;)
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(name=&quot;email&quot;)
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(name=&quot;full_name&quot;)
+     */
+    protected $fullName;
+
+    /**
+     * @ORM\Column(name=&quot;password&quot;)
+     */
+    protected $password;
+
+    /**
+     * @ORM\Column(name=&quot;status&quot;)
+     */
+    protected $status;
+
+    /**
+     * @ORM\Column(name=&quot;date_created&quot;)
+     */
+    protected $dateCreated;
+
+    /**
+     * @ORM\Column(name=&quot;pwd_reset_token&quot;)
+     */
+    protected $passwordResetToken;
+
+    /**
+     * @ORM\Column(name=&quot;pwd_reset_token_creation_date&quot;)
+     */
+    protected $passwordResetTokenCreationDate;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=&quot;User\Entity\Role&quot;)
+     * @ORM\JoinTable(name=&quot;user_role&quot;,
+     *      joinColumns={@ORM\JoinColumn(name=&quot;user_id&quot;, referencedColumnName=&quot;id&quot;)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name=&quot;role_id&quot;, referencedColumnName=&quot;id&quot;)}
+     *      )
+     */
+    private $roles;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this-&gt;roles = new ArrayCollection();
+    }
+
+    /**
+     * Returns user ID.
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this-&gt;id;
+    }
+
+    /**
+     * Sets user ID.
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this-&gt;id = $id;
+    }
+
+    /**
+     * Returns email.
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this-&gt;email;
+    }
+
+    /**
+     * Sets email.
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this-&gt;email = $email;
+    }
+
+    /**
+     * Returns full name.
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this-&gt;fullName;
+    }
+
+    /**
+     * Sets full name.
+     * @param string $fullName
+     */
+    public function setFullName($fullName)
+    {
+        $this-&gt;fullName = $fullName;
+    }
+
+    /**
+     * Returns status.
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this-&gt;status;
+    }
+
+    /**
+     * Returns possible statuses as array.
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        return [
+            self::STATUS_ACTIVE =&gt; 'Active',
+            self::STATUS_RETIRED =&gt; 'Retired'
+        ];
+    }
+
+    /**
+     * Returns user status as string.
+     * @return string
+     */
+    public function getStatusAsString()
+    {
+        $list = self::getStatusList();
+        if (isset($list[$this-&gt;status]))
+            return $list[$this-&gt;status];
+
+        return 'Unknown';
+    }
+
+    /**
+     * Sets status.
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this-&gt;status = $status;
+    }
+
+    /**
+     * Returns password.
+     * @return string
+     */
+    public function getPassword()
+    {
+       return $this-&gt;password;
+    }
+
+    /**
+     * Sets password.
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this-&gt;password = $password;
+    }
+
+    /**
+     * Returns the date of user creation.
+     * @return string
+     */
+    public function getDateCreated()
+    {
+        return $this-&gt;dateCreated;
+    }
+
+    /**
+     * Sets the date when this user was created.
+     * @param string $dateCreated
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this-&gt;dateCreated = $dateCreated;
+    }
+
+    /**
+     * Returns password reset token.
+     * @return string
+     */
+    public function getResetPasswordToken()
+    {
+        return $this-&gt;passwordResetToken;
+    }
+
+    /**
+     * Sets password reset token.
+     * @param string $token
+     */
+    public function setPasswordResetToken($token)
+    {
+        $this-&gt;passwordResetToken = $token;
+    }
+
+    /**
+     * Returns password reset token's creation date.
+     * @return string
+     */
+    public function getPasswordResetTokenCreationDate()
+    {
+        return $this-&gt;passwordResetTokenCreationDate;
+    }
+
+    /**
+     * Sets password reset token's creation date.
+     * @param string $date
+     */
+    public function setPasswordResetTokenCreationDate($date)
+    {
+        $this-&gt;passwordResetTokenCreationDate = $date;
+    }
+
+    /**
+     * Returns the array of roles assigned to this user.
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this-&gt;roles;
+    }
+
+    /**
+     * Returns the string of assigned role names.
+     */
+    public function getRolesAsString()
+    {
+        $roleList = '';
+
+        $count = count($this-&gt;roles);
+        $i = 0;
+        foreach ($this-&gt;roles as $role) {
+            $roleList .= $role-&gt;getName();
+            if ($i&lt;$count-1)
+                $roleList .= ', ';
+            $i++;
+        }
+
+        return $roleList;
+    }
+
+    /**
+     * Assigns a role to user.
+     */
+    public function addRole($role)
+    {
+        $this-&gt;roles-&gt;add($role);
+    }
+}
+</code></pre>
+<h2 id="implementing-role-management">Implementing Role Management</h2>
+<p>In the Role Demo sample, we will create a convenient user interface for managing roles.</p>
+<blockquote>
+<p>You can access the role management page by logging in as <code>admin@example.com</code> and opening
+menu Admin -&gt; Manage Roles.</p>
+</blockquote>
+<p>The role management will be implemented inside the <code>RoleController</code> controller living in the
+<code>User\Controller</code> namespace. The action methods of the <code>RoleController</code> are listed in table 17.4:</p>
+<table>
+<thead>
+<tr>
+<th><em>Action Name</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addAction()</code></td>
+<td>Allows to add a new role.</td>
+</tr>
+<tr>
+<td><code>deleteAction()</code></td>
+<td>Deletes an existing role.</td>
+</tr>
+<tr>
+<td><code>editAction()</code></td>
+<td>Allows to edit an existing role.</td>
+</tr>
+<tr>
+<td><code>editPermissionsAction()</code></td>
+<td>Allows to assign permissions to a role.</td>
+</tr>
+<tr>
+<td><code>indexAction()</code></td>
+<td>Displays the list of existing roles.</td>
+</tr>
+<tr>
+<td><code>viewAction()</code></td>
+<td>Displays the details of a role.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 17.4. Actions of the RoleController controller</p>
+<p>The <code>RoleController</code> works in pair with the <code>RoleManager</code> service which lives in <code>User\Service</code> namespace.</p>
+<p>The <code>RoleController</code> and <code>RoleManager</code> contain nothing new and special, so we will skip their
+discussion here and will just provide some screenshots of the resulting user interface below.</p>
+<blockquote>
+<p>You can find the complete code of the <code>RoleController</code> and <code>RoleManager</code> classes in the Role Demo sample.</p>
+</blockquote>
+<p><img alt="Figure 17.3 The list of roles" src="../images/roles/roledemo_roles_index.png" /></p>
+<p><img alt="Figure 17.4 Create a new role" src="../images/roles/roledemo_roles_add.png" /></p>
+<p><img alt="Figure 17.5 View details of a role" src="../images/roles/roledemo_roles_view.png" /></p>
+<p><img alt="Figure 17.6 Edit an existing role" src="../images/roles/roledemo_roles_edit.png" /></p>
+<p><img alt="Figure 17.7 Assign permissions to a role" src="../images/roles/roledemo_roles_edit_permissions.png" /></p>
+<h2 id="implementing-permission-management">Implementing Permission Management</h2>
+<p>In the Role Demo sample, we will create a convenient user interface for managing permissions.
+It will be useful if you plan to add new permissions or remove existing ones.</p>
+<blockquote>
+<p>You can access the permission management page by logging in as <code>admin@example.com</code> and opening
+menu Admin -&gt; Manage Permissions.</p>
+</blockquote>
+<p>The permission management will be implemented inside the <code>PermissionController</code> controller living in the
+<code>User\Controller</code> namespace. The action methods of the <code>PermissionController</code> are listed in table 17.5:</p>
+<table>
+<thead>
+<tr>
+<th><em>Action Name</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addAction()</code></td>
+<td>Allows to add a new permission.</td>
+</tr>
+<tr>
+<td><code>deleteAction()</code></td>
+<td>Deletes an existing permission.</td>
+</tr>
+<tr>
+<td><code>editAction()</code></td>
+<td>Allows to edit an existing permission.</td>
+</tr>
+<tr>
+<td><code>indexAction()</code></td>
+<td>Displays the list of existing permissions.</td>
+</tr>
+<tr>
+<td><code>viewAction()</code></td>
+<td>Displays the details of a permission.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 17.5. Actions of the PermissionController controller</p>
+<p>The <code>PermissionController</code> works in pair with the <code>PermissionManager</code> service which
+lives in <code>User\Service</code> namespace.</p>
+<p>The <code>PermissionController</code> and <code>PermissionManager</code> contain nothing new and special, so we will skip their
+discussion here and will just provide some screenshots of the resulting user interface below.</p>
+<blockquote>
+<p>You can find the complete code of the <code>PermissionController</code> and <code>PermissionManager</code> classes in the Role Demo sample.</p>
+</blockquote>
+<p><img alt="Figure 17.8 The list of permissions" src="../images/roles/roledemo_permissions_index.png" /></p>
+<p><img alt="Figure 17.9 Create a new permission" src="../images/roles/roledemo_permissions_add.png" /></p>
+<p><img alt="Figure 17.10 View details of a permission" src="../images/roles/roledemo_permissions_view.png" /></p>
+<p><img alt="Figure 17.11 Edit an existing permission" src="../images/roles/roledemo_permissions_edit.png" /></p>
+<h2 id="assigning-roles-to-a-user">Assigning Roles to a User</h2>
+<p>In the Role Demo website, you can assign roles to a user via the convenient user interface.
+Open the <em>Admin -&gt; Manage Users</em> menu and click <em>Edit</em> on the user of your choice. On the
+page that appears, select the roles you'd like to assign to the user and click the <em>Save</em> button.</p>
+<p>This functionality contain nothing new and special, so we will skip its detailed
+discussion here and will just provide a screenshot of the user interface below.</p>
+<p><img alt="Figure 17.12 Assign Roles to a User" src="../images/roles/roledemo_users_edit.png" /></p>
+<h2 id="implementing-rbacmanager">Implementing RbacManager</h2>
+<p>The next thing we will discuss will be the functionality for creating the <code>Rbac</code> container,
+whose purpose is loading the role hierarchy from the database,
+and caching the data in the filesystem cache.</p>
+<blockquote>
+<p>The <em>cache</em> allows to store frequently used data in fast storage. For example, retrieving roles
+and permissions from database on each page load may be rather slow, while storing the precomputed
+role hierarchy in a file may be faster.</p>
+</blockquote>
+<h3 id="setting-up-caching">Setting Up Caching</h3>
+<p>First, let's set up caching. To do that, you need to install the <code>Laminas\Cache</code> and <code>Laminas\Serializer</code> components with
+the following commands:</p>
+<pre><code>php composer.phar require laminas/laminas-cache
+php composer.phar require laminas/laminas-serializer
+</code></pre>
+<p>Finally, edit the <em>config/autoload/global.php</em> and add the following lines:</p>
+<pre><code class="language-php">use Laminas\Cache\Storage\Adapter\Filesystem;
+
+return [
+    //...
+    // Cache configuration.
+    'caches' =&gt; [
+        'FilesystemCache' =&gt; [
+            'adapter' =&gt; [
+                'name'    =&gt; Filesystem::class,
+                'options' =&gt; [
+                    // Store cached data in this directory.
+                    'cache_dir' =&gt; './data/cache',
+                    // Store cached data for 1 hour.
+                    'ttl' =&gt; 60*60*1
+                ],
+            ],
+            'plugins' =&gt; [
+                [
+                    'name' =&gt; 'serializer',
+                    'options' =&gt; [
+                    ],
+                ],
+            ],
+        ],
+    ],
+    //...
+];
+</code></pre>
+<p>This will allow you to use the <code>Filesystem</code> cache and store cached data
+in <em>APP_DIR/data/cache</em> directory.</p>
+<blockquote>
+<p>If you want to learn more about caching, please refer to the <code>Laminas\Cache</code> Laminas component
+documentation.</p>
+</blockquote>
+<h3 id="writing-the-rbacmanager-service">Writing the RbacManager Service</h3>
+<p>The purpose of the <code>RbacManager</code> service will be to construct the <code>Rbac</code> container and load
+the roles and permissions from database. If the needed information is already saved to cache,
+it will load it from cache instead of loading from database.</p>
+<p>Another goal of the <code>RbacManager</code> service will be to use the assertion manager we wrote earlier
+and check for dynamic assertions.</p>
+<p>The <code>RbacManager</code> class will have two methods:</p>
+<ul>
+<li>the <code>init()</code> method will be used to load role hierarchy from database and save it in cache;</li>
+<li>the <code>isGranted()</code> method will be used to query the <code>Rbac</code> container if the given <em>user</em> has the given permission
+    (and checking the assertion manager(s) for the dynamic assertions).</li>
+</ul>
+<p>The <code>RbacManager</code> class will read the configuration and look for the <code>rbac_manager</code> key.
+The key should contain the <code>assertions</code> subkey, in which you can register all assertion managers that you have.</p>
+<pre><code class="language-php">return [
+    //...
+
+    // This key stores configuration for RBAC manager.
+    'rbac_manager' =&gt; [
+        'assertions' =&gt; [Service\RbacAssertionManager::class],
+    ],
+];
+</code></pre>
+<p>The code of the <code>RbacManager</code> class living in <code>User\Service</code> namespace is presented below.</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Service;
+
+use Laminas\Permissions\Rbac\Rbac;
+use Laminas\Permissions\Rbac\Role as RbacRole;
+use User\Entity\User;
+use User\Entity\Role;
+use User\Entity\Permission;
+
+/**
+ * This service is responsible for initialzing RBAC (Role-Based Access Control).
+ */
+class RbacManager
+{
+    /**
+     * Doctrine entity manager.
+     * @var Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * RBAC service.
+     * @var Laminas\Permissions\Rbac\Rbac
+     */
+    private $rbac;
+
+    /**
+     * Auth service.
+     * @var Laminas\Authentication\AuthenticationService
+     */
+    private $authService;
+
+    /**
+     * Filesystem cache.
+     * @var Laminas\Cache\Storage\StorageInterface
+     */
+    private $cache;
+
+    /**
+     * Assertion managers.
+     * @var array
+     */
+    private $assertionManagers = [];
+
+    /**
+     * Constructs the service.
+     */
+    public function __construct($entityManager, $authService, $cache, $assertionManagers)
+    {
+        $this-&gt;entityManager = $entityManager;
+        $this-&gt;authService = $authService;
+        $this-&gt;cache = $cache;
+        $this-&gt;assertionManagers = $assertionManagers;
+    }
+
+    /**
+     * Initializes the RBAC container.
+     */
+    public function init($forceCreate = false)
+    {
+        if ($this-&gt;rbac!=null &amp;&amp; !$forceCreate) {
+            // Already initialized; do nothing.
+            return;
+        }
+
+        // If user wants us to reinit RBAC container, clear cache now.
+        if ($forceCreate) {
+            $this-&gt;cache-&gt;removeItem('rbac_container');
+        }
+
+        // Try to load Rbac container from cache.
+        $this-&gt;rbac = $this-&gt;cache-&gt;getItem('rbac_container', $result);
+        if (!$result)
+        {
+            // Create Rbac container.
+            $rbac = new Rbac();
+            $this-&gt;rbac = $rbac;
+
+            // Construct role hierarchy by loading roles and permissions from database.
+
+            $rbac-&gt;setCreateMissingRoles(true);
+
+            $roles = $this-&gt;entityManager-&gt;getRepository(Role::class)
+                    -&gt;findBy([], ['id'=&gt;'ASC']);
+            foreach ($roles as $role) {
+
+                $roleName = $role-&gt;getName();
+
+                $parentRoleNames = [];
+                foreach ($role-&gt;getParentRoles() as $parentRole) {
+                    $parentRoleNames[] = $parentRole-&gt;getName();
+                }
+
+                $rbac-&gt;addRole($roleName, $parentRoleNames);
+
+                foreach ($role-&gt;getPermissions() as $permission) {
+                    $rbac-&gt;getRole($roleName)-&gt;addPermission($permission-&gt;getName());
+                }
+            }
+
+            // Save Rbac container to cache.
+            $this-&gt;cache-&gt;setItem('rbac_container', $rbac);
+        }
+    }
+
+    /**
+     * Checks whether the given user has permission.
+     * @param User|null $user
+     * @param string $permission
+     * @param array|null $params
+     */
+    public function isGranted($user, $permission, $params = null)
+    {
+        if ($this-&gt;rbac==null) {
+            $this-&gt;init();
+        }
+
+        if ($user==null) {
+
+            $identity = $this-&gt;authService-&gt;getIdentity();
+            if ($identity==null) {
+                return false;
+            }
+
+            $user = $this-&gt;entityManager-&gt;getRepository(User::class)
+                    -&gt;findOneByEmail($identity);
+            if ($user==null) {
+                // Oops.. the identity presents in session, but there is no such user in database.
+                // We throw an exception, because this is a possible security problem.
+                throw new \Exception('There is no user with such identity');
+            }
+        }
+
+        $roles = $user-&gt;getRoles();
+
+        foreach ($roles as $role) {
+            if ($this-&gt;rbac-&gt;isGranted($role-&gt;getName(), $permission)) {
+
+                if ($params==null)
+                    return true;
+
+                foreach ($this-&gt;assertionManagers as $assertionManager) {
+                    if ($assertionManager-&gt;assert($this-&gt;rbac, $permission, $params))
+                        return true;
+                }
+            }
+
+            $parentRoles = $role-&gt;getParentRoles();
+            foreach ($parentRoles as $parentRole) {
+                if ($this-&gt;rbac-&gt;isGranted($parentRole-&gt;getName(), $permission)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+}
+</code></pre>
+<p>The factory for the <code>RbacManager</code> class looks like the following:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Service\Factory;
+
+use Interop\Container\ContainerInterface;
+use User\Service\RbacManager;
+use Laminas\Authentication\AuthenticationService;
+
+/**
+ * This is the factory class for RbacManager service. The purpose of the factory
+ * is to instantiate the service and pass it dependencies (inject dependencies).
+ */
+class RbacManagerFactory
+{
+    /**
+     * This method creates the RbacManager service and returns its instance.
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        $entityManager = $container-&gt;get('doctrine.entitymanager.orm_default');
+        $authService = $container-&gt;get(\Laminas\Authentication\AuthenticationService::class);
+        $cache = $container-&gt;get('FilesystemCache');
+
+        $assertionManagers = [];
+        $config = $container-&gt;get('Config');
+        if (isset($config['rbac_manager']['assertions'])) {
+            foreach ($config['rbac_manager']['assertions'] as $serviceName) {
+                $assertionManagers[$serviceName] = $container-&gt;get($serviceName);
+            }
+        }
+
+        return new RbacManager($entityManager, $authService, $cache, $assertionManagers);
+    }
+}
+</code></pre>
+<h2 id="adding-the-not-authorized-page">Adding the Not Authorized Page</h2>
+<p>Next we will create the <em>Not Authorized</em> page (see figure 17.13) on which we will redirect the user when they are not
+allowed to access some web page.</p>
+<p><img alt="Figure 17.13 Not Authorized page" src="../images/roles/roledemo_notauthorized_page.png" /></p>
+<p>Add the following route to the <em>module.config.php</em> file of the <em>User</em> module:</p>
+<pre><code class="language-php">return [
+    'router' =&gt; [
+        'routes' =&gt; [
+            'not-authorized' =&gt; [
+                'type' =&gt; Literal::class,
+                'options' =&gt; [
+                    'route'    =&gt; '/not-authorized',
+                    'defaults' =&gt; [
+                        'controller' =&gt; Controller\AuthController::class,
+                        'action'     =&gt; 'notAuthorized',
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
+</code></pre>
+<p>Then add the <code>notAuthorizedAction()</code> method to the <code>AuthController</code> in the <code>User</code> module:</p>
+<pre><code class="language-php">/**
+ * Displays the &quot;Not Authorized&quot; page.
+ */
+public function notAuthorizedAction()
+{
+    $this-&gt;getResponse()-&gt;setStatusCode(403);
+
+    return new ViewModel();
+}
+</code></pre>
+<p>Finally, add the <em>not-authorized.phtml</em> view template file under the <em>user/auth</em> directory under the <em>User</em> module's
+<em>view</em> directory:</p>
+<pre><code class="language-php">&lt;?php
+$this-&gt;headTitle(&quot;Not Authorized&quot;);
+?&gt;
+
+&lt;h1&gt;Not Authorized&lt;/h1&gt;
+
+&lt;div class=&quot;alert alert-warning&quot;&gt;Sorry, you have no permission to see this page.&lt;/div&gt;
+</code></pre>
+<p>Now you can see the <em>Not Authorized</em> page if you type the following URL into the address bar of the browser:
+"http://localhost/not-authorized".</p>
+<h2 id="modifying-the-authmanager-service">Modifying the AuthManager Service</h2>
+<p>The next thing we will do is modifying the access filter inside the <code>AuthManager</code> service
+we wrote for the <em>User Demo</em> sample. Particularly, we want to modify the <code>filterAccess()</code>
+method. We want the <code>filterAccess()</code> method to use our <code>RbacManager</code> class.</p>
+<p>But first we will modify the format of the <code>access_filter</code> key in the configuration. We want the key to allow
+to permit access to:</p>
+<ul>
+<li>anyone if we specify the asterisk (<code>*</code>);</li>
+<li>any authenticated user if we specify the "commercial at" (<code>@</code>);</li>
+<li>a concrete authenticated user with the given <code>identity</code> email address if we specify (<code>@identity</code>)</li>
+<li>any authenticated user with the given <code>permission</code> if we specify the plus sign followed by the
+   permission name (<code>+permission</code>).</li>
+</ul>
+<p>For example, here how the <code>access_filter</code> key would look like for the <em>User</em> module:</p>
+<pre><code class="language-php">&lt;?php
+return [
+    //...
+
+    // The 'access_filter' key is used by the User module to restrict or permit
+    // access to certain controller actions for unauthorized visitors.
+    'access_filter' =&gt; [
+        'controllers' =&gt; [
+            Controller\UserController::class =&gt; [
+                // Give access to &quot;resetPassword&quot;, &quot;message&quot; and &quot;setPassword&quot; actions
+                // to anyone.
+                ['actions' =&gt; ['resetPassword', 'message', 'setPassword'], 'allow' =&gt; '*'],
+                // Give access to &quot;index&quot;, &quot;add&quot;, &quot;edit&quot;, &quot;view&quot;, &quot;changePassword&quot; actions
+                // to users having the &quot;user.manage&quot; permission.
+                ['actions' =&gt; ['index', 'add', 'edit', 'view', 'changePassword'],
+                 'allow' =&gt; '+user.manage']
+            ],
+            Controller\RoleController::class =&gt; [
+                // Allow access to authenticated users having the &quot;role.manage&quot; permission.
+                ['actions' =&gt; '*', 'allow' =&gt; '+role.manage']
+            ],
+            Controller\PermissionController::class =&gt; [
+                // Allow access to authenticated users having &quot;permission.manage&quot; permission.
+                ['actions' =&gt; '*', 'allow' =&gt; '+permission.manage']
+            ],
+        ]
+    ],
+
+    //...
+];
+</code></pre>
+<p>Below you can find the source code of the <code>filterAccess()</code> method of the <code>AuthManager</code> service:</p>
+<pre><code class="language-php">/**
+ * This is a simple access control filter. It is able to restrict unauthorized
+ * users to visit certain pages.
+ *
+ * This method uses the 'access_filter' key in the config file and determines
+ * whenther the current visitor is allowed to access the given controller action
+ * or not. It returns true if allowed; otherwise false.
+ */
+public function filterAccess($controllerName, $actionName)
+{
+    // Determine mode - 'restrictive' (default) or 'permissive'. In restrictive
+    // mode all controller actions must be explicitly listed under the 'access_filter'
+    // config key, and access is denied to any not listed action for unauthorized users.
+    // In permissive mode, if an action is not listed under the 'access_filter' key,
+    // access to it is permitted to anyone (even for not logged in users.
+    // Restrictive mode is more secure and recommended to use.
+    $mode = isset($this-&gt;config['options']['mode'])?$this-&gt;config['options']['mode']:'restrictive';
+    if ($mode!='restrictive' &amp;&amp; $mode!='permissive')
+        throw new \Exception('Invalid access filter mode (expected either restrictive or permissive mode');
+
+    if (isset($this-&gt;config['controllers'][$controllerName])) {
+        $items = $this-&gt;config['controllers'][$controllerName];
+        foreach ($items as $item) {
+            $actionList = $item['actions'];
+            $allow = $item['allow'];
+            if (is_array($actionList) &amp;&amp; in_array($actionName, $actionList) ||
+                $actionList=='*') {
+                if ($allow=='*')
+                    // Anyone is allowed to see the page.
+                    return self::ACCESS_GRANTED;
+                else if (!$this-&gt;authService-&gt;hasIdentity()) {
+                    // Only authenticated user is allowed to see the page.
+                    return self::AUTH_REQUIRED;
+                }
+
+                if ($allow=='@') {
+                    // Any authenticated user is allowed to see the page.
+                    return self::ACCESS_GRANTED;
+                } else if (substr($allow, 0, 1)=='@') {
+                    // Only the user with specific identity is allowed to see the page.
+                    $identity = substr($allow, 1);
+                    if ($this-&gt;authService-&gt;getIdentity()==$identity)
+                        return self::ACCESS_GRANTED;
+                    else
+                        return self::ACCESS_DENIED;
+                } else if (substr($allow, 0, 1)=='+') {
+                    // Only the user with this permission is allowed to see the page.
+                    $permission = substr($allow, 1);
+                    if ($this-&gt;rbacManager-&gt;isGranted(null, $permission))
+                        return self::ACCESS_GRANTED;
+                    else
+                        return self::ACCESS_DENIED;
+                } else {
+                    throw new \Exception('Unexpected value for &quot;allow&quot; - expected ' .
+                            'either &quot;?&quot;, &quot;@&quot;, &quot;@identity&quot; or &quot;+permission&quot;');
+                }
+            }
+        }
+    }
+
+    // In restrictive mode, we require authentication for any action not
+    // listed under 'access_filter' key and deny access to authorized users
+    // (for security reasons).
+    if ($mode=='restrictive') {
+        if(!$this-&gt;authService-&gt;hasIdentity())
+            return self::AUTH_REQUIRED;
+        else
+            return self::ACCESS_DENIED;
+    }
+
+    // Permit access to this page.
+    return self::ACCESS_GRANTED;
+}
+</code></pre>
+<p>As you could see from the code, the method returns one of three constants:</p>
+<ul>
+<li><code>ACCESS_GRANTED</code> if user is allowed to see the given page;</li>
+<li><code>AUTH_REQUIRED</code> if user needs to authenticate first;</li>
+<li><code>ACCESS_DENIED</code> if user is denied to see the page.</li>
+</ul>
+<h2 id="modifying-the-dispatch-event-listener">Modifying the Dispatch Event Listener</h2>
+<p>Next, we will modify the <code>Module</code> class living in <code>User</code> namespace and
+particularly its <code>onDispatch()</code> method. The main goal of this is that if the access filter
+returns <code>ACCESS_DENIED</code>, we redirect the user to the <em>Not Authorized</em> page.</p>
+<pre><code class="language-php">&lt;?php
+namespace User;
+
+use Laminas\Mvc\MvcEvent;
+use Laminas\Mvc\Controller\AbstractActionController;
+use User\Controller\AuthController;
+use User\Service\AuthManager;
+
+class Module
+{
+    //...
+
+    /**
+     * Event listener method for the 'Dispatch' event. We listen to the Dispatch
+     * event to call the access filter. The access filter allows to determine if
+     * the current visitor is allowed to see the page or not. If he/she
+     * is not authorized and is not allowed to see the page, we redirect the user
+     * to the login page.
+     */
+    public function onDispatch(MvcEvent $event)
+    {
+        // Get controller and action to which the HTTP request was dispatched.
+        $controller = $event-&gt;getTarget();
+        $controllerName = $event-&gt;getRouteMatch()-&gt;getParam('controller', null);
+        $actionName = $event-&gt;getRouteMatch()-&gt;getParam('action', null);
+
+        // Convert dash-style action name to camel-case.
+        $actionName = str_replace('-', '', lcfirst(ucwords($actionName, '-')));
+
+        // Get the instance of AuthManager service.
+        $authManager = $event-&gt;getApplication()-&gt;getServiceManager()-&gt;get(AuthManager::class);
+
+        // Execute the access filter on every controller except AuthController
+        // (to avoid infinite redirect).
+        if ($controllerName!=AuthController::class)
+        {
+            $result = $authManager-&gt;filterAccess($controllerName, $actionName);
+
+            if ($result==AuthManager::AUTH_REQUIRED) {
+                // Remember the URL of the page the user tried to access. We will
+                // redirect the user to that URL after successful login.
+                $uri = $event-&gt;getApplication()-&gt;getRequest()-&gt;getUri();
+                // Make the URL relative (remove scheme, user info, host name and port)
+                // to avoid redirecting to other domain by a malicious user.
+                $uri-&gt;setScheme(null)
+                    -&gt;setHost(null)
+                    -&gt;setPort(null)
+                    -&gt;setUserInfo(null);
+                $redirectUrl = $uri-&gt;toString();
+
+                // Redirect the user to the &quot;Login&quot; page.
+                return $controller-&gt;redirect()-&gt;toRoute('login', [],
+                        ['query'=&gt;['redirectUrl'=&gt;$redirectUrl]]);
+            }
+            else if ($result==AuthManager::ACCESS_DENIED) {
+                // Redirect the user to the &quot;Not Authorized&quot; page.
+                return $controller-&gt;redirect()-&gt;toRoute('not-authorized');
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="adding-access-controller-plugin-and-view-helper">Adding Access Controller Plugin and View Helper</h2>
+<p>To query <code>RbacManager</code> inside of controllers and view templates, we need to create a
+special controller plugin (which we will name <code>Access</code>) and a special view helper (which we will name
+<code>Access</code> too).</p>
+<h3 id="access-controller-plugin">Access Controller Plugin</h3>
+<p>Sometimes it is required to check some permission inside the controller. For example, this is needed
+for the <code>profile.own.view</code> permission, which uses the dynamic assertion. For this purpose, we will
+create the <code>Access</code> controller plugin.</p>
+<p>The plugin code will be located inside the <code>AccessPlugin.php</code> file inside the <em>Controller/Plugin</em> directory
+of the <em>User</em> module's source directory:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Controller\Plugin;
+
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+
+/**
+ * This controller plugin is used for role-based access control (RBAC).
+ */
+class AccessPlugin extends AbstractPlugin
+{
+    private $rbacManager;
+
+    public function __construct($rbacManager)
+    {
+        $this-&gt;rbacManager = $rbacManager;
+    }
+
+    /**
+     * Checks whether the currently logged in user has the given permission.
+     * @param string $permission Permission name.
+     * @param array $params Optional params (used only if an assertion is associated with permission).
+     */
+    public function __invoke($permission, $params = [])
+    {
+        return $this-&gt;rbacManager-&gt;isGranted(null, $permission, $params);
+    }
+}
+</code></pre>
+<p>The <code>Access</code> plugin's factory looks like the following:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\Controller\Plugin\Factory;
+
+use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use User\Service\RbacManager;
+use User\Controller\Plugin\AccessPlugin;
+
+/**
+ * This is the factory for AccessPlugin. Its purpose is to instantiate the plugin
+ * and inject dependencies into its constructor.
+ */
+class AccessPluginFactory implements FactoryInterface
+{
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        $rbacManager = $container-&gt;get(RbacManager::class);
+
+        return new AccessPlugin($rbacManager);
+    }
+}
+</code></pre>
+<p>The plugin is registered inside the <em>module.config.php</em> file as follows:</p>
+<pre><code class="language-php">// We register module-provided controller plugins under this key.
+'controller_plugins' =&gt; [
+    'factories' =&gt; [
+        Controller\Plugin\AccessPlugin::class =&gt; Controller\Plugin\Factory\AccessPluginFactory::class,
+    ],
+    'aliases' =&gt; [
+        'access' =&gt; Controller\Plugin\AccessPlugin::class,
+    ],
+],
+</code></pre>
+<p>So, in your controller's action, you can easily call this plugin like the following:</p>
+<pre><code class="language-php">if (!$this-&gt;access('profile.own.view', ['user'=&gt;$user])) {
+    return $this-&gt;redirect()-&gt;toRoute('not-authorized');
+}
+</code></pre>
+<h3 id="access-view-helper">Access View Helper</h3>
+<p>Sometimes, it may be required to query the <code>RbacManager</code> inside a view template. For example,
+you may need to hide or show some HTML block based on current user's permissions. To do that,
+we will implement the <code>Access</code> view helper.</p>
+<p>The view helper's code will be located inside the <code>Access.php</code> file inside the <em>View/Helper</em> directory
+of the <em>User</em> module's source directory:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\View\Helper;
+
+use Laminas\View\Helper\AbstractHelper;
+
+/**
+ * This view helper is used to check user permissions.
+ */
+class Access extends AbstractHelper
+{
+    private $rbacManager = null;
+
+    public function __construct($rbacManager)
+    {
+        $this-&gt;rbacManager = $rbacManager;
+    }
+
+    public function __invoke($permission, $params = [])
+    {
+        return $this-&gt;rbacManager-&gt;isGranted(null, $permission, $params);
+    }
+}
+</code></pre>
+<p>The <code>Access</code> view helper's factory looks like the following:</p>
+<pre><code class="language-php">&lt;?php
+namespace User\View\Helper\Factory;
+
+use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use User\Service\RbacManager;
+use User\View\Helper\Access;
+
+/**
+ * This is the factory for Access view helper. Its purpose is to instantiate the helper
+ * and inject dependencies into its constructor.
+ */
+class AccessFactory implements FactoryInterface
+{
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        $rbacManager = $container-&gt;get(RbacManager::class);
+
+        return new Access($rbacManager);
+    }
+}
+</code></pre>
+<p>The view helper is registered inside the <em>module.config.php</em> config file as follows:</p>
+<pre><code class="language-php">// We register module-provided view helpers under this key.
+'view_helpers' =&gt; [
+    'factories' =&gt; [
+        View\Helper\Access::class =&gt; View\Helper\Factory\AccessFactory::class,
+    ],
+    'aliases' =&gt; [
+        'access' =&gt; View\Helper\Access::class,
+    ],
+],
+</code></pre>
+<p>So, you can easily call the view helper from any of your view templates as follows:</p>
+<pre><code class="language-php">if ($this-&gt;access('profile.own.view, ['user'=&gt;$user]))) {
+   // do something...
+}
+</code></pre>
+<h2 id="using-the-user-module">Using the User Module</h2>
+<p>Congratulations, now our <em>Role Demo</em> is ready, so we make some resume of how you typically use it
+if you plan to base your own website on it.</p>
+<p>First of all, you need to create all needed roles and permissions through the convenient user interface
+that we created. Assign a role (or several roles) to each website user.</p>
+<p>Then edit the <em>module.config.php</em> configuration configuration file in your module and add two keys:</p>
+<ul>
+<li>the <code>rbac_manager</code> key will contain settings for the <code>RbacManager</code> (particularly the
+    configuration of assertion manager(s));</li>
+</ul>
+<p>An example of that key is presented below:</p>
+<pre><code class="language-php">// This key stores configuration for RBAC manager.
+'rbac_manager' =&gt; [
+    'assertions' =&gt; [Service\RbacAssertionManager::class],
+],
+</code></pre>
+<ul>
+<li>the <code>access_filter</code> key stores the access rules for the pages of your website. It typically looks like below:</li>
+</ul>
+<pre><code class="language-php">'access_filter' =&gt; [
+    'options' =&gt; [
+        'mode' =&gt; 'restrictive'
+    ],
+    'controllers' =&gt; [
+        Controller\IndexController::class =&gt; [
+            // Allow anyone to visit &quot;index&quot; and &quot;about&quot; actions
+            ['actions' =&gt; ['index', 'about'], 'allow' =&gt; '*'],
+            // Allow authorized users to visit &quot;settings&quot; action
+            ['actions' =&gt; ['settings'], 'allow' =&gt; '@']
+        ],
+    ]
+],
+</code></pre>
+<p>The <code>*</code> and <code>@</code> in the <code>allow</code> subkeys are not the only options. You can make the <code>allow</code>
+subkeys to look as follows. We allow access to the page to:</p>
+<ul>
+<li>anyone if we specify the asterisk (<code>*</code>);</li>
+<li>any authenticated user if we specify the "commercial at" (<code>@</code>);</li>
+<li>a concrete authenticated user with the given <code>identity</code> email address if we specify (<code>@identity</code>)</li>
+<li>any authenticated user with the given <code>permission</code> if we specify the plus sign followed by the
+   permission name (<code>+permission</code>).</li>
+</ul>
+<p>If your website has some dynamic assertions, extend the <code>assert()</code> method of the
+existing <code>RbacAssertionManager</code> class (or write and register your own assertion manager):</p>
+<pre><code class="language-php">public function assert(Rbac $rbac, $permission, $params)
+{
+    $currentUser = $this-&gt;entityManager-&gt;getRepository(User::class)
+            -&gt;findOneByEmail($this-&gt;authService-&gt;getIdentity());
+
+    if ($permission=='post.own.edit' &amp;&amp; $params['post']-&gt;getUser()-&gt;getId()==$currentUser-&gt;getId())
+        return true;
+
+    if ($permission=='post.own.publish' &amp;&amp; $params['post']-&gt;getUser()-&gt;getId()==$currentUser-&gt;getId())
+        return true;
+
+    return false;
+}
+</code></pre>
+<p>If you want to check permissions in a controller action, you can use the <code>Access</code> controller plugin as follows:</p>
+<pre><code class="language-php">if (!$this-&gt;access('profile.own.view', ['user'=&gt;$user])) {
+    return $this-&gt;redirect()-&gt;toRoute('not-authorized');
+}
+</code></pre>
+<p>If you want to check permissions in a view template, you can use the <code>Access</code> view helper:</p>
+<pre><code class="language-php">if ($this-&gt;access('profile.own.view', ['user'=&gt;$user))) {
+   // do something...
+}
+</code></pre>
+<p>That's all! That simple! Enjoy!</p>
+<h2 id="summary">Summary</h2>
+<p>In this chapter we have implemented the <em>Role Demo</em> website which demonstrates how to use roles
+and permissions in Laminas.</p>
+<p>A role is basically a group of users. A user may be assigned with one or several roles at once.</p>
+<p>A role may be assigned one or more permissions. A permission is a single action in the system.</p>
+<p>A dynamic assertion is an additional rule associated with the permission.</p>
+<p>Roles may be organised into an hierarchy, when parent roles
+inherit permissions from their child roles.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../users/" class="btn btn-neutral float-left" title="User Management, Authentication and Access Filtering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../devenv/" class="btn btn-neutral float-right" title="Appendix A. Configuring Web Development Environment">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/modir/laminas-book" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../users/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../devenv/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

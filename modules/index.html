@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/modules/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Creating a New Module - Using Laminas Framework</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Creating a New Module";
+        var mkdocs_page_input_path = "modules.md";
+        var mkdocs_page_url = "/modules/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Using Laminas Framework
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Preface</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">None</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../acknowledgments/">Acknowledgments</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction to Laminas Framework</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../skeleton/">Laminas Skeleton Application</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operation/">Website Operation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../mvc/">Model-View-Controller</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../routing/">Routing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../appearance/">Page Appearance and Layout</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms/">Collecting User Input with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../filters/">Transforming Input Data with Filters</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../validators/">Checking Input Data with Validators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../uploads/">Uploading Files with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms_advanced/">Advanced Usage of Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine/">Database Management with Doctrine ORM</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_migrations/">Database Migrations</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Creating a New Module</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#when-to-create-a-new-module">When to Create a New Module?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-create-a-new-module">How to Create a New Module?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#renaming-the-skeleton-module">Renaming the Skeleton Module</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#enabling-class-autoloading">Enabling Class Autoloading</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#enabling-the-module">Enabling the Module</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modulephp-file-event-listening">Module.php File &amp; Event Listening</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-1-switching-layout-template">Example 1. Switching Layout Template</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-2-forcing-the-use-of-https">Example 2. Forcing the Use of HTTPS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-3-reporting-all-exceptions-in-your-website">Example 3. Reporting All Exceptions in Your Website</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#registering-the-module-as-a-composer-package">Registering the Module as a Composer Package</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../session/">Working with Sessions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../users/">User Management, Authentication and Access Filtering</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../roles/">Role-Based Access Control</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../devenv/">Appendix A. Configuring Web Development Environment</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../netbeans/">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bootstrap/">Appendix C. Introduction to Twitter Bootstrap</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_intro/">Appendix D. Introduction to Doctrine</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ec2_tutorial/">Appendix E. Installing a Laminas Web Application to Amazon EC2</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Using Laminas Framework</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Creating a New Module</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/modir/laminas-book/edit/master/docs/modules.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="creating-a-new-module">Creating a New Module</h1>
+<p>When your website grows in size, you can benefit from using Laminas Framework feature called <em>modules</em>.
+Modular applications consist of pieces that have relatively few dependencies on each other. This allows
+to install or remove modules on demand. In this chapter you will learn what is a Laminas module, when
+to create a new module and how to create it.</p>
+<h2 id="when-to-create-a-new-module">When to Create a New Module?</h2>
+<p>A module is an <em>autonomous</em> and <em>reusable</em> unit of your application. By default your application has
+the single <em>Application</em> module. And it is normal to put your models, views and controllers in
+this module, especially in a simple website.</p>
+<blockquote>
+<p>A module can contain models, views, controllers and assets. Module classes typically live in a separate
+namespace (the same as module name). Module has its own configuration file where you can register routes,
+controllers, controller plugins, services, view helpers and so on.</p>
+</blockquote>
+<p>You may need to create a new module when any of the following is true:</p>
+<ul>
+<li>If your website is relatively large and dividing it into pieces would make it easier to maintain.
+    For example, you can introduce the <em>Admin</em> module and put your backend functionality into that module.</li>
+<li>If the functionality you are implementing is autonomous (has no or few dependencies on other
+    modules of your application. For example, the Blog functionality in theory can be
+    separated in another module, because it does not depend on the rest of the application, but
+    the application depends on it.</li>
+<li>If a module can be separated from your application and concurrently used in another project.
+    For example the Blog module can be reused in another project without changes (only
+    its configuration may require changes).</li>
+</ul>
+<p>In any case, real life is complex, and you should be guided by the intuition when it seems that it
+is necessary to create a new module. If you think that separating a functionality into a module gives
+you some significant benefits, create the module.</p>
+<p>At the same time, you should not create a huge number of almost empty modules, it
+is better to combine related functionality in a single module.</p>
+<h2 id="how-to-create-a-new-module">How to Create a New Module?</h2>
+<p>There are at least two ways of creating a new module in your website. The first way is copying an existing
+module from <em>APP_DIR/module</em> directory (such as <em>Application</em> module), removing any unnecessary controllers,
+models and views, and renaming the existing namespace into your module name in every source file. This may be rather
+boring.</p>
+<p>The second way is downloading an empty <em>skeleton module</em> from the official Laminas Framework repository on GitHub.
+You can find this repository by <a href="https://github.com/laminas/LaminasSkeletonModule">this link</a>.
+You can clone the code or download the code as a ZIP archive (recommended).</p>
+<p>For example, in Linux, use the following commands to download the skeleton module:</p>
+<pre><code>cd ~
+wget https://github.com/laminas/LaminasSkeletonModule/archive/master.zip
+unzip master.zip
+cp LaminasSkeletonModule-master APP_DIR/module/LaminasSkeletonModule
+</code></pre>
+<p>The commands above download the source of the skeleton module to your home directory, unpack the archive
+and copy the files to your website's <code>module</code> directory.</p>
+<p>Let's look at the structure of the skeleton module (see figure 14.1):</p>
+<p><img alt="Figure 14.1. Skeleton module directory structure" src="../images/modules/skeleton_module_directory.png" /></p>
+<p>As you can see, we have a typical directory structure we are already familiar with:</p>
+<ul>
+<li><code>config</code> subdirectory contains <code>module.config.php</code> file which is the configuration file for this module.</li>
+<li><code>src</code> subdirectory is a directory containing module's source files:<ul>
+<li><code>Controller</code> subdirectory contains a sample controller class.</li>
+<li><code>Module.php</code> file is the module entry point. We will discuss it a bit later.</li>
+</ul>
+</li>
+<li><code>tests</code> subdirectory contains a stub for unit tests for this module. We do not cover unit tests in this book for simplicity.</li>
+<li><code>view</code> subdirectory contains view scripts (and also may contain module-specific layout templates).</li>
+</ul>
+<h3 id="renaming-the-skeleton-module">Renaming the Skeleton Module</h3>
+<p>Before you can use this new empty module, you should choose a name for it. A good name describes the module well.
+For example, the name <code>Admin</code> is good when you need a module for backend stuff. <code>Blog</code> name would be good if you
+plan to store blog functionality in this module. A good practice is also prepending some vendor name to the module
+name, for example <code>YourCompanyBlog</code>.</p>
+<p>Once you have chosen the name for the module, you should rename the directory containing module files. For example,
+the command below will rename the module into <code>Admin</code>:</p>
+<pre><code>mv LaminasSkeletonModule Admin
+</code></pre>
+<p>Next, you should rename the <code>SkeletonController.php</code> into something more descriptive. Don't forget to rename subdirectories
+of <code>view</code> directory to reflect the name of the controller.</p>
+<p>Finally, walk through configuration and source files of the controller and make sure you renamed the namespace <code>LaminasSkeletonModule</code>
+to the name of your module (this is required to ensure your classes will be found by PHP class autoloader).</p>
+<h3 id="enabling-class-autoloading">Enabling Class Autoloading</h3>
+<p>The last step is to enable PHP class autoloading. Our module source files will be organised to conform to PSR-4 standard, so we will
+be able to use standard autoloader provided by Composer. To do that, add the following line into your
+<code>composer.json</code> file under the <code>psr-4</code> key (substitute your module name):</p>
+<pre><code>...
+&quot;autoload&quot;: {
+        &quot;psr-4&quot;: {
+            ...
+            &quot;Admin\\&quot;: &quot;module/Admin/src/&quot;
+        }
+    },
+...
+</code></pre>
+<p>Next run the following command to update Composer autloader files:</p>
+<pre><code>php composer.phar dump-autoload
+</code></pre>
+<blockquote>
+<p>The <code>dump-autoload</code> command just regenerates autoloader code without installing or updating any dependencies.</p>
+</blockquote>
+<p>Great! The module is now ready for use. You can add controllers, models and views into it. Do not forget to
+modify the <code>module.config.php</code> file and register your routes, services, controllers, controller plugins, view helpers, etc.</p>
+<h3 id="enabling-the-module">Enabling the Module</h3>
+<p>To let Laminas know about the new module and let it load it on app start up, do not forget to enable your new module in your
+<em>APP_DIR/config/modules.config.php</em> file as follows:</p>
+<pre><code>return [
+    'Admin',
+    //...
+);
+</code></pre>
+<h2 id="modulephp-file-event-listening">Module.php File &amp; Event Listening</h2>
+<p>The <code>Module.php</code> file located inside of module's source directory is some kind of module <em>entry point</em>.
+The <code>Module</code> class defined in this file is loaded by <code>Laminas\ModuleManager</code> component when it loads all application
+modules.</p>
+<p>One useful thing you can do with this class is <em>registering to events</em>. If you remember from the <a href="#operation">Website Operation</a>
+chapter, the application has several life stages represented by events. You may write an event listener function (or class) and
+register it in your module entry point. When an event is triggered, your listener method (or class) will be called allowing you to
+do something useful.</p>
+<blockquote>
+<p><strong>Why would I want to register an event listener?</strong></p>
+<p>Here are several practical applications of event listening that you may find useful:</p>
+<ul>
+<li>Listen to <em>Route</em> event to force the use of HTTPS secure connection.</li>
+<li>When your website is in maintenance mode, listen to <em>Route</em> event to catch all requests and redirect user to the single page.</li>
+<li>Listen to <em>Dispatch</em> event to redirect a user to a different page. For example, if user is not authenticated, redirect him to the login page.</li>
+<li>Listen to <em>Dispatch</em> event to override the default layout template for all controllers belonging to the module.</li>
+<li>Listen to <em>Dispatch Error</em> event to log and/or report any exception or error happening in your website.</li>
+<li>Listen to <em>Render</em> event to modify the content of the resulting web page.</li>
+</ul>
+</blockquote>
+<p>There are two ways to register an event listener within the <code>Module</code> class: either with the help of <code>Module</code>'s <code>init()</code> method or with the
+help of its <code>onBootstrap()</code> method. The difference between <code>init()</code> method and <code>onBootstrap()</code> method is that the <code>init()</code> method is called
+earlier than <code>onBootstrap()</code>, before all other modules are initialized; while <code>onBootstrap()</code> is called once all modules are initialized.
+In the following examples, we use <code>init()</code> method.</p>
+<h3 id="example-1-switching-layout-template">Example 1. Switching Layout Template</h3>
+<p>To show you how to subscribe to an event, let's create an event listener that will react on <em>Dispatch</em> event and
+set a different layout template for <em>all</em> controllers of the module:</p>
+<pre><code class="language-php">&lt;?php
+namespace YourCompanyModule;
+
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\MvcEvent;
+
+class Module
+{
+    // The &quot;init&quot; method is called on application start-up and
+    // allows to register an event listener.
+    public function init(ModuleManager $manager)
+    {
+        // Get event manager.
+        $eventManager = $manager-&gt;getEventManager();
+        $sharedEventManager = $eventManager-&gt;getSharedManager();
+        // Register the event listener method.
+        $sharedEventManager-&gt;attach(__NAMESPACE__, 'dispatch',
+                                    [$this, 'onDispatch'], 100);
+    }
+
+    // Event listener method.
+    public function onDispatch(MvcEvent $event)
+    {
+        // Get controller to which the HTTP request was dispatched.
+        $controller = $event-&gt;getTarget();
+        // Get fully qualified class name of the controller.
+        $controllerClass = get_class($controller);
+        // Get module name of the controller.
+        $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+
+        // Switch layout only for controllers belonging to our module.
+        if ($moduleNamespace == __NAMESPACE__) {
+            $viewModel = $event-&gt;getViewModel();
+            $viewModel-&gt;setTemplate('layout/layout2');
+        }
+    }
+
+    // ...
+}
+</code></pre>
+<p>In the code above, we add the <code>init()</code> method to the <code>Module</code> class. In that method, we register an event listener (line 17)
+with the help of <code>attach()</code> method provided by the <code>Laminas\EventManager\SharedEventManager</code> class. The <code>attach()</code> method
+takes four arguments: the ID of the emitting component, the event name ("dispatch"), the event listener method (the <code>onDispatch()</code>
+method of the current class), and the priority (100)).</p>
+<p>The <code>onDispatch()</code> method is called on the Dispatch event. In this method, we check (line 32) if the HTTP request is
+dispatched to the controller belonging to our module, and if so, switch the layout template (line 34).</p>
+<h3 id="example-2-forcing-the-use-of-https">Example 2. Forcing the Use of HTTPS</h3>
+<p>In this example, we will show how to register an event listener that makes the website to always use HTTPS connection
+with all of your web pages:</p>
+<pre><code class="language-php">&lt;?php
+namespace YourCompanyModule;
+
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\MvcEvent;
+
+class Module
+{
+    // The &quot;init&quot; method is called on application start-up and
+    // allows to register an event listener.
+    public function init(ModuleManager $manager)
+    {
+        // Get event manager.
+        $eventManager = $manager-&gt;getEventManager();
+        $sharedEventManager = $eventManager-&gt;getSharedManager();
+        // Register the event listener method.
+        $sharedEventManager-&gt;attach(__NAMESPACE__, 'route',
+                                    [$this, 'onRoute'], 100);
+    }
+
+    // Event listener method.
+    public function onRoute(MvcEvent $event)
+    {
+        if (php_sapi_name() == &quot;cli&quot;) {
+            // Do not execute HTTPS redirect in console mode.
+            return;
+        }
+
+        // Get request URI
+        $uri = $event-&gt;getRequest()-&gt;getUri();
+        $scheme = $uri-&gt;getScheme();
+        // If scheme is not HTTPS, redirect to the same URI, but with
+        // HTTPS scheme.
+        if ($scheme != 'https'){
+            $uri-&gt;setScheme('https');
+            $response=$event-&gt;getResponse();
+            $response-&gt;getHeaders()-&gt;addHeaderLine('Location', $uri);
+            $response-&gt;setStatusCode(301);
+            $response-&gt;sendHeaders();
+            return $response;
+        }
+    }
+
+    // ...
+}
+</code></pre>
+<p>In the code above, we register an event listener method that is called on <em>Route</em> event.</p>
+<p>Inside the listener, we first check if our website is working in console mode. We do not
+redirect HTTPS if in console mode.</p>
+<p>Then, we extract the URI from the HTTP request and check if the current scheme is HTTPS or not.
+If the scheme is not HTTPS, we redirect the user to the same URL, but with HTTPS scheme.</p>
+<h3 id="example-3-reporting-all-exceptions-in-your-website">Example 3. Reporting All Exceptions in Your Website</h3>
+<p>With this technique, you can easily track all exceptions happening in your website. Reporting
+exceptions and errors is an important thing, because it allows to make your website more stable,
+secure and improve user experience.</p>
+<pre><code class="language-php">&lt;?php
+namespace YourCompanyModule;
+
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\MvcEvent;
+
+class Module
+{
+    // The &quot;init&quot; method is called on application start-up and
+    // allows to register an event listener.
+    public function init(ModuleManager $manager)
+    {
+        // Get event manager.
+        $eventManager = $manager-&gt;getEventManager();
+        $sharedEventManager = $eventManager-&gt;getSharedManager();
+        // Register the event listener method.
+        $sharedEventManager-&gt;attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH_ERROR,
+                                    [$this, 'onError'], 100);
+        $sharedEventManager-&gt;attach(__NAMESPACE__, MvcEvent::EVENT_RENDER_ERROR,
+                                    [$this, 'onError'], 100);
+    }
+
+    // Event listener method.
+    public function onError(MvcEvent $event)
+    {
+        // Get the exception information.
+        $exception = $event-&gt;getParam('exception');
+        if ($exception!=null) {
+            $exceptionName = $exception-&gt;getMessage();
+            $file = $exception-&gt;getFile();
+            $line = $exception-&gt;getLine();
+            $stackTrace = $exception-&gt;getTraceAsString();
+        }
+        $errorMessage = $event-&gt;getError();
+        $controllerName = $event-&gt;getController();
+
+        // Prepare email message.
+        $to = 'admin@yourdomain.com';
+        $subject = 'Your Website Exception';
+
+        $body = '';
+        if(isset($_SERVER['REQUEST_URI'])) {
+            $body .= &quot;Request URI: &quot; . $_SERVER['REQUEST_URI'] . &quot;\n\n&quot;;
+        }
+        $body .= &quot;Controller: $controllerName\n&quot;;
+        $body .= &quot;Error message: $errorMessage\n&quot;;
+        if ($exception!=null) {
+            $body .= &quot;Exception: $exceptionName\n&quot;;
+            $body .= &quot;File: $file\n&quot;;
+            $body .= &quot;Line: $line\n&quot;;
+            $body .= &quot;Stack trace:\n\n&quot; . $stackTrace;
+        }
+
+        $body = str_replace(&quot;\n&quot;, &quot;&lt;br&gt;&quot;, $body);
+
+        // Send an email about the error.
+        mail($to, $subject, $body);
+    }
+
+    // ...
+}
+</code></pre>
+<p>In the code above, we register an event listener that will be called on every Dispatch Error
+(route mismatch or an exception) and Renderer Error. Inside the <code>onError()</code> listener method,
+we extract some information about the exception/error and send it as an email message to the
+address of your choice.</p>
+<h2 id="registering-the-module-as-a-composer-package">Registering the Module as a Composer Package</h2>
+<p>If you are writing a reusable module that you plan to make publicly available, you may want to publish the code of your module
+on GitHub and register it on <a href="http://packagist.org">Packagist.org</a> catalogue as a Composer-installable package.
+This is absolutely free.</p>
+<p>After you register the package, you will be able to add it as a dependency to your web application as follows (replace the <code>vendor</code>
+and <code>package</code> placeholders with your company and package names, respectively):</p>
+<pre><code>php composer.phar require vendor/package
+</code></pre>
+<p>Composer will download and install your module to the <code>vendor</code> directory, so you will be able to use it as any third-party
+module.</p>
+<h2 id="summary">Summary</h2>
+<p>In this chapter, you have learned of the concept <em>modules</em> in Laminas Framework. A module is an <em>autonomous</em> and
+<em>reusable</em> unit of your application. You may create a new module when your website becomes large and when the functionality
+has very few dependencies on other parts of your application.</p>
+<p>Every Laminas module has an entry point class called <code>Module</code>. You may use that class to register an event listener.
+Event listeners are useful, for example, when you want to change the default layout template for the entire module,
+or to tweak the default content of a web page.</p>
+<p>If you are developing a module that you want to make publicly available for use in other projects, you can register
+your module on Packagist.org catalogue and install it with Composer as a third-party package.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../doctrine_migrations/" class="btn btn-neutral float-left" title="Database Migrations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../session/" class="btn btn-neutral float-right" title="Working with Sessions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/modir/laminas-book" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../doctrine_migrations/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../session/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

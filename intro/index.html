@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/intro/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Introduction to Laminas Framework - Using Laminas Framework</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Introduction to Laminas Framework";
+        var mkdocs_page_input_path = "intro.md";
+        var mkdocs_page_url = "/intro/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Using Laminas Framework
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Preface</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="./">None</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../acknowledgments/">Acknowledgments</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Introduction to Laminas Framework</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-laminas-framework">What is Laminas Framework?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#an-example-php-website">An Example PHP Website</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#home-page">Home Page</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#login-page">Login Page</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#logout-page">Logout Page</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reviewing-the-code">Reviewing the Code</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#user-support">User Support</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#framework-source-code">Framework Source Code</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#coding-standards">Coding Standards</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#supported-operating-systems">Supported Operating Systems</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#server-requirements">Server Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#security">Security</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#performance">Performance</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#design-patterns">Design Patterns</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#main-laminas-components">Main Laminas Components</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#differences-with-laminas-framework-2">Differences with Laminas Framework 2</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#backward-compatibility">Backward Compatibility</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#components">Components</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#component-installer">Component Installer</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#servicemanager-and-eventmanager-performance">ServiceManager and EventManager Performance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#psr-4">PSR-4</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#middleware">Middleware</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#focus-on-documentation">Focus on Documentation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../skeleton/">Laminas Skeleton Application</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operation/">Website Operation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../mvc/">Model-View-Controller</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../routing/">Routing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../appearance/">Page Appearance and Layout</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms/">Collecting User Input with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../filters/">Transforming Input Data with Filters</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../validators/">Checking Input Data with Validators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../uploads/">Uploading Files with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms_advanced/">Advanced Usage of Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine/">Database Management with Doctrine ORM</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_migrations/">Database Migrations</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../modules/">Creating a New Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../session/">Working with Sessions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../users/">User Management, Authentication and Access Filtering</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../roles/">Role-Based Access Control</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../devenv/">Appendix A. Configuring Web Development Environment</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../netbeans/">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bootstrap/">Appendix C. Introduction to Twitter Bootstrap</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_intro/">Appendix D. Introduction to Doctrine</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ec2_tutorial/">Appendix E. Installing a Laminas Web Application to Amazon EC2</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Using Laminas Framework</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Introduction to Laminas Framework</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/modir/laminas-book/edit/master/docs/intro.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="introduction-to-laminas-framework">Introduction to Laminas Framework</h1>
+<p>In this chapter you will learn about Laminas Framework, its main principles and components.</p>
+<h2 id="what-is-laminas-framework">What is Laminas Framework?</h2>
+<p>PHP is a popular website development language. However, writing websites in pure PHP is difficult.
+If you write a web application in pure PHP, you'll have to organize your code in some way, collect
+and validate user input, implement support of user authentication and access control, manage database,
+test your code and so on. As your site grows in size, it becomes more and more difficult to develop
+the code in consistent manner. Each developer in your team applies his/her favourite custom coding
+styles and patterns. The code becomes overcomplicated, slow and difficult to support. You merge all
+your code in a single giant script with no separation of concerns. You have to reinvent the wheel
+many times and that causes security problems. Moreover, when you switch to the development of a new
+site you will notice that a large portion of the code you have already written for the old website
+can be used again with small modifications. This code can be separated
+in a library. This is how frameworks appeared.</p>
+<div class="admonition note">
+<p class="admonition-title">What is a Framework?</p>
+<p>A framework is some kind of a library, a piece of software (also written in PHP)
+providing web developers with code base and consistent standardized ways of creating
+web applications.</p>
+</div>
+<p>Laminas Framework is a free and open-source PHP framework.
+Its development is guided (and sponsored) by Laminas Technologies, who is also known as the vendor of the PHP
+language. The first version (Laminas Framework 1) was released in 2007; Laminas Framework 2, the second version of this software,
+was released in September 2012. Laminas Framework (or shortly Laminas) was released in June 2016.</p>
+<p>Laminas Framework provides you with the following capabilities:</p>
+<ul>
+<li>
+<p>Develop your website much faster than when you write it in pure PHP. Laminas provides
+  many components that can be used as a code base for creating your website.</p>
+</li>
+<li>
+<p>Easier cooperation with other members of your site building team. Model-View-Controller
+  pattern used by Laminas allows to separate business logic and presentation layer of your
+  website, making its structure consistent and maintainable.</p>
+</li>
+<li>
+<p>Scale your website with the concept of modules. Laminas uses the term <em>module</em>,
+  allowing to separate decoupled site parts, thus allowing to reuse models, views,
+  controllers and assets of your website in other works.</p>
+</li>
+<li>
+<p>Accessing database in an object-oriented way. Instead of directly interacting with the database
+  using SQL queries, you can use Doctrine Object-Relational Mapping (ORM) to manage the
+  structure and relationships between your data. With Doctrine you map your database
+  table to a PHP class (also called an <em>entity</em> class) and a row from that table is
+  mapped to an instance of that class. Doctrine allows to abstract of database type
+  and make code easier to understand.</p>
+</li>
+<li>
+<p>Write secure web sites with laminas-provided components like
+  form input filters and validators, HTML output escapers and cryptography algorithms,
+  human check (Captcha) and Cross-Site Request Forgery (CSRF) form elements.</p>
+</li>
+</ul>
+<h2 id="an-example-php-website">An Example PHP Website</h2>
+<p>To demonstrate you how difficult it is to write a website <em>without</em> a PHP framework, here we
+will write a very simple website consisting of three HTML pages: <em>Home</em>, <em>Login</em> and <em>Logout</em>.
+For this example, we won't use any framework and will try to use only "pure" PHP.</p>
+<blockquote>
+<p>Don't be confused - writing a website with a PHP framework may also be difficult, but
+with a framework you will do that in a consistent and secure manner.</p>
+</blockquote>
+<h3 id="home-page">Home Page</h3>
+<blockquote>
+<p>When you write a website in PHP, you put your code into a file with the <em>.php</em> extension. Such a file is called
+a PHP <em>script</em>.</p>
+</blockquote>
+<p>First, let's implement the <em>Home</em> page for the website. To do that, create the <em>index.php</em> file in your Apache
+document root directory and put the following code into it:</p>
+<blockquote>
+<p>To understand the code below, you need to have some experience with PHP. If you have no experience
+with PHP, it would be good if you refer to some PHP tutorial,
+like <a href="http://www.w3schools.com/php/">w3schools.com</a>.</p>
+</blockquote>
+<pre><code class="language-php">&lt;?php
+// index.php
+session_start();
+
+// If user is logged in, retrieve identity from session.
+$identity = null;
+if (isset($_SESSION['identity'])) {
+    $identity = $_SESSION['identity'];
+}
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Home page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Home&lt;/h1&gt;
+        &lt;?php if ($identity==null): ?&gt;
+        &lt;a href=&quot;login.php&quot;&gt;Sign in&lt;/a&gt;
+        &lt;?php else: ?&gt;
+        &lt;strong&gt;Welcome, &lt;?= $identity ?&gt;&lt;/strong&gt; &lt;a href=&quot;logout.php&quot;&gt;Sign out&lt;/a&gt;
+        &lt;?php endif; ?&gt;
+
+        &lt;p&gt;
+            This is a simple website to demonstrate the advantages of a PHP framework
+            and disadvantages of &quot;pure&quot; PHP.
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>If you now enter the "http://localhost/index.php" in your browser (like Google Chrome or Firefox), you
+should see the page like below:</p>
+<p><img alt="A simple Home page" src="../images/intro/simple_home_page.png" /></p>
+<h3 id="login-page">Login Page</h3>
+<p>Next, let's implement the <em>Login</em> page. Such a page would have a form with the <em>E-mail</em>
+and <em>Password</em> fields. Once the user submits the form, he passes the authentication
+and his identity is saved to PHP session. The script would look like below:</p>
+<pre><code class="language-php">&lt;?php
+// login.php
+session_start();
+
+// If user is logged in, redirect him to index.php
+if (isset($_SESSION['identity'])) {
+    header('Location: index.php');
+    exit;
+}
+
+// Check if form is submitted.
+$submitted = false;
+if ($_SERVER['REQUEST_METHOD']=='POST') {
+
+    $submitted = true;
+
+    // Extract form data.
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Authenticate user.
+    $authenticated = false;
+    if ($email=='admin@example.com' &amp;&amp; $password=='Secur1ty') {
+        $authenticated = true;
+
+        // Save identity to session.
+        $_SESSION['identity'] = $email;
+
+        // Redirect the user to index.php.
+        header('Location: index.php');
+        exit;
+    }
+}
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Login page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Sign in&lt;/h1&gt;
+        &lt;?php if ($submitted &amp;&amp; !$authenticated): ?&gt;
+            &lt;div class=&quot;alert&quot;&gt;
+                Invalid credentials.
+            &lt;/div&gt;
+        &lt;?php endif; ?&gt;
+        &lt;form name=&quot;login-form&quot; action=&quot;/login.php&quot; method=&quot;POST&quot;&gt;
+            &lt;label for=&quot;email&quot;&gt;E-mail&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;
+            &lt;br&gt;
+            &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt;
+            &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;
+            &lt;br&gt;
+            &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Sign In&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>If you open the "http://localhost/login.php" URL in your browser, you should see something like below:</p>
+<p><img alt="A simple Login page" src="../images/intro/simple_login_page.png" /></p>
+<blockquote>
+<p>To log in, use the <code>admin@example.com</code> and <code>Secur1ty</code> as your E-mail and password, respectively.</p>
+</blockquote>
+<h3 id="logout-page">Logout Page</h3>
+<p>And finally, let's implement the <em>Logout</em> page that will clear user identity from session:</p>
+<pre><code class="language-php">&lt;?php
+// logout.php
+session_start();
+
+unset($_SESSION['identity']);
+header('Location: index.php');
+exit;
+</code></pre>
+<blockquote>
+<p>The complete code of this simple website can be found in
+<a href="https://github.com/olegkrivtsov/using-laminas-book-samples/tree/master/purephp">Pure PHP</a> sample bundled with this book.</p>
+</blockquote>
+<h3 id="reviewing-the-code">Reviewing the Code</h3>
+<p>The above scripts are not only a typical example of a "pure" PHP website. It is also an example of
+how you <em>should not</em> write your websites (even simple websites). What's bad about it?</p>
+<ol>
+<li>
+<p>The <em>index.php</em> and <em>login.php</em> scripts tend to merge all the code into a single file.
+   You do not have any separation of concerns, which makes your code too much complex.
+   Intuitively, you understand that it would
+   be more convenient to split the code responsible for user authentication and the code
+   responsible for presentation (HTML rendering).</p>
+</li>
+<li>
+<p>The URLs of your web pages look ugly (for example, "http://localhost/index.php"). We would like to hide
+   that .php extension at all. And what happens when a web user tries to visit a page that doesn't exist?
+   We would like to redirect the user to an error page in such case.</p>
+</li>
+<li>
+<p>What if this website grows in size? How would you organise your code? A PHP script per web-page?
+   And what if you want to reuse some of your PHP scripts in other websites without changes? Intuitively
+   you might understand that it would be useful to organise the code in some kind of reusable <em>modules</em>.</p>
+</li>
+<li>
+<p>Both <em>index.php</em> and <em>login.php</em> scripts contain common HTML markup. Why do we copy &amp; paste
+   this common layout in every PHP script? We would like to reuse the same master layout on all
+   (or almost all) pages.</p>
+</li>
+<li>
+<p>The <em>login.php</em> script has problems with security, because we didn't implement any validation of POST variables.
+   PHP session is also subject to hacking. And the <em>login.php</em> PHP script will be located under the Apache
+   document root directory, which is not very secure (it would be better to place it in a place not accessible
+   for web users). The <em>index.php</em> is also insecure, because we did not filter the PHP output (it is subject to XSS attacks).</p>
+</li>
+<li>
+<p>These scripts don't use any PHP classes. Encapsulating functionality into classes in theory would make
+   the code well structured and easy to support.</p>
+</li>
+<li>
+<p>In these scripts you have to write your own implementation of user authentication (and so on). Why do we reinvent the wheel
+   and not use a well-designed library for that?</p>
+</li>
+</ol>
+<p>The above problems are easily solved when you write a website within a framework (like Laminas Framework):</p>
+<ol>
+<li>
+<p>In Laminas, you use the <em>Model-View-Controller</em> design pattern, splitting your PHP code into models
+   (the code responsible for authentication would go here), views (the code responsible for HTML rendering
+   would go here) and controllers (the code responsible for retrieving POST variables would go here).</p>
+</li>
+<li>
+<p>The Laminas <em>routing</em> allows to make URLs professionally looking by hiding the .php extensions. How URLs
+   can look like are defined by strict rules. If a user tries to see a non-existing page, he is automatically
+   redirected to a standard error page.</p>
+</li>
+<li>
+<p>In Laminas, you can use the concept of <em>module</em>. This allows to conveniently separate your models, views and
+   controllers in autonomous unit (module) and easily reuse that unit in another project.</p>
+</li>
+<li>
+<p>In Laminas you can define a common <em>layout</em> view template and reuse it on all (or most) web pages.</p>
+</li>
+<li>
+<p>Laminas provides you various security features like form filters and validators, output escapers, session validators,
+   cryptography
+   algorithms and so on. In a Laminas website, only <em>index.php</em> is accessible for web users, all other PHP scripts
+   are located outside of Apache document root directory.</p>
+</li>
+<li>
+<p>In a Laminas website, you put your code into classes, which makes it well-organised.</p>
+</li>
+<li>
+<p>Laminas provides you many components that you can use in your website: a component for authentication, a component
+   for working with forms, and so on.</p>
+</li>
+</ol>
+<blockquote>
+<p>Now you may have some idea of the advantages of Laminas Framework and what it can do for you. In the next
+   sections, we will describe Laminas in more details.</p>
+</blockquote>
+<h2 id="license">License</h2>
+<p>Laminas Framework is licensed under BSD-like license, allowing you to use it in
+both commercial and free applications. You can even modify the library code and release
+it under another name. The only thing you cannot do is to remove the copyright notice
+from the code. If you use Laminas Framework, it is also recommended that you mention
+about it in your site's documentation or on About page.</p>
+<p>Below, the Laminas Framework license text is presented.</p>
+<pre><code class="language-text">Copyright (c) 2005-2016, Laminas Technologies USA, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in
+      the documentation and/or other materials provided with the
+      distribution.
+
+    * Neither the name of Laminas Technologies USA, Inc. nor the names of
+      its contributors may be used to endorse or promote products
+      derived from this software without specific prior written
+      permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+&quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</code></pre>
+<h2 id="user-support">User Support</h2>
+<p>Support is an important thing to consider when deciding whether to use
+the framework as the base for your web site or not. Support includes well
+written documentation, webinars, community forums
+and (optionally) commercial support services, like trainings and
+certification programs.</p>
+<p><img alt="Laminas Framework official project website" src="../images/intro/Laminas_framework_site.png" /></p>
+<p><em>Documentation</em>. Documentation for Laminas Framework is located by <a href="https://framework.Laminas.com/learn">this address</a>.
+It includes beginner's tutorials and programmers manual.</p>
+<p><em>API Reference</em> can be found by <a href="https://olegkrivtsov.github.io/laminas-api-reference/html/">this link</a>.</p>
+<p><em>Community Forum</em>. You can ask a question about using Laminas Framework at <a href="https://stackoverflow.com/search?q=Laminas">StackOverflow</a>.
+Your questions will be answered by the large community of Laminas developers like you.</p>
+<p><em>Webinars</em> are video tutorials covering various Laminas Framework features. Complete list of webinars
+can be found by <a href="http://www.Laminas.com/en/resources/webinars/framework">this link</a>.</p>
+<p><em>Training Classes</em> with live instructors can be accessed by
+<a href="http://www.Laminas.com/en/services/training">this link</a>.
+Here you can learn Laminas Framework by doing exercises,
+mini-projects and developing real code.</p>
+<p><em>Certification Program</em>. Allows you to become a Laminas Certified Engineer (ZCE),
+thus making it easier to improve your skills as an architect and to find a job in a
+competitive PHP job market. Certifications can be found <a href="http://www.Laminas.com/en/services/certification">here</a>.</p>
+<p><em>Want some more Laminas resources?</em> Check out this awesome list of <a href="https://github.com/dignityinside/awesome-zf">Laminas Framework resources</a>.</p>
+<h2 id="framework-source-code">Framework Source Code</h2>
+<p>The source code of Laminas Framework is stored in GitHub <a href="https://github.com/laminas">repositories</a>.
+There is a separate repository per each Laminas component.</p>
+<blockquote>
+<p>In most cases you won't need to get the code of Laminas Framework manually.
+Instead, you will install it with Composer dependency manager. We will
+become familiar with Composer later in a chapter called <a href="#skeleton">Laminas Skeleton Application</a>.</p>
+</blockquote>
+<h3 id="coding-standards">Coding Standards</h3>
+<p>It is a good practice to introduce some common coding standard for all your code. This standard would define class naming
+rules, code formatting rules, etc. Laminas Framework defines such standard <a href="https://github.com/laminas/laminas/wiki/Coding-Standards">here</a>.
+All the code in Laminas follows the rules described in that document.</p>
+<blockquote>
+<p>If you plan to write a laminas-based website, it is recommended that you follow the same standard for your own code. This will
+make your code consistent and easier to extend and support by other people.</p>
+</blockquote>
+<h2 id="supported-operating-systems">Supported Operating Systems</h2>
+<p>As any PHP web-site, laminas-based web application can work on a Linux server and on any other operating system where PHP can
+run. For instance, for creating samples for this book, the author used Ubuntu Linux operating system.</p>
+<p>If you do not know yet what OS to use for your web development, it is
+recommended for you to use Linux, because most server software operates on
+Linux servers. You can refer to <a href="#devenv">Appendix A. Configuring Web Development Environment</a> for some
+instructions on configuring your development environment.</p>
+<h2 id="server-requirements">Server Requirements</h2>
+<p>Laminas Framework requires that your server have PHP version 5.6 (or later)
+installed. Note that this is a rather strict requirement. Not all cheap shared hostings
+and not all private servers have such a modern PHP version.</p>
+<p>Moreover, the recommended way of installing Laminas (and other components
+your app depends on) is using <a href="http://getcomposer.org/">Composer</a>.
+This forces the need of shell access (SSH) to be able
+to execute Composer command-line tool. Some web hostings provide FTP access only, so
+you won't be able to install a laminas-based web app on such servers the usual way.</p>
+<p>Laminas utilizes URL rewriting extension for redirecting web-users to
+entry script of your site (you have to enable Apache's <code>mod_rewrite</code> module.)
+You may also need to install some PHP extensions, like <code>memcached</code>.
+This can be a difficulty when using a shared web hosting
+and requires that you have admin rights on your server.</p>
+<p>So, if you are planning to use Laminas on a shared web hosting, think twice.
+The best server to install Laminas on is a server with the latest version of
+PHP and with shell access to be able to execute Composer and install PHP extensions.</p>
+<p>If your company manages its own server infrastructure and can afford
+upgrading PHP version to the latest one, you can install Laminas on your private server.</p>
+<p>An acceptable alternative is installing a laminas-based web application to a
+cloud-based hosting service, like <a href="http://aws.amazon.com/">Amazon Web Services</a>.
+Amazon provides Linux server instances as a part of EC2 service. EC2 is rather
+cheap, and it provides a <a href="http://aws.amazon.com/free/">free usage tier</a> letting
+you try it for free for one year. We provide instructions for beginners on how to install a Laminas website to Amazon EC2 cloud in
+<a href="#ec2-tutorial">Appendix E. Installing a Laminas Web Application to Amazon EC2</a>.</p>
+<h2 id="security">Security</h2>
+<p>Laminas Framework follows best practices to provide you with a secure code base
+for your web sites. Laminas creators release security patches once the community of users
+finds a problem. You can incorporate those fixes with a single command through Composer dependency
+manager.</p>
+<blockquote>
+<p>Practice shows that using a framework for writing your website is more secure than using "pure"
+PHP, because you don't need to reinvent the wheel. Most security vulnerabilities in frameworks
+are already known and fixed by the community of users.</p>
+</blockquote>
+<p>Laminas provides the following features allowing to make your web site secure:</p>
+<ul>
+<li>
+<p><em>Entry Script</em> (<em>index.php</em>) is the only PHP file accessible to web visitors. All other PHP files
+  are located outside of Apache document root. This is much more secure than allowing everyone to
+  visit any of your PHP scripts.</p>
+</li>
+<li>
+<p><em>Routing</em> allows to define strict rules on how an acceptable page URL should look like.
+  If a site user enters an invalid URL in a web browser's navigation bar,
+  he/she is automatically redirected to an error page.</p>
+</li>
+<li>
+<p><em>Access control lists (ACL)</em> and <em>Role-Based Access Control (RBAC)</em> allow to
+  define flexible rules for granting or denying access to certain resources of
+  your web site. For example, an anonymous user would have access to your index
+  page only, authenticated users would have access to their profile page, and
+  the administrator user would have access to site management panel.</p>
+</li>
+<li>
+<p><em>Form validators and filters</em> ensure that no unwanted data is collected
+  through web forms. Filters, for example, allow to trim strings or strip HTML tags.
+  Validators are used to check that the data that had been submitted through a form
+  conforms to certain rules. For example, E-mail validator checks that an E-mail field
+  contains valid E-mail address, and if not, raises an error forcing the site user to correct
+  the input error.</p>
+</li>
+<li>
+<p><em>Captcha</em> and <em>CSRF</em> (Cross-Site Request Forgery) form elements are used for human checks
+  and hacker attack prevention, respectively.</p>
+</li>
+<li>
+<p><em>Laminas\Escaper</em> component allows to strip unwanted HTML tags from data outputted to site pages.</p>
+</li>
+<li>
+<p><em>Cryptography support</em> allows you to store your sensitive data (e.g. credentials) encrypted with
+  strong crypt algorithms that are difficult to hack.</p>
+</li>
+</ul>
+<h2 id="performance">Performance</h2>
+<p>Laminas provides the following features to ensure its performance is acceptable:</p>
+<ul>
+<li>
+<p><em>Lazy class autoloading.</em> Classes are loaded once needed.
+    You don't have to write <code>require_once</code> for each class
+    you want to load. Instead, the framework automatically discovers your classes
+    using the <em>autoloader</em> feature.</p>
+</li>
+<li>
+<p><em>Efficient service and plugin loading.</em> In Laminas, classes are instantiated
+    only when they really need to. This is achieved through service manager
+    (the central container for services of your application).</p>
+</li>
+<li>
+<p><em>Support of caching.</em> PHP has several caching extensions (like Memcached) that
+    can be used to speed-up laminas-based websites. Caching saves frequently
+    used data to memory to speed-up data retrieval.</p>
+</li>
+</ul>
+<h2 id="design-patterns">Design Patterns</h2>
+<p>Laminas Framework creators are big fans of various design patterns. Although
+you don't have to understand patterns to read this book, this section is intended
+to give you an idea of what design patterns Laminas is based on.</p>
+<ul>
+<li>
+<p><em>Model-View-Controller (MVC) pattern</em>. Model-View-Controller pattern is used in all modern PHP
+  frameworks. In an MVC-application you separate your code into three categories:
+  models (your business logic go here), views (your presentation goes here) and
+  controllers (code responsible for interaction with user goes here). This is also
+  called <em>the separation of concerns</em>. With MVC, you can <em>reuse</em> your components. It is also easy to substitute any part
+  of this triad. For example, you can easily replace a view with another one, without
+  changing your business logic.</p>
+</li>
+<li>
+<p><em>Domain Driven Design (DDD) pattern</em>. In Laminas Framework, by convention, you will have model
+  layer further divided into <em>entities</em> (classes mapped on database tables),
+  <em>repositories</em> (classes used to retrieve entities from database),
+  <em>value objects</em> (model classes not having identity),
+  <em>services</em> (classes responsible for business logic).</p>
+</li>
+<li>
+<p><em>Aspect Oriented Design pattern.</em> In Laminas, everything is event-driven.
+  When a site user requests a page, an <em>event</em> is generated (triggered). A listener (or observer) can
+  catch event and do something with it. For example, @<code>Laminas\Router</code> component
+  parses the URL and determines what controller class to call. When the event finally reaches the page
+  renderer, an HTTP response is generated and the user sees the web page.</p>
+</li>
+<li>
+<p><em>Singleton pattern.</em> In Laminas, there is the service manager object which is the centralized
+  container of all services available in the application. Each service exists in a single
+  instance only.</p>
+</li>
+<li>
+<p><em>Strategy pattern.</em> A strategy is
+  just a class encapsulating some algorithm. And you can use different algorithms based on
+  some condition. For example, the page renderer has several rendering strategies,
+  making it possible to render web pages differently
+  (the renderer can generate an HTML page, a JSON response, an RSS feed etc.)</p>
+</li>
+<li>
+<p><em>Adapter pattern.</em> Adapters allow to adapt a generic class to concrete use case.
+  For example, @<code>Laminas\Db</code> component provides access to database in a generic way.
+  Internally, it uses adapters for each supported database (SQLite, MySQL, PostgreSQL and so on.)</p>
+</li>
+<li>
+<p><em>Factory pattern.</em> You can create an instance of a class using the <code>new</code> operator. Or you can create it
+  with a factory. A factory is just a class encapsulating creation of other objects.
+  Factories are useful, because they simplify dependency injection. Using factories also
+  simplifies the testing of your model and controller classes.</p>
+</li>
+</ul>
+<h2 id="main-laminas-components">Main Laminas Components</h2>
+<p>Laminas developers believe that the framework should be a set of decoupled
+components with minimum dependencies on each other. This is how Laminas is
+organized.</p>
+<p>The idea was to let you use some selected Laminas components alone,
+even if you write your site with another framework. This becomes
+even easier, keeping in mind that each component of Laminas is a Composer-installable
+package, so you can easily install any laminas-component together with its dependencies through a single command.</p>
+<p>There are several "main" Laminas components that are used (either explicitly or implicitly)
+in almost any web application:</p>
+<ul>
+<li>
+<p>@<code>Laminas\EventManager</code> component allows to send events and register listeners to react to them.</p>
+</li>
+<li>
+<p>@<code>Laminas\ModuleManager</code>. In Laminas, every application consists of modules and this component contains
+     module loading functionality.</p>
+</li>
+<li>
+<p>@<code>Laminas\ServiceManager</code>.  This is the centralized registry of all services available in the application,
+     making it possible to access services from any point of the web site.</p>
+</li>
+<li>
+<p>@<code>Laminas\Http</code> provides an easy interface for performing Hyper-Text Transfer Protocol (HTTP)
+    requests.</p>
+</li>
+<li>
+<p>@<code>Laminas\Mvc</code>. Support of Model-View-Controller pattern and separation of business logic from
+    presentation.</p>
+</li>
+<li>
+<p>@<code>Laminas\View</code>. Provides a system of helpers, output filters, and variable escaping. Used in
+    presentation layer.</p>
+</li>
+<li>
+<p>@<code>Laminas\Form</code>. Web form data collection, filtering, validation and rendering.</p>
+</li>
+<li>
+<p>@<code>Laminas\InputFilter</code>. Provides an ability to define form data validation rules.</p>
+</li>
+<li>
+<p>@<code>Laminas\Filter</code>. Provides a set of commonly used data filters, like string trimmer.</p>
+</li>
+<li>
+<p>@<code>Laminas\Validator</code>. Provides a set of commonly used validators.</p>
+</li>
+</ul>
+<h2 id="differences-with-laminas-framework-2">Differences with Laminas Framework 2</h2>
+<p>For readers who have an experience in Laminas Framework 2, in this section we'll
+give some information on what has changed in Laminas Framework.</p>
+<p>Below, the main technical differences between ZF2 and Laminas are presented:</p>
+<h3 id="backward-compatibility">Backward Compatibility</h3>
+<p>Laminas is an evolutionary release, so backward compatibility is preserved in most cases. However,
+some migration work still has to be done if you used <code>ServiceLocatorAwareInterface</code> across your
+code (which you probably did). In Laminas, this interface has been removed, and now all dependencies must be injected through
+factories. So, you'll have to create factories for the most of your controllers, services, view helpers and
+controller plugins.</p>
+<h3 id="components">Components</h3>
+<p>In ZF2, components were stored in a single GIT repository.
+In Laminas, components are stored in multiple GIT repositories, one repository per component (for example,
+<code>laminas/laminas-mvc</code>, <code>laminas/laminas-servicemanager</code>, <code>laminas/laminas-form</code>, etc).
+This allows to develop and release components
+independently of each other.</p>
+<p>Components are even more decoupled than before and have minimum dependencies on each other. @<code>Laminas\Mvc</code> component
+has been divided into several ones. For example, routing functionality has been moved to new @<code>Laminas\Router</code> component.</p>
+<p>You are now recommended to specify individual component names your app depends on in <code>composer.json</code>,
+although it is still possible to depend on <code>laminas/laminas</code> package, which is a meta package
+installing <em>all</em> available components.</p>
+<h3 id="component-installer">Component Installer</h3>
+<p>In Laminas, a special Composer plugin called <em>component installer</em> was introduced. It allows to install
+components as ZF modules. It injects information about the component into the application configuration
+file.</p>
+<h3 id="servicemanager-and-eventmanager-performance">ServiceManager and EventManager Performance</h3>
+<p>Laminas developers did a great job improving performance of @<code>Laminas\ServiceManager</code> and @<code>Laminas\EventManager</code> components.
+They are now about several times faster than before. The disadvantage is that you now have to do some migration
+work to use the new functionality. Controller and service names are now recommended to utilize
+the PHP 5.5 feature called <code>::class</code>. For example, if previously you registered your controller as <code>Application\Controller\Index</code>,
+now you will register it as <code>IndexController::class</code>. If previously you registered service names as you wished,
+now you are recommended to do that using <code>ServiceClassName::class</code>. Read the documentation for <code>Mvc</code>
+component for additional information.</p>
+<h3 id="psr-4">PSR-4</h3>
+<p>In ZF2, the recommended directory structure was PSR-0, while in Laminas it is PSR-4. This requires some
+(small) migration work.</p>
+<h3 id="middleware">Middleware</h3>
+<p>Laminas believes that the future of PHP is in middleware. "Middleware is, quite simply, code sitting between
+an incoming HTTP request, and the outgoing HTTP response." Now you can register a middleware listener
+in an MVC application.</p>
+<h3 id="focus-on-documentation">Focus on Documentation</h3>
+<p>Now each component repository contains its own documentation. Documentation is now in Markdown format
+and has become better designed.</p>
+<h2 id="summary">Summary</h2>
+<p>A PHP framework is a library, giving you the code base and defining consistent ways of creating
+web applications. Laminas Framework is a modern web development framework created by Laminas Technologies,
+the vendor of PHP language. It provides the developers
+with outstanding capabilities for building scalable and secure web sites. Laminas is licensed under BSD-like
+license and can be used for free in both commercial and open-source applications.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../acknowledgments/" class="btn btn-neutral float-left" title="Acknowledgments"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../skeleton/" class="btn btn-neutral float-right" title="Laminas Skeleton Application">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/modir/laminas-book" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../acknowledgments/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../skeleton/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

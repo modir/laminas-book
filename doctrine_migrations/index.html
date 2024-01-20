@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/doctrine_migrations/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Database Migrations - Using Laminas Framework</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Database Migrations";
+        var mkdocs_page_input_path = "doctrine_migrations.md";
+        var mkdocs_page_url = "/doctrine_migrations/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Using Laminas Framework
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Preface</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">None</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../acknowledgments/">Acknowledgments</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction to Laminas Framework</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../skeleton/">Laminas Skeleton Application</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operation/">Website Operation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../mvc/">Model-View-Controller</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../routing/">Routing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../appearance/">Page Appearance and Layout</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms/">Collecting User Input with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../filters/">Transforming Input Data with Filters</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../validators/">Checking Input Data with Validators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../uploads/">Uploading Files with Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../forms_advanced/">Advanced Usage of Forms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine/">Database Management with Doctrine ORM</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Database Migrations</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#installing-doctrinemigrations-component">Installing Doctrine\Migrations Component</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuring-migrations">Configuring Migrations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creating-migrations">Creating Migrations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-the-initial-migration">Creating the Initial Migration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-another-migration">Adding Another Migration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#executing-migrations">Executing Migrations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../modules/">Creating a New Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../session/">Working with Sessions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../users/">User Management, Authentication and Access Filtering</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../roles/">Role-Based Access Control</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../devenv/">Appendix A. Configuring Web Development Environment</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../netbeans/">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bootstrap/">Appendix C. Introduction to Twitter Bootstrap</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../doctrine_intro/">Appendix D. Introduction to Doctrine</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ec2_tutorial/">Appendix E. Installing a Laminas Web Application to Amazon EC2</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Using Laminas Framework</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Database Migrations</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/modir/laminas-book/edit/master/docs/doctrine_migrations.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="database-migrations">Database Migrations</h1>
+<p>When you are developing your website, you are constantly modifying your database schema: some tables
+are being added, others are being modified, unneeded tables are being deleted. Managing database schema
+may become a very complex task, because you need to keep it up-to-date on your development,
+testing and production servers. You can greatly simplify
+the task of managing database schema with the concept of <em>migrations</em>.</p>
+<p>A migration is some kind of atomic change of state of the database schema. You can apply a
+migration to upgrade the schema to its newer state, or you can revert a migration to
+downgrade schema to its previous state. You create new migrations as you develop your website,
+and you can have as many migrations as you need. All migrations form a database schema change
+history, which is very convenient, because you know when and for what purpose you changed the
+schema.</p>
+<h2 id="installing-doctrinemigrations-component">Installing Doctrine\Migrations Component</h2>
+<p>Doctrine provides a special component <code>Doctrine\Migrations</code> that you can use
+for implementing database migrations in your website.
+To install <code>Doctrine\Migrations</code> component, type the following command:</p>
+<pre><code>php composer.phar require doctrine/migrations
+</code></pre>
+<p>The command above will download and install the component files to the <code>vendor</code> directory
+and modify your <code>composer.json</code> file as follows:</p>
+<pre><code>{
+    ...
+    &quot;require&quot;: {
+        ...
+        &quot;doctrine/migrations&quot;: &quot;^1.4&quot;,
+        ...
+    },
+    ...
+}
+</code></pre>
+<h2 id="configuring-migrations">Configuring Migrations</h2>
+<p>Before you can use migrations, you'll need to provide the configuration describing
+what database connection to use, in which table to store migration history, where to
+store migration classes, etc. To do that,
+add the following lines to your <code>config/autoload/global.php</code> file:</p>
+<pre><code class="language-php">&lt;?php
+return [
+    'doctrine' =&gt; [
+        // migrations configuration
+        'migrations_configuration' =&gt; [
+            'orm_default' =&gt; [
+                'directory' =&gt; 'data/Migrations',
+                'name'      =&gt; 'Doctrine Database Migrations',
+                'namespace' =&gt; 'Migrations',
+                'table'     =&gt; 'migrations',
+            ],
+        ],
+    ],
+    // ...
+];
+</code></pre>
+<p>As you can see, we have the <code>doctrine</code> key and its <code>migrations_configuration</code> subkey (line 5). Under this subkey we
+provide the configuration for migrations:</p>
+<ul>
+<li>
+<p>In line 6, we provide the name of entity manager to use (<code>orm_default</code>).</p>
+</li>
+<li>
+<p>In line 7, we tell Doctrine that we want to store migrations under the <code>APP_DIR/data/Migrations</code> directory.</p>
+</li>
+<li>
+<p>In line 8, we provide a user-friendly name for our migrations.</p>
+</li>
+<li>
+<p>In line 9, we tell Doctrine that we want that our migration classes live in <code>Migrations</code> namespace.
+    You can specify a namespace of your choice.</p>
+</li>
+<li>
+<p>In line 10, we tell Doctrine that want to store migration history inside of <code>migrations</code> database table.
+    Doctrine will create and manage that table automatically.</p>
+</li>
+</ul>
+<h2 id="creating-migrations">Creating Migrations</h2>
+<p>A migration is a change set upgrading or downgrading the schema to its next or previous state, respectively.
+You generate a new empty migration with the help of the following commands:</p>
+<pre><code>cd APP_DIR
+./vendor/bin/doctrine-module migrations:generate
+</code></pre>
+<p>The commands above make the application directory the current working directory and then
+run the <code>migrations:generate</code> console command.</p>
+<blockquote>
+<p><code>DoctrineModule</code> and <code>DoctrineORMModule</code> provide several console commands that you can use for various
+database maintenance tasks (like generating or executing migrations). For the list of available commands,
+you can use the <code>list</code> command:</p>
+<p><code>./vendor/bin/doctrine-module list</code></p>
+</blockquote>
+<p>Once you run the <code>migrations:generate</code> command, you will be able to find the newly created migration under the <code>APP_DIR/data/Migrations</code> directory.
+The file has a name like <code>VersionYYYYMMDDHHIISS.php</code>, where <code>YYYY</code> is current year, <code>MM</code> is current month, <code>DD</code> is current day,
+<code>HH</code>, <code>II</code> and <code>SS</code> represent current hour, minute and second, respectively.</p>
+<p>If you look into the newly created file, you will find the following content:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Migrations;
+
+use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\DBAL\Schema\Schema;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+class Version20160901114333 extends AbstractMigration
+{
+    /**
+     * @param Schema $schema
+     */
+    public function up(Schema $schema)
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+
+    }
+
+    /**
+     * @param Schema $schema
+     */
+    public function down(Schema $schema)
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+
+    }
+}
+</code></pre>
+<blockquote>
+<p>If you do not see the newly created migration in NetBeans IDE, you need to open the menu <em>Source</em> and select the
+<em>Scan for external changes</em> menu item.</p>
+</blockquote>
+<p>As you can see from the code above, a migration is a usual PHP class inherited from <code>Doctrine\DBAL\Migrations\AbstractMigration</code>
+base class. Every migration should have <em>at least</em> two methods: <code>up()</code> and <code>down()</code>. The <code>up()</code> method upgrades the schema to a newer state,
+the <code>down()</code> method downgrades the schema from its newer state to the previous state. Both <code>up()</code> and <code>down()</code> methods have a single
+argument of type <code>Doctrine\DBAL\Schema\Schema</code>, which can be used for actual database schema modifications.</p>
+<blockquote>
+<p>The <code>Schema</code> class is a part of <code>Doctrine\DBAL</code> component. For more information about the methods it provides, please
+refer to Doctrine DBAL documentation. Another, even better way is to look at the code inside your <code>vendor/doctrine/dbal</code> directory.</p>
+</blockquote>
+<p>A migration class may optionally have the following (overridden) methods (table 13.1):</p>
+<table>
+<thead>
+<tr>
+<th><em>Method</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>isTransactional()</code></td>
+<td>If this function returns true (default) the migration will be executed in one transaction,</td>
+</tr>
+<tr>
+<td></td>
+<td>otherwise non-transactional state will be used to execute each of the migration SQLs.</td>
+</tr>
+<tr>
+<td><code>getDescription()</code></td>
+<td>This method should return a string describing the migration (for what purpose this schema change is done)</td>
+</tr>
+<tr>
+<td><code>preUp(Schema $schema)</code></td>
+<td>This method will be executed before upgrading the schema.</td>
+</tr>
+<tr>
+<td><code>postUp(Schema $schema)</code></td>
+<td>This method will be executed after upgrading the schema.</td>
+</tr>
+<tr>
+<td><code>preDown(Schema $schema)</code></td>
+<td>This method will be executed before downgrading the schema.</td>
+</tr>
+<tr>
+<td><code>postDown(Schema $schema)</code></td>
+<td>This method will be executed after downgrading the schema.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 13.1. Methods a migration class may have</p>
+<p>The <code>AbstractMigration</code> base class also provides the following useful methods (table 13.2):</p>
+<table>
+<thead>
+<tr>
+<th><em>Method</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addSql($sql, array $params = [], array $types = [])</code></td>
+<td>This method allows to execute an arbitrary SQL request.</td>
+</tr>
+<tr>
+<td><code>write($message)</code></td>
+<td>This helper method prints a (debug or explanatory) message to screen.</td>
+</tr>
+<tr>
+<td><code>throwIrreversibleMigrationException($message = null)</code></td>
+<td>This helper method is typically called inside of <code>down()</code> method to signal that the migration cannot be undone.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 13.2. Methods provided by the base migration class</p>
+<p>As you can see from table 13.2, you can also modify the schema by calling <code>addSql()</code> method. This method
+can be used to create a table, to update a table or to remove a table. It can also be used, for example, to insert
+some data to a table (however, inserting data is not a schema change).</p>
+<blockquote>
+<p>Doctrine migrations are designed for schema changes, not for inserting data to the database. Although,
+inserting some initial data to database is useful in some cases.</p>
+</blockquote>
+<p>Now that you know how to create a migration, let's create a couple of migrations for our <em>Blog</em> sample.</p>
+<h3 id="creating-the-initial-migration">Creating the Initial Migration</h3>
+<p>The first migration we will create is the initial migration. This migration will be applied to empty database
+schema and will create four tables: <code>post</code>, <code>comment</code>, <code>tag</code> and <code>post_tag</code>.</p>
+<p>Modify the migration class we have created in the previous section to look like below:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Migrations;
+
+use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\DBAL\Schema\Schema;
+
+/**
+ * A migration class. It either upgrades the databases schema (moves it to new state)
+ * or downgrades it to the previous state.
+ */
+class Version20160901114333 extends AbstractMigration
+{
+    /**
+     * Returns the description of this migration.
+     */
+    public function getDescription()
+    {
+        $description = 'This is the initial migration which creates blog tables.';
+        return $description;
+    }
+
+    /**
+     * @param Schema $schema
+     */
+    public function up(Schema $schema)
+    {
+        // Create 'post' table
+        $table = $schema-&gt;createTable('post');
+        $table-&gt;addColumn('id', 'integer', ['autoincrement'=&gt;true]);
+        $table-&gt;addColumn('title', 'text', ['notnull'=&gt;true]);
+        $table-&gt;addColumn('content', 'text', ['notnull'=&gt;true]);
+        $table-&gt;addColumn('status', 'integer', ['notnull'=&gt;true]);
+        $table-&gt;addColumn('date_created', 'datetime', ['notnull'=&gt;true]);
+        $table-&gt;setPrimaryKey(['id']);
+        $table-&gt;addOption('engine' , 'InnoDB');
+
+        // Create 'comment' table
+        $table = $schema-&gt;createTable('comment');
+        $table-&gt;addColumn('id', 'integer', ['autoincrement'=&gt;true]);
+        $table-&gt;addColumn('post_id', 'integer', ['notnull'=&gt;true]);
+        $table-&gt;addColumn('content', 'text', ['notnull'=&gt;true]);
+        $table-&gt;addColumn('author', 'string', ['notnull'=&gt;true, 'lenght'=&gt;128]);
+        $table-&gt;addColumn('date_created', 'datetime', ['notnull'=&gt;true]);
+        $table-&gt;setPrimaryKey(['id']);
+        $table-&gt;addOption('engine' , 'InnoDB');
+
+        // Create 'tag' table
+        $table = $schema-&gt;createTable('tag');
+        $table-&gt;addColumn('id', 'integer', ['autoincrement'=&gt;true]);
+        $table-&gt;addColumn('name', 'string', ['notnull'=&gt;true, 'lenght'=&gt;128]);
+        $table-&gt;setPrimaryKey(['id']);
+        $table-&gt;addOption('engine' , 'InnoDB');
+
+        // Create 'post_tag' table
+        $table = $schema-&gt;createTable('post_tag');
+        $table-&gt;addColumn('id', 'integer', ['autoincrement'=&gt;true]);
+        $table-&gt;addColumn('post_id', 'integer', ['notnull'=&gt;true]);
+        $table-&gt;addColumn('tag_id', 'integer', ['notnull'=&gt;true]);
+        $table-&gt;setPrimaryKey(['id']);
+        $table-&gt;addOption('engine' , 'InnoDB');
+    }
+
+    /**
+     * @param Schema $schema
+     */
+    public function down(Schema $schema)
+    {
+        $schema-&gt;dropTable('post_tag');
+        $schema-&gt;dropTable('tag');
+        $schema-&gt;dropTable('comment');
+        $schema-&gt;dropTable('post');
+    }
+}
+</code></pre>
+<p>In the code above we have three methods:</p>
+<ul>
+<li>the <code>getDescription()</code> method provides the description of the migration.</li>
+<li>the <code>up()</code> method upgrades the schema to its newer state by adding new tables.</li>
+<li>the <code>down()</code> method drops tables thus downgrading the schema to its previous state.</li>
+</ul>
+<h3 id="adding-another-migration">Adding Another Migration</h3>
+<p>Now assume we decided to improve the performance of our database by adding indexes to our tables.</p>
+<blockquote>
+<p>If you want to learn about database indexes in more details and why indexes are so helpful, you can refer to an excellent tutorial
+called <a href="http://use-the-index-luke.com/">Use the Index, Luke</a>.</p>
+</blockquote>
+<p>We can also improve data integrity by adding foreign keys. To do this, we have to add another migration. Generate another
+empty migration with the <code>migrations:generate</code> console command. Modify the code to look like below:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Migrations;
+
+use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\DBAL\Schema\Schema;
+
+/**
+ * A migration class. It either upgrades the databases schema (moves it to new state)
+ * or downgrades it to the previous state.
+ */
+class Version20160901114938 extends AbstractMigration
+{
+    /**
+     * Returns the description of this migration.
+     */
+    public function getDescription()
+    {
+        $description = 'This migration adds indexes and foreign key constraints.';
+        return $description;
+    }
+
+    /**
+     * @param Schema $schema
+     */
+    public function up(Schema $schema)
+    {
+        // Add index to post table
+        $table = $schema-&gt;getTable('post');
+        $table-&gt;addIndex(['date_created'], 'date_created_index');
+
+        // Add index and foreign key to comment table
+        $table = $schema-&gt;getTable('comment');
+        $table-&gt;addIndex(['post_id'], 'post_id_index');
+        $table-&gt;addForeignKeyConstraint('post', ['post_id'], ['id'], [], 'comment_post_id_fk');
+
+        // Add indexes and foreign keys to post_tag table
+        $table = $schema-&gt;getTable('post_tag');
+        $table-&gt;addIndex(['post_id'], 'post_id_index');
+        $table-&gt;addIndex(['tag_id'], 'tag_id_index');
+        $table-&gt;addForeignKeyConstraint('post', ['post_id'], ['id'], [], 'post_tag_post_id_fk');
+        $table-&gt;addForeignKeyConstraint('tag', ['tag_id'], ['id'], [], 'post_tag_tag_id_fk');
+    }
+
+    /**
+     * @param Schema $schema
+     */
+    public function down(Schema $schema)
+    {
+        $table = $schema-&gt;getTable('post_tag');
+        $table-&gt;removeForeignKey('post_tag_post_id_fk');
+        $table-&gt;removeForeignKey('post_tag_tag_id_fk');
+        $table-&gt;dropIndex('post_id_index');
+        $table-&gt;dropIndex('tag_id_index');
+
+        $table = $schema-&gt;getTable('comment');
+        $table-&gt;dropIndex('post_id_index');
+        $table-&gt;removeForeignKey('comment_post_id_fk');
+
+        $table = $schema-&gt;getTable('post');
+        $table-&gt;dropIndex('date_created_index');
+    }
+}
+</code></pre>
+<blockquote>
+<p>You can find the migrations we have just created inside of the <em>Blog</em> sample bundled with this book.</p>
+</blockquote>
+<h2 id="executing-migrations">Executing Migrations</h2>
+<p>Once our migration classes are ready, you can apply the migrations to database. To do that, you use the
+<code>migrations:migrate</code> console command as follows:</p>
+<pre><code>./vendor/bin/doctrine-module migrations:migrate
+</code></pre>
+<p>The command above applies all available migrations in turn. It writes the IDs of the applied migration to
+the <code>migrations</code> database table. After that, the <code>migrations</code> table will look as follows:</p>
+<pre><code>mysql&gt; select * from migrations;
++----------------+
+| version        |
++----------------+
+| 20160901114333 |
+| 20160901114938 |
++----------------+
+2 rows in set (0.00 sec)
+</code></pre>
+<p>If you want to upgrade or downgrade to some specific version, specify the migration ID as the <code>migrations:migrate</code>
+command's argument as follows:</p>
+<pre><code>./vendor/bin/doctrine-module migrations:migrate 20160901114333
+</code></pre>
+<blockquote>
+<p>You can also use 'prev', 'next' and 'first' aliases as version IDs which respectively move database to its previous state, next state
+or to the state before the first migration (empty database).</p>
+</blockquote>
+<p>So, with migrations you can easily move through migration history and change the database schema as needed.
+Be careful though that migrations may remove some of your data, so apply them wisely.</p>
+<h2 id="summary">Summary</h2>
+<p>In this chapter, we have learned about database migrations. Doctrine library provides you a component called <code>Doctrine\Migrations</code>
+which allows to implement and apply migrations.</p>
+<p>A migration is some kind of change set which can be applied to database schema. You can apply a
+migration to upgrade the schema to its newer state, or you can revert a migration to
+downgrade schema to its previous state.</p>
+<p>Migrations are useful, because they allow to store the history of schema changes and
+apply changes in a standard way. With migrations, you can easily keep your schema up-to-date on every development
+machine, and on testing, staging and production servers.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../doctrine/" class="btn btn-neutral float-left" title="Database Management with Doctrine ORM"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../modules/" class="btn btn-neutral float-right" title="Creating a New Module">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/modir/laminas-book" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../doctrine/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../modules/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
