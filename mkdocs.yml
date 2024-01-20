@@ -1,0 +1,36 @@
+site_name: Using Laminas Framework
+site_url: https://modir.github.io/
+repo_url: https://github.com/modir/laminas-book
+nav:
+  - index.md
+  - intro.md
+  - acknowledgments.md
+  - intro.md
+  - skeleton.md
+  - operation.md
+  - mvc.md
+  - routing.md
+  - appearance.md
+  - forms.md
+  - filters.md
+  - validators.md
+  - uploads.md
+  - forms_advanced.md
+  - doctrine.md
+  - doctrine_migrations.md
+  - modules.md
+  - session.md
+  - users.md
+  - roles.md
+  - devenv.md
+  - netbeans.md
+  - bootstrap.md
+  - doctrine_intro.md
+  - ec2_tutorial.md
+theme:
+  name: readthedocs
+  features:
+    - content.code.copy
+markdown_extensions:
+  - footnotes
+  - admonition
