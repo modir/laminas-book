@@ -23,10 +23,6 @@ book, Twitter Bootstrap CSS Framework is used to produce nicely styled and laid 
 
 This book was initially written by Oleg Krivtsov as a Zend 3 book. As nobody took care of it Raffael Luthiger took over and rewrote it as a Laminas book.
 
-!!! note
-    Important: The book is now migrated to Laminas. There are links though to example applications which are still written in Zend.
-	Once I have some more spare time I will migrate them as well. Or maybe someone else has the time for it.
-
 ## Intended Audience
 
 This book is intended for web developers involved in the development of web-based applications in PHP.
@@ -57,10 +53,14 @@ For learning HTML, CSS and JavaScript, a good starting point is
 This book's text is illustrated with code samples. Each sample is a complete website you can install and run yourself to
 see Laminas Framework in action. You can even use the samples as a base for your own websites.
 
+!!! note
+    Important: The book is now migrated to Laminas. There are links though to example applications which are still written in Zend.
+	Once I have some more spare time I will migrate them as well. Or maybe someone else has the time for it.
+
 All the source code is stored on GitHub. The code is publicly available, and you can download the entire code
-archive by visiting [this page](https://github.com/olegkrivtsov/using-laminas-book-samples).
+archive by visiting [this page](https://github.com/olegkrivtsov/using-zend-book-samples).
 To download the archive, click the *Clone or Download* button that can be found on the page
-(see the figure below). (Attention: This is still the link to the original code where it is still every "Zend".)
+(see the figure below).
 
 ![Samples can be downloaded from GitHub](images/preface/samples_on_github.png)
 
