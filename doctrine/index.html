@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/doctrine/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/laminas-book/doctrine/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     <title>Database Management with Doctrine ORM - Using Laminas Framework</title>
     <link rel="stylesheet" href="../css/theme.css" />
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Database Management with Doctrine ORM";
         var mkdocs_page_input_path = "doctrine.md";
-        var mkdocs_page_url = "/doctrine/";
+        var mkdocs_page_url = "/laminas-book/doctrine/";
       </script>
     
     <!--[if lt IE 9]>
@@ -300,10 +300,11 @@ Relational Mapper</em> (ORM for short). With Doctrine ORM you map your database 
 Driven Design, it is also called an <em>entity</em> class) and a row from that table is mapped to an
 instance of the entity class. If you are new to Doctrine, it is recommended that you also refer to
 <a href="#doctrine-intro">Appendix D. Introduction to Doctrine</a> for introductory information about the Doctrine library architecture.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Doctrine is a third-party library, it is not part of Laminas Framework. We cover it in this book
 because it provides an easy way of adding database support to your laminas-based web application.</p>
-</blockquote>
+</div>
 <p>Components covered in this chapter:</p>
 <table>
 <thead>
@@ -353,26 +354,23 @@ source code of the <em>Blog</em> web application:</p>
 To install the sample, you can either edit your default Apache virtual host file
 or create a new one. After editing the file, restart the Apache HTTP Server
 and open the website in your web browser.</p>
-<blockquote>
-<p>For detailed installation instructions, please refer to the <em>README.md</em> file located
-   in the <em>blog</em> directory.</p>
-<p>For the <em>Blog</em> sample to work, you have to create a MySQL database. Instructions on how to do
-   that are provided in the next section.</p>
-</blockquote>
+<p>For detailed installation instructions, please refer to the <em>README.md</em> file located in the <em>blog</em> directory.</p>
+<p>For the <em>Blog</em> sample to work, you have to create a MySQL database. Instructions on how to do that are provided in the next section.</p>
 <h2 id="creating-a-simple-mysql-database">Creating a Simple MySQL Database</h2>
 <p>For the <em>Blog</em> sample to work, we need to have a database. In this book, we use MySQL database
 management system, which is very simple in installation and administration.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>For OS-specific instructions on how to install MySQL server and client, please refer to
-   <a href="#devenv">Appendix A. Configuring Web Development Environment</a>.</p>
-</blockquote>
+<a href="#devenv">Appendix A. Configuring Web Development Environment</a>.</p>
+</div>
 <p>Once you install MySQL, type the following command from your command shell to log into MySQL client
 console:</p>
 <p><code>mysql -u root -p</code></p>
 <p>When asked for, type the password of the <em>root</em> user (the password of the <em>root</em> user is
 the one you've specified during MySQL server installation). On successful login, you should
 see the following welcome message:</p>
-<pre><code class="language-text">Welcome to the MySQL monitor.  Commands end with ; or \g.
+<pre><code class="language-sql">Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 4
 Server version: 5.7.13-0ubuntu0.16.04.2 (Ubuntu)
 
@@ -388,23 +386,22 @@ mysql&gt;
 </code></pre>
 <p>Now you are able to type MySQL client commands (like <code>show databases</code>, <code>show tables</code>, etc.) or
 SQL queries (like <code>SELECT</code> or <code>INSERT</code>) at the MySQL prompt  and see their output.</p>
-<blockquote>
 <p>If you want to quit of the MySQL prompt, type <code>quit</code> and press Enter.</p>
-</blockquote>
 <h3 id="creating-new-database">Creating New Database</h3>
 <p>Let's create a database and name it <code>blog</code>. To do that, type the following SQL statement and
 press Enter:</p>
-<pre><code class="language-text">CREATE DATABASE blog;
+<pre><code class="language-sql">CREATE DATABASE blog;
 </code></pre>
 <p>The expected output of this command is the following:</p>
 <p><code>Query OK, 1 row affected (0.01 sec)</code></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>MySQL commands are case insensitive, so you could type <code>create database blog;</code> with the same result.
-   We recommend using upper case for SQL queries, since this is a common convention.</p>
-</blockquote>
+We recommend using upper case for SQL queries, since this is a common convention.</p>
+</div>
 <p>Next, we create the user named <code>blog</code> and grant it all privileges for accessing and modifying the
 <code>blog</code> database and all its tables:</p>
-<pre><code class="language-text">GRANT ALL PRIVILEGES ON blog.* TO blog@localhost IDENTIFIED BY '&lt;passwd&gt;';
+<pre><code class="language-sql">GRANT ALL PRIVILEGES ON blog.* TO blog@localhost IDENTIFIED BY '&lt;passwd&gt;';
 </code></pre>
 <p>In the command above, replace the password placeholder with the new password for the <code>blog</code> user.
 This password should be different than the password of the <em>root</em> user.</p>
@@ -435,7 +432,7 @@ many-to-many relationship between the <code>post</code> and the <code>tag</code>
 <p>Make the <code>blog</code> database current by typing the following from MySQL command prompt:</p>
 <p><code>use blog;</code></p>
 <p>To create the <code>post</code> table, type the following SQL statement:</p>
-<pre><code class="language-text">CREATE TABLE `post` (
+<pre><code class="language-sql">CREATE TABLE `post` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `title` text NOT NULL,
   `content` text NOT NULL,
@@ -451,7 +448,7 @@ character is encountered.</p>
 <p>The expected output of this command is the following:</p>
 <p><code>Query OK, 0 rows affected (0.22 sec)</code></p>
 <p>Next, create the <code>comment</code> table by typing the following:</p>
-<pre><code class="language-text">CREATE TABLE `comment` (
+<pre><code class="language-sql">CREATE TABLE `comment` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,
   `content` text NOT NULL,
@@ -460,20 +457,20 @@ character is encountered.</p>
 );
 </code></pre>
 <p>Then, create the <code>tag</code> table:</p>
-<pre><code class="language-text">CREATE TABLE `tag` (
+<pre><code class="language-sql">CREATE TABLE `tag` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(128)
 );
 </code></pre>
 <p>And finally, create the <code>post_tag</code> table:</p>
-<pre><code class="language-text">CREATE TABLE `post_tag` (
+<pre><code class="language-sql">CREATE TABLE `post_tag` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL
 );
 </code></pre>
 <p>Let's fill the tables we have created with some sample data:</p>
-<pre><code class="language-text">INSERT INTO tag(`name`) VALUES('Laminas');
+<pre><code class="language-sql">INSERT INTO tag(`name`) VALUES('Laminas');
 INSERT INTO tag(`name`) VALUES('book');
 INSERT INTO tag(`name`) VALUES('magento');
 INSERT INTO tag(`name`) VALUES('bootstrap');
@@ -502,11 +499,12 @@ INSERT INTO post_tag(`post_id`, `tag_id`) VALUES(3, 4);
 INSERT INTO comment(`post_id`, `content`, `author`, `date_created`) VALUES(
     1, 'Excellent post!', 'Oleg Krivtsov', '2016-08-09 19:20');
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If necessary, you can easily remove the database and all tables and data it contains by typing the
 following command from MySQL prompt:</p>
 <p><code>DROP DATABASE blog;</code></p>
-</blockquote>
+</div>
 <p>Figure 12.3 graphically illustrates what entities we have in the database and what relationships between
 those entities present.</p>
 <p><img alt="Figure 12.3. Graphical representation of database schema" src="../images/doctrine/database_schema.png" /></p>
@@ -526,7 +524,7 @@ directory and type the following command from your command shell (but not from M
 <p><code>mysql -u root -p blog &lt; schema.mysql.sql</code></p>
 <p>When prompted for password, enter the password of the root user and press Enter.</p>
 <p>Once this is done, log into the MySQL client and type the following commands:</p>
-<pre><code class="language-text">use blog;
+<pre><code class="language-sql">use blog;
 
 show tables;
 </code></pre>
@@ -541,10 +539,11 @@ show tables;
 +----------------+
 4 rows in set (0.00 sec)
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Also consider using <em>database migrations</em> for initializing database schema. For additional
 info about migrations, please refer to <a href="#migrations">Database Migrations</a> chapter.</p>
-</blockquote>
+</div>
 <h2 id="integrating-doctrine-orm-with-laminas-framework">Integrating Doctrine ORM with Laminas Framework</h2>
 <p>For easy integration with Laminas Framework, Doctrine project provides the following two components
 (that are actually Laminas modules):</p>
@@ -571,8 +570,9 @@ located in the root directory of the web application (in this book, we typically
 as <em>APP_DIR</em>).</p>
 <p>To add the dependency, type the following commands from your command shell (replace the <em>APP_DIR</em>
 placeholder with the actual directory name of your application):</p>
-<p><code>cd APP_DIR</code></p>
-<p><code>php composer.phar require doctrine/doctrine-orm-module</code></p>
+<pre><code class="language-bash">cd APP_DIR
+php composer.phar require doctrine/doctrine-orm-module
+</code></pre>
 <p>The <code>cd</code> command above is used to make the <em>APP_DIR</em> directory current working directory.</p>
 <p>And the <code>require</code> command tells Composer to add the package <code>doctrine/doctrine-orm-module</code> as a
 dependency to your web application, and to download and install that dependency.</p>
@@ -593,20 +593,22 @@ install the files into the <em>APP_DIR/vendor</em> directory.</p>
 output, when you install <code>DoctrineORMModule</code> component, Composer
 automatically installs the <code>DoctrineModule</code> and all necessary Doctrine components (<em>Doctrine\DBAL</em>,
 <em>Doctrine\ORM</em>, etc.)</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>As a bonus, at the end of installation, Composer "suggests" you to install some additional packages
 that might be useful for you (<code>doctrine/migrations</code>, <code>doctrine/data-fixtures</code>, etc.) If you strongly
 wish, you may add those dependencies with the Composer's <code>require</code> command as well.</p>
-</blockquote>
+</div>
 <p>When the installation has been finished, you can find the Doctrine files in your <em>APP_DIR/vendor</em>
 directory (see the figure 12.4 below).</p>
 <p><img alt="Figure 12.4. Doctrine files are installed to vendor directory" src="../images/doctrine/installed_doctrine_files.png" /></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>You use the <code>php composer.phar require</code> command for the first time you install Doctrine. Once the
 <em>composer.json</em> (and <em>composer.lock</em>) files have been modified by Composer, you are able to install (or update)
 all dependencies as usual by typing the <code>php composer.phar install</code> or <code>php composer.phar update</code>
 commands, respectively, from your command shell.</p>
-</blockquote>
+</div>
 <h3 id="loading-doctrine-integration-modules-on-application-start-up">Loading Doctrine Integration Modules on Application Start Up</h3>
 <p>Once you have installed the <em>DoctrineORMModule</em> and all its dependencies, you need to add
 the following lines to your <em>APP_DIR/config/modules.config.php</em> file to enable the modules:</p>
@@ -639,9 +641,10 @@ there is a number of subkeys containing the following settings:</p>
     For each database connection it contains parameters like driver class name, host, user name,
     password and database name.</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>By default, there is only one connection named <code>orm_default</code>, and you may add more database connections if required.</p>
-</blockquote>
+</div>
 <ul>
 <li>
 <p>the <code>configuration</code> key contains ORM settings like caching configuration and locations of
@@ -659,10 +662,11 @@ there is a number of subkeys containing the following settings:</p>
 <p>the <code>eventmanager</code> key contains settings for Doctrine event manager for each available connection.</p>
 </li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Doctrine uses its own implementation of event manager. If you want, you can create an event listener
 class and hooks some events. However, this is an advanced topic and we do not cover it in this book.</p>
-</blockquote>
+</div>
 <ul>
 <li>the <code>migrations_configuration</code> key contains settings for database migrations. Database migrations
     are used for initializing and updating database schema in a standard and consistent way.</li>
@@ -693,10 +697,11 @@ default configuration tree provided by the <em>DoctrineORMModule</em>.</p>
 <p>Below we provide content of the <em>autoload/local.php</em> file of the <em>Blog</em> web application.
 This config file contains the application-wide database connection settings for the <code>blog</code>
 MySQL database that we created earlier in this chapter:</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>This connection is shared between all modules of the web application. If you want to create
 module-specific connection, consider adding the key to the <em>module.config.php</em> file instead.</p>
-</blockquote>
+</div>
 <pre><code class="language-php">&lt;?php
 use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 
@@ -722,11 +727,9 @@ return [
 <li>The <code>driverClass</code> key provides the class name to use as a driver to the database. Since we use MySQL
     database, we specify the <code>Doctrine\DBAL\Driver\PDOMySql\Driver</code> class name.</li>
 </ul>
-<blockquote>
 <p>For your reference, in table 12.1, you can find several other often used database drivers.
-   Each driver class supports its own set of parameters, so please refer to certain driver's code (and
-   related documentation) for additional information.</p>
-</blockquote>
+Each driver class supports its own set of parameters, so please refer to certain driver's code (and
+related documentation) for additional information.</p>
 <ul>
 <li>
 <p>The <code>params</code> key contains the connection parameters:</p>
@@ -776,12 +779,14 @@ Each developer in your team then renames the <em>local.php.dist</em> file to <em
 enters his own password instead of the placeholder. The <em>local.php</em> file should not be version
 controlled, because you usually do not want other people on your team (or other people having
 access to your code repository) seeing the actual password.</p>
-<p><strong>What happens if I need several database connections?</strong></p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">What happens if I need several database connections?</p>
 <p>You can easily add more database connections by adding other keys below the <code>orm_default</code> key.
 For example, let's assume that you have another database for testing purposes. To let
 Doctrine know about this database, you create the <code>orm_test</code> subkey below the <code>orm_default</code> key
 and fill it with connection parameters.</p>
-</blockquote>
+</div>
 <h2 id="about-doctrine-entities">About Doctrine Entities</h2>
 <p>An <em>entity</em> is a PHP class that is designed for storing data. For example, below you can find
 several often used examples of entities:</p>
@@ -832,13 +837,14 @@ An example of annotation can be found below:</p>
  */
 </code></pre>
 <p>Doctrine reads Docblock annotations with the help of its <code>Doctrine\Annotations</code> component.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>You might have already seen Docblock annotations if you've used <a href="http://www.phpdoc.org/">phpDocumentor</a> or
 <a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a> documentation generation
 tools. In those tools, annotation comments are serving the same goal: to describe a PHP class and
 its properties and methods. Then the tool goes through your code and builds HTML documentation
 automatically based entirely on code and annotations analysis.</p>
-</blockquote>
+</div>
 <p>For example, below, we provide the basic example of a Doctrine entity class. You can see that the class and its
 properties are marked with Docblock annotations with special <em>tags</em> (a tag starts with '@' character).</p>
 <pre><code class="language-php">&lt;?php
@@ -1041,11 +1047,12 @@ class Post
     their brief descriptions).</p>
 </li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note that for properties we (by convention) use camel-case names (like <code>$dateCreated</code>),
-   while for database columns we use "canonicalized" names (in lower-case and with underscores
-   separating words in a name, like <code>date_created</code>).</p>
-</blockquote>
+while for database columns we use "canonicalized" names (in lower-case and with underscores
+separating words in a name, like <code>date_created</code>).</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -1289,10 +1296,11 @@ class Tag
 </code></pre>
 <p>Since the <code>Comment</code> and <code>Tag</code> entities are analogous to the <code>Post</code> entity, we don't provide detailed
 description of the code above.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note that we do not create an entity for the fourth auxiliary table <code>post_tag</code>. That
-   table will be indirectly used further in this chapter when defining relationships between entities.</p>
-</blockquote>
+table will be indirectly used further in this chapter when defining relationships between entities.</p>
+</div>
 <h3 id="specifying-relationships-between-entities">Specifying Relationships between Entities</h3>
 <p>Now it is time to use annotations to define relationships between entities. If you remember,
 we have two relationships between our entities:</p>
@@ -1302,11 +1310,9 @@ we have two relationships between our entities:</p>
 </ul>
 <p>In Doctrine, to express a relationship between two entities, you add a private property paired
 with Docblock annotation.</p>
-<blockquote>
 <p>For detailed information about relationships between entities in Doctrine, please read
-   <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/association-mapping.html">this page</a>
-   of Doctrine documentation.</p>
-</blockquote>
+<a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/association-mapping.html">this page</a>
+of Doctrine documentation.</p>
 <h4 id="onetomanymanytoone">OneToMany/ManyToOne</h4>
 <p>First, let's define one-to-many relationship between the <code>Post</code> and <code>Comment</code> entities. Modify the <em>Post.php</em>
 file and add the following lines:</p>
@@ -1533,11 +1539,12 @@ return [
 </code></pre>
 <p>Above, in line 2, we specify the namespace <code>Application</code>. This should be the name of the current
 module.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Note that usually we do not specify namespace in config files, but in this particular case it is
-   convenient to do. When we have namespace defined, we can use the <code>__NAMESPACE__</code> placeholder which
-   expands into that namespace.</p>
-</blockquote>
+convenient to do. When we have namespace defined, we can use the <code>__NAMESPACE__</code> placeholder which
+expands into that namespace.</p>
+</div>
 <p>In line 8, we have <code>doctrine</code> key, under which we have the <code>driver</code> subkey.
 In line 13, we tell Doctrine ORM that our entities are stored inside of <em>Entity</em>
 directory under the module's <em>src</em> directory.</p>
@@ -1624,11 +1631,12 @@ and <code>Tag</code> entities.</p>
 <p>To load data from the database, you retrieve an entity from its repository. When you request the repository for
 an entity, it loads the data from the table mapped to the entity, and assigns
 entity's fields with the data.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <code>Doctrine\ORM\EntityRepository</code> class implements the default repository. If needed, you can,
 by extending the <code>EntityRepository</code>, create your own repository for certain entity class.
 We will show how to do that later.</p>
-</blockquote>
+</div>
 <p>The most used methods provided by the <code>EntityRepository</code> class are listed in table 12.5.</p>
 <table>
 <thead>
@@ -2008,10 +2016,8 @@ presented above deeply.</p>
 sample, we will create and register the <em>PostManager</em> service. This service will have the <code>addNewPost()</code>
 public method that will contain business logic of adding <code>Post</code> entity to database and associating it with
 one or several <code>Tag</code> entities.</p>
-<blockquote>
 <p>The <code>PostManager</code> service will contain business logic of the <em>Blog</em> sample. This business logic
-   includes, but not limited to, adding new post to the blog.</p>
-</blockquote>
+includes, but not limited to, adding new post to the blog.</p>
 <p>Create the <em>PostManager.php</em> file inside the <em>Service</em> directory under the module's
 source directory. Put the following content into that file:</p>
 <pre><code class="language-php">&lt;?php
@@ -3159,10 +3165,11 @@ WHERE p.status=?1 ORDER BY p.dateCreated DESC
 <pre><code>SELECT p FROM \Application\Entity\Post p JOIN p.tags t
 WHERE p.status=?1 AND t.name=?2 ORDER BY p.dateCreated DESC
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>To learn more about Doctrine query builder, please refer to
 <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html">this page</a>.</p>
-</blockquote>
+</div>
 <p>To let Doctrine know that it should use the custom repository for <code>Post</code> entity,
 modify the <code>Post</code> entity's annotation as follows:</p>
 <pre><code class="language-php">&lt;?php
@@ -3278,10 +3285,11 @@ present in HTTP request, all posts are retrieved as usual. If the variable prese
 custom repository's <code>findPostsByTag()</code> method to filter posts.</p>
 <p>In line 36, we call the <code>PostManager::getTagCloud()</code> that returns array of tags and their frequencies.
 We use this information for rendering the cloud.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note that we are now using the <code>PostManager</code> service in our controller and have to inject it into
 the constructor. Do not forget to modify the controller factory to do that.</p>
-</blockquote>
+</div>
 <h3 id="rendering-tag-cloud">Rendering Tag Cloud</h3>
 <p>Finally, modify the <em>index.phtml</em> file to make it look like follows:</p>
 <pre><code class="language-php">&lt;h1&gt;Posts&lt;/h1&gt;
@@ -3346,10 +3354,11 @@ the constructor. Do not forget to modify the controller factory to do that.</p>
 <p>For now we have only several posts on our <em>Posts</em> page. But assume there are many (hundreds of) posts. The page will
 be loading very slowly. Also, it would be
 very inconvenient to scroll the page to read all posts. In this situation, <em>pagination</em> would help.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><em>Pagination</em> is when you divide your results into pages and navigate through pages by clicking page
 number links on pagination widget.</p>
-</blockquote>
+</div>
 <p>An example of pagination widget styled with Twitter Bootstrap is presented below:</p>
 <p><img alt="Figure 12.12. Paginator widget example" src="../images/doctrine/paginator_example.png" /></p>
 <h3 id="doctrine-orm-paginator">Doctrine ORM Paginator</h3>
@@ -3357,10 +3366,11 @@ number links on pagination widget.</p>
 It can take a Doctrine <code>Query</code> object as input and provides several methods for getting paged results (we won't discuss
 those methods here for simplicity). But, Doctrine ORM module doesn't provide any view helpers to visualize the pagination
 widget. For that, we can use the pagination functionality provided by Laminas Framework.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Although we plan to use Laminas pagination component, we will still use Doctrine ORM paginator internally for consuming
 data. Laminas paginator will be just a wrapper for Doctrine ORM paginator.</p>
-</blockquote>
+</div>
 <h3 id="laminas-paginator">Laminas Paginator</h3>
 <p>In Laminas Framework, pagination is implemented in @<code>Laminas\Paginator</code> component. If you haven't installed this
 component, do so by typing the following command:</p>
@@ -3467,10 +3477,8 @@ of the <code>EntityRepository</code>, which returns array of posts. But now we'l
     return $queryBuilder-&gt;getQuery();
 }
 </code></pre>
-<blockquote>
 <p>You will also need to slightly modify the <code>PostManager::getTagCloud()</code> method, because it expects an array of posts, but
 now it will receive the <code>Query</code>. It is a simple and obvious modification, so we won't describe how to do that (refer to Blog sample for the complete code).</p>
-</blockquote>
 <h4 id="modifying-indexcontroller">Modifying IndexController</h4>
 <p>Next, modify the <code>indexAction()</code> method of the <code>IndexController</code> as follows:</p>
 <pre><code class="language-php">&lt;?php
@@ -3597,11 +3605,12 @@ that are used to control how the widget will look like.</p>
 <h4 id="results">Results</h4>
 <p>Hooray! Our blog application is ready now. The main page of the website now contains a nice looking pagination widget (see the figure 12.13 below):</p>
 <p><img alt="Figure 12.13. Main page with the paginator" src="../images/doctrine/main_page_paginator.png" /></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In this chapter we implemented only the simplest pagination. For real websites, in addition to pagination,
 you might also want to allow interactively sorting your results by certain fields. For such complex tabular data display,
 consider using the <a href="https://datatables.net/">DataTables</a> or <a href="http://www.jquery-bootgrid.com/">BootGrid</a> jQuery plugins.</p>
-</blockquote>
+</div>
 <h2 id="summary">Summary</h2>
 <p>Doctrine is not part of Laminas Framework, but we cover its usage in this book because it provides
 an easy way of accessing a database and providing object persistence to your application.</p>

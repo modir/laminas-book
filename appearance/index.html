@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/appearance/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/laminas-book/appearance/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     <title>Page Appearance and Layout - Using Laminas Framework</title>
     <link rel="stylesheet" href="../css/theme.css" />
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Page Appearance and Layout";
         var mkdocs_page_input_path = "appearance.md";
-        var mkdocs_page_url = "/appearance/";
+        var mkdocs_page_url = "/laminas-book/appearance/";
       </script>
     
     <!--[if lt IE 9]>
@@ -248,12 +248,13 @@ advanced designer skills and without the need of creating basic CSS rules (but, 
 you can define your own custom CSS rules on top of Bootstrap to customize your site's
 appearance). Bootstrap is freely distributed under the
 <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License v.2.0</a>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Twitter Bootstrap is shipped with Laminas Skeleton Application, so you
 can use it out of the box. Alternatively, you can download the newest
 version of Bootstrap from the project's <a href="http://getbootstrap.com/">official page</a>.
-At the moment of writing this book, the latest version is v.3.x.</p>
-</blockquote>
+At the moment of writing this book, the latest version is v.5.x.</p>
+</div>
 <p>Generally, the Bootstrap does the following things:</p>
 <ul>
 <li>
@@ -284,11 +285,12 @@ At the moment of writing this book, the latest version is v.3.x.</p>
 </li>
 </ul>
 <p><img alt="Figure 6.1. Main page of the skeleton app and its layout" src="../images/appearance/skeleton-layout.png" /></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you are new to Twitter Bootstrap, it is recommended that you refer to
 <a href="#bootstrap">Appendix C. Introduction to Twitter Bootstrap</a>, where you can find more information about using
 Twitter Bootstrap and its components.</p>
-</blockquote>
+</div>
 <h2 id="page-layout-in-laminas-framework">Page Layout in Laminas Framework</h2>
 <p>Pages of your web site typically have some common structure that can be shared among them.
 For example, a typical page has the <code>&lt;!DOCTYPE&gt;</code> declaration to identify the HTML document,
@@ -332,7 +334,7 @@ Below, the complete contents of the file is presented:</p>
           -&gt;appendHttpEquiv('X-UA-Compatible', 'IE=edge')
     ?&gt;
 
-    &lt;!-- Le styles --&gt;
+    &lt;!-- The styles (CSS) --&gt;
     &lt;?= $this-&gt;headLink(['rel' =&gt; 'shortcut icon', 'type' =&gt; 'image/vnd.microsoft.icon',
                          'href' =&gt; $this-&gt;basePath() . '/img/favicon.ico'])
         -&gt;prependStylesheet($this-&gt;basePath('css/style.css'))
@@ -340,7 +342,7 @@ Below, the complete contents of the file is presented:</p>
         -&gt;prependStylesheet($this-&gt;basePath('css/bootstrap.min.css'))
     ?&gt;
 
-    &lt;!-- Scripts --&gt;
+    &lt;!-- JS Scripts --&gt;
     &lt;?= $this-&gt;headScript()
         -&gt;prependFile($this-&gt;basePath('js/bootstrap.min.js'))
         -&gt;prependFile($this-&gt;basePath('js/jquery-2.2.4.min.js'))

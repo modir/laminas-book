@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/devenv/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/laminas-book/devenv/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     <title>Appendix A. Configuring Web Development Environment - Using Laminas Framework</title>
     <link rel="stylesheet" href="../css/theme.css" />
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Appendix A. Configuring Web Development Environment";
         var mkdocs_page_input_path = "devenv.md";
-        var mkdocs_page_url = "/devenv/";
+        var mkdocs_page_url = "/laminas-book/devenv/";
       </script>
     
     <!--[if lt IE 9]>
@@ -222,11 +222,19 @@ convenient integrated development environment for PHP development. It allows
 for an easier navigation, editing and debugging of your PHP application.
 The NetBeans IDE is written in Java and can be installed in Windows, Linux and other
 platforms supporting a compatible Java machine.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>We also provide instructions for beginners on how to install a Laminas website to Amazon EC2 cloud in
 <a href="#ec2-tutorial">Appendix E. Installing a Laminas Web Application to Amazon EC2</a>.</p>
-</blockquote>
+</div>
 <h2 id="installing-apache-php-and-mysql-in-linux">Installing Apache, PHP and MySQL in Linux</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section is highly outdated. Most distributions by now only have 64-bit versions. Furthermore PHP 8.3 is out.
+(As written in January 2024.) But it gives you a general overview over the existing distributions and their
+versions. Furthermore it makes you aware of the fact that you need to check the PHP versions when looking
+at a distribution version.</p>
+</div>
 <p>In general, it is recommended that you use a popular and well supported
 Linux distribution, either 32-bit (x86) or 64-bit (amd64). A 64-bit version can give a great performance,
 but deliver more problems (like driver compatibility issues). 32-bit systems are with us for a longer time
@@ -302,14 +310,15 @@ Ubuntu 15.04 or later.</p>
 the 64 bit version of Linux Ubuntu will have more compatibility issues than its
 32-bit counterpart. The support of drivers can also cause problems on the
 64-bit platform.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">New to Ubuntu Linux?</p>
 <p>If you are new to Linux Ubuntu, watch these excellent video tutorials by
 <a href="https://www.youtube.com/channel/UCxQKHvKbmSzGMvUrVtJYnUA">LearnLinux.tv</a> YouTube user:
 <a href="https://www.youtube.com/watch?v=ajYMQ69S4pg">Tutorial - Installing Ubuntu 16.04 LTS</a> (this
 one shows how to install Ubuntu Desktop Edition)
 and <a href="https://www.youtube.com/watch?v=w5W_48vyC6U">Tutorial - Installing Ubuntu Server 16.04</a>
 (this one shows how to install Ubuntu Server Edition which has console terminal only).</p>
-</blockquote>
+</div>
 <h3 id="installing-apache-and-php">Installing Apache and PHP</h3>
 <p>In modern Linux distributions, you can easily download and install
 software from a centralized <em>repository</em>. The repository contains so called
@@ -323,7 +332,7 @@ YUM (RPM package manager). Below, detailed installation instructions for these o
 <p>First of all, it is recommended that you update your system by installing
 the latest available updates. To do this, from a command shell, run the
 following commands:</p>
-<pre><code>sudo apt-get update
+<pre><code class="language-bash">sudo apt-get update
 
 sudo apt-get upgrade
 </code></pre>
@@ -336,7 +345,7 @@ need to elevate your privileges to install a package or edit some configuration 
 under which you log into the system and press Enter.</p>
 </blockquote>
 <p>Next, from a command shell, run the following commands:</p>
-<pre><code>sudo apt-get install apache2
+<pre><code class="language-bash">sudo apt-get install apache2
 
 sudo apt-get install php
 
@@ -352,18 +361,18 @@ It is recommended to answer Yes (press "y" and then press Enter).</p>
 <p>First of all, it is recommended that you update your system by installing
 the latest available updates. To do this, from a command shell, run the
 following command:</p>
-<pre><code>sudo yum update
+<pre><code class="language-bash">sudo yum update
 </code></pre>
 <p>The command above runs the YUM tool and installs the newest system package updates.</p>
 <p>Next, from a command shell, run the following commands:</p>
-<pre><code>sudo yum install httpd
+<pre><code class="language-bash">sudo yum install httpd
 
 sudo yum install php
 </code></pre>
 <p>The commands above download from repository and install the latest available
 versions of Apache HTTP Server and PHP engine.</p>
 <p>Next, run the following commands to add Apache HTTP Server to system autorun and start it:</p>
-<pre><code>sudo chkconfig --level 235 httpd on
+<pre><code class="language-bash">sudo chkconfig --level 235 httpd on
 
 sudo service httpd start
 </code></pre>
@@ -373,7 +382,8 @@ correctly and that the server sees the PHP engine. To do that, create <em>phpinf
 file in Apache document root directory.</p>
 <p>The <em>document root</em> is a directory where you can (by default) store the web files.
 Typically, the Apache document root directory is <em>/var/www/html</em>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Recommendation from the author</p>
 <p>To be able to navigate the directory structure and edit files, it is
 recommended to install Midnight Commander (convenient file manager and text editor).
 To install Midnight Commander in Debian or Linux Ubuntu, type the following:</p>
@@ -385,9 +395,9 @@ text file with the command like this:</p>
 <p><code>mcedit /path/to/file</code></p>
 <p>If you need administrative permissions to edit the file, prepend the <code>sudo</code> command
 to the command above.</p>
-</blockquote>
+</div>
 <p>In the <em>phpinfo.php</em> file, enter the PHP method <code>phpinfo()</code> as follows:</p>
-<pre><code class="language-text">&lt;?php
+<pre><code class="language-php">&lt;?php
   phpinfo();
 ?&gt;
 </code></pre>
@@ -397,13 +407,14 @@ to the command above.</p>
 <h3 id="editing-php-configuration">Editing PHP Configuration</h3>
 <p>To configure PHP for your development environment, you need to edit the
 PHP config file (<em>php.ini</em>) and adjust some parameters.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Where to find the config file?</p>
 <p>In different distributions of Linux, PHP configuration file can be located in different paths.
 To edit the PHP config file in Debian or Linux Ubuntu, type the following:</p>
 <p><code>sudo mcedit /etc/php/7.0/apache2/php.ini</code></p>
 <p>Type the following to edit <em>php.ini</em> in Fedora, CentOS or Red Hat Linux:</p>
 <p><code>sudo mcedit /etc/php.ini</code></p>
-</blockquote>
+</div>
 <p>For the development environment, it is recommended to set the following
 error handling and logging parameters as below. This will force PHP to
 display errors on your PHP pages to screen.</p>
@@ -451,11 +462,12 @@ several web-sites on the same machine.</p>
 <em>site.mydomain.com</em> and <em>site2.mydomain.com</em>). Each virtual
 host has its own document root directory, allowing you to place
 your web files anywhere on the system (not only to <em>/var/www/html</em> directory).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note that right now you don't need to create a virtual host,
 we'll do that in chapter <a href="#skeleton">Laminas Skeleton Application</a>. Now you just need to have an idea of
 how virtual hosts are created in different Linux distributions.</p>
-</blockquote>
+</div>
 <p><strong>In Debian or Ubuntu Linux</strong></p>
 <p>You have an example default virtual host at
 <em>/etc/apache2/sites-available/000-default.conf</em> (see below).</p>
@@ -497,15 +509,14 @@ to apply changes.</p>
 host, when you need several web sites to operate on the same machine.
 For example, to create another virtual host file named <em>001-vhost2.conf</em> , type the following from
 your command shell:</p>
-<p><code>cd /etc/apache2/sites-available</code></p>
-<p><code>sudo cp 000-default.conf 001-vhost2.conf</code></p>
-<p><code>sudo a2ensite 001-vhost2.conf</code></p>
-<blockquote>
+<pre><code class="language-bash">cd /etc/apache2/sites-available
+sudo cp 000-default.conf 001-vhost2.conf
+sudo a2ensite 001-vhost2.conf
+</code></pre>
 <p>The virtual host's name starts with a prefix (like <em>000</em>, <em>010</em>, etc.), which defines
 the priority. Apache web server tries to direct
 an HTTP request to each virtual host in turn (first to <em>000-default</em>, then to <em>001-vhost2</em>),
 and if a certain virtual host cannot serve the request, the next one is tried and so on.</p>
-</blockquote>
 <p><strong>In Fedora, CentOS or Red Hat Linux</strong></p>
 <p>There is an example virtual host in <em>/etc/httpd/conf/httpd.conf</em> file.
 Scroll down to the very bottom of the document to the section called Virtual Hosts.
@@ -524,7 +535,7 @@ for your code.</p>
 <p><code>sudo mcedit /etc/php/7.0/mods-available/xdebug.ini</code></p>
 <p>Add the following lines to the end of file (replace the remote IP address placeholder with the IP address
 you plan to debug your website from):</p>
-<pre><code class="language-text">xdebug.remote_enable=1
+<pre><code class="language-ini">xdebug.remote_enable=1
 xdebug.remote_handler=dbgp
 xdebug.remote_mode=req
 xdebug.remote_host=&lt;remote_ip_address&gt;
@@ -541,7 +552,7 @@ Install XDebug package with the following command:</p>
 <p><code>mcedit /etc/php.d/xdebug.ini</code></p>
 <p>Add the following lines to the end of file (replace the remote IP address placeholder with the IP address
 you plan to debug your website from):</p>
-<pre><code class="language-text">[xdebug]
+<pre><code class="language-ini">[xdebug]
 
 Laminas_extension = /usr/lib/php/modules/xdebug.so
 xdebug.remote_enable=1
@@ -559,7 +570,7 @@ developed and supported by Oracle. MySQL is the most popular database system use
 In this book, we will be using MySQL.</p>
 <p><strong>Debian or Linux Ubuntu</strong></p>
 <p>In order to install MySQL database, type the following:</p>
-<pre><code>sudo apt-get install mysql-server
+<pre><code class="language-bash">sudo apt-get install mysql-server
 
 sudo apt-get install mysql-client
 
@@ -569,7 +580,7 @@ sudo apt-get install php-mysql
 component and MySQL extension module for PHP, respectively.</p>
 <p><strong>Fedora, CentOS or Red Hat Linux</strong></p>
 <p>In order to install MySQL database, type the following:</p>
-<pre><code>sudo yum install mysql-server
+<pre><code class="language-bash">sudo yum install mysql-server
 
 sudo yum install mysql
 
@@ -633,7 +644,7 @@ and that your Apache server recognizes the PHP engine.</p>
 <p>To check that Apache and PHP are installed correctly, create <em>phpinfo.php</em>
 file in Apache document root directory.</p>
 <p>In the <em>phpinfo.php</em> file, enter the PHP method <code>phpinfo()</code> as follows:</p>
-<pre><code class="language-text">&lt;?php
+<pre><code class="language-php">&lt;?php
     phpinfo();
 ?&gt;
 </code></pre>
@@ -655,21 +666,22 @@ should now look like this:</p>
 The virtual sites are differentiated by domain name (like <em>site.mydomain.com</em>
 and <em>site2.mydomain.com</em>)</p>
 <p>Please consult to your WAMP or XAMPP documentation for information on how to create virtual hosts.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Right now, you don't need to edit virtual host file, we'll do that in chapter <a href="#skeleton">Laminas Skeleton Application</a>
 when installing the Hello World application. Now you just need to understand
 how to create virtual hosts.</p>
-</blockquote>
+</div>
 <h3 id="installing-xdebug-php-extension_1">Installing XDebug PHP extension</h3>
 <p>To be able to debug your web sites in NetBeans IDE, it is recommended that
 you install the XDebug extension of your PHP engine. Download an appropriate
 DLL from <a href="http://www.xdebug.org/download.php">this site</a>.</p>
 <p>Then edit your <em>php.ini</em> file and add the following line:</p>
-<pre><code class="language-text">Laminas_extension=&quot;C:/path/to/your/xdebug.dll&quot;
+<pre><code class="language-ini">Laminas_extension=&quot;C:/path/to/your/xdebug.dll&quot;
 </code></pre>
 <p>Add the following lines to the end of file (replace the remote IP address placeholder with the IP address
 you plan to debug your website from):</p>
-<pre><code>xdebug.remote_enable=on
+<pre><code class="language-ini">xdebug.remote_enable=on
 xdebug.remote_handler=dbgp
 xdebug.remote_host=&lt;remote_ip_address&gt;
 </code></pre>
@@ -722,10 +734,10 @@ and click the Install button (see the figure A.8).</p>
 <p>When the PHP plugin installation is complete, restart the IDE.
 Then you should be able to create new PHP projects
 from menu <code>New-&gt;New Project...</code>.</p>
-<blockquote>
-<p>It is also recommended to update NetBeans IDE to the latest version
-by opening menu <code>Help-&gt;Check for updates</code>.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is also recommended to update NetBeans IDE to the latest version by opening menu <code>Help-&gt;Check for updates</code>.</p>
+</div>
 <h2 id="installing-netbeans-ide-in-windows">Installing NetBeans IDE in Windows</h2>
 <p>Installing NetBeans in Windows is strightforward. You just need to download the installer
 from <a href="https://netbeans.org/">NetBeans site</a> and run it. You may encounter several bundles

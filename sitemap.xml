@@ -1,123 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://modir.github.io/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/acknowledgments/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/acknowledgments/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/appearance/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/appearance/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/bootstrap/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/bootstrap/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/devenv/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/devenv/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/doctrine/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/doctrine/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/doctrine_intro/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/doctrine_intro/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/doctrine_migrations/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/doctrine_migrations/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/ec2_tutorial/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/ec2_tutorial/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/filters/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/filters/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/forms/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/forms/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/forms_advanced/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/forms_advanced/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/intro/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/intro/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/modules/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/modules/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/mvc/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/mvc/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/netbeans/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/netbeans/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/operation/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/operation/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/roles/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/roles/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/routing/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/routing/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/session/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/session/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/skeleton/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/skeleton/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/uploads/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/uploads/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/users/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/users/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://modir.github.io/validators/</loc>
-         <lastmod>2024-01-20</lastmod>
+         <loc>https://modir.github.io/laminas-book/validators/</loc>
+         <lastmod>2024-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

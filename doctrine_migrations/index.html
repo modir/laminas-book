@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/doctrine_migrations/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/laminas-book/doctrine_migrations/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     <title>Database Migrations - Using Laminas Framework</title>
     <link rel="stylesheet" href="../css/theme.css" />
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Database Migrations";
         var mkdocs_page_input_path = "doctrine_migrations.md";
-        var mkdocs_page_url = "/doctrine_migrations/";
+        var mkdocs_page_url = "/laminas-book/doctrine_migrations/";
       </script>
     
     <!--[if lt IE 9]>
@@ -261,12 +261,13 @@ You generate a new empty migration with the help of the following commands:</p>
 </code></pre>
 <p>The commands above make the application directory the current working directory and then
 run the <code>migrations:generate</code> console command.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>DoctrineModule</code> and <code>DoctrineORMModule</code> provide several console commands that you can use for various
 database maintenance tasks (like generating or executing migrations). For the list of available commands,
 you can use the <code>list</code> command:</p>
 <p><code>./vendor/bin/doctrine-module list</code></p>
-</blockquote>
+</div>
 <p>Once you run the <code>migrations:generate</code> command, you will be able to find the newly created migration under the <code>APP_DIR/data/Migrations</code> directory.
 The file has a name like <code>VersionYYYYMMDDHHIISS.php</code>, where <code>YYYY</code> is current year, <code>MM</code> is current month, <code>DD</code> is current day,
 <code>HH</code>, <code>II</code> and <code>SS</code> represent current hour, minute and second, respectively.</p>
@@ -302,18 +303,20 @@ class Version20160901114333 extends AbstractMigration
     }
 }
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you do not see the newly created migration in NetBeans IDE, you need to open the menu <em>Source</em> and select the
 <em>Scan for external changes</em> menu item.</p>
-</blockquote>
+</div>
 <p>As you can see from the code above, a migration is a usual PHP class inherited from <code>Doctrine\DBAL\Migrations\AbstractMigration</code>
 base class. Every migration should have <em>at least</em> two methods: <code>up()</code> and <code>down()</code>. The <code>up()</code> method upgrades the schema to a newer state,
 the <code>down()</code> method downgrades the schema from its newer state to the previous state. Both <code>up()</code> and <code>down()</code> methods have a single
 argument of type <code>Doctrine\DBAL\Schema\Schema</code>, which can be used for actual database schema modifications.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <code>Schema</code> class is a part of <code>Doctrine\DBAL</code> component. For more information about the methods it provides, please
 refer to Doctrine DBAL documentation. Another, even better way is to look at the code inside your <code>vendor/doctrine/dbal</code> directory.</p>
-</blockquote>
+</div>
 <p>A migration class may optionally have the following (overridden) methods (table 13.1):</p>
 <table>
 <thead>
@@ -473,10 +476,11 @@ class Version20160901114333 extends AbstractMigration
 </ul>
 <h3 id="adding-another-migration">Adding Another Migration</h3>
 <p>Now assume we decided to improve the performance of our database by adding indexes to our tables.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you want to learn about database indexes in more details and why indexes are so helpful, you can refer to an excellent tutorial
 called <a href="http://use-the-index-luke.com/">Use the Index, Luke</a>.</p>
-</blockquote>
+</div>
 <p>We can also improve data integrity by adding foreign keys. To do this, we have to add another migration. Generate another
 empty migration with the <code>migrations:generate</code> console command. Modify the code to look like below:</p>
 <pre><code class="language-php">&lt;?php
@@ -543,9 +547,7 @@ class Version20160901114938 extends AbstractMigration
     }
 }
 </code></pre>
-<blockquote>
 <p>You can find the migrations we have just created inside of the <em>Blog</em> sample bundled with this book.</p>
-</blockquote>
 <h2 id="executing-migrations">Executing Migrations</h2>
 <p>Once our migration classes are ready, you can apply the migrations to database. To do that, you use the
 <code>migrations:migrate</code> console command as follows:</p>
@@ -566,10 +568,8 @@ the <code>migrations</code> database table. After that, the <code>migrations</co
 command's argument as follows:</p>
 <pre><code>./vendor/bin/doctrine-module migrations:migrate 20160901114333
 </code></pre>
-<blockquote>
 <p>You can also use 'prev', 'next' and 'first' aliases as version IDs which respectively move database to its previous state, next state
 or to the state before the first migration (empty database).</p>
-</blockquote>
 <p>So, with migrations you can easily move through migration history and change the database schema as needed.
 Be careful though that migrations may remove some of your data, so apply them wisely.</p>
 <h2 id="summary">Summary</h2>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/doctrine_intro/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/laminas-book/doctrine_intro/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     <title>Appendix D. Introduction to Doctrine - Using Laminas Framework</title>
     <link rel="stylesheet" href="../css/theme.css" />
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Appendix D. Introduction to Doctrine";
         var mkdocs_page_input_path = "doctrine_intro.md";
-        var mkdocs_page_url = "/doctrine_intro/";
+        var mkdocs_page_url = "/laminas-book/doctrine_intro/";
       </script>
     
     <!--[if lt IE 9]>
@@ -260,17 +260,19 @@ and switch between databases more easily than when you use your database-depende
 <p>When using a relational database system, you typically use <em>SQL language</em> as a standard way for accessing
 database data and managing database schema. However, each DBMS usually has it own specific SQL language
 extensions (dialects).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Doctrine library is designed to work with all major relational database systems that use SQL language,
 but it is obvious that it supports only some subset of their functionality and SQL language capabilities.</p>
-</blockquote>
+</div>
 <p>Doctrine is built on top of PHP PDO extension (and other database-specific PHP extensions, like <code>sqlite</code>, <code>mysqli</code>,
 <code>oci8</code>, etc.). Those extensions provide drivers for all major relational database systems. You specify which
 driver to use when configuring a database connection.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Need to learn SQL first?</p>
 <p>If you are not familiar with SQL, a good point for learning its syntax is
 <a href="http://www.w3schools.com/sql/default.asp">W3Schools Tutorials</a>.</p>
-</blockquote>
+</div>
 <p>Since the Object Relational Mapper component of Doctrine is designed to work with objects instead of tables,
 it provides its own "object-oriented" query language called <em>DQL</em> <sup id="fnref:dql"><a class="footnote-ref" href="#fn:dql">2</a></sup>. It is similar to SQL in sense
 that it allows to write and execute queries to database, but result of a query is an array of objects rather
@@ -305,11 +307,12 @@ databases can be divided in the following groups:</p>
 <p>and others.</p>
 </li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Doctrine provides support only to the Document Store subset of the NoSQL database systems. Column
-   store and key-value store database systems typically have very specific field of applications, and not covered by
-   Doctrine.</p>
-</blockquote>
+store and key-value store database systems typically have very specific field of applications, and not covered by
+Doctrine.</p>
+</div>
 <h4 id="document-databases">Document Databases</h4>
 <p>Doctrine supports a number of NoSQL document store databases: <a href="https://www.mongodb.org/">MongoDB</a>,
 <a href="http://couchdb.apache.org/">CouchDB</a>, <a href="http://www.orientechnologies.com/orientdb/">OrientDB</a> and
@@ -318,11 +321,12 @@ databases can be divided in the following groups:</p>
 The <code>post</code> document would have fields named <code>id</code>, <code>title</code>, <code>content</code>, <code>author</code>, <code>date_created</code>;
 and the <code>comment</code> document would have fields named <code>id</code>, <code>author</code>, <code>content</code> and <code>date_created</code>. This
 is very similar to the tables you would have in a relational database.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In this book, we do not address the Doctrine-provided API to the NoSQL document databases. If you
-   want to learn about these capabilities, please refer to the corresponding sections of Doctrine project
-   documentation.</p>
-</blockquote>
+want to learn about these capabilities, please refer to the corresponding sections of Doctrine project
+documentation.</p>
+</div>
 <h2 id="doctrine-architecture">Doctrine Architecture</h2>
 <p>The <a href="http://www.doctrine-project.org/">Doctrine Project</a> consists of several libraries (components).
 Each Doctrine component is distributed as a Composer-installable package and registered in

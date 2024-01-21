@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/bootstrap/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://modir.github.io/laminas-book/bootstrap/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     <title>Appendix C. Introduction to Twitter Bootstrap - Using Laminas Framework</title>
     <link rel="stylesheet" href="../css/theme.css" />
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Appendix C. Introduction to Twitter Bootstrap";
         var mkdocs_page_input_path = "bootstrap.md";
-        var mkdocs_page_url = "/bootstrap/";
+        var mkdocs_page_url = "/laminas-book/bootstrap/";
       </script>
     
     <!--[if lt IE 9]>
@@ -221,13 +221,14 @@ To fix this problem, the <em>minification</em> is used.</p>
 <p>The minification is the process of removing all unnecessary characters from the
 source code without changing its functionality. The minified Bootstrap file is
 called <em>bootstrap.min.css</em>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>It is generally recommended to use the minified file, especially in
 production environment, because it reduces the page load time. However,
 if you plan to dig into Bootstrap code to understand how it works, you better
 use the usual (non-minified) file, or even download the original source files
 (not concatenated ones).</p>
-</blockquote>
+</div>
 <p>Let's look in more details at the files stored inside
 the <em>APP_DIR/public</em> directory and its subdirectories (figure C.1).</p>
 <p><img alt="Figure C.1. Structure of the APP_DIR/public directory" src="../images/bootstrap/bootstrap_files.png" /></p>
@@ -286,13 +287,14 @@ For example, in figure C.3, the upper grid row consists of 12 columns,
 and each cell spans a single column. In the bottom row,
 the first cell spans 2 columns, the second and the third ones span 4 columns each, and the fourth
 cell spans 2 columns (in total we have 12 columns).</p>
-<blockquote>
-<p><strong>Why does Bootstrap's grid consist of only 12 columns?</strong></p>
-<p>Probably because 12 columns are enough for most websites. If you have more fine-grained grid with
-lots of columns, it would be more difficult to compute column spans without the calculator.
+<div class="admonition note">
+<p class="admonition-title">Why does Bootstrap's grid consist of only 12 columns?</p>
+<p>12 is dividable by 2, 3 and 4. Hence you can easily create 2, 3 or 4 columns layouts. This is
+enough for 90% of all typical website layouts.
+If you have more fine-grained grid with lots of columns, it would be more difficult to compute column spans without the calculator.
 Fortunately, Bootstrap allows for customizing the count of columns per row, so you can have as many
 columns as you wish.</p>
-</blockquote>
+</div>
 <h3 id="defining-the-grid">Defining the Grid</h3>
 <p>To arrange elements in a grid on your web page, you start from defining the
 container by adding a <code>&lt;div&gt;</code> element having the <code>.container</code> CSS class.
@@ -390,12 +392,13 @@ spans 8 columns, the child grid consists of 8 columns, too.</p>
 <p>Twitter Bootstrap is designed to support different devices varying from wide
 displays to tablets and mobile phones. By this reason, the layout grid is adapted
 to different screen resolutions.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>This is also called the <em>responsiveness</em>, or the "mobile first" concept.
 Bootstrap is mobile-first, which means your website will be viewable
 and usable on any-sized screen. However, this does not free you of painstaking
 preparation and planning the layout.</p>
-</blockquote>
+</div>
 <p>This adaptation is performed in two ways. The first way is that the column width
 within the grid is flexible. For example, if you increase the size of the browser
 window, the grid will be scaled accordingly to fill the whole space.</p>
