@@ -29,8 +29,8 @@ and should be updated as well. Everyone is welcome to make merge requests.
 In the first step I would like to resolve as many problems as possible. In the next step I would like to modernize the code
 and make everything type safe as it should be these days with PHP 8.x.
 
-The old book had other languages as well but while going through it I have seen that most of them have only one or two chapters.
+The old book had translations other languages as well but while going through it I have seen that most of them have only one or two chapters.
 At the moment it is better to focus on the english version. The book can still be translated later with e.g. Google translate once
 the english version is in a good stable state.
 
-I welcome everyone to give feedback about the book. Helping hands are welcome.
+I welcome everyone to give feedback about the book. Helping hands are always welcome.

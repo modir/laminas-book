@@ -58,7 +58,7 @@ see Laminas Framework in action. You can even use the samples as a base for your
 	Once I have some more spare time I will migrate them as well. Or maybe someone else has the time for it.
 
 All the source code is stored on GitHub. The code is publicly available, and you can download the entire code
-archive by visiting [this page](https://github.com/olegkrivtsov/using-zend-book-samples).
+archive by visiting [this page](https://github.com/olegkrivtsov/using-zf3-book-samples).
 To download the archive, click the *Clone or Download* button that can be found on the page
 (see the figure below).
 
