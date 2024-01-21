@@ -7,8 +7,9 @@ Driven Design, it is also called an *entity* class) and a row from that table is
 instance of the entity class. If you are new to Doctrine, it is recommended that you also refer to
 [Appendix D. Introduction to Doctrine](#doctrine-intro) for introductory information about the Doctrine library architecture.
 
-> Doctrine is a third-party library, it is not part of Laminas Framework. We cover it in this book
-> because it provides an easy way of adding database support to your laminas-based web application.
+!!! note
+    Doctrine is a third-party library, it is not part of Laminas Framework. We cover it in this book
+    because it provides an easy way of adding database support to your laminas-based web application.
 
 Components covered in this chapter:
 
@@ -53,19 +54,18 @@ To install the sample, you can either edit your default Apache virtual host file
 or create a new one. After editing the file, restart the Apache HTTP Server
 and open the website in your web browser.
 
-> For detailed installation instructions, please refer to the *README.md* file located
-   in the *blog* directory.
+For detailed installation instructions, please refer to the *README.md* file located in the *blog* directory.
 
-> For the *Blog* sample to work, you have to create a MySQL database. Instructions on how to do
-   that are provided in the next section.
+For the *Blog* sample to work, you have to create a MySQL database. Instructions on how to do that are provided in the next section.
 
 ## Creating a Simple MySQL Database
 
 For the *Blog* sample to work, we need to have a database. In this book, we use MySQL database
 management system, which is very simple in installation and administration.
 
-> For OS-specific instructions on how to install MySQL server and client, please refer to
-   [Appendix A. Configuring Web Development Environment](#devenv).
+!!! note
+    For OS-specific instructions on how to install MySQL server and client, please refer to
+    [Appendix A. Configuring Web Development Environment](#devenv).
 
 Once you install MySQL, type the following command from your command shell to log into MySQL client
 console:
@@ -76,7 +76,7 @@ When asked for, type the password of the *root* user (the password of the *root*
 the one you've specified during MySQL server installation). On successful login, you should
 see the following welcome message:
 
-~~~text
+~~~sql
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 4
 Server version: 5.7.13-0ubuntu0.16.04.2 (Ubuntu)
@@ -95,14 +95,14 @@ mysql>
 Now you are able to type MySQL client commands (like `show databases`, `show tables`, etc.) or
 SQL queries (like `SELECT` or `INSERT`) at the MySQL prompt  and see their output.
 
-> If you want to quit of the MySQL prompt, type `quit` and press Enter.
+If you want to quit of the MySQL prompt, type `quit` and press Enter.
 
 ### Creating New Database
 
 Let's create a database and name it `blog`. To do that, type the following SQL statement and
 press Enter:
 
-~~~text
+~~~sql
 CREATE DATABASE blog;
 ~~~
 
@@ -110,13 +110,14 @@ The expected output of this command is the following:
 
 `Query OK, 1 row affected (0.01 sec)`
 
-> MySQL commands are case insensitive, so you could type `create database blog;` with the same result.
-   We recommend using upper case for SQL queries, since this is a common convention.
+!!! note
+    MySQL commands are case insensitive, so you could type `create database blog;` with the same result.
+    We recommend using upper case for SQL queries, since this is a common convention.
 
 Next, we create the user named `blog` and grant it all privileges for accessing and modifying the
 `blog` database and all its tables:
 
-~~~text
+~~~sql
 GRANT ALL PRIVILEGES ON blog.* TO blog@localhost IDENTIFIED BY '<passwd>';
 ~~~
 
@@ -160,7 +161,7 @@ Make the `blog` database current by typing the following from MySQL command prom
 
 To create the `post` table, type the following SQL statement:
 
-~~~text
+~~~sql
 CREATE TABLE `post` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `title` text NOT NULL,
@@ -180,7 +181,7 @@ The expected output of this command is the following:
 
 Next, create the `comment` table by typing the following:
 
-~~~text
+~~~sql
 CREATE TABLE `comment` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,
@@ -192,7 +193,7 @@ CREATE TABLE `comment` (
 
 Then, create the `tag` table:
 
-~~~text
+~~~sql
 CREATE TABLE `tag` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(128)
@@ -201,7 +202,7 @@ CREATE TABLE `tag` (
 
 And finally, create the `post_tag` table:
 
-~~~text
+~~~sql
 CREATE TABLE `post_tag` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,
@@ -211,7 +212,7 @@ CREATE TABLE `post_tag` (
 
 Let's fill the tables we have created with some sample data:
 
-~~~text
+~~~sql
 INSERT INTO tag(`name`) VALUES('Laminas');
 INSERT INTO tag(`name`) VALUES('book');
 INSERT INTO tag(`name`) VALUES('magento');
@@ -242,10 +243,11 @@ INSERT INTO comment(`post_id`, `content`, `author`, `date_created`) VALUES(
     1, 'Excellent post!', 'Oleg Krivtsov', '2016-08-09 19:20');
 ~~~
 
-> If necessary, you can easily remove the database and all tables and data it contains by typing the
-> following command from MySQL prompt:
->
-> `DROP DATABASE blog;`
+!!! note
+    If necessary, you can easily remove the database and all tables and data it contains by typing the
+    following command from MySQL prompt:
+
+    `DROP DATABASE blog;`
 
 Figure 12.3 graphically illustrates what entities we have in the database and what relationships between
 those entities present.
@@ -276,7 +278,7 @@ When prompted for password, enter the password of the root user and press Enter.
 
 Once this is done, log into the MySQL client and type the following commands:
 
-~~~text
+~~~sql
 use blog;
 
 show tables;
@@ -296,8 +298,9 @@ You should see the list of tables created, something like below:
 4 rows in set (0.00 sec)
 ~~~
 
-> Also consider using *database migrations* for initializing database schema. For additional
-> info about migrations, please refer to [Database Migrations](#migrations) chapter.
+!!! note
+    Also consider using *database migrations* for initializing database schema. For additional
+    info about migrations, please refer to [Database Migrations](#migrations) chapter.
 
 ## Integrating Doctrine ORM with Laminas Framework
 
@@ -328,9 +331,10 @@ as *APP_DIR*).
 To add the dependency, type the following commands from your command shell (replace the *APP_DIR*
 placeholder with the actual directory name of your application):
 
-`cd APP_DIR`
-
-`php composer.phar require doctrine/doctrine-orm-module`
+~~~bash
+cd APP_DIR
+php composer.phar require doctrine/doctrine-orm-module
+~~~
 
 The `cd` command above is used to make the *APP_DIR* directory current working directory.
 
@@ -359,19 +363,21 @@ output, when you install `DoctrineORMModule` component, Composer
 automatically installs the `DoctrineModule` and all necessary Doctrine components (*Doctrine\\DBAL*,
 *Doctrine\\ORM*, etc.)
 
-> As a bonus, at the end of installation, Composer "suggests" you to install some additional packages
-> that might be useful for you (`doctrine/migrations`, `doctrine/data-fixtures`, etc.) If you strongly
-> wish, you may add those dependencies with the Composer's `require` command as well.
+!!! note
+    As a bonus, at the end of installation, Composer "suggests" you to install some additional packages
+    that might be useful for you (`doctrine/migrations`, `doctrine/data-fixtures`, etc.) If you strongly
+    wish, you may add those dependencies with the Composer's `require` command as well.
 
 When the installation has been finished, you can find the Doctrine files in your *APP_DIR/vendor*
 directory (see the figure 12.4 below).
 
 ![Figure 12.4. Doctrine files are installed to vendor directory](images/doctrine/installed_doctrine_files.png)
 
-> You use the `php composer.phar require` command for the first time you install Doctrine. Once the
-> *composer.json* (and *composer.lock*) files have been modified by Composer, you are able to install (or update)
-> all dependencies as usual by typing the `php composer.phar install` or `php composer.phar update`
-> commands, respectively, from your command shell.
+!!! note
+    You use the `php composer.phar require` command for the first time you install Doctrine. Once the
+    *composer.json* (and *composer.lock*) files have been modified by Composer, you are able to install (or update)
+    all dependencies as usual by typing the `php composer.phar install` or `php composer.phar update`
+    commands, respectively, from your command shell.
 
 ### Loading Doctrine Integration Modules on Application Start Up
 
@@ -417,7 +423,8 @@ there is a number of subkeys containing the following settings:
     For each database connection it contains parameters like driver class name, host, user name,
 	password and database name.
 
-> By default, there is only one connection named `orm_default`, and you may add more database connections if required.
+!!! note
+    By default, there is only one connection named `orm_default`, and you may add more database connections if required.
 
   * the `configuration` key contains ORM settings like caching configuration and locations of
     auto-generated entity proxy classes for each available connection.
@@ -430,8 +437,9 @@ there is a number of subkeys containing the following settings:
 
   * the `eventmanager` key contains settings for Doctrine event manager for each available connection.
 
-> Doctrine uses its own implementation of event manager. If you want, you can create an event listener
-> class and hooks some events. However, this is an advanced topic and we do not cover it in this book.
+!!! note
+    Doctrine uses its own implementation of event manager. If you want, you can create an event listener
+    class and hooks some events. However, this is an advanced topic and we do not cover it in this book.
 
   * the `migrations_configuration` key contains settings for database migrations. Database migrations
     are used for initializing and updating database schema in a standard and consistent way.
@@ -462,8 +470,9 @@ Below we provide content of the *autoload/local.php* file of the *Blog* web appl
 This config file contains the application-wide database connection settings for the `blog`
 MySQL database that we created earlier in this chapter:
 
-> This connection is shared between all modules of the web application. If you want to create
-> module-specific connection, consider adding the key to the *module.config.php* file instead.
+!!! note
+    This connection is shared between all modules of the web application. If you want to create
+    module-specific connection, consider adding the key to the *module.config.php* file instead.
 
 ~~~php
 <?php
@@ -492,9 +501,9 @@ Above, we have the `doctrine` key and `connection` subkey. The `connection` subk
   * The `driverClass` key provides the class name to use as a driver to the database. Since we use MySQL
     database, we specify the `Doctrine\DBAL\Driver\PDOMySql\Driver` class name.
 
-> For your reference, in table 12.1, you can find several other often used database drivers.
-   Each driver class supports its own set of parameters, so please refer to certain driver's code (and
-   related documentation) for additional information.
+For your reference, in table 12.1, you can find several other often used database drivers.
+Each driver class supports its own set of parameters, so please refer to certain driver's code (and
+related documentation) for additional information.
 
   * The `params` key contains the connection parameters:
 
@@ -520,12 +529,11 @@ Table 12.1. Often Used Database Driver Classes
 > controlled, because you usually do not want other people on your team (or other people having
 > access to your code repository) seeing the actual password.
 
-> **What happens if I need several database connections?**
->
-> You can easily add more database connections by adding other keys below the `orm_default` key.
-> For example, let's assume that you have another database for testing purposes. To let
-> Doctrine know about this database, you create the `orm_test` subkey below the `orm_default` key
-> and fill it with connection parameters.
+!!! note "What happens if I need several database connections?"
+    You can easily add more database connections by adding other keys below the `orm_default` key.
+    For example, let's assume that you have another database for testing purposes. To let
+    Doctrine know about this database, you create the `orm_test` subkey below the `orm_default` key
+    and fill it with connection parameters.
 
 ## About Doctrine Entities
 
@@ -576,11 +584,12 @@ An example of annotation can be found below:
 
 Doctrine reads Docblock annotations with the help of its `Doctrine\Annotations` component.
 
-> You might have already seen Docblock annotations if you've used [phpDocumentor](http://www.phpdoc.org/) or
-> [Doxygen](http://www.stack.nl/~dimitri/doxygen/) documentation generation
-> tools. In those tools, annotation comments are serving the same goal: to describe a PHP class and
-> its properties and methods. Then the tool goes through your code and builds HTML documentation
-> automatically based entirely on code and annotations analysis.
+!!! note
+    You might have already seen Docblock annotations if you've used [phpDocumentor](http://www.phpdoc.org/) or
+    [Doxygen](http://www.stack.nl/~dimitri/doxygen/) documentation generation
+    tools. In those tools, annotation comments are serving the same goal: to describe a PHP class and
+    its properties and methods. Then the tool goes through your code and builds HTML documentation
+    automatically based entirely on code and annotations analysis.
 
 For example, below, we provide the basic example of a Doctrine entity class. You can see that the class and its
 properties are marked with Docblock annotations with special *tags* (a tag starts with '@' character).
@@ -791,9 +800,10 @@ In the code above, we have the following things:
     that a typical blog post has (see table 12.2 below for reference of properties together with
 	their brief descriptions).
 
-> Please note that for properties we (by convention) use camel-case names (like `$dateCreated`),
-   while for database columns we use "canonicalized" names (in lower-case and with underscores
-   separating words in a name, like `date_created`).
+!!! note
+    Please note that for properties we (by convention) use camel-case names (like `$dateCreated`),
+    while for database columns we use "canonicalized" names (in lower-case and with underscores
+    separating words in a name, like `date_created`).
 
 | *Property*   | *Mapped on Column*   | *Description*                                    |
 |--------------|----------------------|--------------------------------------------------|
@@ -978,8 +988,9 @@ class Tag
 Since the `Comment` and `Tag` entities are analogous to the `Post` entity, we don't provide detailed
 description of the code above.
 
-> Please note that we do not create an entity for the fourth auxiliary table `post_tag`. That
-   table will be indirectly used further in this chapter when defining relationships between entities.
+!!! note
+    Please note that we do not create an entity for the fourth auxiliary table `post_tag`. That
+    table will be indirectly used further in this chapter when defining relationships between entities.
 
 ### Specifying Relationships between Entities
 
@@ -992,9 +1003,9 @@ we have two relationships between our entities:
 In Doctrine, to express a relationship between two entities, you add a private property paired
 with Docblock annotation.
 
-> For detailed information about relationships between entities in Doctrine, please read
-   [this page](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/association-mapping.html)
-   of Doctrine documentation.
+For detailed information about relationships between entities in Doctrine, please read
+[this page](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/association-mapping.html)
+of Doctrine documentation.
 
 #### OneToMany/ManyToOne
 
@@ -1247,9 +1258,10 @@ return [
 Above, in line 2, we specify the namespace `Application`. This should be the name of the current
 module.
 
-> Note that usually we do not specify namespace in config files, but in this particular case it is
-   convenient to do. When we have namespace defined, we can use the `__NAMESPACE__` placeholder which
-   expands into that namespace.
+!!! note
+    Note that usually we do not specify namespace in config files, but in this particular case it is
+    convenient to do. When we have namespace defined, we can use the `__NAMESPACE__` placeholder which
+    expands into that namespace.
 
 In line 8, we have `doctrine` key, under which we have the `driver` subkey.
 In line 13, we tell Doctrine ORM that our entities are stored inside of *Entity*
@@ -1335,9 +1347,10 @@ To load data from the database, you retrieve an entity from its repository. When
 an entity, it loads the data from the table mapped to the entity, and assigns
 entity's fields with the data.
 
-> The `Doctrine\ORM\EntityRepository` class implements the default repository. If needed, you can,
-> by extending the `EntityRepository`, create your own repository for certain entity class.
-> We will show how to do that later.
+!!! note
+    The `Doctrine\ORM\EntityRepository` class implements the default repository. If needed, you can,
+    by extending the `EntityRepository`, create your own repository for certain entity class.
+    We will show how to do that later.
 
 The most used methods provided by the `EntityRepository` class are listed in table 12.5.
 
@@ -1742,8 +1755,8 @@ sample, we will create and register the *PostManager* service. This service will
 public method that will contain business logic of adding `Post` entity to database and associating it with
 one or several `Tag` entities.
 
-> The `PostManager` service will contain business logic of the *Blog* sample. This business logic
-   includes, but not limited to, adding new post to the blog.
+The `PostManager` service will contain business logic of the *Blog* sample. This business logic
+includes, but not limited to, adding new post to the blog.
 
 Create the *PostManager.php* file inside the *Service* directory under the module's
 source directory. Put the following content into that file:
@@ -3004,8 +3017,9 @@ SELECT p FROM \Application\Entity\Post p JOIN p.tags t
 WHERE p.status=?1 AND t.name=?2 ORDER BY p.dateCreated DESC
 ~~~
 
-> To learn more about Doctrine query builder, please refer to
-> [this page](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html).
+!!! note
+    To learn more about Doctrine query builder, please refer to
+    [this page](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html).
 
 To let Doctrine know that it should use the custom repository for `Post` entity,
 modify the `Post` entity's annotation as follows:
@@ -3137,8 +3151,9 @@ custom repository's `findPostsByTag()` method to filter posts.
 In line 36, we call the `PostManager::getTagCloud()` that returns array of tags and their frequencies.
 We use this information for rendering the cloud.
 
-> Please note that we are now using the `PostManager` service in our controller and have to inject it into
-> the constructor. Do not forget to modify the controller factory to do that.
+!!! note
+    Please note that we are now using the `PostManager` service in our controller and have to inject it into
+    the constructor. Do not forget to modify the controller factory to do that.
 
 ### Rendering Tag Cloud
 
@@ -3210,8 +3225,9 @@ For now we have only several posts on our *Posts* page. But assume there are man
 be loading very slowly. Also, it would be
 very inconvenient to scroll the page to read all posts. In this situation, *pagination* would help.
 
-> *Pagination* is when you divide your results into pages and navigate through pages by clicking page
-> number links on pagination widget.
+!!! note
+    *Pagination* is when you divide your results into pages and navigate through pages by clicking page
+    number links on pagination widget.
 
 An example of pagination widget styled with Twitter Bootstrap is presented below:
 
@@ -3224,8 +3240,9 @@ It can take a Doctrine `Query` object as input and provides several methods for 
 those methods here for simplicity). But, Doctrine ORM module doesn't provide any view helpers to visualize the pagination
 widget. For that, we can use the pagination functionality provided by Laminas Framework.
 
-> Although we plan to use Laminas pagination component, we will still use Doctrine ORM paginator internally for consuming
-> data. Laminas paginator will be just a wrapper for Doctrine ORM paginator.
+!!! note
+    Although we plan to use Laminas pagination component, we will still use Doctrine ORM paginator internally for consuming
+    data. Laminas paginator will be just a wrapper for Doctrine ORM paginator.
 
 ### Laminas Paginator
 
@@ -3327,8 +3344,8 @@ public function findPostsByTag($tagName)
 }
 ~~~
 
-> You will also need to slightly modify the `PostManager::getTagCloud()` method, because it expects an array of posts, but
-> now it will receive the `Query`. It is a simple and obvious modification, so we won't describe how to do that (refer to Blog sample for the complete code).
+You will also need to slightly modify the `PostManager::getTagCloud()` method, because it expects an array of posts, but
+now it will receive the `Query`. It is a simple and obvious modification, so we won't describe how to do that (refer to Blog sample for the complete code).
 
 #### Modifying IndexController
 
@@ -3476,9 +3493,10 @@ Hooray! Our blog application is ready now. The main page of the website now cont
 
 ![Figure 12.13. Main page with the paginator](images/doctrine/main_page_paginator.png)
 
-> In this chapter we implemented only the simplest pagination. For real websites, in addition to pagination,
-> you might also want to allow interactively sorting your results by certain fields. For such complex tabular data display,
-> consider using the [DataTables](https://datatables.net/) or [BootGrid](http://www.jquery-bootgrid.com/) jQuery plugins.
+!!! note
+    In this chapter we implemented only the simplest pagination. For real websites, in addition to pagination,
+    you might also want to allow interactively sorting your results by certain fields. For such complex tabular data display,
+    consider using the [DataTables](https://datatables.net/) or [BootGrid](http://www.jquery-bootgrid.com/) jQuery plugins.
 
 ## Summary
 

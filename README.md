@@ -12,6 +12,13 @@ The whole documentation is now generated with https://www.mkdocs.org/ hence the 
 If you want to make bigger changes and test everything first locally then I recommend you to go through the Getting Started
 guide at https://www.mkdocs.org/getting-started/ first.
 
+## Markdown
+
+If you want to learn more about the Markdown syntax please look at https://www.markdownguide.org/cheat-sheet/. At the top you have links to "Basic Syntax" and "Extended Syntax" which are very helpful as well.
+
+Furthermore we have some extensions which are helpful as well. Their documentation can be found here: https://python-markdown.github.io/extensions/
+See `admonition` and `footnotes` especially.
+
 ## Status
 
 The book was in a first stage just copied and then with search/replace reworded from Zend to Laminas.

@@ -22,11 +22,12 @@ The minification is the process of removing all unnecessary characters from the
 source code without changing its functionality. The minified Bootstrap file is
 called *bootstrap.min.css*.
 
-> It is generally recommended to use the minified file, especially in
-> production environment, because it reduces the page load time. However,
-> if you plan to dig into Bootstrap code to understand how it works, you better
-> use the usual (non-minified) file, or even download the original source files
-> (not concatenated ones).
+!!! note
+    It is generally recommended to use the minified file, especially in
+    production environment, because it reduces the page load time. However,
+    if you plan to dig into Bootstrap code to understand how it works, you better
+    use the usual (non-minified) file, or even download the original source files
+    (not concatenated ones).
 
 Let's look in more details at the files stored inside
 the *APP_DIR/public* directory and its subdirectories (figure C.1).
@@ -94,12 +95,12 @@ and each cell spans a single column. In the bottom row,
 the first cell spans 2 columns, the second and the third ones span 4 columns each, and the fourth
 cell spans 2 columns (in total we have 12 columns).
 
-> **Why does Bootstrap's grid consist of only 12 columns?**
->
-> Probably because 12 columns are enough for most websites. If you have more fine-grained grid with
-> lots of columns, it would be more difficult to compute column spans without the calculator.
-> Fortunately, Bootstrap allows for customizing the count of columns per row, so you can have as many
-> columns as you wish.
+!!! note "Why does Bootstrap's grid consist of only 12 columns?"
+    12 is dividable by 2, 3 and 4. Hence you can easily create 2, 3 or 4 columns layouts. This is
+    enough for 90% of all typical website layouts.
+    If you have more fine-grained grid with lots of columns, it would be more difficult to compute column spans without the calculator.
+    Fortunately, Bootstrap allows for customizing the count of columns per row, so you can have as many
+    columns as you wish.
 
 ### Defining the Grid
 
@@ -225,10 +226,11 @@ Twitter Bootstrap is designed to support different devices varying from wide
 displays to tablets and mobile phones. By this reason, the layout grid is adapted
 to different screen resolutions.
 
-> This is also called the *responsiveness*, or the "mobile first" concept.
-> Bootstrap is mobile-first, which means your website will be viewable
-> and usable on any-sized screen. However, this does not free you of painstaking
-> preparation and planning the layout.
+!!! note
+    This is also called the *responsiveness*, or the "mobile first" concept.
+    Bootstrap is mobile-first, which means your website will be viewable
+    and usable on any-sized screen. However, this does not free you of painstaking
+    preparation and planning the layout.
 
 This adaptation is performed in two ways. The first way is that the column width
 within the grid is flexible. For example, if you increase the size of the browser

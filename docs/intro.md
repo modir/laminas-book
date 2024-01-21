@@ -349,7 +349,7 @@ There is a separate repository per each Laminas component.
 ### Coding Standards
 
 It is a good practice to introduce some common coding standard for all your code. This standard would define class naming
-rules, code formatting rules, etc. Laminas Framework defines such standard [here](https://github.com/laminas/laminas/wiki/Coding-Standards).
+rules, code formatting rules, etc. Laminas Framework defines such standard [here](https://github.com/laminas/laminas-coding-standard).
 All the code in Laminas follows the rules described in that document.
 
 > If you plan to write a laminas-based website, it is recommended that you follow the same standard for your own code. This will

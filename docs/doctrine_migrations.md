@@ -91,11 +91,12 @@ cd APP_DIR
 The commands above make the application directory the current working directory and then
 run the `migrations:generate` console command.
 
-> `DoctrineModule` and `DoctrineORMModule` provide several console commands that you can use for various
-> database maintenance tasks (like generating or executing migrations). For the list of available commands,
-> you can use the `list` command:
->
-> `./vendor/bin/doctrine-module list`
+!!! note
+    `DoctrineModule` and `DoctrineORMModule` provide several console commands that you can use for various
+    database maintenance tasks (like generating or executing migrations). For the list of available commands,
+    you can use the `list` command:
+
+    `./vendor/bin/doctrine-module list`
 
 Once you run the `migrations:generate` command, you will be able to find the newly created migration under the `APP_DIR/data/Migrations` directory.
 The file has a name like `VersionYYYYMMDDHHIISS.php`, where `YYYY` is current year, `MM` is current month, `DD` is current day,
@@ -136,16 +137,18 @@ class Version20160901114333 extends AbstractMigration
 }
 ~~~
 
-> If you do not see the newly created migration in NetBeans IDE, you need to open the menu *Source* and select the
-> *Scan for external changes* menu item.
+!!! note
+    If you do not see the newly created migration in NetBeans IDE, you need to open the menu *Source* and select the
+    *Scan for external changes* menu item.
 
 As you can see from the code above, a migration is a usual PHP class inherited from `Doctrine\DBAL\Migrations\AbstractMigration`
 base class. Every migration should have *at least* two methods: `up()` and `down()`. The `up()` method upgrades the schema to a newer state,
 the `down()` method downgrades the schema from its newer state to the previous state. Both `up()` and `down()` methods have a single
 argument of type `Doctrine\DBAL\Schema\Schema`, which can be used for actual database schema modifications.
 
-> The `Schema` class is a part of `Doctrine\DBAL` component. For more information about the methods it provides, please
-> refer to Doctrine DBAL documentation. Another, even better way is to look at the code inside your `vendor/doctrine/dbal` directory.
+!!! note
+    The `Schema` class is a part of `Doctrine\DBAL` component. For more information about the methods it provides, please
+    refer to Doctrine DBAL documentation. Another, even better way is to look at the code inside your `vendor/doctrine/dbal` directory.
 
 A migration class may optionally have the following (overridden) methods (table 13.1):
 
@@ -274,8 +277,9 @@ In the code above we have three methods:
 
 Now assume we decided to improve the performance of our database by adding indexes to our tables.
 
-> If you want to learn about database indexes in more details and why indexes are so helpful, you can refer to an excellent tutorial
-> called [Use the Index, Luke](http://use-the-index-luke.com/).
+!!! note
+    If you want to learn about database indexes in more details and why indexes are so helpful, you can refer to an excellent tutorial
+    called [Use the Index, Luke](http://use-the-index-luke.com/).
 
 We can also improve data integrity by adding foreign keys. To do this, we have to add another migration. Generate another
 empty migration with the `migrations:generate` console command. Modify the code to look like below:
@@ -346,7 +350,7 @@ class Version20160901114938 extends AbstractMigration
 }
 ~~~
 
-> You can find the migrations we have just created inside of the *Blog* sample bundled with this book.
+You can find the migrations we have just created inside of the *Blog* sample bundled with this book.
 
 ## Executing Migrations
 
@@ -378,8 +382,8 @@ command's argument as follows:
 ./vendor/bin/doctrine-module migrations:migrate 20160901114333
 ~~~
 
-> You can also use 'prev', 'next' and 'first' aliases as version IDs which respectively move database to its previous state, next state
-> or to the state before the first migration (empty database).
+You can also use 'prev', 'next' and 'first' aliases as version IDs which respectively move database to its previous state, next state
+or to the state before the first migration (empty database).
 
 So, with migrations you can easily move through migration history and change the database schema as needed.
 Be careful though that migrations may remove some of your data, so apply them wisely.

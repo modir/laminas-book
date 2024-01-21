@@ -71,15 +71,17 @@ When using a relational database system, you typically use *SQL language* as a s
 database data and managing database schema. However, each DBMS usually has it own specific SQL language
 extensions (dialects).
 
-> Doctrine library is designed to work with all major relational database systems that use SQL language,
-> but it is obvious that it supports only some subset of their functionality and SQL language capabilities.
+!!! note
+    Doctrine library is designed to work with all major relational database systems that use SQL language,
+    but it is obvious that it supports only some subset of their functionality and SQL language capabilities.
 
 Doctrine is built on top of PHP PDO extension (and other database-specific PHP extensions, like `sqlite`, `mysqli`,
 `oci8`, etc.). Those extensions provide drivers for all major relational database systems. You specify which
 driver to use when configuring a database connection.
 
-> If you are not familiar with SQL, a good point for learning its syntax is
-> [W3Schools Tutorials](http://www.w3schools.com/sql/default.asp).
+!!! note "Need to learn SQL first?"
+    If you are not familiar with SQL, a good point for learning its syntax is
+    [W3Schools Tutorials](http://www.w3schools.com/sql/default.asp).
 
 [^pdo]: The PHP Data Objects (PDO) extension defines a lightweight, consistent interface for accessing
         databases in PHP. To make it in database-agnostic way, PDO uses the concept of database drivers.
@@ -119,9 +121,10 @@ databases can be divided in the following groups:
 
   * and others.
 
-> Doctrine provides support only to the Document Store subset of the NoSQL database systems. Column
-   store and key-value store database systems typically have very specific field of applications, and not covered by
-   Doctrine.
+!!! note
+    Doctrine provides support only to the Document Store subset of the NoSQL database systems. Column
+    store and key-value store database systems typically have very specific field of applications, and not covered by
+    Doctrine.
 
 #### Document Databases
 
@@ -134,9 +137,10 @@ The `post` document would have fields named `id`, `title`, `content`, `author`, 
 and the `comment` document would have fields named `id`, `author`, `content` and `date_created`. This
 is very similar to the tables you would have in a relational database.
 
-> In this book, we do not address the Doctrine-provided API to the NoSQL document databases. If you
-   want to learn about these capabilities, please refer to the corresponding sections of Doctrine project
-   documentation.
+!!! note
+    In this book, we do not address the Doctrine-provided API to the NoSQL document databases. If you
+    want to learn about these capabilities, please refer to the corresponding sections of Doctrine project
+    documentation.
 
 ## Doctrine Architecture
 

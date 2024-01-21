@@ -38,10 +38,11 @@ you can define your own custom CSS rules on top of Bootstrap to customize your s
 appearance). Bootstrap is freely distributed under the
 [Apache License v.2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
 
-> Twitter Bootstrap is shipped with Laminas Skeleton Application, so you
-> can use it out of the box. Alternatively, you can download the newest
-> version of Bootstrap from the project's [official page](http://getbootstrap.com/).
-> At the moment of writing this book, the latest version is v.3.x.
+!!! note
+    Twitter Bootstrap is shipped with Laminas Skeleton Application, so you
+    can use it out of the box. Alternatively, you can download the newest
+    version of Bootstrap from the project's [official page](http://getbootstrap.com/).
+    At the moment of writing this book, the latest version is v.5.x.
 
 Generally, the Bootstrap does the following things:
 
@@ -68,9 +69,10 @@ Generally, the Bootstrap does the following things:
 
 ![Figure 6.1. Main page of the skeleton app and its layout](images/appearance/skeleton-layout.png)
 
-> If you are new to Twitter Bootstrap, it is recommended that you refer to
-> [Appendix C. Introduction to Twitter Bootstrap](#bootstrap), where you can find more information about using
-> Twitter Bootstrap and its components.
+!!! note
+    If you are new to Twitter Bootstrap, it is recommended that you refer to
+    [Appendix C. Introduction to Twitter Bootstrap](#bootstrap), where you can find more information about using
+    Twitter Bootstrap and its components.
 
 ## Page Layout in Laminas Framework
 
@@ -127,7 +129,7 @@ Below, the complete contents of the file is presented:
           ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
     ?>
 
-    <!-- Le styles -->
+    <!-- The styles (CSS) -->
     <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon',
                          'href' => $this->basePath() . '/img/favicon.ico'])
         ->prependStylesheet($this->basePath('css/style.css'))
@@ -135,7 +137,7 @@ Below, the complete contents of the file is presented:
         ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
     ?>
 
-    <!-- Scripts -->
+    <!-- JS Scripts -->
     <?= $this->headScript()
         ->prependFile($this->basePath('js/bootstrap.min.js'))
         ->prependFile($this->basePath('js/jquery-2.2.4.min.js'))
