@@ -200,11 +200,9 @@ to create a new module and how to create it.</p>
 <p>A module is an <em>autonomous</em> and <em>reusable</em> unit of your application. By default your application has
 the single <em>Application</em> module. And it is normal to put your models, views and controllers in
 this module, especially in a simple website.</p>
-<blockquote>
 <p>A module can contain models, views, controllers and assets. Module classes typically live in a separate
 namespace (the same as module name). Module has its own configuration file where you can register routes,
 controllers, controller plugins, services, view helpers and so on.</p>
-</blockquote>
 <p>You may need to create a new module when any of the following is true:</p>
 <ul>
 <li>If your website is relatively large and dividing it into pieces would make it easier to maintain.
@@ -268,7 +266,7 @@ to the name of your module (this is required to ensure your classes will be foun
 <p>The last step is to enable PHP class autoloading. Our module source files will be organised to conform to PSR-4 standard, so we will
 be able to use standard autoloader provided by Composer. To do that, add the following line into your
 <code>composer.json</code> file under the <code>psr-4</code> key (substitute your module name):</p>
-<pre><code>...
+<pre><code class="language-php">...
 &quot;autoload&quot;: {
         &quot;psr-4&quot;: {
             ...
@@ -278,17 +276,18 @@ be able to use standard autoloader provided by Composer. To do that, add the fol
 ...
 </code></pre>
 <p>Next run the following command to update Composer autloader files:</p>
-<pre><code>php composer.phar dump-autoload
+<pre><code class="language-bash">php composer.phar dump-autoload
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <code>dump-autoload</code> command just regenerates autoloader code without installing or updating any dependencies.</p>
-</blockquote>
+</div>
 <p>Great! The module is now ready for use. You can add controllers, models and views into it. Do not forget to
 modify the <code>module.config.php</code> file and register your routes, services, controllers, controller plugins, view helpers, etc.</p>
 <h3 id="enabling-the-module">Enabling the Module</h3>
 <p>To let Laminas know about the new module and let it load it on app start up, do not forget to enable your new module in your
 <em>APP_DIR/config/modules.config.php</em> file as follows:</p>
-<pre><code>return [
+<pre><code class="language-php">return [
     'Admin',
     //...
 );
@@ -301,8 +300,8 @@ modules.</p>
 chapter, the application has several life stages represented by events. You may write an event listener function (or class) and
 register it in your module entry point. When an event is triggered, your listener method (or class) will be called allowing you to
 do something useful.</p>
-<blockquote>
-<p><strong>Why would I want to register an event listener?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Why would I want to register an event listener?</p>
 <p>Here are several practical applications of event listening that you may find useful:</p>
 <ul>
 <li>Listen to <em>Route</em> event to force the use of HTTPS secure connection.</li>
@@ -312,7 +311,7 @@ do something useful.</p>
 <li>Listen to <em>Dispatch Error</em> event to log and/or report any exception or error happening in your website.</li>
 <li>Listen to <em>Render</em> event to modify the content of the resulting web page.</li>
 </ul>
-</blockquote>
+</div>
 <p>There are two ways to register an event listener within the <code>Module</code> class: either with the help of <code>Module</code>'s <code>init()</code> method or with the
 help of its <code>onBootstrap()</code> method. The difference between <code>init()</code> method and <code>onBootstrap()</code> method is that the <code>init()</code> method is called
 earlier than <code>onBootstrap()</code>, before all other modules are initialized; while <code>onBootstrap()</code> is called once all modules are initialized.

@@ -263,12 +263,13 @@ appears, click the <em>Launch Instance</em> button. Then you will have to pass t
 <p><img alt="Figure E.4. Choose an Amazon Machine Image (AMI) page" src="../images/ec2_tutorial/aws_create_new_instance.png" /></p>
 <p>On the page that appears, you need to select the Linux distribution you want to run on the virutal machine.
 In this tutorial, we choose <em>Amazon Linux AMI, 64-bit</em>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Amazon Linux is a distribution from Red Hat Linux and Cent OS family. The installation instructions are
 common between these distributions. For example, all these distributions use the yum package manager. So, if
 you know how to install a program in Cent OS, you will be able to apply the same steps to install it in Amazon Linux.</p>
 <p>In this tutorial, we use Amazon Linux, but you may select another distribution, if you wish.</p>
-</blockquote>
+</div>
 <p>Click the <em>Select</em> button at the right side of the <em>Amazon Linux AMI</em> option.</p>
 <h3 id="step-2-choose-an-instance-type">Step 2 — Choose an Instance Type</h3>
 <p>Next, the <em>Choose an Instance Type</em> page appears (see the figure below).</p>
@@ -358,11 +359,9 @@ be able to see the prompt like in the figure below:</p>
 installed. The next thing we plan to do is installing Apache Web Server and PHP.</p>
 <p>First, it is recommended that you update the system by typing the following shell command:</p>
 <p><code>sudo yum update</code></p>
-<blockquote>
 <p>You do not have to type all commands manually, instead you can copy and paste them.
 Select the command in this window and copy it into the clipboard (CTRL+C), then click
 your mouse's right button over the PuTTY terminal window to insert the text.</p>
-</blockquote>
 <p>To install Apache HTTP Server, type the following command:</p>
 <p><code>sudo yum install httpd</code></p>
 <p>Install the PHP engine:</p>

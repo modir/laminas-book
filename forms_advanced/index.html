@@ -275,12 +275,13 @@ figure 11.1 for some examples).</p>
 submission by an automated process (so called robot). Usually, such
 robots send spam messages to forums, hack passwords on site login forms,
 or perform some other malicious actions.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">What is a CAPTCHA Test?</p>
 <p>The CAPTCHA test allows to reliably distinguish humans from robots, because
 humans are easily able to recognise and reproduce characters from the
 distorted image, while robots are not (at the current stage of evolution of
 computer vision algorithms).</p>
-</blockquote>
+</div>
 <h4 id="captcha-types">CAPTCHA Types</h4>
 <p>In Laminas Framework, there are several CAPTCHA types available (they all belong
 to the @<code>Laminas\Captcha</code> component):</p>
@@ -585,11 +586,12 @@ sensitive data (e.g. money transfer forms, shopping carts etc.)</p>
    It is now able to submit the payment form to the payment gateway site.</p>
 </li>
 </ol>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The above described CSRF attack is possible it the web form on the payment gateway site
 does not check the source of the HTTP request. The people who maintain the payment
 gateway site must put more attention in making its forms more secure.</p>
-</blockquote>
+</div>
 <p>To prevent CSRF attacks to a form, one has to require a special token with the form, as follows:</p>
 <ol>
 <li>
@@ -604,17 +606,13 @@ gateway site must put more attention in making its forms more secure.</p>
    with the token saved server-side. If they match, consider the form data secure.</p>
 </li>
 </ol>
-<blockquote>
 <p>If a malicious user will try to attack the site by submitting the form, he
 will not be able to put right token in the form submissions, because the token
 is not stored in cookies.</p>
-</blockquote>
 <h4 id="example-adding-a-csrf-element-to-form">Example: Adding a CSRF Element to Form</h4>
 <p>In Laminas Framework, to add a CSRF protection to your form model,
 you use the @<code>Laminas\Form\Element\Csrf</code> form element class.</p>
-<blockquote>
 <p>The @<code>Csrf</code>[Laminas\Form\Element\Csrf] element has no visual representation (you will not see it on the screen).</p>
-</blockquote>
 <p>To insert a CSRF element to your form model, add the following lines in its <code>addElements()</code> method:</p>
 <pre><code class="language-php">// Add the CSRF field
 $this-&gt;add([
@@ -644,28 +642,24 @@ which means the CSRF check expires in 600 seconds (10 minutes) after form creati
 for the CSRF field like shown below:</p>
 <pre><code class="language-text">&lt;input type=&quot;hidden&quot; name=&quot;csrf&quot; value=&quot;1bc42bd0da4800fb55d16e81136fe177&quot;&gt;
 </code></pre>
-<blockquote>
 <p>As you can see from the HTML markup code above, the form now contains a hidden field with a
 randomly generated token. Since the attacker script doesn't know this token, it won't
 be able to submit its correct value, thus the CSRF attack becomes prevented.</p>
-<p><strong>What happens if CSRF element validation fails?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">What happens if CSRF element validation fails?</p>
 <p>If during the form validation the CSRF check fails, the form is considered
 invalid and the user will see it again to fix input errors, but he won't see
 the error message for the CSRF element (we don't want hackers to know for sure
 what's wrong with the form).</p>
-</blockquote>
+</div>
 <h2 id="using-validation-groups">Using Validation Groups</h2>
 <p>Sometimes it may be useful to temporarily disable validation of some form elements. You can do that with a feature
 called <em>validation groups</em>.</p>
-<blockquote>
 <p>By default, all form elements are validated. A validation group allows to disable validation of certain fields.</p>
-</blockquote>
 <p>For example, assume you implement a form named <code>PaymentForm</code>, which allows you to select a payment method of several alternatives (credit card, bank transfer and cash).
 If the user selects <em>credit card</em>, you also want him to enter the credit card number; else if user selects <em>bank transfer</em>, you
 want him to enter bank account number; and finally, if the <em>cash</em> is selected, user does not need to enter additional information.</p>
-<blockquote>
 <p>For this form, you will have to dynamically hide and display dependent fields in client's browser with JavaScript.</p>
-</blockquote>
 <p>How would you validate such form in your controller's action? The problem is that some fields <em>depend</em> on others. The <code>card_number</code> field is required
 only when <code>payment_method</code> is the "credit card", otherwise it is optional. The same is for the <code>bank_account</code> field - it is required
 only when <code>payment_method</code> is the "bank transfer".</p>
@@ -694,29 +688,24 @@ if ($form-&gt;isValid())
     }
 }
 </code></pre>
-<blockquote>
 <p>You can see this example in action in the <em>Form Demo</em> sample web application bundled with this book. Just type
 "http://localhost/payment" URL in your browser.</p>
-</blockquote>
 <h2 id="implementing-multi-step-forms-multi-step-forms">Implementing Multi-Step Forms {#multi-step-forms}</h2>
 <p>In this section, we will provide instructions on how to implement a <em>multi-step</em> form with Laminas. A multi-step form
 is a form having a lot of fields, and which is displayed in several steps. To store the current step and user-entered data
 between page requests, PHP <em>sessions</em> are utilized.</p>
-<blockquote>
 <p>For example, user registration can be performed in several steps: on the first step you display the page allowing to enter
 login and password, on the second step you display the page where the site visitor can enter his personal information,
-and on the third step, the visitor can enter billing information.</p>
-<p>Another example of a multi-step form is a Survey form. This form would display a question and possible variants of the answer.
+and on the third step, the visitor can enter billing information.
+Another example of a multi-step form is a Survey form. This form would display a question and possible variants of the answer.
 This form would have as many steps as many questions are in the survey.</p>
-</blockquote>
 <p>In this section we will implement the <em>User Registration</em> form allowing to collect information about the user being registered.</p>
-<blockquote>
 <p>You can see this complete working example in action as part of <em>Form Demo</em> sample web application bundled with this book.</p>
-</blockquote>
 <h3 id="enabling-sessions">Enabling Sessions</h3>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you are new to the PHP sessions feature, please refer to <a href="#session">Working with Sessions</a> before reading this section.</p>
-</blockquote>
+</div>
 <p>Session support is implemented in @<code>Laminas\Session</code> component, so you have to install it if you hadn't done that before.</p>
 <p>Next, modify your <em>APP_DIR/config/global.php</em> config file as follows:</p>
 <pre><code class="language-php">&lt;?php
@@ -1380,9 +1369,7 @@ class RegistrationControllerFactory implements FactoryInterface
     }
 }
 </code></pre>
-<blockquote>
 <p>Do not forget to register the controller in the <em>module.config.php</em> file!</p>
-</blockquote>
 <h3 id="adding-view-templates">Adding View Templates</h3>
 <p>Now, let's add the view templates for the controller actions. We have four view templates: <em>step1.phtml</em>, <em>step2.phtml</em>,
 <em>step3.phtml</em> and <em>review.phtml</em>. The first three ones are used by the <code>indexAction()</code> and the last is used by the <code>reviewAction()</code>.</p>
@@ -1617,9 +1604,7 @@ navigation bar. The <em>User Registration - Step 1</em> page appears (see figure
 <p><img alt="Figure 11.8. User Registration - Step 3" src="../images/forms_advanced/registration_step3.png" /></p>
 <p>Clicking <em>Next</em> results in displaying the <em>Review</em> page allowing to see the data entered on the previous three steps:</p>
 <p><img alt="Figure 11.9. User Registration - Review" src="../images/forms_advanced/registration_review.png" /></p>
-<blockquote>
 <p>You can find this complete example in the <em>Form Demo</em> sample application bundled with this book.</p>
-</blockquote>
 <h2 id="summary">Summary</h2>
 <p>In this chapter, we have discussed some advanced form usage capabilities.</p>
 <p>Laminas Framework provides two classes whose purpose is enhancing form security: @<code>Captcha</code>

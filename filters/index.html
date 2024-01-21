@@ -298,10 +298,8 @@ interface FilterInterface
 <p>As you can see, the @<code>FilterInterface</code>[Laminas\Filter\FilterInterface] interface has the single method <code>filter()</code> (line 7),
 which takes the single parameter <code>$value</code>. The method transforms the input data and finally
 returns the resulting (filtered) value.</p>
-<blockquote>
 <p>A concrete filter class implementing the @<code>FilterInterface</code>[Laminas\Filter\FilterInterface] interface may have additional methods.
 For example, many filter classes have methods allowing configuration of the filter (set filtering options).</p>
-</blockquote>
 <h2 id="standard-filters-overview">Standard Filters Overview</h2>
 <p>Standard filters implementing the @<code>FilterInterface</code>[Laminas\Filter\FilterInterface] interface belong to @<code>Laminas\Filter</code> namespace <sup id="fnref:standard_filters"><a class="footnote-ref" href="#fn:standard_filters">1</a></sup>.
 A filter class inheritance diagram is shown in figure 8.1. From that figure, you can see that base
@@ -452,12 +450,10 @@ an arbitrary data. To do that, you simply create an instance of the filter class
 filter by using the methods it provides, and call the <code>filter()</code> method on the filter.</p>
 <p>For example, let's consider the usage of the @<code>StringTrim</code> filter which removes the
 white space characters from the beginning and the end of a string.</p>
-<blockquote>
 <p>The @<code>StringTrim</code> filter is useful for filtering user-entered string data (E-mail addresses, user
 names, etc.) because site visitors tend to make typos in those data. For example, a user may
 unintentionally enter a trailing space in an E-mail field, thus making an E-mail invalid. With
 the @<code>StringTrim</code> filter, you will easily cope with such input errors and improve user experience.</p>
-</blockquote>
 <p>The methods provided by the filter are listed in table 8.2:</p>
 <table>
 <thead>
@@ -939,12 +935,10 @@ $filteredValue3 = $filter-&gt;filter(false); // Returns null.
 <h4 id="datetimeformatter-filter">DateTimeFormatter Filter</h4>
 <p>The @<code>DateTimeFormatter</code> filter accepts a date in an arbitrary format and converts it into
 the desired format.</p>
-<blockquote>
 <p>This filter can accept a string (e.g., '2014-03-22 15:36'), an integer timestamp
 (like the <code>time()</code> PHP function returns) or an instance of the <code>DateTime</code> PHP class.
 The @<code>DateTimeFormatter</code> filter may throw a @<code>Laminas\Filter\Exception\InvalidArgumentException</code>
 exception if you pass it a date in an incorrect format.</p>
-</blockquote>
 <p>Filter's public methods are listed in table 8.7.</p>
 <table>
 <thead>
@@ -983,11 +977,12 @@ $filteredValue = $filter-&gt;filter('2014-03-22 15:36');
 
 // The expected output is 'March 22, 2014 3:36 PM'.
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Internally, the @<code>DateTimeFormatter</code> filter uses the <code>DateTime</code> class from the PHP standard
 library for converting and formatting dates. For available date formats, please refer to the
 PHP documentation for the <code>DateTime</code> class.</p>
-</blockquote>
+</div>
 <h3 id="filters-performing-manipulations-on-a-file-path">Filters Performing Manipulations on a File Path</h3>
 <p>In this section, we will consider usage examples of the filters from the group of filters related
 to manipulating file paths.</p>
@@ -1005,18 +1000,20 @@ $filteredValue = $filter-&gt;filter('/var/log/httpd/error.log');
 
 // The expected filter's output is the 'error.log'.
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>BaseName</code> filter will not process a non-scalar value. If you pass it an array, it
 will return the array as is and raise a PHP warning.</p>
-</blockquote>
+</div>
 <h4 id="dir-filter">Dir Filter</h4>
 <p>The @<code>Dir</code> filter class is just a wrapper on the <code>dirname()</code> PHP function.
 It takes a string containing the path to a file or directory and returns the parent
 directory's path.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>Dir</code> filter will not process a non-scalar value. If you pass it an array, it
 will return the array as is.</p>
-</blockquote>
+</div>
 <p>Below, a code example demonstrating the usage of the @<code>Dir</code> filter is provided.</p>
 <pre><code class="language-php">&lt;?php
 // Create Dir filter.
@@ -1031,9 +1028,10 @@ $filteredValue = $filter-&gt;filter('/var/log/httpd/error.log');
 <p>The @<code>RealPath</code> filter takes an absolute or a relative file path as a string input argument. It
 expands all symbolic links and resolves references to '/./', '/../' and extra '/' characters
 in the input path and returns the canonicalized absolute pathname.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>RealPath</code> filter is a wrapper over the <code>realpath()</code> PHP function.</p>
-</blockquote>
+</div>
 <p>Filter's public methods are listed in table 8.8.</p>
 <table>
 <thead>
@@ -1077,10 +1075,11 @@ $filteredValue = $filter-&gt;filter('./error.log');
 
 // The expected filter's output is the '/var/log/httpd/error.log'.
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>RealPath</code> filter will not process a non-scalar value. If you pass it an array, it
 will return the array as is.</p>
-</blockquote>
+</div>
 <h3 id="filters-performing-compression-and-encryption-of-input-data">Filters Performing Compression and Encryption of Input Data</h3>
 <p>In this section, we will consider several filters from the group of filters related
 to compressing and encrypting the input data. These filters are not very usable for
@@ -1196,10 +1195,11 @@ $filter-&gt;filter('testfile.txt');
 (line 6), set adapter's options (line 7), and finally, compress the input file (line 13). The
 expected result, the <em>example.zip</em> archive file, will be created in the current directory. The
 archive will contain the <em>testfile.txt</em> file.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>Decompress</code> filter is a "mirror reflection" of the @<code>Compress</code> filter and can be
 used by analogy. By that reason, we do not cover the @<code>Decompress</code> filter in this section.</p>
-</blockquote>
+</div>
 <h4 id="encrypt-filter">Encrypt Filter</h4>
 <p>The @<code>Encrypt</code>[Laminas\Filter\Decrypt] filter's purpose is encrypting the input data with the specified algorithm.
 Filter's public methods are listed in table 8.11.</p>
@@ -1252,10 +1252,11 @@ $filter-&gt;setAdapter('BlockCipher');
 $filteredValue = $filter-&gt;filter('some data to encrypt');
 </code></pre>
 <p>The expected result is a string encrypted with the block cipher.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>Decrypt</code>[Laminas\Filter\Decrypt] filter is a "mirror reflection" of the @<code>Encrypt</code>[Laminas\Filter\Encrypt] filter and can be
 used by analogy. By that reason, we do not cover the @<code>Decrypt</code>[Laminas\Filter\Decrypt] filter in this section.</p>
-</blockquote>
+</div>
 <h3 id="filters-manipulating-string-data">Filters Manipulating String Data</h3>
 <p>In this section, we will consider usage examples of the filters from the group of filters related
 to manipulating string data.</p>
@@ -1297,10 +1298,11 @@ characters such as umlaut-A (Ä) will not be converted.</p>
 filter to behave like the <code>mb_strtolower()</code> PHP function. By contrast to <code>strtolower()</code>, "alphabetic"
 is determined by the Unicode character properties. Thus, the behavior of this function is not affected
 by locale settings, and it can convert any characters that have 'alphabetic' property, such as A-umlaut (Ä).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If the value provided is non-scalar, the value will remain unfiltered,
 and an <code>E_USER_WARNING</code> will be raised indicating it cannot be filtered.</p>
-</blockquote>
+</div>
 <p>Below, a code example showing how to use the @<code>StringToLower</code> filter is provided:</p>
 <pre><code class="language-php">&lt;?php
 // Create StringToLower filter.
@@ -1443,10 +1445,11 @@ $filteredValue = $filter-&gt;filter(&quot;A multi line\r\n string&quot;);
 
 // The expected filter's output is the 'A multi line string'.
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>StripNewlines</code> will not process a non-scalar value. If the value passed to the
 filter is non-scalar, the value will remain unfiltered.</p>
-</blockquote>
+</div>
 <h4 id="urinormalize-filter">UriNormalize Filter</h4>
 <p>The @<code>UriNormalize</code> filter can be used for normalizing a URL string and (optionally) applying
 a scheme part to it. The public methods of the filter are provided in table 8.15 below.</p>
@@ -1509,10 +1512,11 @@ $filteredValue = $filter-&gt;filter('www.example.com');
 such a compound filter is run, the value filtered by the first filter is passed as an input for
 the second one, and then the value filtered by the second filter will be passed to the third one,
 and so on.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>FilterChain</code>[Laminas\Filter\FilterChain] class is internally used by the @<code>InputFilter</code>[Laminas\InputFilter\InputFilter] container class for storing the
 sequence of filters attached to the form model's field.</p>
-</blockquote>
+</div>
 <p>Public methods provided by the @<code>FilterChain</code>[Laminas\Filter\FilterChain] class are presented in table 8.16:</p>
 <table>
 <thead>
@@ -1608,11 +1612,9 @@ where you cannot use a standard filter. Here, the @<code>Callback</code>[Laminas
 <p>The @<code>Callback</code>[Laminas\Filter\Callback] filter is designed as a wrapper for your custom filtering algorithm. For example, this may
 be useful when a standard filter is not suitable, and you need to apply your own filtering
 algorithm to the data.</p>
-<blockquote>
 <p>You implement your custom filtering algorithm as a callback function or a callback class method.
 A <em>callback</em> is a function or a public method of a class which is called by the @<code>Callback</code>[Laminas\Filter\Callback] filter
 and is passed the value to be filtered and, optionally, user-defined argument(s).</p>
-</blockquote>
 <p>The public methods provided by the @<code>Callback</code>[Laminas\Filter\Callback] filter are listed in table 8.17.</p>
 <table>
 <thead>
@@ -1798,10 +1800,8 @@ implementing the @<code>FilterInterface</code>[Laminas\Filter\FilterInterface] i
 forms of your web application (or, if you wish, outside a form).</p>
 <p>To demonstrate how to create your own filter, we will write the <code>PhoneFilter</code> class encapsulating
 the phone filtering algorithm we used with the @<code>Callback</code>[Laminas\Filter\Callback] filter example.</p>
-<blockquote>
 <p>As you may remember, the base concrete class for all standard filters is the @<code>AbstractFilter</code>
 class. By analogy, we will also derive our custom <code>PhoneFilter</code> filter from that base class.</p>
-</blockquote>
 <p>We plan to have the following methods in our <code>PhoneFilter</code> filter class (see table 8.18):</p>
 <table>
 <thead>

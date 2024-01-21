@@ -314,10 +314,11 @@ your classes in a better manner, to make them easy to maintain.</p>
 <p>In MVC, classes implementing your business logic are called <em>models</em>, code snippets
 rendering HTML pages are called <em>views</em>, and the classes responsible for interacting with user
 are called <em>controllers</em>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Views are implemented as <em>code snippets</em>, not as classes. This is because
 views are typically very simple and contain only the mixture of HTML and inline PHP code.</p>
-</blockquote>
+</div>
 <p>The main objective of the MVC concept is to separate the business logic (models)
 from its visualization (views). This is also called the <em>separation of concerns</em>, when each layer
 does its specific tasks only.</p>
@@ -404,10 +405,11 @@ namespace.</p>
 <p>A controller is a usual PHP class derived from the @<code>AbstractActionController</code>[Laminas\Mvc\Controller\AbstractActionController] base class (line 7).</p>
 <p>By default, the controller class contains the single <em>action method</em> called <code>indexAction()</code> (see lines 9-12).
 Typically, you will create other action methods in your controller classes.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Laminas automatically recognizes the action methods by the <code>Action</code> suffix.
 If a controller method's name does not have that suffix, it is considered as a usual method, not an action.</p>
-</blockquote>
+</div>
 <p>As its name assumes, an action method performs some site action,
 which typically results in producing a single web page. Index controller usually
 contains action methods for site-wide web pages (table 4.1). For example, you would have
@@ -583,10 +585,11 @@ The default value is very convenient, because you don't have to use the <code>is
 function to test if the variable exists.</p>
 <p>In line 5 we use the <code>fromPost()</code> method to retrieve the variable from POST. The meaning
 of this method's parameters is the same as for the <code>fromQuery()</code> method.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In Laminas, you must not access request parameters through traditional PHP <code>$_GET</code> and <code>$_POST</code>
 global arrays. Instead, you use laminas-provided API for retrieving the request data.</p>
-</blockquote>
+</div>
 <h2 id="putting-data-to-http-response">Putting Data to HTTP Response</h2>
 <p>Although you rarely interact with HTTP response data directly, you can do that
 with the help of <code>getResponse()</code> method provided by the @<code>AbstractActionController</code>[Laminas\Mvc\Controller\AbstractActionController] base class.
@@ -813,12 +816,10 @@ add the line in form of <em>key=&gt;value</em> pair. The key should be the fully
 like <code>\Application\Controller\IndexController</code> (we can use the PHP <code>::class</code> keyword for class name resolution),
 and value should be the name of a factory class that would create the controller class for use. In our case,
 we use the standard @<code>InvokableFactory</code>, but you can create your own if you need.</p>
-<blockquote>
 <p>By using the @<code>InvokableFactory</code>, you tell Laminas Framework
 that it can invoke the controller by instantiating it with the <code>new</code> operator. This is the most
 simple way of instantiating the controller. As an alternative, you can register your own factory
 to create the controller instance, and inject dependencies into controller.</p>
-</blockquote>
 <h3 id="registering-a-controller-factory">Registering a Controller Factory</h3>
 <p>If your controller class needs to call some service (this happens very often), you need to request that service from the <em>service manager</em> (we discussed
 the service manager in the <a href="#operation">Website Operation</a> chapter) and pass that service to controller's constructor, and the controller saves the service you passed
@@ -861,20 +862,12 @@ return [
     // ...
 ];
 </code></pre>
-<blockquote>
-<p>If you have some experience with Laminas Framework 2, you may notice that the things are now a little different than before.
-In ZF2, there was <code>getServiceLocator()</code> method in the @<code>AbstractActionController</code>[Laminas\Mvc\Controller\AbstractActionController] base class allowing to get dependencies of the controller even without the factory.
-In Laminas, you have to pass dependencies explicitly. It is a little more boring,
-but it removes "hidden" dependencies and makes your code more clear and easier to understand.</p>
-</blockquote>
 <h3 id="lazycontrollerabstractfactory">LazyControllerAbstractFactory</h3>
 <p>Writing a factory for almost every controller may seem boring at first sight. If you are so lazy that you
 don't want to do that, you can use the standard @<code>LazyControllerAbstractFactory</code> factory class.</p>
-<blockquote>
 <p>The @<code>LazyControllerAbstractFactory</code> factory uses <em>reflection</em> to determine which services your controller
 wants to use. You just need to <em>typehint</em> the arguments of controller's constructor, and the factory will
 itself retrieve the needed services and pass it to the constructor.</p>
-</blockquote>
 <p>For example, to inject the <code>CurrencyConverter</code> service in your controller, make sure its constructor looks like below:</p>
 <pre><code class="language-php">namespace Application\Controller;
 
@@ -912,9 +905,10 @@ return [
 <p>When your site grows in size, you should create new controller classes instead of putting
 all actions to <code>IndexController</code>. The Index controller is used for defining the actions
 which work for your entire site.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>It is not recommended to create huge controllers with hundreds of actions, because they are difficult to understand and support.</p>
-</blockquote>
+</div>
 <p>It is recommended to create new controller class for each model (or for most important ones) of your business logic domain.</p>
 <p>For example, you can create <code>UserController</code> to manage users of your site.
 This controller would have the default "index" action for displaying the page
@@ -925,7 +919,6 @@ and implementing the shopping cart, <code>DownloadController</code> and its acti
 etc.</p>
 <h2 id="controller-plugins">Controller Plugins</h2>
 <p>A <em>controller plugin</em> is a class which extends the functionality of <em>all controllers</em> in some way.</p>
-<blockquote>
 <p>Without plugins, to extend the functionality of all controllers, you would have to
 create a custom base class, say <code>BaseController</code>, and
 derive other controllers from that base class. This way can also be used, but from Laminas creators' point of view, plugins are better
@@ -933,7 +926,6 @@ solution, because they use <em>class composition</em> <sup id="fnref:foo"><a cla
 to class inheritance. You register your plugin controller and it automatically becomes
 accessible from all controllers of your app (@<code>AbstractActionController</code> base class uses PHP's <code>__call()</code>
 magic method to proxy calls to registered controller plugins).</p>
-</blockquote>
 <p>There are several standard controller plugins available out of the box (table 4.6), and we've already used one of
 them (the @<code>Params</code> plugin) in one of our previous examples.</p>
 <table>
@@ -1039,10 +1031,11 @@ return [
     // ...
 ];
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note that we also register an alias for the plugin to be able to get
 the plugin by its short name.</p>
-</blockquote>
+</div>
 <p>After that, you'll be able to access your custom plugin from
 all of your controller's actions in this way:</p>
 <pre><code class="language-php">// Check if site user is allowed to visit the &quot;index&quot; page
@@ -1058,14 +1051,14 @@ for rendering the web pages.</p>
 <p>Views typically live inside of the <em>view</em> subdirectory
 of the module (see figure 4.5):</p>
 <p><img alt="Figure 4.5. View directory" src="../images/mvc/views_dir.png" /></p>
-<blockquote>
-<p><strong>Why are view template files not stored under module's source directory?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Why are view template files not stored under module's source directory?</p>
 <p>View templates (<code>.phtml</code> files) are not stored under module's <code>src/</code> directory,
 because they are not usual PHP classes and do not need to be resolved by a PHP
 class autoloading feature. View templates are resolved by the special Laminas class
 called <em>view resolver</em>, and for this reason, view templates are stored under
 the module's <code>view</code> directory.</p>
-</blockquote>
+</div>
 <p>View templates can have different behaviors, based on variables you pass to them from the controller's
 action method. Data is passed to view templates with the help of a @<code>ViewModel</code>[Laminas\View\Model\ViewModel] variable container.</p>
 <p>For example, let's implement the view template for the <code>aboutAction()</code> of our Index controller.
@@ -1095,38 +1088,36 @@ In that file, enter the following:</p>
 <p>As you can see, the view template is a usual HTML page with several PHP code fragments.
 A view script just renders the data you pass to it with a @<code>ViewModel</code>[Laminas\View\Model\ViewModel] variable container.
 For example, in line 8 we get the value of <code>$appName</code> variable and print it into the standard output stream.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Inside the view template, you easily can access the variables that were passed from the controller's action.
 For example, to get the value of the application name variable, use either
 <code>$appName</code> or <code>$this-&gt;appName</code> syntax. These two ways of accessing the variable are equivalent, but the first one
 requires less writing, so we will use it in the future.</p>
-</blockquote>
+</div>
 <p>Please note that we are using @<code>EscapeHtml</code> view helper to <em>escape</em> the string printed to the web page
 to make the website resistant to hacker attacks.</p>
-<p>W&gt; You should always escape variables that you print to your web page. Escaping allows to be sure that no malicious code
-W&gt; is injected on your page.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should always escape variables that you print to your web page. Escaping allows to be sure that no malicious code
+is injected on your page.</p>
+</div>
 <p>In your view script, you can also use simple flow control operations (like <code>if</code>, <code>foreach</code> or <code>switch</code>) to
 make the appearance of the page different depending on variable's value.</p>
-</blockquote>
 <p>Now let's look at how the page looks like in the web browser. Type "http://localhost/application/about"
 URL in your browser's navigation bar. The <em>About</em> page should appear (see figure 4.8):</p>
 <p><img alt="Figure 4.8. About Page" src="../images/mvc/about_page.png" /></p>
-<blockquote>
 <p>In general, the PHP code you use inside of views must be as simple as possible.
 Views typically do not modify the data you pass from controller.
 For example, a view can use the model you pass to it to walk through database table rows and render
 the items to an HTML page, but it should never create database tables or modify them itself.</p>
-</blockquote>
 <h2 id="view-helpers">View Helpers</h2>
-<p>A <em>view helper</em> is typically a (relatively) simple PHP class whose goal is to render some part of a view.
-You can invoke view helpers from any view template. With view helpers, you can create reusable widgets
-(like menus, navigation bars, etc.) for your web pages.</p>
-<blockquote>
 <p>View helpers are analogous to controller plugins: the controller plugins allow to "extend"
 the functionality of controllers, and view helpers allow to "extend" the functionality of view
 templates.</p>
-</blockquote>
+<p>A <em>view helper</em> is typically a (relatively) simple PHP class whose goal is to render some part of a view.
+You can invoke view helpers from any view template. With view helpers, you can create reusable widgets
+(like menus, navigation bars, etc.) for your web pages.</p>
 <p>Laminas provides many standard view helpers out of the box. In the table 4.7, some of them are
 presented with a brief description:</p>
 <table>
@@ -1203,26 +1194,23 @@ $this-&gt;headTitle('About');
 <p>In the code above, we call the @<code>HeadTitle</code> view helper and pass it the page title string ("About")
 as the argument. The @<code>HeadTitle</code> view helper internally sets the text for the <code>&lt;title&gt;</code> HTML
 element of your web page. Then, if you open the <em>About</em> page in your web browser,
-the page title will look like "About - ZF Skeleton Application" (see the figure 4.9
+the page title will look like "About - Laminas Skeleton Application" (see the figure 4.9
 below for an example):</p>
 <p><img alt="Figure 4.9. Setting page title for the About page" src="../images/mvc/about_title.png" /></p>
-<blockquote>
 <p>We will discuss the view helpers in more details and provide
 more usage examples in the chapter <a href="#appearance">Page Appearance and Layout</a>.</p>
-</blockquote>
 <h2 id="view-template-names">View Template Names</h2>
 <p>When you return data with the @<code>ViewModel</code>[Laminas\View\Model\ViewModel] variable container from your controller's
-action method, Laminas Framework somehow knows the name of the corresponding view template
-file. For example, for your <code>IndexController</code>'s <code>aboutAction()</code> method,
-Laminas automatically uses the <em>about.phtml</em> view template.</p>
-<blockquote>
+action method, Laminas Framework knows the name of the corresponding view template file.</p>
 <p>Laminas determines the correct view template name by module name, controller name and action name.
 For example, <code>IndexController::aboutAction()</code> action belonging to <code>Application</code> module will
 have the <code>application/index/about.phtml</code> view template by default.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If your your controller or action name consists of several words in camel-case (like <code>UserRegistrationController</code> and <code>registrationStep1Action</code>),
 the corresponding view template will be <em>application/user-registration/registration-step-1.phtml</em> (camel-cased names
 are converted to lower-case and words are separated by dashes).</p>
-</blockquote>
+</div>
 <h3 id="overriding-default-view-template-name">Overriding Default View Template Name</h3>
 <p>The @<code>ViewModel</code>[Laminas\View\Model\ViewModel] can also be used to override the default view template resolving.
 Actually the @<code>ViewModel</code>[Laminas\View\Model\ViewModel] class is more than just a variable container. Additionally, it
@@ -1267,11 +1255,12 @@ public function indexAction()
 passed the name of the view template name as its argument. The view template name
 is actually a relative path to the <code>about.phtml</code> file, minus file extension.</p>
 <p>Finally, we returned the view model object from the action method (line 7).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>However, calling the <code>setTemplate()</code> method in every action method is optional.
 If you don't do that, Laminas will determine the view template name automatically
 by concatenating the current module name, controller name and action method name.</p>
-</blockquote>
+</div>
 <h2 id="view-resolver">View Resolver</h2>
 <p>When Laminas Framework has the template name, it only remains to determine the absolute path
 to the corresponding <em>.phtml</em> file. This is also called the <em>view template resolving</em>.
@@ -1442,11 +1431,12 @@ the <em>sample.txt</em> file and offer you to save it to some location.</p>
 page, the <em>.phtml</em> view template is rendered with the help of @<code>PhpRenderer</code> class living in @<code>Laminas\View\Renderer</code>[Laminas\View]
 namespace. This strategy works well in 99% of cases. But sometimes you may need to return something else, for example, a
 JSON response or a RSS feed response.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>A response in JSON format is typically returned when you implement some kind of API (Application Programming Interface).
 API is used to retrieve some the data in machine-readable format.
 A response in RSS feed format is typically used to publish frequently changing information, like blog posts or news.</p>
-</blockquote>
+</div>
 <p>So, Laminas provides three view rendering strategies out of the box:</p>
 <ul>
 <li>the default one (also known as @<code>PhpRendererStrategy</code>[Laminas\View\Strategy\PhpRendererStrategy]).</li>
@@ -1529,12 +1519,13 @@ return [
 <li>The <em>not_found_template</em> defines the template name for the 404 error.</li>
 <li>The <em>exception_template</em> specifies the template name for the unhandled exception error.</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>You typically set the <em>display_not_found_reason</em> and <em>display_exceptions</em> parameters
 to <code>false</code> in production systems, because you don't want site visitors see the details
 about errors in your site. However, you will still be able to retrieve the detailed
 information from Apache's <code>error.log</code> file.</p>
-</blockquote>
+</div>
 <h2 id="models">Models</h2>
 <p>A <em>model</em> is a PHP class which contains the business logic of your application.
 The business logic is the "core" of your website. It implements the goal of site
@@ -1550,11 +1541,8 @@ first name, last name, country, city, post code and street address.</p>
 <p>Models can have some behavior. For example, a mailer model
 may send E-mail messages, the currency converter model may
 be able to convert money and so on.</p>
-<blockquote>
 <p>With Laminas, you represent models as usual PHP classes.
-Properties are implemented as class fields, and
-the behaviors are implemented as class methods.</p>
-</blockquote>
+Properties are implemented as class fields, and the behaviors are implemented as class methods.</p>
 <h2 id="model-types">Model Types</h2>
 <p>In Laminas Framework, there is no single <code>Model</code> directory for storing the model classes, as you could
 assume. Instead, by convention, models are further subdivided into the following principal types, and each type is
@@ -1590,11 +1578,9 @@ stored in its own subdirectory (see table 4.9):</p>
 </tbody>
 </table>
 <p>Table 4.9. Model Types and their Location</p>
-<blockquote>
 <p>Separation of models into different types make it easier to design your business logic domain.
 This is also called the "Domain Driven Design" (or shortly, DDD). The person who proposed DDD was Eric Evans
 in his famous book called <em>Domain-Driven Design — Tackling Complexity in the Heart of Software</em>.</p>
-</blockquote>
 <p>Below, we will describe the principal model types further.</p>
 <h3 id="entities">Entities</h3>
 <p><em>Entities</em> are intended for storing some data and always have some <em>identifier</em> property, so you can uniquely identify the data.
@@ -1634,22 +1620,21 @@ class User
 define the properties using the private access type, and make
 them available to the caller through <em>getter</em> and <em>setter</em> public methods
 (like <code>getLogin()</code> and <code>setLogin()</code>, etc).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Model's behavior methods are not limited by getters and setters.
 You can create other methods which manipulate model's data.
 For example, you can define the <code>getFullName()</code> convenience method,
 which would return the user's full name, like "Mr. John Doe".</p>
-</blockquote>
+</div>
 <h3 id="repositories">Repositories</h3>
 <p><em>Repositories</em> are specific models responsible for storing and retrieving entities.
 For example, a <code>UserRepository</code> may represent a database table and provide methods
 for retrieving <code>User</code> entities. You typically use repositories when storing entities
 in a database. With repositories, you can encapsulate SQL query logic in the
 single place and easily maintain and test it.</p>
-<blockquote>
 <p>We will learn about repositories in more details in <a href="#doctrine">Database Management with Doctrine</a>, when
 talking about Doctrine library.</p>
-</blockquote>
 <h3 id="value-objects">Value Objects</h3>
 <p><em>Value objects</em> are a kind of model for which the identity is not as important as for entities.
 A value object is usually a small class identified by all of its attributes.
@@ -1748,9 +1733,7 @@ class Mailer
     }
 }
 </code></pre>
-<blockquote>
 <p>In Laminas Framework, you typically register your service models in Service Manager.</p>
-</blockquote>
 <h3 id="factories">Factories</h3>
 <p><em>Factories</em> are usually being designed to instantiate other models (particularly, service models). In the simplest cases you
 can create an instance of a service without any factory, just by using the <code>new</code> operator, but
@@ -1794,13 +1777,13 @@ whose goal is to instantiate the object. This method has the <code>$container</c
 manager. You can use <code>$container</code> to retrieve services from service manager and pass them to the constructor
 method of the service being instantiated.</p>
 <h2 id="determining-the-correct-model-type">Determining the Correct Model Type</h2>
-<blockquote>
-<p><strong>Isn't it confusing to have so many model types?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Isn't it confusing to have so many model types?</p>
 <p>Well, yes and no. At first, it may be a little difficult to determine
 the correct model type, but as soon you improve your
 skills, you will be able to do that intuitively. Just remember that model types improve the
 structure of your domain models.</p>
-</blockquote>
+</div>
 <p>When writing your own application, you may be confused
 when trying to decide to which model type your class belongs (whether it is an entity,
 value object, repository, service or factory). Below, a simple algorithm
@@ -1833,12 +1816,12 @@ when writing your own application:</p>
 </ul>
 </li>
 </ul>
-<blockquote>
-<p><strong>Hmm... what if I just store all my models in a single Model directory?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Hmm... what if I just store all my models in a single Model directory?</p>
 <p>Of course, you can, if you strongly wish. But, when you use Doctrine ORM
 library, you will notice that it utilizes DDD principles as well, so using DDD
 makes your application well-organized.</p>
-</blockquote>
+</div>
 <h2 id="other-model-types">Other Model Types</h2>
 <p>In your website, you will typically divide your principal model types (described above) into subtypes.
 For example, you will have:</p>
@@ -1883,10 +1866,8 @@ For example, you will have:</p>
         /Helper
             /Factory
 </code></pre>
-<blockquote>
 <p>It is possible to have arbitrarily many model subtypes. The more complex is your application, the more model subtypes
 you may have.</p>
-</blockquote>
 <h2 id="skinny-controllers-fat-models-simple-views">Skinny Controllers, Fat Models, Simple Views</h2>
 <p>When developing a website using Model-View-Controller pattern, there is a risk
 of misunderstanding the role of controllers, views and models. This results in making the
