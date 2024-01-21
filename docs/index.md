@@ -23,6 +23,10 @@ book, Twitter Bootstrap CSS Framework is used to produce nicely styled and laid 
 
 This book was initially written by Oleg Krivtsov as a Zend 3 book. As nobody took care of it Raffael Luthiger took over and rewrote it as a Laminas book.
 
+!!! note
+    Important: The book is now migrated to Laminas. There are links though to example applications which are still written in Zend.
+	Once I have some more spare time I will migrate them as well. Or maybe someone else has the time for it.
+
 ## Intended Audience
 
 This book is intended for web developers involved in the development of web-based applications in PHP.

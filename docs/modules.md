@@ -11,9 +11,9 @@ A module is an *autonomous* and *reusable* unit of your application. By default 
 the single *Application* module. And it is normal to put your models, views and controllers in
 this module, especially in a simple website.
 
-> A module can contain models, views, controllers and assets. Module classes typically live in a separate
-> namespace (the same as module name). Module has its own configuration file where you can register routes,
-> controllers, controller plugins, services, view helpers and so on.
+A module can contain models, views, controllers and assets. Module classes typically live in a separate
+namespace (the same as module name). Module has its own configuration file where you can register routes,
+controllers, controller plugins, services, view helpers and so on.
 
 You may need to create a new module when any of the following is true:
 
@@ -96,7 +96,7 @@ The last step is to enable PHP class autoloading. Our module source files will b
 be able to use standard autoloader provided by Composer. To do that, add the following line into your
 `composer.json` file under the `psr-4` key (substitute your module name):
 
-~~~
+~~~php
 ...
 "autoload": {
         "psr-4": {
@@ -109,11 +109,11 @@ be able to use standard autoloader provided by Composer. To do that, add the fol
 
 Next run the following command to update Composer autloader files:
 
-~~~
+~~~bash
 php composer.phar dump-autoload
 ~~~
-
-> The `dump-autoload` command just regenerates autoloader code without installing or updating any dependencies.
+!!! note
+    The `dump-autoload` command just regenerates autoloader code without installing or updating any dependencies.
 
 Great! The module is now ready for use. You can add controllers, models and views into it. Do not forget to
 modify the `module.config.php` file and register your routes, services, controllers, controller plugins, view helpers, etc.
@@ -123,7 +123,7 @@ modify the `module.config.php` file and register your routes, services, controll
 To let Laminas know about the new module and let it load it on app start up, do not forget to enable your new module in your
 *APP_DIR/config/modules.config.php* file as follows:
 
-~~~
+~~~php
 return [
     'Admin',
     //...
@@ -141,16 +141,15 @@ chapter, the application has several life stages represented by events. You may 
 register it in your module entry point. When an event is triggered, your listener method (or class) will be called allowing you to
 do something useful.
 
-> **Why would I want to register an event listener?**
->
-> Here are several practical applications of event listening that you may find useful:
->
->   * Listen to *Route* event to force the use of HTTPS secure connection.
->   * When your website is in maintenance mode, listen to *Route* event to catch all requests and redirect user to the single page.
->   * Listen to *Dispatch* event to redirect a user to a different page. For example, if user is not authenticated, redirect him to the login page.
->   * Listen to *Dispatch* event to override the default layout template for all controllers belonging to the module.
->   * Listen to *Dispatch Error* event to log and/or report any exception or error happening in your website.
->   * Listen to *Render* event to modify the content of the resulting web page.
+!!! note "Why would I want to register an event listener?"
+    Here are several practical applications of event listening that you may find useful:
+
+      * Listen to *Route* event to force the use of HTTPS secure connection.
+      * When your website is in maintenance mode, listen to *Route* event to catch all requests and redirect user to the single page.
+      * Listen to *Dispatch* event to redirect a user to a different page. For example, if user is not authenticated, redirect him to the login page.
+      * Listen to *Dispatch* event to override the default layout template for all controllers belonging to the module.
+      * Listen to *Dispatch Error* event to log and/or report any exception or error happening in your website.
+      * Listen to *Render* event to modify the content of the resulting web page.
 
 There are two ways to register an event listener within the `Module` class: either with the help of `Module`'s `init()` method or with the
 help of its `onBootstrap()` method. The difference between `init()` method and `onBootstrap()` method is that the `init()` method is called

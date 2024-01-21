@@ -5,12 +5,11 @@ based applications. In [Appendix A. Configuring Web Development Environment](#de
 Here we will provide some useful tips on using NetBeans for PHP programming.
 We will learn how to launch and interactively debug a laminas-based website.
 
-> *What if I want to use another IDE (not NetBeans) for developing my applications?*
->
-> Well, you can use any IDE you want. The problem is that it is impossible to cover
-> all IDEs for PHP development in this book. The author only provides instructions
-> for NetBeans IDE. It would be easier for a beginner to use NetBeans IDE. Advanced
-> developers may use an IDE of their choices.
+!!! note "What if I want to use another IDE (not NetBeans) for developing my applications?"
+    Well, you can use any IDE you want. The problem is that it is impossible to cover
+    all IDEs for PHP development in this book. The author only provides instructions
+    for NetBeans IDE. It would be easier for a beginner to use NetBeans IDE. Advanced
+    developers may use an IDE of their choices.
 
 ## Run Configuration
 
@@ -144,9 +143,10 @@ to the left of it (shown in figure B.7):
 
 ![Figure B.7. Setting a breakpoint](images/netbeans/breakpoint.png)
 
-> Be careful not to set a breakpoint on an empty line or on a comment line.
-> Such a breakpoint will be ignored by XDebug, and it will be marked by the "broken"
-> square (see figure B.8 for example):
+!!! note
+    Be careful not to set a breakpoint on an empty line or on a comment line.
+    Such a breakpoint will be ignored by XDebug, and it will be marked by the "broken"
+    square (see figure B.8 for example):
 
 ![Figure B.8. Inactive breakpoint](images/netbeans/breakpoint_on_comment.png)
 
@@ -351,14 +351,15 @@ The coloured bar at the top of the page displays the contribution of different f
 * *Green* shows the contribution of your own class methods;
 * *Orange* denotes time taken on traditional "procedural" functions (functions that are not part of a PHP classes).
 
-> Please note that the profiler creates a new data file in your */tmp* directory for each HTTP request to your website.
-> This may cause disk space exhaustion, which can be fixed only by rebooting your system.
-> So, when you've finished profiling your application, it is recommended to disable the profiling
-> by editing the *php.ini* file, commenting the `xdebug.profiler_enable` parameter as follows,
-> and then restarting the Apache web server.
->
-> `;xdebug.profiler_enable = 0`
->
+!!! note
+    Please note that the profiler creates a new data file in your */tmp* directory for each HTTP request to your website.
+    This may cause disk space exhaustion, which can be fixed only by rebooting your system.
+    So, when you've finished profiling your application, it is recommended to disable the profiling
+    by editing the *php.ini* file, commenting the `xdebug.profiler_enable` parameter as follows,
+    and then restarting the Apache web server.
+
+    `;xdebug.profiler_enable = 0`
+
 
 ## Summary
 
