@@ -302,10 +302,8 @@ from repository in different Linux distributions:</p>
 </tbody>
 </table>
 <p>Table A.1. Available PHP versions in different Linux distributions</p>
-<blockquote>
 <p>As you can see from the table above, for the purpose of Laminas development, you'll have to install
 Ubuntu 15.04 or later.</p>
-</blockquote>
 <p>When choosing between 32-bit and 64-bit versions of the system, remember that
 the 64 bit version of Linux Ubuntu will have more compatibility issues than its
 32-bit counterpart. The support of drivers can also cause problems on the
@@ -340,10 +338,11 @@ sudo apt-get upgrade
 The <code>sudo</code> command (stands for "Super User DO") allows to run another command,
 <code>apt-get</code> in our case, as system administrator (root). You typically use <code>sudo</code> when you
 need to elevate your privileges to install a package or edit some configuration file.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <code>sudo</code> command may request you for password. When prompted, enter the password
 under which you log into the system and press Enter.</p>
-</blockquote>
+</div>
 <p>Next, from a command shell, run the following commands:</p>
 <pre><code class="language-bash">sudo apt-get install apache2
 
@@ -353,10 +352,8 @@ sudo apt-get install libapache2-mod-php
 </code></pre>
 <p>The commands above download from repository and install the latest available
 versions of Apache HTTP Server, PHP engine and PHP extension module for Apache.</p>
-<blockquote>
 <p>The commands above may ask you for confirmation when installing a package.
 It is recommended to answer Yes (press "y" and then press Enter).</p>
-</blockquote>
 <p><strong>Fedora, CentOS or Red Hat Linux</strong></p>
 <p>First of all, it is recommended that you update your system by installing
 the latest available updates. To do this, from a command shell, run the
@@ -421,10 +418,11 @@ display errors on your PHP pages to screen.</p>
 <p><code>error_reporting = E_ALL</code></p>
 <p><code>display_errors = On</code></p>
 <p><code>display_startup_errors = On</code></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>To conveniently search within the file, press <code>F7</code> in Midnight Commander's editor window and
 enter the search string (the name of the parameter to search for).</p>
-</blockquote>
+</div>
 <p>Set your time zone settings (replace <code>&lt;your_time_zone&gt;</code> placeholder with your time zone,
 for example, <code>UTC</code> or <code>America/New_York</code>):</p>
 <p><code>date.timezone = &lt;your_time_zone&gt;</code></p>

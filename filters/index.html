@@ -255,11 +255,12 @@
 <p>In this chapter, we will provide an overview of standard filters that
 can be used with your web forms. A filter is a class which takes some input data, processes it,
 and produces some output data. We will also show how to write a custom filter.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In general, you can even use filters <em>outside</em> forms to process an arbitrary data.
 For example, filters may be used in a controller action to transform the data passed
 as GET and/or POST variables to certain format.</p>
-</blockquote>
+</div>
 <p>Laminas components covered in this chapter:</p>
 <table>
 <thead>
@@ -306,11 +307,12 @@ A filter class inheritance diagram is shown in figure 8.1. From that figure, you
 concrete class for most standard filters is the @<code>AbstractFilter</code> class, which implements
 the @<code>FilterInterface</code>[Laminas\Filter\FilterInterface] interface <sup id="fnref:filter_inheritance"><a class="footnote-ref" href="#fn:filter_inheritance">2</a></sup>.</p>
 <p><img alt="Figure 8.1. Filter class inheritance" src="../images/filters/filter_inheritance.png" /></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>You may notice that there is a strange filter called @<code>StaticFilter</code> which does not inherit from @<code>AbstractFilter</code>
 base class. This is because the @<code>StaticFilter</code> class is actually a "wrapper" (it is designed to be a proxy
 to another filter without explicit instantiation of that filter).</p>
-</blockquote>
+</div>
 <p>Standard filters provided by the @<code>Laminas\Filter</code> component, along with a brief description of each, are listed in table 8.1.</p>
 <p>As you can see from the table, the standard filters can be roughly divided into the following groups:</p>
 <ul>
@@ -486,10 +488,11 @@ the @<code>StringTrim</code> filter, you will easily cope with such input errors
 the constructor method which you can (optionally) pass with the complete list of options to
 initialize the filter, and the <code>setCharList()</code> and <code>getCharList()</code> methods which can be used for
 setting specific filter options.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>All standard filters have the constructor method (optionally) accepting an array of options
 for configuring the filter when instantiating it manually.</p>
-</blockquote>
+</div>
 <p>Below, we provide two code examples showing equivalent methods of manually creating an instance
 of the @<code>StringTrim</code> filter, setting its options, and filtering a value.</p>
 <p><strong>Example 1. Passing options to the constructor method.</strong></p>
@@ -593,9 +596,6 @@ the constructor initializes the filter as needed.</p>
 <p>In the previous example, you saw that you can use either the fully qualified filter class
 name or its short alias when instantiating the filter from the array. The short aliases for
 the standard filters are defined by the @<code>FilterPluginManager</code>[Laminas\Filter\FilterPluginManager] class.</p>
-<blockquote>
-<p>The @<code>FilterPluginManager</code>[Laminas\Filter\FilterPluginManager] class defines the short aliases for the standard filters.</p>
-</blockquote>
 <p>A standard filter's alias is typically the same as the class name. For example, the class
 @<code>Laminas\Filter\StringTrim</code> has the short alias @<code>StringTrim</code>.</p>
 <p>The filter plugin manager is internally used by the @<code>InputFilter</code>[Laminas\InputFilter\InputFilter] container class for
@@ -611,10 +611,11 @@ to process), the <code>filter()</code> method may throw a @<code>Laminas\Filter\
 This behavior can be seen in @<code>DateTimeFormatter</code> filter.</p>
 <p>Some filters (e.g., @<code>ToInt</code> or @<code>StringToLower</code>) may rise a PHP warning if the
 value provided is in incorrect format and cannot be filtered.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>It is recommended to read filter's documentation carefully to know what to expect
 of the filter you plan to use in your form.</p>
-</blockquote>
+</div>
 <h2 id="filter-usage-examples">Filter Usage Examples</h2>
 <p>Next, we will consider the usage of the most important standard filters. These
 describe the methods (and options) a filter has and provide code examples showing how
@@ -630,10 +631,11 @@ data to an integer. This filter may be useful when adding validation rules for
 form fields that must contain an integer numeric values (e.g., a drop-down list or a
 text field containing an amount of something).</p>
 <p>The @<code>ToInt</code> class has the single <code>filter()</code> method.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>ToInt</code> filter will not cast a non-scalar value. If you pass it an array, it
 will return it as is.</p>
-</blockquote>
+</div>
 <p>Below, you can find a code example illustrating the usage of the @<code>ToInt</code> filter.</p>
 <pre><code class="language-php">&lt;?php
 // Create ToInt filter.
@@ -1316,11 +1318,9 @@ $filteredValue = $filter-&gt;filter('How to Start a Business in 10 Days');
 
 // The expected filter's output is the 'how to start a business in 10 days'.
 </code></pre>
-<blockquote>
 <p>The @<code>StringToUpper</code> filter (converting a string to uppercase letters) is a "mirror reflection"
 of the @<code>StringToLower</code> filter and can be used by analogy. By that reason, we do not cover the @<code>StringToUpper</code>
 filter in this section.</p>
-</blockquote>
 <h4 id="pregreplace-filter">PregReplace Filter</h4>
 <p>The @<code>PregReplace</code> filter can be used for performing a regular expression search and replace in a string data.
 This filter is a wrapper over the <code>preg_replace()</code> PHP function. The public methods of the filter are provided in table 8.13 below.</p>
@@ -1428,10 +1428,11 @@ $filteredValue = $filter-&gt;filter(
 // The expected filter's output is the
 // '&lt;p&gt;Please click the following link.&lt;/p&gt;;'
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>StripTags</code> will not process a non-scalar value. If the value passed to the
 filter is non-scalar, the value will remain unfiltered.</p>
-</blockquote>
+</div>
 <h4 id="stripnewlines-filter">StripNewlines Filter</h4>
 <p>The @<code>StripNewlines</code> filter is a very simple filter which returns the input string
 without any newline control characters ("\r", "\n").</p>

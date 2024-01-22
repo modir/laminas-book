@@ -303,13 +303,14 @@ class Person
     }
 }
 </code></pre>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>You may notice that in example above we have the opening <code>&lt;?php</code> tag which
 tells the PHP engine that the text after the tag is a PHP code. In example above, when the file contains
 only the PHP code (without mixing PHP and HTML tags), you don't need to insert the
 closing <code>?&gt;</code> tag after the end of the code. Moreover, this is not recommended and may cause undesired
 effects, if you inadvertently add some character after the closing <code>?&gt;</code> tag.</p>
-</blockquote>
+</div>
 <p>The <code>Person</code> class above has a private property <code>$fullName</code> and three methods:</p>
 <ul>
 <li>
@@ -331,11 +332,12 @@ $person-&gt;setFullName('John Doe');
 // Print person's full name to screen.
 echo &quot;Person's full name is: &quot; . $person-&gt;getFullName() . &quot;\n&quot;;
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Classes allow to split your functionality into smaller blocks and make it well organised.
 Laminas consists of hundreds of classes.
 You will also write your own classes in your web applications.</p>
-</blockquote>
+</div>
 <h2 id="php-namespaces">PHP Namespaces</h2>
 <p>When you use classes from different libraries (or even classes from different components of a single library)
 in your program, the class names may conflict.
@@ -373,12 +375,13 @@ its fully-qualified name:</p>
 <pre><code class="language-php">&lt;?php
 $application = new \Laminas\Mvc\Application();
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note the leading back-slash in @<code>\Laminas\Mvc\Application</code>
 name. If you specify a class name with leading back-slash, this means the fully-qualified class name.
 It is also possible to specify class name relatively to the current namespace, in that case you do not
 specify the leading back-slash.</p>
-</blockquote>
+</div>
 <p>It is also possible to use the <em>alias</em> (short name for the class) with the
 help of PHP's <code>use</code> statement:</p>
 <pre><code class="language-php">&lt;?php
@@ -388,11 +391,12 @@ use Laminas\Mvc\Application;
 // Later in your code, use the short class name.
 $application = new Application();
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Although the alias allows to use a short class name instead of the full name,
 its usage is optional. You are not required to always use aliases, and can
 refer the class by its fully-qualified name.</p>
-</blockquote>
+</div>
 <p>Every PHP file of your application typically defines the namespace
 (except <em>index.php</em> entry script and config files, which typically do not).
 For example, the main module of your site, the <em>Application</em> module,

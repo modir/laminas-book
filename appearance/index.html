@@ -554,10 +554,11 @@ the <code>&lt;div&gt;</code> elements of the grid inside of it. The grid consist
 </code></pre>
 <p>In the code above, we used the navbar interface component provided by the Bootstrap.
 We also used the @<code>Url</code>[Laminas\View\Helper\Url] view helper to insert the links to the navigation items.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>We discussed the usage of the @<code>Url</code>[Laminas\View\Helper\Url] view helper in the <em>Generating URLs from Route</em> section
 in <a href="#routing">Routing</a>.</p>
-</blockquote>
+</div>
 <p>Next, put the breadcrumbs component to the corresponding grid row:</p>
 <pre><code class="language-php">&lt;!-- Breadcrumbs --&gt;
 &lt;ol class=&quot;breadcrumb&quot;&gt;
@@ -591,11 +592,12 @@ the <code>body</code> CSS rule in the <code>style.css</code> file and make it lo
 open the site in your browser, you should see the page as in figure 6.4. You can click
 the links in navigation bar to visit the pages like <em>About</em> or <em>Documentation</em>, etc.
 The content of a particular page is put into the content placeholder of our layout.</p>
-<blockquote>
-<p>The result can be seen in action in
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The result can also be seen in action in
 the <em>Hello World</em> sample application that is part of this book's example
 code available on GitHub.</p>
-</blockquote>
+</div>
 <h2 id="switching-between-layouts">Switching between Layouts</h2>
 <p>By default, Laminas provides you with a single layout template <em>layout.phtml</em>.
 In real-life applications, you will probably need to have several layouts
@@ -626,11 +628,12 @@ public function indexAction()
 that allows to access the instance of the @<code>ViewModel</code>[Laminas\View\Model\ViewModel] class associated with the
 layout template. To change the layout template for this particular action method,
 we called the <code>setTemplate()</code> method provided by the <code>ViewModel</code> class.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In addition to the @<code>Layout</code>[Laminas\Mvc\Controller\Plugin\Layout] controller plugin, there is the @<code>Layout</code>[Laminas\View\Helper\Layout] view helper
 which provides the same capabilities. With the @<code>Layout</code>[Laminas\View\Helper\Layout] view helper, you can, for
 example, switch layout from the "static" page which has no specific controller action.</p>
-</blockquote>
+</div>
 <h3 id="setting-layout-for-all-actions-of-a-controller">Setting Layout for All Actions of a Controller</h3>
 <p>If all action methods of a controller class need to use the same alternative layout,
 you can override the <code>onDispatch()</code> method of the @<code>AbstractActionController</code>
@@ -952,12 +955,13 @@ element at the bottom of your view template, as shown in the example below:</p>
 </code></pre>
 <p>This ensures the same effect is achieved as with @<code>InlineScript</code> view helper, but allows for
 better script readability and automatic syntax checking in NetBeans IDE.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>For @<code>HeadScript</code> and @<code>InlineScript</code> view helpers to work, you should ensure their content
 is echoed in layout view template (look at lines 23 and 62 of <em>layout.phtml</em> file). If
 you remove those lines from the layout template, the scripts won't be inserted in the
 web page.</p>
-</blockquote>
+</div>
 <h3 id="example">Example</h3>
 <p>For a real-life example of inserting a JavaScript code in your web page, let's add a page
 with auto-complete feature. With this feature, the web browser will predict
@@ -1066,10 +1070,8 @@ The <em>Typeahead</em> page will appear with the prompt to enter a continent nam
 For example, type <em>a</em> letter to see how Typeahead suggests you available
 variants (figure 6.7).</p>
 <p><img alt="Figure 6.7. Auto-complete feature" src="../images/appearance/typeahead.png" /></p>
-<blockquote>
 <p>You can see this example working in the <em>Hello World</em> sample bundled with this book
 by typing the URL "http://localhost/typeahead" in your browser.</p>
-</blockquote>
 <h2 id="adding-css-stylesheets-to-a-web-page">Adding CSS Stylesheets to a Web Page</h2>
 <p>CSS stylesheets are typically placed to the <code>&lt;head&gt;</code> section of an HTML document, either as a link to an
 external file (external CSS stylesheet files are usually stored in <code>APP_DIR/public/css</code> directory.)</p>
@@ -1290,14 +1292,14 @@ the item description will take the following form:</p>
 from creating the <code>Menu.php</code> file in the <em>View/Helper</em> directory under the <em>Application</em>
 module's source directory (figure 6.10).</p>
 <p><img alt="Figure 6.10. View helper directory" src="../images/appearance/view_helper_dir.png" /></p>
-<blockquote>
-<p><strong>Why do we place the view helper class under module's source directory?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Why do we place the view helper class under module's source directory?</p>
 <p>View helpers (unlike <code>.phtml</code> view templates) are stored under module's <code>src/</code> directory,
 because they are usual PHP classes and require to be resolved by a PHP
 class auto-loading feature. On the other hand, view templates are resolved by the special Laminas class
 called <em>view resolver</em>, and for this reason, view templates are stored under
 the module's <code>view/</code> directory.</p>
-</blockquote>
+</div>
 <p>Next, create the stub code for the <code>Menu</code> class:</p>
 <pre><code class="language-php">&lt;?php
 namespace Application\View\Helper;
@@ -1719,13 +1721,11 @@ takes a single flag parameter. If <code>true</code>, the view model is considere
 and the renderer returns the output of the view template to the application, otherwise
 its parents are rendered as well. The method <code>terminate()</code> tests whether the view model is terminal
 or not.</p>
-<blockquote>
 <p>The <code>setTerminal()</code> method is very useful in some situations, because with its help you
 can disable the rendering of the layout view template. If you return from controller the
 view model marked as terminal, the layout will not be applied. This can be used, for example,
 when you want to load part of a page asynchronously by an AJAX <sup id="fnref:ajax"><a class="footnote-ref" href="#fn:ajax">10</a></sup> request and need to insert
 its HTML code in the DOM tree of an existing page.</p>
-</blockquote>
 <h2 id="summary">Summary</h2>
 <p>Laminas Framework is shipped with Twitter Bootstrap that is a CSS framework
 allowing for creating visual appealing and professionally looking web

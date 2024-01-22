@@ -252,10 +252,11 @@ This programming interface is implemented in two levels:</p>
 </ol>
 <p>Typically, you use the API provided by high-level ORM component. At the same time, you can easily
 work with lower-level DBAL component, if you find that more suitable for your particular needs.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Doctrine is database-agnostic. In theory, when you use Doctrine you are able to abstract of database type
 and switch between databases more easily than when you use your database-dependent solution.</p>
-</blockquote>
+</div>
 <h4 id="sql-vs-dql">SQL vs. DQL</h4>
 <p>When using a relational database system, you typically use <em>SQL language</em> as a standard way for accessing
 database data and managing database schema. However, each DBMS usually has it own specific SQL language
@@ -345,13 +346,14 @@ are core Doctrine components (like <code>Annotations</code>, <code>Common</code>
 for other top-level components. The <code>DBAL</code> component provides an abstraction layer of database type.
 And on top of all that there is the <code>ORM</code> component providing API for working with data in object-oriented
 way. <code>DoctrineModule</code> and <code>DoctrineORMModule</code> components are designed for integration with Laminas Framework.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Doctrine ORM component uses the so called <a href="http://en.wikipedia.org/wiki/Data_mapper_pattern">Data Mapper</a>
-   pattern. This pattern tells that a database table can be represented as a PHP entity class. The database
-   in this pattern is considered as some kind of repository (storage of entities). When you retrieve an
-   entity from the repository, an SQL query is performed internally, and an instance of the PHP entity class
-   is constructed and its properties are filled with data.</p>
-</blockquote>
+pattern. This pattern tells that a database table can be represented as a PHP entity class. The database
+in this pattern is considered as some kind of repository (storage of entities). When you retrieve an
+entity from the repository, an SQL query is performed internally, and an instance of the PHP entity class
+is constructed and its properties are filled with data.</p>
+</div>
 <p>By analogy with Laminas components, Doctrine component names consist of two parts: the vendor name
 ("Doctrine") and the component name (e.g. "Common"). Below, you can find the list of
 Doctrine components together with their Composer-installable package names and brief descriptions:</p>

@@ -405,12 +405,13 @@ We recommend using upper case for SQL queries, since this is a common convention
 </code></pre>
 <p>In the command above, replace the password placeholder with the new password for the <code>blog</code> user.
 This password should be different than the password of the <em>root</em> user.</p>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>Here, we create the second user <code>blog</code>, because it is not recommended to give the web application
 ability to log into database under the <code>root</code> user. The <em>root</em> user has unlimited rights and it is
 poor security practice to give an application the ability to do any actions it wants. The <code>blog</code> user will
 have permissions to modify the <code>blog</code> database only, which is sufficient in our case.</p>
-</blockquote>
+</div>
 <p>You can check that the database has been created by typing the following command and pressing Enter:</p>
 <p><code>show databases;</code></p>
 <p>You should be able to see the output like below (note the <code>blog</code> line in the list of databases):</p>
@@ -440,11 +441,12 @@ many-to-many relationship between the <code>post</code> and the <code>tag</code>
   `date_created` datetime NOT NULL
 );
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>MySQL client allows easy entering of multi-line commands. Just press Enter when you want to move
 the caret to the next line. The command is considered to be fully entered when the semicolon (;)
 character is encountered.</p>
-</blockquote>
+</div>
 <p>The expected output of this command is the following:</p>
 <p><code>Query OK, 0 rows affected (0.22 sec)</code></p>
 <p>Next, create the <code>comment</code> table by typing the following:</p>
@@ -689,10 +691,8 @@ typically divided into two categories: application-wide configuration and module
 </ul>
 <p>When laminas-based website loads its configuration, it merges all configs into a single big array, thus
 forming the final Doctrine config "tree".</p>
-<blockquote>
 <p>By adding your application-specific Doctrine configuration, you extend and/or override the
 default configuration tree provided by the <em>DoctrineORMModule</em>.</p>
-</blockquote>
 <h2 id="specifying-database-connection-parameters">Specifying Database Connection Parameters</h2>
 <p>Below we provide content of the <em>autoload/local.php</em> file of the <em>Blog</em> web application.
 This config file contains the application-wide database connection settings for the <code>blog</code>
@@ -772,14 +772,15 @@ related documentation) for additional information.</p>
 </tbody>
 </table>
 <p>Table 12.1. Often Used Database Driver Classes</p>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>Because the <em>autoload/local.php</em> file contains environment-specific parameters,
 you only store its "distribution template", <em>local.php.dist</em> file, in version control.
 Each developer in your team then renames the <em>local.php.dist</em> file to <em>local.php</em> and
 enters his own password instead of the placeholder. The <em>local.php</em> file should not be version
 controlled, because you usually do not want other people on your team (or other people having
 access to your code repository) seeing the actual password.</p>
-</blockquote>
+</div>
 <div class="admonition note">
 <p class="admonition-title">What happens if I need several database connections?</p>
 <p>You can easily add more database connections by adding other keys below the <code>orm_default</code> key.
@@ -804,10 +805,11 @@ several often used examples of entities:</p>
     transaction ID, money amount, money currency, etc.</p>
 </li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In terms of Domain Driven Design pattern, entities are a kind of models designed for storing data.
-   For additional examples of entities and other types of models, please refer to <a href="#mvc">Model-View-Controller</a>.</p>
-</blockquote>
+For additional examples of entities and other types of models, please refer to <a href="../mvc">Model-View-Controller</a>.</p>
+</div>
 <p>In Doctrine ORM, an entity class is mapped on a certain database table. For example, the <code>User</code> entity
 is usually mapped on the <code>user</code> table (if needed, the table name may be arbitrary).</p>
 <p>For our <em>Blog</em> example application, we will create three entity classes:</p>
@@ -919,10 +921,11 @@ the code above, we use the following class-level tags (describing the whole enti
     this particular property (lines 15, 20, 25, 30, 35).</p>
 </li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The complete list of Doctrine-provided tags used in annotations can be found by the following
 <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html">link</a>.</p>
-</blockquote>
+</div>
 <h2 id="creating-entities">Creating Entities</h2>
 <p>For the <em>Application</em> module, entities are (by convention) stored inside the <em>Entity</em>
 directory under the module's source directory. Entity classes live inside the <code>Application\Entity</code>
@@ -1152,11 +1155,12 @@ separating words in a name, like <code>date_created</code>).</p>
 </tbody>
 </table>
 <p>Table 12.3. Getter and setter methods of the Post entity</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Note that we do not mark entity class methods with Doctrine annotations. There is just no need to
-   do that. However, you may mark methods with usual comments and non-Doctrine Docblock annotations,
-   if you strongly wish.</p>
-</blockquote>
+do that. However, you may mark methods with usual comments and non-Doctrine Docblock annotations,
+if you strongly wish.</p>
+</div>
 <h3 id="adding-the-comment-and-tag-entities">Adding the Comment and Tag Entities</h3>
 <p>By analogy with the <code>Post</code> entity, we next create the <code>Comment</code> and the <code>Tag</code> entity classes in
 the <em>Entity</em> directory. To do that, first, create <em>Comment.php</em> file and put the
@@ -1367,10 +1371,11 @@ class Post
 property will be the <em>collection</em> of comments related to certain post.</p>
 <p>We initialize the <code>$comments</code> property in class constructor (lines 24-27). By assigning it with
 a new instance of <code>Doctrine\Common\Collections\ArrayCollection</code> class.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>A Doctrine <code>ArrayCollection</code> is an array of objects, like usual PHP <code>array</code>, but with additional
 features required by Doctrine. It is implemented in <em>Doctrine\Common</em> component.</p>
-</blockquote>
+</div>
 <p>In lines 15-18, we add Doctrine annotations to the <code>$comments</code> property, so Doctrine knows how to
 get all comments associated with the post:</p>
 <ul>
@@ -1550,11 +1555,9 @@ In line 13, we tell Doctrine ORM that our entities are stored inside of <em>Enti
 directory under the module's <em>src</em> directory.</p>
 <h2 id="about-entity-manager">About Entity Manager</h2>
 <p><em>Entity manager</em> is the primary access point to ORM functionality provided by Doctrine.</p>
-<blockquote>
 <p><code>EntityManager</code> is a Doctrine class that lives in <code>Doctrine\ORM</code> namespace and used to
 retrieve entities from their repositories using search criteria and save entities
 back to database.</p>
-</blockquote>
 <p><code>EntityManager</code> is registered as a service in the Laminas Framework service manager.
 In your factory class, you retrieve the <code>EntityManager</code> from service manager as
 follows (if you need a different connection than <code>orm_default</code>, just replace the <code>orm_default</code> with
@@ -2007,10 +2010,8 @@ class PostForm extends Form
 </code></pre>
 <p>As you can see from the code above, the <code>PostForm</code> class defines a Laminas form with title, content,
 tags, and status fields. It also has the <em>Submit</em> button.</p>
-<blockquote>
 <p>Since we covered forms in details in previous chapters, here we do not explain the code
 presented above deeply.</p>
-</blockquote>
 <h3 id="adding-postmanager-service">Adding PostManager Service</h3>
 <p>According to Domain Driven Design pattern, we put business logic into service models. In our <em>Blog</em>
 sample, we will create and register the <em>PostManager</em> service. This service will have the <code>addNewPost()</code>
@@ -2417,10 +2418,11 @@ class PostManager
 <p>Above, we have the <code>updatePost()</code> method (lines 8-19) that takes an existing <code>Post</code> entity,
 the new title, content, status and the list of tags. It then updates entity's properties and
 saves changes to database using <code>flush()</code> method.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Note that the <code>updatePost()</code> method doesn't use the <code>persist()</code> method of entity manager, because
-   here we have existing post, not a new one.</p>
-</blockquote>
+here we have existing post, not a new one.</p>
+</div>
 <p>Then, we have the <code>convertTagsToString()</code> method (lines 22-36) which takes the post, goes through
 <code>Tag</code> entities associated with the post and formats and returns the comma-separated list of tags.</p>
 <h3 id="adding-controller-action-and-view-template">Adding Controller Action and View Template</h3>
@@ -2768,10 +2770,8 @@ class CommentForm extends Form
 }
 </code></pre>
 <p>As you see from the code above, the <code>CommentForm</code> form contains the author, comment fields, and the Submit button.</p>
-<blockquote>
 <p>Since we covered forms in details in previous chapters, here we do not explain the code
 presented above deeply.</p>
-</blockquote>
 <h3 id="modifying-postmanager_2">Modifying PostManager</h3>
 <p>Here, we add two methods:</p>
 <ul>
@@ -3082,20 +3082,25 @@ the tag cloud results in filtering posts by this tag.</p>
 <p>Earlier we mentioned that by default Doctrine uses the <code>Doctrine\ORM\EntityRepository</code> as the
 default repository class. Custom repository is a class extended from <code>EntityRepository</code> class.
 It is typically used when you need to encapsulate complex DQL queries and search logic in a single place in your code.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>It is also possible to put the DQL queries to controller class, but that would make controllers "fat".
-   Since we use MVC pattern, we strive to avoid that.</p>
+Since we use MVC pattern, we strive to avoid that.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">What is DQL?</p>
 <p>DQL is similar to SQL in sense that it allows to write and execute queries to database, but the result
-   of a query is an array of objects rather than an array of table rows. For more information on DQL
-   and its usage examples, please refer to this <a href="http://docs.doctrine-project.org/en/latest/reference/dql-doctrine-query-language.html">page</a>.</p>
-</blockquote>
+of a query is an array of objects rather than an array of table rows. For more information on DQL
+and its usage examples, please refer to this <a href="http://docs.doctrine-project.org/en/latest/reference/dql-doctrine-query-language.html">page</a>.</p>
+</div>
 <p>For our <em>Blog</em> sample web application, we need a custom repository which allows to find published
 posts having at least one tag (to calculate total count of tagged posts), and, to find published
 posts filtered by particular tag. We plan to encapsulate this search logic into the custom <code>PostRepository</code> repository.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Doctrine works with custom repositories transparently. This means, that you retrieve the repository
-   from <code>EntityManager</code> as usual and still can use its <code>findBy()</code>, <code>findOneBy()</code> and other methods.</p>
-</blockquote>
+from <code>EntityManager</code> as usual and still can use its <code>findBy()</code>, <code>findOneBy()</code> and other methods.</p>
+</div>
 <p>Create the <em>PostRepository.php</em> file inside the <em>Repository</em> directory under the module's source directory.
 Below, you can find the code of <code>PostRepository</code> class that has two public methods:</p>
 <ul>
