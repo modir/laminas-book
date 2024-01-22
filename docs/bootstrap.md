@@ -266,11 +266,12 @@ Table C.1 provides the summary of available grid classes and their breakdown pag
 
 Table C.1. CSS classes for defining layout grid
 
-> Bootstrap's grid system greatly simplifies the positioning of elements
-> on a web page. However, using the grid system is not mandatory. For example,
-> sometimes you may need a much more complex layout, and the simple grid system will be
-> insufficient. In such a case, you can create and use your custom layout by using
-> `<table>` or `<div>` HTML elements.
+!!! note
+    Bootstrap's grid system greatly simplifies the positioning of elements
+    on a web page. However, using the grid system is not mandatory. For example,
+    sometimes you may need a much more complex layout, and the simple grid system will be
+    insufficient. In such a case, you can create and use your custom layout by using
+    `<table>` or `<div>` HTML elements.
 
 ## Bootstrap's Interface Components
 
@@ -571,10 +572,13 @@ You can also remove some unused JavaScript code components from the resulting *b
 Additionally, you can choose different CSS parameters like background color, base text color and font family,
 and so on. There are more than a hundred customizable parameters available.
 
-> CSS customization is possible, because Bootstrap source files are stored in LESS [^less]
-> format, which allows to define variable parameters (like `@bodyBackground` or `@textColor`).
-> Once the parameters are defined, the LESS files are compiled into usual CSS files, minified
-> and made available for downloading.
+!!! note
+    CSS customization is possible, because Bootstrap source files are stored in LESS [^less]
+    format, which allows to define variable parameters (like `@bodyBackground` or `@textColor`).
+    Once the parameters are defined, the LESS files are compiled into usual CSS files, minified
+    and made available for downloading.
+
+    If you would like to read more about LESS then go to the [official website](https://lesscss.org/).
 
 When you have finished with tuning parameters, you can scroll the
 *Customize* page down and press the *Compile and Download*

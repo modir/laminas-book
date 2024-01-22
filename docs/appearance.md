@@ -387,8 +387,9 @@ Next, we put the navigation bar in the corresponding grid row:
 In the code above, we used the navbar interface component provided by the Bootstrap.
 We also used the @`Url`[Laminas\View\Helper\Url] view helper to insert the links to the navigation items.
 
-> We discussed the usage of the @`Url`[Laminas\View\Helper\Url] view helper in the *Generating URLs from Route* section
-> in [Routing](#routing).
+!!! note
+    We discussed the usage of the @`Url`[Laminas\View\Helper\Url] view helper in the *Generating URLs from Route* section
+    in [Routing](#routing).
 
 Next, put the breadcrumbs component to the corresponding grid row:
 
@@ -435,9 +436,10 @@ open the site in your browser, you should see the page as in figure 6.4. You can
 the links in navigation bar to visit the pages like *About* or *Documentation*, etc.
 The content of a particular page is put into the content placeholder of our layout.
 
-> The result can be seen in action in
-> the *Hello World* sample application that is part of this book's example
-> code available on GitHub.
+!!! note
+    The result can also be seen in action in
+    the *Hello World* sample application that is part of this book's example
+    code available on GitHub.
 
 ## Switching between Layouts
 
@@ -477,9 +479,10 @@ that allows to access the instance of the @`ViewModel`[Laminas\View\Model\ViewMo
 layout template. To change the layout template for this particular action method,
 we called the `setTemplate()` method provided by the `ViewModel` class.
 
-> In addition to the @`Layout`[Laminas\Mvc\Controller\Plugin\Layout] controller plugin, there is the @`Layout`[Laminas\View\Helper\Layout] view helper
-> which provides the same capabilities. With the @`Layout`[Laminas\View\Helper\Layout] view helper, you can, for
-> example, switch layout from the "static" page which has no specific controller action.
+!!! note
+    In addition to the @`Layout`[Laminas\Mvc\Controller\Plugin\Layout] controller plugin, there is the @`Layout`[Laminas\View\Helper\Layout] view helper
+    which provides the same capabilities. With the @`Layout`[Laminas\View\Helper\Layout] view helper, you can, for
+    example, switch layout from the "static" page which has no specific controller action.
 
 ### Setting Layout for All Actions of a Controller
 
@@ -842,10 +845,11 @@ element at the bottom of your view template, as shown in the example below:
 This ensures the same effect is achieved as with @`InlineScript` view helper, but allows for
 better script readability and automatic syntax checking in NetBeans IDE.
 
-> For @`HeadScript` and @`InlineScript` view helpers to work, you should ensure their content
-> is echoed in layout view template (look at lines 23 and 62 of *layout.phtml* file). If
-> you remove those lines from the layout template, the scripts won't be inserted in the
-> web page.
+!!! note
+    For @`HeadScript` and @`InlineScript` view helpers to work, you should ensure their content
+    is echoed in layout view template (look at lines 23 and 62 of *layout.phtml* file). If
+    you remove those lines from the layout template, the scripts won't be inserted in the
+    web page.
 
 ### Example
 
@@ -974,8 +978,8 @@ variants (figure 6.7).
 
 ![Figure 6.7. Auto-complete feature](images/appearance/typeahead.png)
 
-> You can see this example working in the *Hello World* sample bundled with this book
-> by typing the URL "http://localhost/typeahead" in your browser.
+You can see this example working in the *Hello World* sample bundled with this book
+by typing the URL "http://localhost/typeahead" in your browser.
 
 ## Adding CSS Stylesheets to a Web Page
 
@@ -1181,13 +1185,12 @@ module's source directory (figure 6.10).
 
 ![Figure 6.10. View helper directory](images/appearance/view_helper_dir.png)
 
-> **Why do we place the view helper class under module's source directory?**
->
-> View helpers (unlike `.phtml` view templates) are stored under module's `src/` directory,
-> because they are usual PHP classes and require to be resolved by a PHP
-> class auto-loading feature. On the other hand, view templates are resolved by the special Laminas class
-> called *view resolver*, and for this reason, view templates are stored under
-> the module's `view/` directory.
+!!! note "Why do we place the view helper class under module's source directory?"
+    View helpers (unlike `.phtml` view templates) are stored under module's `src/` directory,
+    because they are usual PHP classes and require to be resolved by a PHP
+    class auto-loading feature. On the other hand, view templates are resolved by the special Laminas class
+    called *view resolver*, and for this reason, view templates are stored under
+    the module's `view/` directory.
 
 Next, create the stub code for the `Menu` class:
 
@@ -1623,11 +1626,11 @@ and the renderer returns the output of the view template to the application, oth
 its parents are rendered as well. The method `terminate()` tests whether the view model is terminal
 or not.
 
-> The `setTerminal()` method is very useful in some situations, because with its help you
-> can disable the rendering of the layout view template. If you return from controller the
-> view model marked as terminal, the layout will not be applied. This can be used, for example,
-> when you want to load part of a page asynchronously by an AJAX [^ajax] request and need to insert
-> its HTML code in the DOM tree of an existing page.
+The `setTerminal()` method is very useful in some situations, because with its help you
+can disable the rendering of the layout view template. If you return from controller the
+view model marked as terminal, the layout will not be applied. This can be used, for example,
+when you want to load part of a page asynchronously by an AJAX [^ajax] request and need to insert
+its HTML code in the DOM tree of an existing page.
 
 [^ajax]: AJAX (stands for Asynchronous JavaScript and XML) is a capability provided by modern browsers
          which can be used to send data to, and retrieve data from, a server asynchronously

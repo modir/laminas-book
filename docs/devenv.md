@@ -84,7 +84,7 @@ from repository in different Linux distributions:
 
 Table A.1. Available PHP versions in different Linux distributions
 
-> As you can see from the table above, for the purpose of Laminas development, you'll have to install
+As you can see from the table above, for the purpose of Laminas development, you'll have to install
 Ubuntu 15.04 or later.
 
 When choosing between 32-bit and 64-bit versions of the system, remember that
@@ -129,8 +129,9 @@ The `sudo` command (stands for "Super User DO") allows to run another command,
 `apt-get` in our case, as system administrator (root). You typically use `sudo` when you
 need to elevate your privileges to install a package or edit some configuration file.
 
-> The `sudo` command may request you for password. When prompted, enter the password
-> under which you log into the system and press Enter.
+!!! note
+    The `sudo` command may request you for password. When prompted, enter the password
+    under which you log into the system and press Enter.
 
 Next, from a command shell, run the following commands:
 
@@ -145,8 +146,8 @@ sudo apt-get install libapache2-mod-php
 The commands above download from repository and install the latest available
 versions of Apache HTTP Server, PHP engine and PHP extension module for Apache.
 
-> The commands above may ask you for confirmation when installing a package.
-> It is recommended to answer Yes (press "y" and then press Enter).
+The commands above may ask you for confirmation when installing a package.
+It is recommended to answer Yes (press "y" and then press Enter).
 
 **Fedora, CentOS or Red Hat Linux**
 
@@ -245,8 +246,9 @@ display errors on your PHP pages to screen.
 
 `display_startup_errors = On`
 
-> To conveniently search within the file, press `F7` in Midnight Commander's editor window and
-> enter the search string (the name of the parameter to search for).
+!!! note
+    To conveniently search within the file, press `F7` in Midnight Commander's editor window and
+    enter the search string (the name of the parameter to search for).
 
 Set your time zone settings (replace `<your_time_zone>` placeholder with your time zone,
 for example, `UTC` or `America/New_York`):

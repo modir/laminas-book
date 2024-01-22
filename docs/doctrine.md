@@ -124,10 +124,11 @@ GRANT ALL PRIVILEGES ON blog.* TO blog@localhost IDENTIFIED BY '<passwd>';
 In the command above, replace the password placeholder with the new password for the `blog` user.
 This password should be different than the password of the *root* user.
 
-> Here, we create the second user `blog`, because it is not recommended to give the web application
-> ability to log into database under the `root` user. The *root* user has unlimited rights and it is
-> poor security practice to give an application the ability to do any actions it wants. The `blog` user will
-> have permissions to modify the `blog` database only, which is sufficient in our case.
+!!! important
+    Here, we create the second user `blog`, because it is not recommended to give the web application
+    ability to log into database under the `root` user. The *root* user has unlimited rights and it is
+    poor security practice to give an application the ability to do any actions it wants. The `blog` user will
+    have permissions to modify the `blog` database only, which is sufficient in our case.
 
 You can check that the database has been created by typing the following command and pressing Enter:
 
@@ -171,9 +172,10 @@ CREATE TABLE `post` (
 );
 ~~~
 
-> MySQL client allows easy entering of multi-line commands. Just press Enter when you want to move
-> the caret to the next line. The command is considered to be fully entered when the semicolon (;)
-> character is encountered.
+!!! note
+    MySQL client allows easy entering of multi-line commands. Just press Enter when you want to move
+    the caret to the next line. The command is considered to be fully entered when the semicolon (;)
+    character is encountered.
 
 The expected output of this command is the following:
 
@@ -461,8 +463,8 @@ typically divided into two categories: application-wide configuration and module
 When laminas-based website loads its configuration, it merges all configs into a single big array, thus
 forming the final Doctrine config "tree".
 
-> By adding your application-specific Doctrine configuration, you extend and/or override the
-> default configuration tree provided by the *DoctrineORMModule*.
+By adding your application-specific Doctrine configuration, you extend and/or override the
+default configuration tree provided by the *DoctrineORMModule*.
 
 ## Specifying Database Connection Parameters
 
@@ -522,12 +524,13 @@ related documentation) for additional information.
 
 Table 12.1. Often Used Database Driver Classes
 
-> Because the *autoload/local.php* file contains environment-specific parameters,
-> you only store its "distribution template", *local.php.dist* file, in version control.
-> Each developer in your team then renames the *local.php.dist* file to *local.php* and
-> enters his own password instead of the placeholder. The *local.php* file should not be version
-> controlled, because you usually do not want other people on your team (or other people having
-> access to your code repository) seeing the actual password.
+!!! important
+    Because the *autoload/local.php* file contains environment-specific parameters,
+    you only store its "distribution template", *local.php.dist* file, in version control.
+    Each developer in your team then renames the *local.php.dist* file to *local.php* and
+    enters his own password instead of the placeholder. The *local.php* file should not be version
+    controlled, because you usually do not want other people on your team (or other people having
+    access to your code repository) seeing the actual password.
 
 !!! note "What happens if I need several database connections?"
     You can easily add more database connections by adding other keys below the `orm_default` key.
@@ -549,8 +552,9 @@ several often used examples of entities:
   * `Payment` entity may contain properties related to a purchase of some goods. The properties are:
     transaction ID, money amount, money currency, etc.
 
-> In terms of Domain Driven Design pattern, entities are a kind of models designed for storing data.
-   For additional examples of entities and other types of models, please refer to [Model-View-Controller](#mvc).
+!!! note
+    In terms of Domain Driven Design pattern, entities are a kind of models designed for storing data.
+    For additional examples of entities and other types of models, please refer to [Model-View-Controller](../mvc).
 
 In Doctrine ORM, an entity class is mapped on a certain database table. For example, the `User` entity
 is usually mapped on the `user` table (if needed, the table name may be arbitrary).
@@ -670,8 +674,9 @@ Entity's properties are described with the following property-level tags:
   * `@ORM\Column(name="<column_name>")` is used to tell Doctrine ORM on which table column to map
     this particular property (lines 15, 20, 25, 30, 35).
 
-> The complete list of Doctrine-provided tags used in annotations can be found by the following
-> [link](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html).
+!!! note
+    The complete list of Doctrine-provided tags used in annotations can be found by the following
+    [link](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html).
 
 ## Creating Entities
 
@@ -837,9 +842,10 @@ Table 12.2. Properties of the Post entity
 
 Table 12.3. Getter and setter methods of the Post entity
 
-> Note that we do not mark entity class methods with Doctrine annotations. There is just no need to
-   do that. However, you may mark methods with usual comments and non-Doctrine Docblock annotations,
-   if you strongly wish.
+!!! note
+    Note that we do not mark entity class methods with Doctrine annotations. There is just no need to
+    do that. However, you may mark methods with usual comments and non-Doctrine Docblock annotations,
+    if you strongly wish.
 
 ### Adding the Comment and Tag Entities
 
@@ -1067,8 +1073,9 @@ property will be the *collection* of comments related to certain post.
 We initialize the `$comments` property in class constructor (lines 24-27). By assigning it with
 a new instance of `Doctrine\Common\Collections\ArrayCollection` class.
 
-> A Doctrine `ArrayCollection` is an array of objects, like usual PHP `array`, but with additional
-> features required by Doctrine. It is implemented in *Doctrine\Common* component.
+!!! note
+    A Doctrine `ArrayCollection` is an array of objects, like usual PHP `array`, but with additional
+    features required by Doctrine. It is implemented in *Doctrine\Common* component.
 
 In lines 15-18, we add Doctrine annotations to the `$comments` property, so Doctrine knows how to
 get all comments associated with the post:
@@ -1271,9 +1278,9 @@ directory under the module's *src* directory.
 
 *Entity manager* is the primary access point to ORM functionality provided by Doctrine.
 
-> `EntityManager` is a Doctrine class that lives in `Doctrine\ORM` namespace and used to
-> retrieve entities from their repositories using search criteria and save entities
-> back to database.
+`EntityManager` is a Doctrine class that lives in `Doctrine\ORM` namespace and used to
+retrieve entities from their repositories using search criteria and save entities
+back to database.
 
 `EntityManager` is registered as a service in the Laminas Framework service manager.
 In your factory class, you retrieve the `EntityManager` from service manager as
@@ -1745,8 +1752,8 @@ class PostForm extends Form
 As you can see from the code above, the `PostForm` class defines a Laminas form with title, content,
 tags, and status fields. It also has the *Submit* button.
 
-> Since we covered forms in details in previous chapters, here we do not explain the code
-> presented above deeply.
+Since we covered forms in details in previous chapters, here we do not explain the code
+presented above deeply.
 
 ### Adding PostManager Service
 
@@ -2195,8 +2202,9 @@ Above, we have the `updatePost()` method (lines 8-19) that takes an existing `Po
 the new title, content, status and the list of tags. It then updates entity's properties and
 saves changes to database using `flush()` method.
 
-> Note that the `updatePost()` method doesn't use the `persist()` method of entity manager, because
-   here we have existing post, not a new one.
+!!! note
+    Note that the `updatePost()` method doesn't use the `persist()` method of entity manager, because
+    here we have existing post, not a new one.
 
 Then, we have the `convertTagsToString()` method (lines 22-36) which takes the post, goes through
 `Tag` entities associated with the post and formats and returns the comma-separated list of tags.
@@ -2583,8 +2591,8 @@ class CommentForm extends Form
 
 As you see from the code above, the `CommentForm` form contains the author, comment fields, and the Submit button.
 
-> Since we covered forms in details in previous chapters, here we do not explain the code
-> presented above deeply.
+Since we covered forms in details in previous chapters, here we do not explain the code
+presented above deeply.
 
 ### Modifying PostManager
 
@@ -2925,19 +2933,22 @@ Earlier we mentioned that by default Doctrine uses the `Doctrine\ORM\EntityRepos
 default repository class. Custom repository is a class extended from `EntityRepository` class.
 It is typically used when you need to encapsulate complex DQL queries and search logic in a single place in your code.
 
-> It is also possible to put the DQL queries to controller class, but that would make controllers "fat".
-   Since we use MVC pattern, we strive to avoid that.
+!!! note
+    It is also possible to put the DQL queries to controller class, but that would make controllers "fat".
+    Since we use MVC pattern, we strive to avoid that.
 
-> DQL is similar to SQL in sense that it allows to write and execute queries to database, but the result
-   of a query is an array of objects rather than an array of table rows. For more information on DQL
-   and its usage examples, please refer to this [page](http://docs.doctrine-project.org/en/latest/reference/dql-doctrine-query-language.html).
+!!! note "What is DQL?"
+    DQL is similar to SQL in sense that it allows to write and execute queries to database, but the result
+    of a query is an array of objects rather than an array of table rows. For more information on DQL
+    and its usage examples, please refer to this [page](http://docs.doctrine-project.org/en/latest/reference/dql-doctrine-query-language.html).
 
 For our *Blog* sample web application, we need a custom repository which allows to find published
 posts having at least one tag (to calculate total count of tagged posts), and, to find published
 posts filtered by particular tag. We plan to encapsulate this search logic into the custom `PostRepository` repository.
 
-> Doctrine works with custom repositories transparently. This means, that you retrieve the repository
-   from `EntityManager` as usual and still can use its `findBy()`, `findOneBy()` and other methods.
+!!! note
+    Doctrine works with custom repositories transparently. This means, that you retrieve the repository
+    from `EntityManager` as usual and still can use its `findBy()`, `findOneBy()` and other methods.
 
 Create the *PostRepository.php* file inside the *Repository* directory under the module's source directory.
 Below, you can find the code of `PostRepository` class that has two public methods:

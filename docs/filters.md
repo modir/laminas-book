@@ -4,9 +4,10 @@ In this chapter, we will provide an overview of standard filters that
 can be used with your web forms. A filter is a class which takes some input data, processes it,
 and produces some output data. We will also show how to write a custom filter.
 
-> In general, you can even use filters *outside* forms to process an arbitrary data.
-> For example, filters may be used in a controller action to transform the data passed
-> as GET and/or POST variables to certain format.
+!!! note
+    In general, you can even use filters *outside* forms to process an arbitrary data.
+    For example, filters may be used in a controller action to transform the data passed
+    as GET and/or POST variables to certain format.
 
 Laminas components covered in this chapter:
 
@@ -63,9 +64,10 @@ the @`FilterInterface`[Laminas\Filter\FilterInterface] interface [^filter_inheri
       And, the @`Decompress` filter inherits from the @`Compress` filter, because these filters are in fact very similar.
       By analogy, the @`Decrypt`[Laminas\Filter\Decrypt] filter inherits from the @`Encrypt`[Laminas\Filter\Encrypt] filter, because they are the "mirror reflection" of each other as well.
 
-> You may notice that there is a strange filter called @`StaticFilter` which does not inherit from @`AbstractFilter`
-> base class. This is because the @`StaticFilter` class is actually a "wrapper" (it is designed to be a proxy
-> to another filter without explicit instantiation of that filter).
+!!! note
+    You may notice that there is a strange filter called @`StaticFilter` which does not inherit from @`AbstractFilter`
+    base class. This is because the @`StaticFilter` class is actually a "wrapper" (it is designed to be a proxy
+    to another filter without explicit instantiation of that filter).
 
 Standard filters provided by the @`Laminas\Filter` component, along with a brief description of each, are listed in table 8.1.
 
@@ -149,8 +151,9 @@ the constructor method which you can (optionally) pass with the complete list of
 initialize the filter, and the `setCharList()` and `getCharList()` methods which can be used for
 setting specific filter options.
 
-> All standard filters have the constructor method (optionally) accepting an array of options
-> for configuring the filter when instantiating it manually.
+!!! note
+    All standard filters have the constructor method (optionally) accepting an array of options
+    for configuring the filter when instantiating it manually.
 
 Below, we provide two code examples showing equivalent methods of manually creating an instance
 of the @`StringTrim` filter, setting its options, and filtering a value.
@@ -282,8 +285,6 @@ In the previous example, you saw that you can use either the fully qualified fil
 name or its short alias when instantiating the filter from the array. The short aliases for
 the standard filters are defined by the @`FilterPluginManager`[Laminas\Filter\FilterPluginManager] class.
 
-> The @`FilterPluginManager`[Laminas\Filter\FilterPluginManager] class defines the short aliases for the standard filters.
-
 A standard filter's alias is typically the same as the class name. For example, the class
 @`Laminas\Filter\StringTrim` has the short alias @`StringTrim`.
 
@@ -306,8 +307,9 @@ This behavior can be seen in @`DateTimeFormatter` filter.
 Some filters (e.g., @`ToInt` or @`StringToLower`) may rise a PHP warning if the
 value provided is in incorrect format and cannot be filtered.
 
-> It is recommended to read filter's documentation carefully to know what to expect
-> of the filter you plan to use in your form.
+!!! note
+    It is recommended to read filter's documentation carefully to know what to expect
+    of the filter you plan to use in your form.
 
 ## Filter Usage Examples
 
@@ -331,8 +333,9 @@ text field containing an amount of something).
 
 The @`ToInt` class has the single `filter()` method.
 
-> The @`ToInt` filter will not cast a non-scalar value. If you pass it an array, it
-> will return it as is.
+!!! note
+    The @`ToInt` filter will not cast a non-scalar value. If you pass it an array, it
+    will return it as is.
 
 Below, you can find a code example illustrating the usage of the @`ToInt` filter.
 
@@ -820,9 +823,9 @@ $filteredValue = $filter->filter('How to Start a Business in 10 Days');
 // The expected filter's output is the 'how to start a business in 10 days'.
 ~~~
 
-> The @`StringToUpper` filter (converting a string to uppercase letters) is a "mirror reflection"
-> of the @`StringToLower` filter and can be used by analogy. By that reason, we do not cover the @`StringToUpper`
-> filter in this section.
+The @`StringToUpper` filter (converting a string to uppercase letters) is a "mirror reflection"
+of the @`StringToLower` filter and can be used by analogy. By that reason, we do not cover the @`StringToUpper`
+filter in this section.
 
 #### PregReplace Filter
 
@@ -894,8 +897,9 @@ $filteredValue = $filter->filter(
 // '<p>Please click the following link.</p>;'
 ~~~
 
-> The @`StripTags` will not process a non-scalar value. If the value passed to the
-> filter is non-scalar, the value will remain unfiltered.
+!!! note
+    The @`StripTags` will not process a non-scalar value. If the value passed to the
+    filter is non-scalar, the value will remain unfiltered.
 
 #### StripNewlines Filter
 

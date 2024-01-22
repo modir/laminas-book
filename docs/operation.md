@@ -48,11 +48,12 @@ class Person
 }
 ~~~
 
-> You may notice that in example above we have the opening `<?php` tag which
-> tells the PHP engine that the text after the tag is a PHP code. In example above, when the file contains
-> only the PHP code (without mixing PHP and HTML tags), you don't need to insert the
-> closing `?>` tag after the end of the code. Moreover, this is not recommended and may cause undesired
-> effects, if you inadvertently add some character after the closing `?>` tag.
+!!! important
+    You may notice that in example above we have the opening `<?php` tag which
+    tells the PHP engine that the text after the tag is a PHP code. In example above, when the file contains
+    only the PHP code (without mixing PHP and HTML tags), you don't need to insert the
+    closing `?>` tag after the end of the code. Moreover, this is not recommended and may cause undesired
+    effects, if you inadvertently add some character after the closing `?>` tag.
 
 The `Person` class above has a private property `$fullName` and three methods:
 
@@ -75,9 +76,10 @@ $person->setFullName('John Doe');
 echo "Person's full name is: " . $person->getFullName() . "\n";
 ~~~
 
-> Classes allow to split your functionality into smaller blocks and make it well organised.
-> Laminas consists of hundreds of classes.
-> You will also write your own classes in your web applications.
+!!! note
+    Classes allow to split your functionality into smaller blocks and make it well organised.
+    Laminas consists of hundreds of classes.
+    You will also write your own classes in your web applications.
 
 ## PHP Namespaces
 
@@ -127,10 +129,11 @@ its fully-qualified name:
 $application = new \Laminas\Mvc\Application();
 ~~~
 
-> Please note the leading back-slash in @`\Laminas\Mvc\Application`
-name. If you specify a class name with leading back-slash, this means the fully-qualified class name.
-It is also possible to specify class name relatively to the current namespace, in that case you do not
-specify the leading back-slash.
+!!! note
+    Please note the leading back-slash in @`\Laminas\Mvc\Application`
+    name. If you specify a class name with leading back-slash, this means the fully-qualified class name.
+    It is also possible to specify class name relatively to the current namespace, in that case you do not
+    specify the leading back-slash.
 
 It is also possible to use the *alias* (short name for the class) with the
 help of PHP's `use` statement:
@@ -144,9 +147,10 @@ use Laminas\Mvc\Application;
 $application = new Application();
 ~~~
 
-> Although the alias allows to use a short class name instead of the full name,
-> its usage is optional. You are not required to always use aliases, and can
-> refer the class by its fully-qualified name.
+!!! note
+    Although the alias allows to use a short class name instead of the full name,
+    its usage is optional. You are not required to always use aliases, and can
+    refer the class by its fully-qualified name.
 
 Every PHP file of your application typically defines the namespace
 (except *index.php* entry script and config files, which typically do not).

@@ -178,8 +178,9 @@ As you can see from table 13.2, you can also modify the schema by calling `addSq
 can be used to create a table, to update a table or to remove a table. It can also be used, for example, to insert
 some data to a table (however, inserting data is not a schema change).
 
-> Doctrine migrations are designed for schema changes, not for inserting data to the database. Although,
-> inserting some initial data to database is useful in some cases.
+!!! note
+    Doctrine migrations are designed for schema changes, not for inserting data to the database. Although,
+    inserting some initial data to database is useful in some cases.
 
 Now that you know how to create a migration, let's create a couple of migrations for our *Blog* sample.
 

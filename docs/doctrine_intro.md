@@ -62,8 +62,9 @@ This programming interface is implemented in two levels:
 Typically, you use the API provided by high-level ORM component. At the same time, you can easily
 work with lower-level DBAL component, if you find that more suitable for your particular needs.
 
-> Doctrine is database-agnostic. In theory, when you use Doctrine you are able to abstract of database type
-> and switch between databases more easily than when you use your database-dependent solution.
+!!! note
+    Doctrine is database-agnostic. In theory, when you use Doctrine you are able to abstract of database type
+    and switch between databases more easily than when you use your database-dependent solution.
 
 #### SQL vs. DQL
 
@@ -167,11 +168,12 @@ for other top-level components. The `DBAL` component provides an abstraction lay
 And on top of all that there is the `ORM` component providing API for working with data in object-oriented
 way. `DoctrineModule` and `DoctrineORMModule` components are designed for integration with Laminas Framework.
 
-> Doctrine ORM component uses the so called [Data Mapper](http://en.wikipedia.org/wiki/Data_mapper_pattern)
-   pattern. This pattern tells that a database table can be represented as a PHP entity class. The database
-   in this pattern is considered as some kind of repository (storage of entities). When you retrieve an
-   entity from the repository, an SQL query is performed internally, and an instance of the PHP entity class
-   is constructed and its properties are filled with data.
+!!! note
+    Doctrine ORM component uses the so called [Data Mapper](http://en.wikipedia.org/wiki/Data_mapper_pattern)
+    pattern. This pattern tells that a database table can be represented as a PHP entity class. The database
+    in this pattern is considered as some kind of repository (storage of entities). When you retrieve an
+    entity from the repository, an SQL query is performed internally, and an instance of the PHP entity class
+    is constructed and its properties are filled with data.
 
 By analogy with Laminas components, Doctrine component names consist of two parts: the vendor name
 ("Doctrine") and the component name (e.g. "Common"). Below, you can find the list of
