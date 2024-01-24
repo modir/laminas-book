@@ -281,10 +281,8 @@ hexadecimal digits (for example, the space character will be replaced by '%20').
 <p><em>Routing</em> is a mechanism which allows to map HTTP request to a controller's action.
 With routing, Laminas knows which of the controller's action method to execute
 as the result of the request. For example, you can map "http://localhost/" URL to <code>IndexController::indexAction()</code> method,
-and "http://localhost/about" URL to <code>IndexController::aboutAction()</code> method.</p>
-<blockquote>
-<p>You define the mapping between URLs and controllers with the help of <em>routes</em>.</p>
-</blockquote>
+and "http://localhost/about" URL to <code>IndexController::aboutAction()</code> method.
+You define the mapping between URLs and controllers with the help of <em>routes</em>.</p>
 <p>There are several standard route types provided by Laminas Framework (shown in table 5.1).
 These route types are implemented as classes living in the @<code>Laminas\Router\Http</code>[Laminas\Router] namespace.</p>
 <table>
@@ -421,9 +419,10 @@ the @<code>TreeRouteStack</code>[Laminas\Router\Http\TreeRouteStack] is used by 
 <p>You can use the optional <code>default_params</code> key (line 11) to define the <em>default values</em> for parameters
 for all routes at once. However, you typically do not use this key and define
 the defaults on a per-route basis.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>We will show how you extract parameters from route later in this chapter.</p>
-</blockquote>
+</div>
 <h3 id="configuration-for-simple-routes">Configuration for Simple Routes</h3>
 <p>A typical route has the <em>name</em>, <em>type</em> and <em>options</em>:</p>
 <ul>
@@ -450,10 +449,11 @@ like "home" or "about". The <code>type</code> key specifies the fully qualified 
 <p>The optional <code>priority</code> key allows to define the priority (which should be an integer number)
 of the route in the priority list (routes with higher priority will be visited first). If you
 omit the <code>priority</code> key, the routes will be visited in the LIFO <sup id="fnref:lifo"><a class="footnote-ref" href="#fn:lifo">2</a></sup> order.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Routes having equal priority will be visited in the LIFO order. Thus, for the best performance, you should
 register routes that will match most often in the last turn, and least common routes should be registered first.</p>
-</blockquote>
+</div>
 <p>The <code>options</code> key defines the array of route's options. We will discuss the options
 in the following sections of this chapter.</p>
 <h3 id="configuration-for-nested-routes">Configuration for Nested Routes</h3>
@@ -485,11 +485,12 @@ and add your child routes under that key, like below:</p>
     ]
 ],
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Looking at the two examples above, you won't see the explicit usage of @<code>Part</code>[Laminas\Router\Http\Part] and
 @<code>Chain</code>[Laminas\Router\Http\Chain] route types, because (for your convenience) they are used by the Laminas automatically when
 it encounters the <code>child_routes</code> and <code>chain_routes</code> keys in your routing configuration.</p>
-</blockquote>
+</div>
 <h3 id="default-routing-configuration-in-laminas-skeleton-application">Default Routing Configuration in Laminas Skeleton Application</h3>
 <p>Now that you know how to configure routes and organize them in compound structures,
 let's look at the real life example. In a fresh Laminas Skeleton Application, the routing
@@ -590,32 +591,36 @@ see the <em>About</em> page.</p>
 <h2 id="segment-route-type">Segment Route Type</h2>
 <p>The <em>Segment</em> route type allows for matching the route string against one
 or several URL path segments.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you look at the <em>module.config.php</em> file, you can see the <em>Segment</em> route type is
 used inside of the "application" route to make actions of your <code>IndexController</code>
 automatically mapped to site URLs. You just add an action method to your <code>IndexController</code> class,
 and it becomes available by a URL like "http://localhost/application/&lt;action&gt;".
 For example, you can see the <em>About</em> page of your site with the following URL:
 "http://localhost/application/about".</p>
-</blockquote>
+</div>
 <p>To demonstrate the creation of the <em>Segment</em> route type, let's implement
-a controller action which will generate a simple barcode image.
-Barcodes are widely used in supermarkets for optically recognizing goods in your
-shopping cart. The barcodes may be of different types and have different
+a controller action which will generate a simple barcode image. The barcodes may be of different types and have different
 labels. We will use the <em>Segment</em> route type to map the action to a URL like
 "http://localhost/barcode/&lt;type&gt;/&lt;label&gt;".</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Barcodes are widely used in supermarkets for optically recognizing goods in your
+shopping cart.</p>
+</div>
 <p>To be able to use barcodes, you need to install the @<code>Laminas\Barcode</code> component with Composer, by
 typing the following command:</p>
-<p><code>php composer.phar require laminas/laminas-barcode</code></p>
-</blockquote>
-<p>W&gt; Please note that for barcode images to work, you need to have the GD<sup id="fnref:gd"><a class="footnote-ref" href="#fn:gd">3</a></sup> extension
-W&gt; of the PHP engine installed and enabled. In Linux Ubuntu, you can install this extension with the
-W&gt; following command:
-W&gt;
-W&gt; <code>sudo apt-get install php-gd</code>
-W&gt;
-W&gt; After installing the extension, restart Apache to apply your changes.</p>
+<pre><code class="language-bash">php composer.phar require laminas/laminas-barcode
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that for barcode images to work, you need to have the GD<sup id="fnref:gd"><a class="footnote-ref" href="#fn:gd">3</a></sup> extension
+of the PHP engine installed and enabled. In Linux Ubuntu, you can install this extension with the
+following command:</p>
+<p><code>sudo apt-get install php-gd</code></p>
+<p>After installing the extension, restart Apache to apply your changes.</p>
+</div>
 <p>First, we define the "barcode" route in the <em>module.config.php</em> file:</p>
 <pre><code class="language-php">'barcode' =&gt; [
     'type' =&gt; Segment::class,
@@ -683,11 +688,12 @@ two arguments: the variable name and its default value.</p>
 In line 14 we define the label text for the barcode. In lines 18-19 we
 create the @<code>Barcode</code>[Laminas\Barcode\Barcode] object with the factory method. Finally, in line 23 we
 render the image file by dumping it to PHP output stream.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>@<code>Laminas\Barcode</code> is an auxiliary component used for generation of various
 barcode images. For additional information about this component, please
 refer to the corresponding section of Laminas Framework reference manual.</p>
-</blockquote>
+</div>
 <p>In line 26 we return the @<code>Response</code>[Laminas\Http\PhpEnvironment\Response] object to suppress the default view rendering.</p>
 <p>Now, enter the "http://localhost/barcode" URL into your browser to see
 the barcode image (shown in figure 5.6):</p>
@@ -711,11 +717,12 @@ h. http://localhost/barcode/ean2/12
 matched against a regular expression.</p>
 <p>For example, assume you want to create a simple documentation system for your website.
 The documentation would consist of "static" pages mapped to URLs like <em>/doc/&lt;page_name&gt;.html</em>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>By the term "static page" we refer to a page which mostly contains static HTML code
 plus several PHP inline fragments. For such simple pages you do not need to create
 separate controller actions. All "static" pages can be served by the single controller action.</p>
-</blockquote>
+</div>
 <p>Let's implement the route which will serve the "static" pages of the site. Because "static"
 pages are simple, you typically won't need to add per-page action methods
 to the controller. All pages will be handled by the single action <code>IndexController::docAction()</code>.</p>
@@ -739,10 +746,8 @@ The expression contains the named capture <sup id="fnref:capture"><a class="foot
 the router on match together with the default parameters.</p>
 <p>Line 9 contains <code>spec</code> option, which is used for generating URLs by route (we will discuss generating URLs
 by route later in this chapter).</p>
-<blockquote>
 <p>Do not forget to add the following line to the beginning of <code>module.config.php</code> file:</p>
 <p><code>use Laminas\Router\Http\Regex;</code></p>
-</blockquote>
 <p>Next, add the following action to <code>IndexController</code> class:</p>
 <pre><code class="language-php">public function docAction()
 {
@@ -801,13 +806,14 @@ use in your site (figure 5.8):</p>
 <p>Clicking the <em>Introduction</em> link will direct you to the "Introduction" static page.
 You can also add other pages to the <em>doc</em> directory to make them automatically
 available for site users through our <em>Regex</em> route.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>One disadvantage of such a documentation system is that it does not work well if you place nested
 pages in subdirectories under the <em>doc</em> directory. The reason of this limitation lies in the way the
 <em>Regex</em> route assembles URLs. You can't generate URLs containing slash characters, as these "unsafe"
 characters will be automatically URL-encoded. We will work-around this problem with our custom route
 type that we will create at the end of this chapter.</p>
-</blockquote>
+</div>
 <h2 id="other-route-types">Other Route Types</h2>
 <p>The <em>Hostname</em>, <em>Scheme</em>, and <em>Method</em> route types are used less commonly
 compared to the route types mentioned previously.</p>
@@ -943,10 +949,11 @@ The useful methods of the @<code>RouteMatch</code>[Laminas\Router\RouteMatch] cl
 </tbody>
 </table>
 <p>Table 5.3. Laminas\Router\RouteMatch class methods</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In most cases, it will be sufficient to use the @<code>Params</code> controller plugin, but alternatively
 you can use the @<code>RouteMatch</code>[Laminas\Router\RouteMatch] object for accomplishing the same task.</p>
-</blockquote>
+</div>
 <p>To get the @<code>RouteMatch</code>[Laminas\Router\RouteMatch] object from your controller's action method, you can use the following
 code:</p>
 <pre><code class="language-php">// An example action.
@@ -1004,13 +1011,14 @@ which takes the route name as an input argument:</p>
 <p>In the lines above, we generate two relative URLs. In line 2, we call the @<code>Url</code>[Laminas\View\Helper\Url] view helper
 and pass the "home" route name as its parameter. In line 5, we pass the "about" route name as
 an argument for the @<code>Url</code>[Laminas\View\Helper\Url] view helper.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In the example above, the @<code>Url</code>[Laminas\View\Helper\Url] view helper internally uses the @<code>RouteMatch</code>[Laminas\Router\RouteMatch] object and calls
 the @<code>Literal</code>[Laminas\Router\Http\Literal] route to assemble the URL string by route name.</p>
-</blockquote>
+</div>
 <p>After the @<code>PhpRenderer</code> class executes the view template's
 code, the output HTML markup will be the following:</p>
-<pre><code class="language-php">&lt;!-- A hyperlink to Home page --&gt;
+<pre><code class="language-html">&lt;!-- A hyperlink to Home page --&gt;
 &lt;a href=&quot;/&quot;&gt;Home page&lt;/a&gt;
 
 &lt;!-- A hyperlink to About page --&gt;
@@ -1051,7 +1059,7 @@ code, the output HTML markup will be the following:</p>
  Introduction &lt;/a&gt;
 </code></pre>
 <p>This will generate the following HTML markup:</p>
-<pre><code class="language-php">&lt;!-- A hyperlink to Introduction page --&gt;
+<pre><code class="language-html">&lt;!-- A hyperlink to Introduction page --&gt;
 &lt;a href=&quot;/doc/introduction.html&quot;&gt; Introduction &lt;/a&gt;
 </code></pre>
 <h4 id="generating-absolute-urls">Generating Absolute URLs</h4>
@@ -1072,7 +1080,7 @@ argument, empty array as the second argument, and an array containing <code>forc
 option as the third argument. In lines 6-7, we also pass the <code>force_canonical</code> option
 as the third argument for generating the URL of the About page.</p>
 <p>The resulting HTML markup of the code above will be as follows:</p>
-<pre><code class="language-php">&lt;!-- A hyperlink to Home page --&gt;
+<pre><code class="language-html">&lt;!-- A hyperlink to Home page --&gt;
 &lt;a href=&quot;http://localhost/&quot; &gt; Home page &lt;/a&gt;
 
 &lt;!-- A hyperlink to About page --&gt;
@@ -1106,10 +1114,11 @@ public function someAction()
               ['action'=&gt;'about'], ['force_canonical'=&gt;true]);
 }
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The arguments the <code>Url</code> plugin takes and their meaning are identical to the @<code>Url</code>[Laminas\View\Helper\Url] view helper's
 ones. So, you can generate absolute or relative URLs the same way you did in your view templates.</p>
-</blockquote>
+</div>
 <h3 id="url-encoding">URL Encoding</h3>
 <p>When generating URLs either with the @<code>Url</code>[Laminas\View\Helper\Url] view helper or with the @<code>Url</code>[Laminas\Mvc\Controller\Plugin\Url] controller plugin,
 you should remember that URLs may only contain "safe" characters from ASCII character set. Thus,
@@ -1124,7 +1133,7 @@ with the value "/chapter1/introduction".</p>
 <p>We could assume it generates the URL like "/doc/chapter1/introduction.html". But
 because the slash ('/') character is unsafe, it will be replaced with the "%2F" characters
 for security reasons, and we will have the following HTML code:</p>
-<pre><code class="language-text">&lt;!-- A hyperlink to Introduction page --&gt;
+<pre><code class="language-html">&lt;!-- A hyperlink to Introduction page --&gt;
 &lt;a href=&quot;/doc/chapter1%2Fintroduction.html&quot;&gt; Introduction &lt;/a&gt;
 </code></pre>
 <p>Unfortunately, this hyperlink is unusable, because it won't match our
@@ -1491,10 +1500,8 @@ In the <code>options</code> array, we define the base directory where the "stati
 placed (line 4), the template prefix (line 5), the filename pattern (line 6),
 and the <code>defaults</code> array, containing the name of the controller and the action that
 will serve all the static pages.</p>
-<blockquote>
 <p>Do not forget to insert the following line to the beginning of the <code>module.config.php</code> class:</p>
 <p><code>use Application\Route\StaticRoute;</code></p>
-</blockquote>
 <p>The final step is creating the action method in the <code>IndexController</code> class:</p>
 <pre><code class="language-php">public function staticAction()
 {
@@ -1530,7 +1537,7 @@ of the <code>Application</code> module and put the <em>help.phtml</em> view temp
 </code></pre>
 <p>Then create the <em>chapter1</em> subdirectory in the <em>static</em> directory and
 put the following <em>chapter1/intro.phtml</em> file in there:</p>
-<pre><code class="language-php">&lt;h1&gt;Introduction&lt;/h1&gt;
+<pre><code class="language-html">&lt;h1&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;
     Write the help introduction here.
@@ -1545,10 +1552,11 @@ URL in your browser, you should see the Introduction page (figure 5.12).</p>
 <p><img alt="Figure 5.12. Introduction page" src="../images/routing/chapter1_intro.png" /></p>
 <p>You can create static pages just by adding the phtml files under the
 <em>static</em> directory, and they will automatically become available to site users.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you are stuck, you can find this complete working example inside the <em>Hello World</em>
 application.</p>
-</blockquote>
+</div>
 <h2 id="summary">Summary</h2>
 <p>In this chapter, we've learned about routing. Routing is used for mapping HTTP
 request to controller's action method. There are several route types (<em>Literal</em>,

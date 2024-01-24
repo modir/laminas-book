@@ -441,10 +441,11 @@ see that every application implementing this interface will have method <code>ge
 retrieving the service manager (about the service manager, see later in this chapter), the
 <code>getRequest()</code> and <code>getResponse()</code> methods for retrieving the HTTP request and response, respectively,
 and method <code>run()</code> for running the application.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In Laminas Framework, by convention, interface classes should be named with <code>Interface</code> suffix,
-like @<code>ApplicationInterface</code>.</p>
-</blockquote>
+like @<code>ApplicationInterface</code>. This convention is followed by most programmers world wide, not only at Laminas.</p>
+</div>
 <p>A class implementing an interface is called a <em>concrete</em> class. The concrete @<code>Application</code> class
 implements the @<code>ApplicationInterface</code>, which means it provides the implementation of the methods
 defined by the interface:</p>
@@ -559,12 +560,14 @@ class to your program.</p>
 you will have to register a different custom autoloader function per each dependent library,
 which is rather annoying (and actually this is an unneeded work). To resolve this problem,
 the PSR-4 standard was introduced.</p>
-<blockquote>
-<p>PSR stands for PHP Standards Recommendation.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">What is PSR?</p>
+<p>PSR stands for PHP Standards Recommendation. These recommendations are maintained by the
+PHP FIG PHP Frameworks Interoperability Group.</p>
+</div>
 <p>The <a href="http://www.php-fig.org/psr/psr-4/">PSR-4 standard</a>
 defines the recommended code structure that an application or library must follow
-to guarantee autoloader interoperability. In two words, the standard says that:</p>
+to guarantee autoloader interoperability. In short, the standard says that:</p>
 <ul>
 <li>The class namespaces should be organized in the following way:</li>
 </ul>
@@ -640,11 +643,12 @@ with the <code>require</code> statement.</p>
 However, its advantage is that you don't need to maintain any class map,
 which is very convenient when you develop new code and add new classes to
 your application.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Laminas Framework conforms to PSR-4 standard, making it possible to use standard
 autoloading mechanism across all its components. It is also compatible with other
 PSR-4 conforming libraries like Doctrine or Symfony.</p>
-</blockquote>
+</div>
 <h3 id="composer-provided-autoloader">Composer-provided Autoloader</h3>
 <p>Composer can generate autoloader functions (both class map autoloaders and PSR-4 standard autoloaders) for the code you install with it.
 Laminas Framework uses the autoloader implementation provided by Composer. When you install a package with
@@ -663,19 +667,17 @@ the <code>autoload</code> key in your <code>composer.json</code> file:</p>
 <pre><code class="language-php">// Composer autoloading
 include __DIR__ . '/../vendor/autoload.php';
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <em>autoload.php</em> file is generated each time you install a package with Composer. Besides that, to
 make Composer generate the <em>autoload.php</em> file, you may need to execute the <code>dump-autoload</code> command:</p>
 <p><code>php composer.phar dump-autoload</code></p>
-</blockquote>
+</div>
 <h3 id="psr-4-and-modules-source-directory-structure">PSR-4 and Module's Source Directory Structure</h3>
 <p>In Laminas Skeleton Application, you can see how the PSR-4 standard is applied
 in practice. For the default module of your website, the <code>Application</code> module, PHP classes which
 are registered with the standard autoloader are stored under the <code>APP_DIR/module/Application/src</code>
-directory ("src" abbreviation means "source").</p>
-<blockquote>
-<p>We will refer to the <code>src</code> directory as module's source directory.</p>
-</blockquote>
+directory ("src" abbreviation means "source"). We will refer to the <code>src</code> directory as module's source directory.</p>
 <p>For example, lets look at the <code>IndexController.php</code> file of <code>Application</code> module (figure 3.2).</p>
 <p><img alt="Figure 3.2. Skeleton application's directory structure conforms to PSR-4 standard" src="../images/operation/psr0_and_dir_structure.png" /></p>
 <p>As you can see, it contains the <code>IndexController</code> class <sup id="fnref:controller"><a class="footnote-ref" href="#fn:controller">1</a></sup> belonging to <code>Application\Controller</code> namespace.
@@ -686,14 +688,15 @@ directory.</p>
 <p>When a site user opens a web page in a web browser's window, the browser generates
 a request message and sends it using HTTP protocol to the web server. The web server
 directs this HTTP request to your web application.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">What is HTTP?</p>
 <p><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> (stands for Hyper Text
-Transfer Protocol) -- a protocol for transferring data
+Transfer Protocol) - a protocol for transferring data
 in the form of hyper text documents (web pages). HTTP is based on the client-server
 technology: the client initiates a connection and sends a request to web server, and the
 server waits for a connection, performs the necessary
 actions and returns a response message back.</p>
-</blockquote>
+</div>
 <p>Thus, the main underlying goal of any web application is handling the HTTP request
 and producing an HTTP response typically containing the HTML code of the requested web page.
 The response is sent by the web server to the client web browser and the browser displays a
@@ -752,12 +755,10 @@ Content-Length: 8434
 <h2 id="site-entry-script">Site Entry Script</h2>
 <p>When the Apache web server receives an HTTP request from a client browser,
 it executes the <em>APP_DIR/public/index.php</em> file, also called the <em>entry script</em>.</p>
-<blockquote>
 <p>The entry script is the only PHP file accessible to the outside world. Apache web server
 directs all HTTP requests to this script (remember the <em>.htaccess</em> file?). Having this
 single entry script makes the website more secure (comparing with the situation when you allow
 everyone to access all PHP files of your application).</p>
-</blockquote>
 <p>Although the <em>index.php</em> file is very important, it is surprisingly small (see below):</p>
 <pre><code class="language-php">&lt;?php
 
@@ -813,12 +814,10 @@ configuration file, and, the application is run.</p>
 <p>As you've learned from the previous section, on every HTTP request, the @<code>Laminas\Mvc\Application</code>
 object is created. Typically, an application "lives" for a second or less
 (this time is enough to generate the HTTP response). The application's "life" consists of several stages.</p>
-<blockquote>
 <p>Laminas Framework uses the concept of <em>event</em>. One class can <em>trigger</em> an event,
 and other classes may <em>listen</em> to events. Technically, triggering an event means just calling
 another class' "callback" method. The event management is implemented inside of
 the @<code>Laminas\EventManager</code> component.</p>
-</blockquote>
 <p>Each application life stage is initiated by the application by triggering an event (this
 event is represented by the @<code>MvcEvent</code> class living in @<code>Laminas\Mvc</code> namespace). Other
 classes (either belonging to Laminas Framework or specific to your application) may listen
@@ -838,11 +837,12 @@ and produces the data that can be displayed on the web page.</p>
 <p><strong>Finish</strong>. On this event, the HTTP response is sent back to client.</p>
 <p>The event flow is illustrated in figure 3.3:</p>
 <p><img alt="Figure 3.3. Event flow during the application's life cycle" src="../images/operation/app_life_cycle.png" /></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Although needed relatively rarely, some practical examples of
 how to listen and react to an event can be found in <a href="#modules">Creating a New Module</a>
 chapter.</p>
-</blockquote>
+</div>
 <h2 id="application-configuration">Application Configuration</h2>
 <p>Most of Laminas Framework components which are used in your website,
 require configuration (fine-tuning). For example, in the configuration
@@ -854,14 +854,15 @@ application level, or at the module level. At the application level you typicall
 define parameters which control the whole app and are common to all
 modules of your application. At the module level, you define parameters which
 affect only this module.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Some PHP frameworks prefer <em>conventions over configuration</em> concept, where
 most of your parameters are hard-coded and do not require configuration.
 This makes it faster to develop the application, but makes it less customizable.
 In Laminas Framework, the <em>configuration over conventions</em> concept is used,
 so you can customize any aspect of your application, but have to
 spend some time for learning how to do that.</p>
-</blockquote>
+</div>
 <h3 id="application-level-config-files">Application-Level Config Files</h3>
 <p>The <em>APP_DIR/config</em> subdirectory contains application-wide configuration files. Let's look
 at this subdirectory in more details (figure 3.4).</p>
@@ -874,10 +875,11 @@ is presented. You can see that the configuration file is just a usual
 PHP nested associative array, and each component
 may have a specific key in that array. You can provide inline comments for the array keys
 to make it easier for others to understand what each key means.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>By convention, key names should be in lower case, and if the key name consists
 of several words, the words should be separated by the underscore symbol ('_').</p>
-</blockquote>
+</div>
 <pre><code class="language-php">return [
     // Retrieve list of modules used in this application.
     'modules' =&gt; require __DIR__ . '/modules.config.php',
@@ -971,11 +973,12 @@ installed in your website:</p>
 </code></pre>
 <p>The <code>Application</code> module is a module containing your app's files. All other modules listed are Laminas Framework
 components.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In Laminas, a special Composer plugin called <em>component installer</em> was introduced. If you remember, in the
 chapter <a href="#skeleton">Laminas Skeleton Application</a>, we answered several yes/no questions of the installer, determining
 which components to install. And the installer <em>injected</em> those components' module names here, in <code>modules.config.php</code></p>
-</blockquote>
+</div>
 <h3 id="application-level-extra-config-files">Application-Level Extra Config Files</h3>
 <p>"Extra" config files, <em>APP_DIR/config/autoload/global.php</em> and <em>APP_DIR/config/autoload/local.php</em>
 files define application-wide environment-agnostic and environment-dependent parameters, respectively.
@@ -999,21 +1002,23 @@ confused about which parameters should be put into each one. Here are some hints
   the credentials for the "live" database here.</p>
 </li>
 </ul>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>Because the <em>autoload/local.php</em> file contains environment-specific parameters,
 in version control system you store its "distribution template" <em>local.php.dist</em>.
 Each developer in your team then renames the <em>local.php.dist</em> file into <em>local.php</em> and
 enters his own parameters. This <em>local.php</em> file should not be stored under
 version control, because it may contain sensitive information like database credentials
 (username and password), and you might want that other people do not see these.</p>
-</blockquote>
+</div>
 <h3 id="application-level-development-config-file">Application-Level Development Config File</h3>
 <p>The application-level development configuration file (<code>APP_DIR/config/development.config.php</code>) presents only
 when you enable the <em>development mode</em>. If you remember, we enabled the development mode earlier in the <a href="#skeleton">Laminas Skeleton Application</a> chapter.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Reminder</p>
 <p>You enable the development mode with the following command:</p>
 <p><code>php composer.phar development-enable</code></p>
-</blockquote>
+</div>
 <p>The <code>development.config.php</code> file is merged with the main <code>application.config.php</code> file. This allows you to
 override some parameters. For example, you can:</p>
 <ul>
@@ -1098,13 +1103,14 @@ and view helpers (we will learn more about these terms in this chapter and in th
 <em>APP_DIR/config/autoload</em> directory are being merged into one big nested array,
 so every configuration parameter becomes available to any piece of the website.
 So, potentially, you are able to override some parameters specified by the modules.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>You might also have seen the "combined" config file when installing PHP, where there is
 the main <em>php.ini</em> file and several extra config files, which are included into the main one.
 Such a separation makes your application configuration fine-grained and flexible,
 because you don't have to put all your params to a single file and edit it each time you need
 to change something.</p>
-</blockquote>
+</div>
 <p>The configuration files are loaded in the following order:</p>
 <ul>
 <li>
@@ -1149,10 +1155,11 @@ class Module
 <p>The class <code>Module</code> belongs to the module's namespace (for the main module
 it belongs to the <code>Application</code> namespace).</p>
 <p>The <code>getConfig()</code> method is typically used to provide module's configuration to Laminas Framework (<em>module.config.php</em> file).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>You can also register some <em>event listeners</em> here, we'll see how to do this later
 in <a href="#modules">Creating a New Module</a> chapter.</p>
-</blockquote>
+</div>
 <h2 id="service-manager">Service Manager</h2>
 <p>You can imagine the web application as a set of <em>services</em>. For example,
 you can have an authentication service responsible for logging in the site users,
@@ -1228,7 +1235,8 @@ you want: a PHP class, a simple variable or an array.</p>
 <p>From table 3.1, you can see that in Laminas almost everything can be considered as a service. The service
 manager is itself registered as a service. Moreover, the @<code>Application</code> class is also
 registered as a service.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>An important thing you should note about the services is that they are <em>typically</em>
 stored in a single instance only (this is also called the <em>singleton</em> pattern). Obviously,
 you don't need the second instance of the @<code>Application</code> class (in that case you
@@ -1237,7 +1245,7 @@ would have a nightmare).</p>
 @<code>EventManager</code> is not a singleton. Each time you retrieve the event manager service from service manager,
 you receive a <em>new</em> object. This is done for performance reasons and to avoid possible event conflicts between
 different components. We will discuss this further in the <em>About Event Manager</em> section later in this chapter.</p>
-</blockquote>
+</div>
 <p>The service manager defines several methods needed for locating and retrieving
 a service from the service manager (see the table 3.2 below).</p>
 <table>
@@ -1279,15 +1287,12 @@ $modules = $appConfig['modules'];
 </code></pre>
 <p>And the <code>build()</code> method always creates a new instance of the service when you call it (comparing to <code>get()</code>, which
 typically creates the instance of the service only once and returns it on later requests).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>You will typically retrieve services from service manager not in <em>any</em> place of your code, but inside of a <em>factory</em>. A factory
 is a code responsible for creation of an object. When creating the object, you can retrieve services it depends on from the service manager
 and pass those services (dependencies) to the object's constructor. This is also called <em>dependency injection</em>.</p>
-<p>If you have some experience with Laminas Framework 2, you may notice that the things are now a little different than before.
-In ZF2, there was <code>ServiceLocator</code> pattern allowing to get dependencies from service manager in <em>any</em> part of your app
-(in controllers, services, etc.) In Laminas, you have to pass dependencies explicitly. It is a little more boring,
-but it removes "hidden" dependencies and makes your code more clear and easier to understand.</p>
-</blockquote>
+</div>
 <h3 id="registering-a-service">Registering a Service</h3>
 <p>When writing your website, you will often need to register your own service
 in the service manager. One of the ways to register a service is using the <code>setService()</code> method of the service manager.
@@ -1368,11 +1373,12 @@ $serviceManager-&gt;setInvokableClass(CurrencyConverter::class);
 the service instead of passing its instance. With this technique, the service
 will be instantiated by the service manager only when someone calls the <code>get(CurrencyConverter::class)</code>
 method. This is also called lazy loading.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Services often depend on each other. For example, the currency converter service may use entity manager service
 to read money exchange rates from database. The disadvantage of <code>setInvokableClass()</code> method is that it doesn't allow to pass parameters (dependencies)
 to the service on object instantiation. To resolve this issue, you can use <em>factories</em>, as described below.</p>
-</blockquote>
+</div>
 <h3 id="registering-a-factory">Registering a Factory</h3>
 <p>A <em>factory</em> is a class that can do only one thing - to create other objects.</p>
 <p>You register a factory for a service with the <code>setFactory()</code> method of the service manager:</p>
@@ -1429,11 +1435,12 @@ class CurrencyConverterFactory implements FactoryInterface
     }
 }
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Technically, in Laminas you <em>can</em> use the same factory class for instantiating several services that have similar
 instantiation code (for that purpose, you can use the <code>$requestedName</code> argument passed to the <code>__invoke()</code> method of the factory).
 However, <em>mostly</em> you will create a different factory per each service.</p>
-</blockquote>
+</div>
 <h3 id="registering-an-abstract-factory">Registering an Abstract Factory</h3>
 <p>Even more complex case of a factory is when you need to determine at run
 time which service names should be registered. For such a situation,
@@ -1458,10 +1465,11 @@ service name (<code>$requestedName</code>).</p>
 usual factory class <em>typically</em> creates only a single type of service, but an abstract factory can dynamically
 create as many types of services as it wants.</p>
 <p>You register an abstract factory with the <code>setAbstractFactory()</code> method of the service manager.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Abstract factories are a powerful feature, but you should use them only when really necessary, because
 they negatively impact the performance. It is better to use the usual (non-abstract) factories.</p>
-</blockquote>
+</div>
 <h3 id="registering-service-aliases">Registering Service Aliases</h3>
 <p>Sometimes, you may want to define an <em>alias</em> for a service. The alias
 is like a symbolic link: it references the already registered service.
@@ -1488,9 +1496,12 @@ service manager's methods as described above).</p>
 <code>service_manager</code> key of a configuration file is used. You can put this key
 either inside of an application-level configuration file or in a module-level
 configuration file.</p>
-<p>W&gt; If you are putting this key in a module-level configuration file, be
-W&gt; careful about the danger of name overwriting during the configs merge.
-W&gt; Do not register the same service name in different modules.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you are putting this key in a module-level configuration file, be
+careful about the danger of name overwriting during the configs merge.
+Do not register the same service name in different modules.</p>
+</div>
 <p>This <code>service_manager</code> key should look like below:</p>
 <pre><code class="language-php">&lt;?php
 return [
@@ -1586,21 +1597,20 @@ registered under the <code>controllers</code> key in <em>module.config.php</em> 
 <em>view_helpers</em> key that is used for registering view helpers, the <em>controller_plugins</em> key that is used
 for registering controller plugins, and so on.</p>
 <h2 id="about-event-manager">About Event Manager</h2>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In this section, we will give some advanced information about event manager. You can relatively safely skip this
-   section, however refer to it if you plan to implement some advanced event listeners in your website.</p>
-</blockquote>
+section, however refer to it if you plan to implement some advanced event listeners in your website.</p>
+</div>
 <p>Previously in this chapter we have mentioned that the application life cycle consists of <em>events</em>.
 One class can <em>trigger</em> an event, and other classes may <em>listen</em> to events. Technically, triggering an event means just calling
 another class' "callback" method. The event management is implemented inside of
 the @<code>Laminas\EventManager</code> component.</p>
-<blockquote>
 <p>Laminas (and particularly its @<code>Laminas\Mvc</code> component) hardly depends on events to operate,
 and because of that its source code is a combination of event listeners which is rather difficult to understand.
 Fortunately, in most cases you do not need to understand how Laminas triggers and handles events internally, you just need
 to understand what event is, what events present in application life cycle and what is the difference between usual <em>event manager</em> and
 <em>shared event manager</em>.</p>
-</blockquote>
 <h3 id="event-mvcevent">Event &amp; MvcEvent</h3>
 <p>An <em>event</em> is technically an instance of the @<code>Laminas\EventManager\Event</code> class.
 An event can basically have at least the following parts:</p>
@@ -1632,10 +1642,11 @@ service from the service manager, you receive a new instance of it. This is done
 service is stored in the service manager as a singleton, so you can be sure everyone will have the same instance of it.</p>
 <p>With the @<code>SharedEventManager</code>, you can attach a listener to private events triggered by certain class (or several classes).
 You specify the unique class identifier(s) to which you would like to listen. That simple!</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Some practical examples of how to listen and react to an event can be found in <a href="#modules">Creating a New Module</a>
 chapter and <a href="#users">User Management, Authentication &amp; Access Filtering</a> chapter.</p>
-</blockquote>
+</div>
 <h2 id="summary">Summary</h2>
 <p>In this chapter, we've learned some theory about laminas-based website operation basics.</p>
 <p>Laminas uses PHP namespaces and class autoloading features, simplifying the development
