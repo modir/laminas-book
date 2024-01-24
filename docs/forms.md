@@ -540,17 +540,13 @@ use Laminas\Form\Form;
 // A feedback form model
 class ContactForm extends Form
 {
-  // Constructor.
-  public function __construct()
+  // init() method
+  public function init() : void
   {
-    // Define form name
-    parent::__construct('contact-form');
-
     // Set POST method for this form
+    // The default is alread POST so it is not needed;
+    // but it is here as a reference in case you want to set it to GET
     $this->setAttribute('method', 'post');
-
-    // (Optionally) set action for this form
-    $this->setAttribute('action', '/contactus');
 
     // Create the form fields here ...
   }
@@ -572,9 +568,6 @@ method provided by the base class (line 16). The `setAttribute()` takes two para
 the first one is the name of the attribute to set, and the second one is the value of the
 attribute.
 
-You also can set the form's "action" attribute (line 19) with the `setAttribute()` method, analogous to the way
-you did with the "method" attribute. Actually, as you will see later, setting the form's "action" attribute is optional.
-
 !!! note
     Setting the "action" attribute for the form is optional, because empty
     form action forces the browser to submit form data to the URL of the
@@ -582,8 +575,7 @@ you did with the "method" attribute. Actually, as you will see later, setting th
     you use the single controller action for both displaying the form
     and processing its data.
 
-Form fields are typically created inside of the form model's constructor
-(look at line 21). In the next section, we will learn which form fields
+Form fields are typically created inside of the form model's init-method. In the next section, we will learn which form fields
 are available and how to add them to the form model.
 
 ## Form Elements
@@ -733,8 +725,8 @@ use Laminas\Form\Element\Text;
 // A feedback form model
 class ContactForm extends Form
 {
-  // Constructor.
-  public function __construct()
+  // init() method
+  public function init() : void
   {
     // Create the form fields here ...
     $element = new Text(
@@ -806,8 +798,8 @@ use Laminas\Form\Form;
 // A feedback form model
 class ContactForm extends Form
 {
-  // Constructor.
-  public function __construct()
+  // init() method
+  public function init() : void
   {
     // Add "subject" field
     $this->add([
@@ -876,8 +868,8 @@ use Laminas\Form\Form;
  */
 class ContactForm extends Form
 {
-  // Constructor.
-  public function __construct()
+  // init() method
+  public function init() : void
   {
     // Define form name
     parent::__construct('contact-form');
@@ -1126,7 +1118,8 @@ use Laminas\InputFilter\InputFilter;
 
 class ContactForm extends Form
 {
-  public function __construct()
+  // init() method
+  public function init() : void
   {
     // ... call this method to add filtering/validation rules
     $this->addInputFilter();

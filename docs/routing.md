@@ -44,8 +44,7 @@ hexadecimal digits (for example, the space character will be replaced by '%20').
 With routing, Laminas knows which of the controller's action method to execute
 as the result of the request. For example, you can map "http://localhost/" URL to `IndexController::indexAction()` method,
 and "http://localhost/about" URL to `IndexController::aboutAction()` method.
-
-> You define the mapping between URLs and controllers with the help of *routes*.
+You define the mapping between URLs and controllers with the help of *routes*.
 
 There are several standard route types provided by Laminas Framework (shown in table 5.1).
 These route types are implemented as classes living in the @`Laminas\Router\Http`[Laminas\Router] namespace.
@@ -166,7 +165,8 @@ You can use the optional `default_params` key (line 11) to define the *default v
 for all routes at once. However, you typically do not use this key and define
 the defaults on a per-route basis.
 
-> We will show how you extract parameters from route later in this chapter.
+!!! note
+    We will show how you extract parameters from route later in this chapter.
 
 ### Configuration for Simple Routes
 
@@ -200,8 +200,9 @@ The optional `priority` key allows to define the priority (which should be an in
 of the route in the priority list (routes with higher priority will be visited first). If you
 omit the `priority` key, the routes will be visited in the LIFO [^lifo] order.
 
-> Routes having equal priority will be visited in the LIFO order. Thus, for the best performance, you should
-> register routes that will match most often in the last turn, and least common routes should be registered first.
+!!! note
+    Routes having equal priority will be visited in the LIFO order. Thus, for the best performance, you should
+    register routes that will match most often in the last turn, and least common routes should be registered first.
 
 [^lifo]: LIFO (stands for Last In, First Out) is used to organize items in a stack, where
          the topmost item, which is added last, is taken out first.
@@ -245,9 +246,10 @@ If you need to organize the routes in a chain (degenerated subtree), you add the
 ],
 ~~~
 
-> Looking at the two examples above, you won't see the explicit usage of @`Part`[Laminas\Router\Http\Part] and
-> @`Chain`[Laminas\Router\Http\Chain] route types, because (for your convenience) they are used by the Laminas automatically when
-> it encounters the `child_routes` and `chain_routes` keys in your routing configuration.
+!!! note
+    Looking at the two examples above, you won't see the explicit usage of @`Part`[Laminas\Router\Http\Part] and
+    @`Chain`[Laminas\Router\Http\Chain] route types, because (for your convenience) they are used by the Laminas automatically when
+    it encounters the `child_routes` and `chain_routes` keys in your routing configuration.
 
 ### Default Routing Configuration in Laminas Skeleton Application
 
@@ -373,32 +375,38 @@ see the *About* page.
 The *Segment* route type allows for matching the route string against one
 or several URL path segments.
 
-> If you look at the *module.config.php* file, you can see the *Segment* route type is
-> used inside of the "application" route to make actions of your `IndexController`
-> automatically mapped to site URLs. You just add an action method to your `IndexController` class,
-> and it becomes available by a URL like "http://localhost/application/&lt;action&gt;".
-> For example, you can see the *About* page of your site with the following URL:
-> "http://localhost/application/about".
+!!! note
+    If you look at the *module.config.php* file, you can see the *Segment* route type is
+    used inside of the "application" route to make actions of your `IndexController`
+    automatically mapped to site URLs. You just add an action method to your `IndexController` class,
+    and it becomes available by a URL like "http://localhost/application/&lt;action&gt;".
+    For example, you can see the *About* page of your site with the following URL:
+    "http://localhost/application/about".
 
 To demonstrate the creation of the *Segment* route type, let's implement
-a controller action which will generate a simple barcode image.
-Barcodes are widely used in supermarkets for optically recognizing goods in your
-shopping cart. The barcodes may be of different types and have different
+a controller action which will generate a simple barcode image. The barcodes may be of different types and have different
 labels. We will use the *Segment* route type to map the action to a URL like
 "http://localhost/barcode/&lt;type&gt;/&lt;label&gt;".
 
-> To be able to use barcodes, you need to install the @`Laminas\Barcode` component with Composer, by
-> typing the following command:
->
-> `php composer.phar require laminas/laminas-barcode`
+!!! note
+    Barcodes are widely used in supermarkets for optically recognizing goods in your
+    shopping cart.
 
-W> Please note that for barcode images to work, you need to have the GD[^gd] extension
-W> of the PHP engine installed and enabled. In Linux Ubuntu, you can install this extension with the
-W> following command:
-W>
-W> `sudo apt-get install php-gd`
-W>
-W> After installing the extension, restart Apache to apply your changes.
+To be able to use barcodes, you need to install the @`Laminas\Barcode` component with Composer, by
+typing the following command:
+
+~~~bash
+php composer.phar require laminas/laminas-barcode
+~~~
+
+!!! note
+    Please note that for barcode images to work, you need to have the GD[^gd] extension
+    of the PHP engine installed and enabled. In Linux Ubuntu, you can install this extension with the
+    following command:
+
+    `sudo apt-get install php-gd`
+
+    After installing the extension, restart Apache to apply your changes.
 
 [^gd]: PHP GD extension allows to create image files in different formats (like JPEG, PNG, GIF, etc.)
 
@@ -481,9 +489,10 @@ In line 14 we define the label text for the barcode. In lines 18-19 we
 create the @`Barcode`[Laminas\Barcode\Barcode] object with the factory method. Finally, in line 23 we
 render the image file by dumping it to PHP output stream.
 
-> @`Laminas\Barcode` is an auxiliary component used for generation of various
-> barcode images. For additional information about this component, please
-> refer to the corresponding section of Laminas Framework reference manual.
+!!! note
+    @`Laminas\Barcode` is an auxiliary component used for generation of various
+    barcode images. For additional information about this component, please
+    refer to the corresponding section of Laminas Framework reference manual.
 
 In line 26 we return the @`Response`[Laminas\Http\PhpEnvironment\Response] object to suppress the default view rendering.
 
@@ -518,9 +527,10 @@ matched against a regular expression.
 For example, assume you want to create a simple documentation system for your website.
 The documentation would consist of "static" pages mapped to URLs like */doc/&lt;page_name&gt;.html*.
 
-> By the term "static page" we refer to a page which mostly contains static HTML code
-> plus several PHP inline fragments. For such simple pages you do not need to create
-> separate controller actions. All "static" pages can be served by the single controller action.
+!!! note
+    By the term "static page" we refer to a page which mostly contains static HTML code
+    plus several PHP inline fragments. For such simple pages you do not need to create
+    separate controller actions. All "static" pages can be served by the single controller action.
 
 Let's implement the route which will serve the "static" pages of the site. Because "static"
 pages are simple, you typically won't need to add per-page action methods
@@ -555,9 +565,9 @@ by route later in this chapter).
             using the syntax `(?P<name>pattern)`. This sub-pattern will then be indexed
             in the *matches* array by its name.
 
-> Do not forget to add the following line to the beginning of `module.config.php` file:
->
-> `use Laminas\Router\Http\Regex;`
+Do not forget to add the following line to the beginning of `module.config.php` file:
+
+`use Laminas\Router\Http\Regex;`
 
 Next, add the following action to `IndexController` class:
 
@@ -632,11 +642,12 @@ Clicking the *Introduction* link will direct you to the "Introduction" static pa
 You can also add other pages to the *doc* directory to make them automatically
 available for site users through our *Regex* route.
 
-> One disadvantage of such a documentation system is that it does not work well if you place nested
-> pages in subdirectories under the *doc* directory. The reason of this limitation lies in the way the
-> *Regex* route assembles URLs. You can't generate URLs containing slash characters, as these "unsafe"
-> characters will be automatically URL-encoded. We will work-around this problem with our custom route
-> type that we will create at the end of this chapter.
+!!! note
+    One disadvantage of such a documentation system is that it does not work well if you place nested
+    pages in subdirectories under the *doc* directory. The reason of this limitation lies in the way the
+    *Regex* route assembles URLs. You can't generate URLs containing slash characters, as these "unsafe"
+    characters will be automatically URL-encoded. We will work-around this problem with our custom route
+    type that we will create at the end of this chapter.
 
 ## Other Route Types
 
@@ -796,8 +807,9 @@ The useful methods of the @`RouteMatch`[Laminas\Router\RouteMatch] class are lis
 
 Table 5.3. Laminas\Router\RouteMatch class methods
 
-> In most cases, it will be sufficient to use the @`Params` controller plugin, but alternatively
-> you can use the @`RouteMatch`[Laminas\Router\RouteMatch] object for accomplishing the same task.
+!!! note
+    In most cases, it will be sufficient to use the @`Params` controller plugin, but alternatively
+    you can use the @`RouteMatch`[Laminas\Router\RouteMatch] object for accomplishing the same task.
 
 To get the @`RouteMatch`[Laminas\Router\RouteMatch] object from your controller's action method, you can use the following
 code:
@@ -876,13 +888,14 @@ In the lines above, we generate two relative URLs. In line 2, we call the @`Url`
 and pass the "home" route name as its parameter. In line 5, we pass the "about" route name as
 an argument for the @`Url`[Laminas\View\Helper\Url] view helper.
 
-> In the example above, the @`Url`[Laminas\View\Helper\Url] view helper internally uses the @`RouteMatch`[Laminas\Router\RouteMatch] object and calls
-> the @`Literal`[Laminas\Router\Http\Literal] route to assemble the URL string by route name.
+!!! note
+    In the example above, the @`Url`[Laminas\View\Helper\Url] view helper internally uses the @`RouteMatch`[Laminas\Router\RouteMatch] object and calls
+    the @`Literal`[Laminas\Router\Http\Literal] route to assemble the URL string by route name.
 
 After the @`PhpRenderer` class executes the view template's
 code, the output HTML markup will be the following:
 
-~~~php
+~~~html
 <!-- A hyperlink to Home page -->
 <a href="/">Home page</a>
 
@@ -938,7 +951,7 @@ As another example, let's try to generate a URL for our *Regex* route
 
 This will generate the following HTML markup:
 
-~~~php
+~~~html
 <!-- A hyperlink to Introduction page -->
 <a href="/doc/introduction.html"> Introduction </a>
 ~~~
@@ -967,7 +980,7 @@ as the third argument for generating the URL of the About page.
 
 The resulting HTML markup of the code above will be as follows:
 
-~~~php
+~~~html
 <!-- A hyperlink to Home page -->
 <a href="http://localhost/" > Home page </a>
 
@@ -1012,8 +1025,9 @@ public function someAction()
 }
 ~~~
 
-> The arguments the `Url` plugin takes and their meaning are identical to the @`Url`[Laminas\View\Helper\Url] view helper's
-> ones. So, you can generate absolute or relative URLs the same way you did in your view templates.
+!!! note
+    The arguments the `Url` plugin takes and their meaning are identical to the @`Url`[Laminas\View\Helper\Url] view helper's
+    ones. So, you can generate absolute or relative URLs the same way you did in your view templates.
 
 ### URL Encoding
 
@@ -1035,7 +1049,7 @@ We could assume it generates the URL like "/doc/chapter1/introduction.html". But
 because the slash ('/') character is unsafe, it will be replaced with the "%2F" characters
 for security reasons, and we will have the following HTML code:
 
-~~~text
+~~~html
 <!-- A hyperlink to Introduction page -->
 <a href="/doc/chapter1%2Fintroduction.html"> Introduction </a>
 ~~~
@@ -1425,9 +1439,9 @@ placed (line 4), the template prefix (line 5), the filename pattern (line 6),
 and the `defaults` array, containing the name of the controller and the action that
 will serve all the static pages.
 
-> Do not forget to insert the following line to the beginning of the `module.config.php` class:
->
-> `use Application\Route\StaticRoute;`
+Do not forget to insert the following line to the beginning of the `module.config.php` class:
+
+`use Application\Route\StaticRoute;`
 
 The final step is creating the action method in the `IndexController` class:
 
@@ -1472,7 +1486,7 @@ of the `Application` module and put the *help.phtml* view template there:
 Then create the *chapter1* subdirectory in the *static* directory and
 put the following *chapter1/intro.phtml* file in there:
 
-~~~php
+~~~html
 <h1>Introduction</h1>
 
 <p>
@@ -1495,8 +1509,9 @@ URL in your browser, you should see the Introduction page (figure 5.12).
 You can create static pages just by adding the phtml files under the
 *static* directory, and they will automatically become available to site users.
 
-> If you are stuck, you can find this complete working example inside the *Hello World*
-> application.
+!!! note
+    If you are stuck, you can find this complete working example inside the *Hello World*
+    application.
 
 ## Summary
 

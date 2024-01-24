@@ -46,7 +46,8 @@ source code of the *Role Demo* web application:
 
 The *Role Demo* is a website which can be installed on your machine.
 
-> Detailed instructions on how to install the *Role Demo* sample can be found in *README.md* file located in the sample directory.
+!!! note
+    Detailed instructions on how to install the *Role Demo* sample can be found in *README.md* file located in the sample directory.
 
 ## Introduction to RBAC
 
@@ -167,7 +168,7 @@ the permission, it returns `true`; otherwise `false`.
 Since our Role Demo application is designed to be the base for your own more complex websites,
 for our Role Demo sample, we will have only the following simple default roles: Administrator and Guest.
 
-> You will be able to add more roles via user interface of the website.
+You will be able to add more roles via user interface of the website.
 
 We will have the following default permissions:
 
@@ -191,7 +192,7 @@ which is the user profile of a user with the given ID.
 
 The `profile.own.view` allows Guest to access their own profile page *http://localhost/application/settings*.
 
-> You will be able to create additional permissions via the user interface of the website.
+You will be able to create additional permissions via the user interface of the website.
 
 ## Introduction to Dynamic Assertions
 
@@ -266,8 +267,9 @@ As you can see from the code above, the class has the `assert()` method which ac
 Inside the `assert()` method, we can get the currently logged in user and compare it with the user passed, this
 way we can return `true` if the user is trying to open its own profile; otherwise `false`.
 
-> In theory, you can have many assertion managers in your website (for example, if your Blog module has some
-> dynamic assertions, you can create and register an assertion manager for that module).
+!!! note
+    In theory, you can have many assertion managers in your website (for example, if your Blog module has some
+    dynamic assertions, you can create and register an assertion manager for that module).
 
 ## Setting Up the Database
 
@@ -286,11 +288,12 @@ We will create the following tables (see figure 17.2):
 You can find a database migration, which creates these tables, in the *Role Demo* sample application. To run migrations,
 type the following command:
 
-~~~php
+~~~bash
 ./vendor/bin/doctrine-module migrations:migrate
 ~~~
 
-> If you are new to migrations, refer to chapter [Database Migrations](#migrations).
+!!! note
+    If you are new to migrations, refer to chapter [Database Migrations](#migrations).
 
 ## Implementing Entities
 
@@ -865,8 +868,9 @@ class User
 
 In the Role Demo sample, we will create a convenient user interface for managing roles.
 
-> You can access the role management page by logging in as `admin@example.com` and opening
-> menu Admin -> Manage Roles.
+!!! note
+    You can access the role management page by logging in as `admin@example.com` and opening
+    menu Admin -> Manage Roles.
 
 The role management will be implemented inside the `RoleController` controller living in the
 `User\Controller` namespace. The action methods of the `RoleController` are listed in table 17.4:
@@ -887,7 +891,8 @@ The `RoleController` works in pair with the `RoleManager` service which lives in
 The `RoleController` and `RoleManager` contain nothing new and special, so we will skip their
 discussion here and will just provide some screenshots of the resulting user interface below.
 
-> You can find the complete code of the `RoleController` and `RoleManager` classes in the Role Demo sample.
+!!! note
+    You can find the complete code of the `RoleController` and `RoleManager` classes in the Role Demo sample.
 
 ![Figure 17.3 The list of roles](images/roles/roledemo_roles_index.png)
 
@@ -904,8 +909,9 @@ discussion here and will just provide some screenshots of the resulting user int
 In the Role Demo sample, we will create a convenient user interface for managing permissions.
 It will be useful if you plan to add new permissions or remove existing ones.
 
-> You can access the permission management page by logging in as `admin@example.com` and opening
-> menu Admin -> Manage Permissions.
+!!! note
+    You can access the permission management page by logging in as `admin@example.com` and opening
+    menu Admin -> Manage Permissions.
 
 The permission management will be implemented inside the `PermissionController` controller living in the
 `User\Controller` namespace. The action methods of the `PermissionController` are listed in table 17.5:
@@ -926,7 +932,8 @@ lives in `User\Service` namespace.
 The `PermissionController` and `PermissionManager` contain nothing new and special, so we will skip their
 discussion here and will just provide some screenshots of the resulting user interface below.
 
-> You can find the complete code of the `PermissionController` and `PermissionManager` classes in the Role Demo sample.
+!!! note
+    You can find the complete code of the `PermissionController` and `PermissionManager` classes in the Role Demo sample.
 
 ![Figure 17.8 The list of permissions](images/roles/roledemo_permissions_index.png)
 
@@ -953,16 +960,17 @@ The next thing we will discuss will be the functionality for creating the `Rbac`
 whose purpose is loading the role hierarchy from the database,
 and caching the data in the filesystem cache.
 
-> The *cache* allows to store frequently used data in fast storage. For example, retrieving roles
-> and permissions from database on each page load may be rather slow, while storing the precomputed
-> role hierarchy in a file may be faster.
+!!! note
+    The *cache* allows to store frequently used data in fast storage. For example, retrieving roles
+    and permissions from database on each page load may be rather slow, while storing the precomputed
+    role hierarchy in a file may be faster.
 
 ### Setting Up Caching
 
 First, let's set up caching. To do that, you need to install the `Laminas\Cache` and `Laminas\Serializer` components with
 the following commands:
 
-~~~
+~~~bash
 php composer.phar require laminas/laminas-cache
 php composer.phar require laminas/laminas-serializer
 ~~~
@@ -1002,8 +1010,9 @@ return [
 This will allow you to use the `Filesystem` cache and store cached data
 in *APP_DIR/data/cache* directory.
 
-> If you want to learn more about caching, please refer to the `Laminas\Cache` Laminas component
-> documentation.
+!!! note
+    If you want to learn more about caching, please refer to the `Laminas\Cache` Laminas component
+    documentation.
 
 ### Writing the RbacManager Service
 

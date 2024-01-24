@@ -554,7 +554,7 @@ several often used examples of entities:
 
 !!! note
     In terms of Domain Driven Design pattern, entities are a kind of models designed for storing data.
-    For additional examples of entities and other types of models, please refer to [Model-View-Controller](../mvc).
+    For additional examples of entities and other types of models, please refer to [Model-View-Controller](mvc.md).
 
 In Doctrine ORM, an entity class is mapped on a certain database table. For example, the `User` entity
 is usually mapped on the `user` table (if needed, the table name may be arbitrary).
