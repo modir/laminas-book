@@ -118,8 +118,6 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#providing-session-configuration">Providing Session Configuration</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#making-the-session-manager-the-default-one">Making the Session Manager the Default One</a>
-    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#session-containers">Session Containers</a>
@@ -247,8 +245,8 @@ ini_set('session.gc_maxlifetime', 60*60*24*30);
 </code></pre>
 <p>There are several other "advanced" session-related PHP configuration settings in <em>php.ini</em>. We do not
 cover them here, because they are usually not needed.</p>
-<blockquote>
-<p><strong>So, if PHP sessions is so simple, why do I need additional wrapper provided by Laminas Framework?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">So, if PHP sessions is so simple, why do I need additional wrapper provided by Laminas Framework?</p>
 <p>laminas-provided wrapper around the PHP sessions is useful, because:</p>
 <ul>
 <li>Laminas session wrapper is object-oriented, so you can use it consistently in your MVC application.</li>
@@ -257,7 +255,7 @@ cover them here, because they are usually not needed.</p>
 <li>Using <code>$_SESSION</code> super-global array directly is not good, because it makes testing your website more difficult. When you use a wrapper around PHP sessions, it is easier to supply test data.</li>
 <li>With Laminas session classes, it is possible to implement custom session data storages (for example, store session data in database instead of files).</li>
 </ul>
-</blockquote>
+</div>
 <h2 id="installing-laminassession-component">Installing Laminas\Session Component</h2>
 <p>In Laminas, the session functionality is implemented inside of @<code>Laminas\Session</code> component. If you haven't
 yet installed this component in your web application, do this now with Composer by typing the following command:</p>
@@ -373,10 +371,11 @@ return [
     // ...
 ];
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>We modify <code>global.php</code> file here, because sessions may be used by any module in your website and do not
 depend on environment.</p>
-</blockquote>
+</div>
 <p>As you can see, the session configuration is stored under three keys:</p>
 <ul>
 <li>
@@ -394,39 +393,6 @@ depend on environment.</p>
     is the default storage and is sufficient for the most cases.</p>
 </li>
 </ul>
-<h3 id="making-the-session-manager-the-default-one">Making the Session Manager the Default One</h3>
-<p>In Laminas, many components use the session manager implicitly (for example, @<code>FlashMessenger</code>[Laminas\Mvc\Plugin\FlashMessenger] controller plugin and view helper
-uses session to save messages between HTTP requests). To let such components use the session manager you just configured, you'll have to make it
-"the default one" by instantiating it as early as possible. For example, you can instantiate the session manager in your
-module's <code>onBootstrap()</code> method, as follows:</p>
-<pre><code class="language-php">&lt;?php
-namespace Application;
-
-use Laminas\Mvc\MvcEvent;
-use Laminas\Session\SessionManager;
-
-class Module
-{
-    //...
-
-    /**
-     * This method is called once the MVC bootstrapping is complete.
-     */
-    public function onBootstrap(MvcEvent $event)
-    {
-        $application = $event-&gt;getApplication();
-        $serviceManager = $application-&gt;getServiceManager();
-
-        // The following line instantiates the SessionManager and automatically
-        // makes the SessionManager the 'default' one.
-        $sessionManager = $serviceManager-&gt;get(SessionManager::class);
-    }
-}
-</code></pre>
-<blockquote>
-<p>Making the session manager the default one is very important, because otherwise you'll have to explicitly pass it to every component
-depending on the session manager, which is rather boring.</p>
-</blockquote>
 <h2 id="session-containers">Session Containers</h2>
 <p>Once you have configured the session manager, you can actually store and retrieve data to/from session. To do that,
 you use <em>session containers</em>. Session containers are implemented by the @<code>Container</code>[Laminas\Session\Container] class living in @<code>Laminas\Session</code> namespace.</p>
@@ -435,10 +401,11 @@ different classes, modules and components that use sessions, the session contain
 which the data will be stored. A container namespace may contain upper-case and lower-case characters,
 underscores and back-slashes. So, for example, "Session\ContainerName", "session_container_name" and "SessionContainerName" are all
 valid container namespaces.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Session containers work closely with the session manager. When you create a session container, it calls the session
 manager's <code>start()</code> method automatically, so session is started and initialized.</p>
-</blockquote>
+</div>
 <p>Now let's start using containers. You can create a container using two equivalent ways: either manually instantiating a container or
 let a factory do that for you. The second one is easier, so we recommend it.</p>
 <h3 id="method-1-manual-instantiation-of-a-session-container">Method 1. Manual Instantiation of a Session Container</h3>
@@ -483,10 +450,7 @@ else
 <p>To remove data from session, use the following code:</p>
 <pre><code class="language-php">unset($sessionContainer-&gt;myVar);
 </code></pre>
-<blockquote>
-<p>For some practical examples of using session containers, please refer to <a href="#multi-step-forms">Implementing Multi-Step Forms</a>
-   section.</p>
-</blockquote>
+<p>For some practical examples of using session containers, please refer to <a href="#multi-step-forms">Implementing Multi-Step Forms</a> section.</p>
 <h2 id="summary">Summary</h2>
 <p>PHP sessions is a useful feature allowing you to store some data between page requests. PHP engine stores session data on server
 in form of files, and uses browser cookies to identify the same visitor the next time and load his session data to memory. For example, you can
