@@ -362,7 +362,7 @@ When using validators with form's validation rules, you typically do not constru
 validator object explicitly as we did in the previous section, instead you pass an
 array configuration to the factory class which automatically constructs the validator
 for you and (optionally) configures it. We already saw how this works when adding
-validation rules for the feedback form in [Collecting User Input with Forms](#forms).
+validation rules for the feedback form in [Collecting User Input with Forms](forms.md).
 
 For example, let's show how to construct the same @`EmailAddress` filter with the help
 of the factory:

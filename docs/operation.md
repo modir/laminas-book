@@ -6,7 +6,7 @@ what class autoloading is, how to define application configuration parameters an
 the stages present in an application's life-cycle. You will also become familiar with such
 important Laminas components as @`Laminas\EventManager`, @`Laminas\ModuleManager` and @`Laminas\ServiceManager`.
 If instead of learning the theory, you want to have some practical examples, skip this chapter
-and refer directly to [Model-View-Controller](#mvc).
+and refer directly to [Model-View-Controller](mvc.md).
 
 Laminas components covered in this chapter:
 
@@ -489,7 +489,7 @@ we have to put it under the `Controller` directory under the module's source
 directory.
 
 [^controller]: `IndexController` class is the default controller for the skeleton website.
-               We will talk about controllers later in chapter [Model-View-Controller](#mvc).
+               We will talk about controllers later in chapter [Model-View-Controller](mvc.md).
 
 ## HTTP Request and Response
 
@@ -673,7 +673,7 @@ The event flow is illustrated in figure 3.3:
 
 !!! note
     Although needed relatively rarely, some practical examples of
-    how to listen and react to an event can be found in [Creating a New Module](#modules)
+    how to listen and react to an event can be found in [Creating a New Module](modules.md)
     chapter.
 
 ## Application Configuration
@@ -824,7 +824,7 @@ components.
 
 !!! note
     In Laminas, a special Composer plugin called *component installer* was introduced. If you remember, in the
-    chapter [Laminas Skeleton Application](#skeleton), we answered several yes/no questions of the installer, determining
+    chapter [Laminas Skeleton Application](skeleton.md), we answered several yes/no questions of the installer, determining
     which components to install. And the installer *injected* those components' module names here, in `modules.config.php`
 
 ### Application-Level Extra Config Files
@@ -860,7 +860,7 @@ confused about which parameters should be put into each one. Here are some hints
 ### Application-Level Development Config File
 
 The application-level development configuration file (`APP_DIR/config/development.config.php`) presents only
-when you enable the *development mode*. If you remember, we enabled the development mode earlier in the [Laminas Skeleton Application](#skeleton) chapter.
+when you enable the *development mode*. If you remember, we enabled the development mode earlier in the [Laminas Skeleton Application](skeleton.md) chapter.
 
 !!! note "Reminder"
     You enable the development mode with the following command:
@@ -1020,7 +1020,7 @@ The `getConfig()` method is typically used to provide module's configuration to 
 
 !!! note
     You can also register some *event listeners* here, we'll see how to do this later
-    in [Creating a New Module](#modules) chapter.
+    in [Creating a New Module](modules.md) chapter.
 
 ## Service Manager
 
@@ -1538,8 +1538,8 @@ With the @`SharedEventManager`, you can attach a listener to private events trig
 You specify the unique class identifier(s) to which you would like to listen. That simple!
 
 !!! note
-    Some practical examples of how to listen and react to an event can be found in [Creating a New Module](#modules)
-    chapter and [User Management, Authentication & Access Filtering](#users) chapter.
+    Some practical examples of how to listen and react to an event can be found in [Creating a New Module](modules.md)
+    chapter and [User Management, Authentication & Access Filtering](users.md) chapter.
 
 ## Summary
 

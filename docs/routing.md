@@ -350,7 +350,7 @@ and controller's action method which should be executed. You can also define oth
 parameters here, if needed.
 
 As another example of the *Literal* route type, let's add the '/about' route for the *About* page we've
-created earlier in the *Views* section of the chapter [Model-View-Controller](#mvc). To create the route, add
+created earlier in the *Views* section of the chapter [Model-View-Controller](mvc.md). To create the route, add
 the following lines right after the "home" route definition inside of your
 *module.config.php* file:
 

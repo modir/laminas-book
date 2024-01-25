@@ -5,7 +5,7 @@ professionally looking with the help of Twitter Bootstrap CSS Framework and
 how to position elements on a page using Laminas layout mechanism. You'll also
 become familiar with common view helpers allowing for composing web pages
 of reusable parts. If you are new to Twitter Bootstrap, it is also recommended
-that you refer to [Appendix C. Introduction to Twitter Bootstrap](#bootstrap) for advanced description of Bootstrap
+that you refer to [Appendix C. Introduction to Twitter Bootstrap](bootstrap.md) for advanced description of Bootstrap
 capabilities.
 
 Laminas components covered in this chapter:
@@ -71,7 +71,7 @@ Generally, the Bootstrap does the following things:
 
 !!! note
     If you are new to Twitter Bootstrap, it is recommended that you refer to
-    [Appendix C. Introduction to Twitter Bootstrap](#bootstrap), where you can find more information about using
+    [Appendix C. Introduction to Twitter Bootstrap](bootstrap.md), where you can find more information about using
     Twitter Bootstrap and its components.
 
 ## Page Layout in Laminas Framework
@@ -389,7 +389,7 @@ We also used the @`Url`[Laminas\View\Helper\Url] view helper to insert the links
 
 !!! note
     We discussed the usage of the @`Url`[Laminas\View\Helper\Url] view helper in the *Generating URLs from Route* section
-    in [Routing](#routing).
+    in [Routing](routing.md).
 
 Next, put the breadcrumbs component to the corresponding grid row:
 
@@ -868,7 +868,7 @@ place the file in your *APP_DIR/public/js* directory.
 Then add the *typeahead.phtml* file in your *application/index/static* subdirectory
 under the module's *view* directory.
 This directory is served by the `StaticRoute` route type that we've created and configured
-earlier in chapter [Routing](#routing), and all "static" pages placed here will
+earlier in chapter [Routing](routing.md), and all "static" pages placed here will
 automatically become available to site users.
 
 In the *typeahead.phtml* view template file, put the following content:

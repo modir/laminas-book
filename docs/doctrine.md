@@ -5,7 +5,7 @@ object-oriented way. For working with relational databases, Doctrine provides a 
 Relational Mapper* (ORM for short). With Doctrine ORM you map your database table to a PHP class (in terms of Domain
 Driven Design, it is also called an *entity* class) and a row from that table is mapped to an
 instance of the entity class. If you are new to Doctrine, it is recommended that you also refer to
-[Appendix D. Introduction to Doctrine](#doctrine-intro) for introductory information about the Doctrine library architecture.
+[Appendix D. Introduction to Doctrine](doctrine_intro.md) for introductory information about the Doctrine library architecture.
 
 !!! note
     Doctrine is a third-party library, it is not part of Laminas Framework. We cover it in this book
@@ -65,7 +65,7 @@ management system, which is very simple in installation and administration.
 
 !!! note
     For OS-specific instructions on how to install MySQL server and client, please refer to
-    [Appendix A. Configuring Web Development Environment](#devenv).
+    [Appendix A. Configuring Web Development Environment](devenv.md).
 
 Once you install MySQL, type the following command from your command shell to log into MySQL client
 console:
@@ -302,7 +302,7 @@ You should see the list of tables created, something like below:
 
 !!! note
     Also consider using *database migrations* for initializing database schema. For additional
-    info about migrations, please refer to [Database Migrations](#migrations) chapter.
+    info about migrations, please refer to [Database Migrations](doctrine_migrations.md) chapter.
 
 ## Integrating Doctrine ORM with Laminas Framework
 
@@ -448,7 +448,7 @@ there is a number of subkeys containing the following settings:
 
 ### Overriding the Default Doctrine Configuration
 
-As you already know from [Website Operation](#operation) chapter, in a laminas-based web application configuration is
+As you already know from [Website Operation](operation.md) chapter, in a laminas-based web application configuration is
 typically divided into two categories: application-wide configuration and module-specific configuration.
 
   * For storing application-wide Doctrine settings, you typically use the *APP_DIR/config/autoload/global.php* or

@@ -293,12 +293,12 @@ type the following command:
 ~~~
 
 !!! note
-    If you are new to migrations, refer to chapter [Database Migrations](#migrations).
+    If you are new to migrations, refer to chapter [Database Migrations](doctrine_migrations.md).
 
 ## Implementing Entities
 
 The *Role Demo* sample uses Doctrine ORM for managing database. We have already learned how to use Doctrine in
-[Database Management with Doctrine ORM](#doctrine).
+[Database Management with Doctrine ORM](doctrine.md).
 
 For storing information about roles and permissions in database, we will create the `Role` and `Permission`
 entities. The `Role` entity is mapped

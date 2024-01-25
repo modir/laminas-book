@@ -336,7 +336,7 @@ There is a separate repository per each Laminas component.
 
 In most cases you won't need to get the code of Laminas Framework manually.
 Instead, you will install it with Composer dependency manager. We will
-become familiar with Composer later in a chapter called [Laminas Skeleton Application](#skeleton).
+become familiar with Composer later in a chapter called [Laminas Skeleton Application](skeleton.md).
 
 ### Coding Standards
 
@@ -354,7 +354,7 @@ run. For instance, for creating samples for this book, the author used Ubuntu Li
 
 If you do not know yet what OS to use for your web development, it is
 recommended for you to use Linux, because most server software operates on
-Linux servers. You can refer to [Appendix A. Configuring Web Development Environment](#devenv) for some
+Linux servers. You can refer to [Appendix A. Configuring Web Development Environment](devenv.md) for some
 instructions on configuring your development environment.
 
 ## Server Requirements
@@ -387,7 +387,7 @@ cloud-based hosting service, like [Amazon Web Services](http://aws.amazon.com/).
 Amazon provides Linux server instances as a part of EC2 service. EC2 is rather
 cheap, and it provides a [free usage tier](http://aws.amazon.com/free/) letting
 you try it for free for one year. We provide instructions for beginners on how to install a Laminas website to Amazon EC2 cloud in
-[Appendix E. Installing a Laminas Web Application to Amazon EC2](#ec2-tutorial).
+[Appendix E. Installing a Laminas Web Application to Amazon EC2](ec2_tutorial.md).
 
 ## Security
 

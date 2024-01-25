@@ -20,7 +20,7 @@ platforms supporting a compatible Java machine.
 
 !!! note
     We also provide instructions for beginners on how to install a Laminas website to Amazon EC2 cloud in
-    [Appendix E. Installing a Laminas Web Application to Amazon EC2](#ec2-tutorial).
+    [Appendix E. Installing a Laminas Web Application to Amazon EC2](ec2_tutorial.md).
 
 ## Installing Apache, PHP and MySQL in Linux
 
@@ -312,7 +312,7 @@ your web files anywhere on the system (not only to */var/www/html* directory).
 
 !!! note
     Please note that right now you don't need to create a virtual host,
-    we'll do that in chapter [Laminas Skeleton Application](#skeleton). Now you just need to have an idea of
+    we'll do that in chapter [Laminas Skeleton Application](skeleton.md). Now you just need to have an idea of
     how virtual hosts are created in different Linux distributions.
 
 **In Debian or Ubuntu Linux**
@@ -603,7 +603,7 @@ and *site2.mydomain.com*)
 Please consult to your WAMP or XAMPP documentation for information on how to create virtual hosts.
 
 !!! note
-    Right now, you don't need to edit virtual host file, we'll do that in chapter [Laminas Skeleton Application](#skeleton)
+    Right now, you don't need to edit virtual host file, we'll do that in chapter [Laminas Skeleton Application](skeleton.md)
     when installing the Hello World application. Now you just need to understand
     how to create virtual hosts.
 

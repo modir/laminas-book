@@ -136,7 +136,7 @@ The `Module.php` file located inside of module's source directory is some kind o
 The `Module` class defined in this file is loaded by `Laminas\ModuleManager` component when it loads all application
 modules.
 
-One useful thing you can do with this class is *registering to events*. If you remember from the [Website Operation](#operation)
+One useful thing you can do with this class is *registering to events*. If you remember from the [Website Operation](operation.md)
 chapter, the application has several life stages represented by events. You may write an event listener function (or class) and
 register it in your module entry point. When an event is triggered, your listener method (or class) will be called allowing you to
 do something useful.

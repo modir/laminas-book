@@ -38,7 +38,7 @@ source code of the *Form Demo* web application:
 To install the example, you can either edit your default virtual host file
 or create a new one. After editing the file, restart the Apache HTTP Server
 and open the web site in your web browser. For additional information on
-Apache virtual hosts, you can refer to [Appendix A. Configuring Web Development Environment](#devenv).
+Apache virtual hosts, you can refer to [Appendix A. Configuring Web Development Environment](devenv.md).
 
 ## About HTML Forms
 
@@ -1229,8 +1229,8 @@ filter we've created.
 
 Above, we briefly described how to create an input filter for the form model.
 For detailed information about the above mentioned (and other) filters and validators and their
-usage examples, please refer to [Transforming Input Data with Filters](#filters) and
-[Checking Input Data with Validators](#validators).
+usage examples, please refer to [Transforming Input Data with Filters](filters.md) and
+[Checking Input Data with Validators](validators.md).
 
 ## Using the Form in a Controller's Action
 

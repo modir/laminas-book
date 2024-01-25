@@ -519,7 +519,7 @@ if ($form->isValid())
 You can see this example in action in the *Form Demo* sample web application bundled with this book. Just type
 "http://localhost/payment" URL in your browser.
 
-## Implementing Multi-Step Forms {#multi-step-forms}
+## Implementing Multi-Step Forms
 
 In this section, we will provide instructions on how to implement a *multi-step* form with Laminas. A multi-step form
 is a form having a lot of fields, and which is displayed in several steps. To store the current step and user-entered data
@@ -538,7 +538,7 @@ You can see this complete working example in action as part of *Form Demo* sampl
 ### Enabling Sessions
 
 !!! note
-    If you are new to the PHP sessions feature, please refer to [Working with Sessions](#session) before reading this section.
+    If you are new to the PHP sessions feature, please refer to [Working with Sessions](session.md) before reading this section.
 
 Session support is implemented in @`Laminas\Session` component, so you have to install it if you hadn't done that before.
 

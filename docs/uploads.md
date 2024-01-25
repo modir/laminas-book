@@ -97,7 +97,7 @@ however it has the following important differences:
 !!! note
     By default, PHP engine's settings do not allow to upload large files (larger than 2MB). In order to upload
     large files, you may need to edit the *php.ini* configuration file and modify the `post_max_size`
-    and `upload_max_filesize` parameters (please refer to [Appendix A. Configuring Web Development Environment](#devenv) for information on how to do that).
+    and `upload_max_filesize` parameters (please refer to [Appendix A. Configuring Web Development Environment](devenv.md) for information on how to do that).
     Setting these with `100M` allows to upload files up to 100 Mb in size, and this would typically be sufficient.
     If you plan to upload very large files up to 1 GB in size, than better set these with 1024M.
     Do not forget to restart your Apache Web Server after editing the configuration file.
@@ -1113,7 +1113,7 @@ $form->prepare();
 In the code of the view template, we first set "class" attribute (line 3). This is to
 apply nice-looking Twitter Bootstrap styles to the form's *Submit* button.
 
-Then, we render the form with the common view helpers that we discussed in [Collecting User Input with Forms](#forms).
+Then, we render the form with the common view helpers that we discussed in [Collecting User Input with Forms](forms.md).
 For rendering the "file" field, we use the generic @`FormElement` view helper.
 
 !!! note

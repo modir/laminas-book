@@ -3,7 +3,7 @@
 Laminas Framework provides you with the so called "skeleton application" to make it easier to create
 your new websites from scratch. In this chapter, we will show how to install the skeleton
 application and how to create an Apache virtual host. It is recommended that you refer to
-[Appendix A. Configuring Web Development Environment](#devenv) before reading this chapter to get your development
+[Appendix A. Configuring Web Development Environment](devenv.md) before reading this chapter to get your development
 environment configured.
 
 ## Getting Laminas Skeleton Application
@@ -165,7 +165,7 @@ there are several files:
   In this book, we do not cover usage of Docker.
 
 * `LICENSE.md` is a text file containing Laminas license (you had a chance to read it in
- [Introduction to Laminas Framework](#intro)).
+ [Introduction to Laminas Framework](intro.md)).
   Do not remove or modify this file, because Laminas license doesn't allow to do so.
 
 * `phpunit.xml.dist` file is a configuration for [PHPUnit](https://phpunit.de/) (unit testing framework). You use this file
@@ -331,7 +331,7 @@ about it, we need to edit the virtual host file.
 !!! note
     Virtual host file may be located at a different path, depending on your operating system type.
     For example, in Linux Ubuntu it is located in `/etc/apache2/sites-available/000-default.conf` file.
-    For OS- and server-specific information about virtual hosts, please refer to [Appendix A. Configuring Web Development Environment](#devenv).
+    For OS- and server-specific information about virtual hosts, please refer to [Appendix A. Configuring Web Development Environment](devenv.md).
 
 Let's now edit the default virtual host file to make it look like below (we assume you use Apache v2.4):
 
@@ -373,7 +373,7 @@ everyone to visit the website.
     Laminas Framework utilizes Apache's URL rewriting module for redirecting
     web-users to entry script of your website. Please ensure that your web server
     has `mod_rewrite` module enabled. For instructions on how to enable the module, please
-    refer to [Appendix A. Configuring Web Development Environment](#devenv).
+    refer to [Appendix A. Configuring Web Development Environment](devenv.md).
 
 !!! note
     After editing the config file, do not forget to restart Apache to apply your changes.
@@ -396,7 +396,7 @@ applications.
 Now that we have the skeleton application set up and working, we will want to change something
 with it in the future. To easily navigate the directory structure, edit files and debug the
 website, the common practice is to use an IDE (Integrated Development Environment). In this book, we
-use NetBeans IDE (see [Appendix A. Configuring Web Development Environment](#devenv) for more information on how to install NetBeans).
+use NetBeans IDE (see [Appendix A. Configuring Web Development Environment](devenv.md) for more information on how to install NetBeans).
 
 To create NetBeans project for our skeleton application, run NetBeans and open menu
 *File->New Project...*. The *New Project* dialog appears (see figure 2.4).
@@ -431,7 +431,7 @@ In the project window, you can see the menu bar, the tool bar,
 the *Projects* pane where your project files are listed, and, in the right
 part of the window, you can see the code of the `index.php` entry file.
 
-Please refer to [Appendix B. Introduction to PHP Development in NetBeans IDE](#netbeans)
+Please refer to [Appendix B. Introduction to PHP Development in NetBeans IDE](netbeans.md)
 for more NetBeans usage tips, including launching and interactively debugging
 laminas-based websites.
 
@@ -745,7 +745,7 @@ php composer.phar require doctrine/doctrine-module 2.*
 ~~~
 
 The command above edits `composer.json` file, and downloads and installs the package. We will use this command
-later in chapter [Managing Database with Doctrine](#doctrine), when becoming familiar with database management.
+later in chapter [Managing Database with Doctrine](doctrine.md), when becoming familiar with database management.
 
 ### Virtual Packages
 

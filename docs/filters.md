@@ -244,7 +244,7 @@ When using filters with form's validation rules, you typically do not construct 
 filter object explicitly as we did in the previous section; instead, you pass an
 array configuration to the factory class, which automatically constructs the filter
 for you and (optionally) configures it. We already saw how this works when adding
-validation rules for the feedback form in [Collecting User Input with Forms](#forms).
+validation rules for the feedback form in [Collecting User Input with Forms](forms.md).
 
 For example, let's show how to construct the same @`StringTrim` filter with the help
 of the factory:

@@ -55,7 +55,7 @@ Detailed instructions on how to install the *User Demo* sample can be found in *
 
 In the *User Demo* sample, we create a new module called *User* and add all functionality
 related to user management and authentication to that module. If you are new
-to the concept of modules, refer to chapter [Creating a New Module](#modules).
+to the concept of modules, refer to chapter [Creating a New Module](modules.md).
 
 The *User* module will have very few dependencies on other
 modules of the website. The idea behind the *User* module is to give you a reusable unit that you can use in your own web
@@ -149,12 +149,12 @@ CREATE TABLE `user` (
 You can find a migration, which creates the `user` table, in the *User Demo* sample application.
 
 !!! note
-    If you are new to migrations, refer to chapter [Database Migrations](#migrations).
+    If you are new to migrations, refer to chapter [Database Migrations](doctrine_migrations.md).
 
 ## Implementing User Entity
 
 The *User Demo* sample uses Doctrine ORM for managing the database. We have already learned how to use Doctrine in
-[Database Management with Doctrine ORM](#doctrine).
+[Database Management with Doctrine ORM](doctrine.md).
 
 For storing information about users in the database, we will create the `User` entity. The `User` entity is mapped
 onto the `user` database table. It is a typical Doctrine entity class.
@@ -741,7 +741,7 @@ php composer.phar require laminas/laminas-authentication
 
 !!! important
     For authentication to work, you also need to have @`Laminas\Session` component installed and session manager configured. For information
-    on how to do that, refer to [Working with Sessions](#session) chapter.
+    on how to do that, refer to [Working with Sessions](session.md) chapter.
 
 ### AuthenticationService
 
@@ -777,8 +777,12 @@ algorithms (see figure 16.9), and several *storage handlers* allowing you to sav
 ![Figure 16.10 Standard storage handlers](images/users/std_auth_storage_handlers.png)
 
 For our purposes, we can use @`Session`[Laminas\Authentication\Storage\Session] storage handler without needing to change any code. However, standard authentication
-adapters are not suitable for us, because we use Doctrine ORM. We will have to write our custom authentication adapter.
-Luckily, this is rather simple to do.
+adapters are not suitable for us, because we use Doctrine ORM.
+
+!!! important
+    The following chapters will be rewritten. Since the first version of this book a proper DoctrineModule was written for Laminas\Authentication.
+    Because of this we do not need to write an adapter. The documentation for the DoctrineModule can be found at:
+    [DoctrineModule](https://www.doctrine-project.org/projects/doctrine-module/en/6.1/authentication.html)
 
 ### Writing Authentication Adapter
 
@@ -1321,12 +1325,12 @@ Under the `access_filter` key, we have two subkeys:
 !!! note
     The access filter implementation is very simple. It can't, for example, allow access based on username or by user role. However,
     you can easily modify and extend it as you wish. If you plan to introduce role-based access control (RBAC), refer to the
-    [Role-Based Access Control](#roles) chapter.
+    [Role-Based Access Control](roles.md) chapter.
 
 ### Adding Dispatch Event Listener
 
 To implement access filtering, we will use an event listener. You have already become familiar with event listening
-in the [Creating a New Module](#modules) chapter.
+in the [Creating a New Module](modules.md) chapter.
 
 Particularly, we will listen to the *Dispatch* event. The *Dispatch* event is triggered after the *Route* event, when the
 controller and action are already determined. To implement the listener, we modify the *Module.php* file of the *User* module

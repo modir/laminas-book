@@ -1,7 +1,7 @@
 # Appendix B. Introduction to PHP Development in NetBeans IDE
 
 In this book, we use NetBeans IDE for developing Laminas Framework
-based applications. In [Appendix A. Configuring Web Development Environment](#devenv), we have installed NetBeans IDE.
+based applications. In [Appendix A. Configuring Web Development Environment](devenv.md), we have installed NetBeans IDE.
 Here we will provide some useful tips on using NetBeans for PHP programming.
 We will learn how to launch and interactively debug a laminas-based website.
 
@@ -89,7 +89,7 @@ retrieve information about the current state of the program, like the values of 
 and the call stack. You see the debugging information in NetBeans window in graphical form.
 
 W> To be able to debug the site, you need to have the XDebug extension installed.
-W> If you haven't installed it yet, please refer to [Appendix A. Configuring Web Development Environment](#devenv) for additional
+W> If you haven't installed it yet, please refer to [Appendix A. Configuring Web Development Environment](devenv.md) for additional
 W> information on how to install it.
 
 To start the debugging session, in NetBeans window, click the *Debug* button on the *Run Toolbar* (figure B.4).
@@ -289,7 +289,7 @@ the archive.
 
 Next, you need to tell the Apache web server where to find Webgrind files. This means
 you need to configure a separate virtual host. We have already learned about virtual
-hosts in [Appendix A. Configuring Web Development Environment](#devenv). Do not forget to restart Apache web server after
+hosts in [Appendix A. Configuring Web Development Environment](devenv.md). Do not forget to restart Apache web server after
 you have configured the virtual host.
 
 Finally, open Webgrind in your browser by navigating to the URL of your

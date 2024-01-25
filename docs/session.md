@@ -264,7 +264,7 @@ To remove data from session, use the following code:
 unset($sessionContainer->myVar);
 ~~~
 
-For some practical examples of using session containers, please refer to [Implementing Multi-Step Forms](#multi-step-forms) section.
+For some practical examples of using session containers, please refer to [Implementing Multi-Step Forms](forms_advanced.md#implementing-multi-step-forms) section.
 
 ## Summary
 

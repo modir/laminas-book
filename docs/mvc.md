@@ -446,7 +446,7 @@ to create the controller instance, and inject dependencies into controller.
 ### Registering a Controller Factory
 
 If your controller class needs to call some service (this happens very often), you need to request that service from the *service manager* (we discussed
-the service manager in the [Website Operation](#operation) chapter) and pass that service to controller's constructor, and the controller saves the service you passed
+the service manager in the [Website Operation](operation.md) chapter) and pass that service to controller's constructor, and the controller saves the service you passed
 in a private property for internal use (this also called dependency injection).
 
 This procedure is typically implemented inside of a factory class. For example, assume our controller class needs to use some `CurrencyConverter`
@@ -817,7 +817,7 @@ below for an example):
 ![Figure 4.9. Setting page title for the About page](images/mvc/about_title.png)
 
 We will discuss the view helpers in more details and provide
-more usage examples in the chapter [Page Appearance and Layout](#appearance).
+more usage examples in the chapter [Page Appearance and Layout](appearance.md).
 
 ## View Template Names
 
@@ -923,7 +923,7 @@ return [
 
 You can see that template map resolver's settings are stored under the *template_map* key. By default,
 there are several "standard" view templates, which are resolved this way: the index page template, the layout template
-(we will talk about it in [Page Appearance and Layout](#appearance)) and error templates (we will talk about them
+(we will talk about it in [Page Appearance and Layout](appearance.md)) and error templates (we will talk about them
 a little bit later). These standard pages are served with this type of resolver, because it is
 fast.
 
@@ -1284,7 +1284,7 @@ for retrieving `User` entities. You typically use repositories when storing enti
 in a database. With repositories, you can encapsulate SQL query logic in the
 single place and easily maintain and test it.
 
-We will learn about repositories in more details in [Database Management with Doctrine](#doctrine), when
+We will learn about repositories in more details in [Database Management with Doctrine](doctrine.md), when
 talking about Doctrine library.
 
 ### Value Objects
