@@ -1282,7 +1282,7 @@ retrieved by the `getMessages()` method.
 !!! note
     You might notice that we didn't define the `getMessages()` method in our `PhoneValidator` class.
     This is because we inherited this method from the @`AbstractValidator` base class. Inside of our
-   `isValid()` method, for generating error messages, we also used the `error()` protected method
+    `isValid()` method, for generating error messages, we also used the `error()` protected method
     provided by the base class (lines 61, 91, 93).
 
 !!! note
