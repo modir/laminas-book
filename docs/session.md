@@ -66,15 +66,14 @@ ini_set('session.gc_maxlifetime', 60*60*24*30);
 There are several other "advanced" session-related PHP configuration settings in *php.ini*. We do not
 cover them here, because they are usually not needed.
 
-> **So, if PHP sessions is so simple, why do I need additional wrapper provided by Laminas Framework?**
->
-> laminas-provided wrapper around the PHP sessions is useful, because:
->
->   * Laminas session wrapper is object-oriented, so you can use it consistently in your MVC application.
->   * Laminas provides the concept of session namespaces, so different models can store data without naming conflicts.
->   * Laminas provides security features (session validators), so it is more difficult for a malicious user to hack and substitute your session data.
->   * Using `$_SESSION` super-global array directly is not good, because it makes testing your website more difficult. When you use a wrapper around PHP sessions, it is easier to supply test data.
->   * With Laminas session classes, it is possible to implement custom session data storages (for example, store session data in database instead of files).
+!!! note "So, if PHP sessions is so simple, why do I need additional wrapper provided by Laminas Framework?"
+    laminas-provided wrapper around the PHP sessions is useful, because:
+
+      * Laminas session wrapper is object-oriented, so you can use it consistently in your MVC application.
+      * Laminas provides the concept of session namespaces, so different models can store data without naming conflicts.
+      * Laminas provides security features (session validators), so it is more difficult for a malicious user to hack and substitute your session data.
+      * Using `$_SESSION` super-global array directly is not good, because it makes testing your website more difficult. When you use a wrapper around PHP sessions, it is easier to supply test data.
+      * With Laminas session classes, it is possible to implement custom session data storages (for example, store session data in database instead of files).
 
 ## Installing Laminas\Session Component
 
@@ -164,8 +163,9 @@ return [
 ];
 ~~~
 
-> We modify `global.php` file here, because sessions may be used by any module in your website and do not
-depend on environment.
+!!! note
+    We modify `global.php` file here, because sessions may be used by any module in your website and do not
+    depend on environment.
 
 As you can see, the session configuration is stored under three keys:
 
@@ -180,42 +180,6 @@ As you can see, the session configuration is stored under three keys:
   * The `session_storage` key allows to specify the session storage class. We use the @`SessionArrayStorage` class, which
     is the default storage and is sufficient for the most cases.
 
-### Making the Session Manager the Default One
-
-In Laminas, many components use the session manager implicitly (for example, @`FlashMessenger`[Laminas\Mvc\Plugin\FlashMessenger] controller plugin and view helper
-uses session to save messages between HTTP requests). To let such components use the session manager you just configured, you'll have to make it
-"the default one" by instantiating it as early as possible. For example, you can instantiate the session manager in your
-module's `onBootstrap()` method, as follows:
-
-~~~php
-<?php
-namespace Application;
-
-use Laminas\Mvc\MvcEvent;
-use Laminas\Session\SessionManager;
-
-class Module
-{
-    //...
-
-    /**
-     * This method is called once the MVC bootstrapping is complete.
-     */
-    public function onBootstrap(MvcEvent $event)
-    {
-        $application = $event->getApplication();
-        $serviceManager = $application->getServiceManager();
-
-        // The following line instantiates the SessionManager and automatically
-        // makes the SessionManager the 'default' one.
-        $sessionManager = $serviceManager->get(SessionManager::class);
-    }
-}
-~~~
-
-> Making the session manager the default one is very important, because otherwise you'll have to explicitly pass it to every component
-> depending on the session manager, which is rather boring.
-
 ## Session Containers
 
 Once you have configured the session manager, you can actually store and retrieve data to/from session. To do that,
@@ -227,8 +191,9 @@ which the data will be stored. A container namespace may contain upper-case and 
 underscores and back-slashes. So, for example, "Session\ContainerName", "session_container_name" and "SessionContainerName" are all
 valid container namespaces.
 
-> Session containers work closely with the session manager. When you create a session container, it calls the session
-> manager's `start()` method automatically, so session is started and initialized.
+!!! note
+    Session containers work closely with the session manager. When you create a session container, it calls the session
+    manager's `start()` method automatically, so session is started and initialized.
 
 Now let's start using containers. You can create a container using two equivalent ways: either manually instantiating a container or
 let a factory do that for you. The second one is easier, so we recommend it.
@@ -299,8 +264,7 @@ To remove data from session, use the following code:
 unset($sessionContainer->myVar);
 ~~~
 
-> For some practical examples of using session containers, please refer to [Implementing Multi-Step Forms](#multi-step-forms)
-   section.
+For some practical examples of using session containers, please refer to [Implementing Multi-Step Forms](#multi-step-forms) section.
 
 ## Summary
 
