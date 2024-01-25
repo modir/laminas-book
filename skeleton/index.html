@@ -217,7 +217,7 @@ accessed by <a href="https://github.com/laminas/LaminasSkeletonApplication">this
 However, you typically do not download the source code of the skeleton application directly,
 instead you use <a href="http://getcomposer.org/">Composer</a> dependency manager, as shown below.</p>
 <p>First, you need to get the latest version of Composer. You do this with the following commands:</p>
-<pre><code>cd ~
+<pre><code class="language-bash">cd ~
 
 php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
 
@@ -227,11 +227,9 @@ php -r &quot;unlink('composer-setup.php');&quot;
 </code></pre>
 <p>The commands above change your working directory to be your home directory, download the <code>composer-setup.php</code> installer script
 to your working directory, run it, and, finally, remove the installer.</p>
-<blockquote>
 <p>Once you run the commands above, you should have the <code>composer.phar</code> file in your working directory.</p>
-</blockquote>
 <p>Now, type the following command from your command prompt:</p>
-<pre><code>php composer.phar create-project -sdev laminas/skeleton-application helloworld
+<pre><code class="language-bash">php composer.phar create-project -sdev laminas/skeleton-application helloworld
 </code></pre>
 <p>The command above downloads the Laminas Skeleton Application to <code>helloworld</code> directory and runs its
 interactive installer. You now should answer several yes/no questions by typing <code>y</code> or <code>n</code> and pressing Enter.
@@ -239,7 +237,7 @@ Your answers will help the installer to determine which dependencies to install.
 If you don't know what to answer, answer 'n' (no); you will be able to install additional dependencies
 later at any time.</p>
 <p>For the beginning, you can answer the questions the following way:</p>
-<pre><code>    Do you want a minimal install (no optional packages)? Y/n
+<pre><code class="language-bash">    Do you want a minimal install (no optional packages)? Y/n
 n
 
     Would you like to install the developer toolbar? y/N
@@ -286,7 +284,7 @@ n
 <p>Once you answer the questions, the installer will download and install all necessary packages and asks
 you to which config file you would like to inject information about installed modules. When prompted,
 type '1' and press Enter:</p>
-<pre><code> Please select which config file you wish to inject 'Laminas\Form' into:
+<pre><code class="language-bash"> Please select which config file you wish to inject 'Laminas\Form' into:
   [0] Do not inject
   [1] config/modules.config.php
   [2] config/development.config.php.dist
@@ -297,23 +295,24 @@ type '1' and press Enter:</p>
 <p>Next, the installer will ask you if you would like to remove existing version control files from the project.
 Since you will probably store your web application in your own version control system (like Git) and do not need
 existing VCS files, type 'y' and press Enter:</p>
-<pre><code>Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]? y
+<pre><code class="language-bash">Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]? y
 </code></pre>
 <p>Now copy <code>composer.phar</code> file to your new <code>helloworld</code> directory:</p>
-<pre><code>cp composer.phar helloworld
+<pre><code class="language-bash">cp composer.phar helloworld
 </code></pre>
 <p>And final and very important step is enabling the <em>development mode</em> by typing the following command:</p>
-<pre><code>cd helloworld
+<pre><code class="language-bash">cd helloworld
 php composer.phar development-enable
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The development mode is typically used when you <em>develop</em> your application. When you enable the development
 mode additional "development" configuration files are created in your web application's <code>config</code> directory. In this
 mode your application may optionally load additional "development" modules. Configuration caching
 is also disabled in this mode allowing you to change your website's configuration files and see the changes immediately.</p>
 <p>Once you have finished the development, you can enable the <em>production</em> mode by typing the following:</p>
 <p><code>php composer.phar development-disable</code></p>
-</blockquote>
+</div>
 <p>Congratulations! The hard work is done. Now let's look inside the <code>helloworld</code> directory.</p>
 <h2 id="typical-directory-structure">Typical Directory Structure</h2>
 <p>Every laminas-based website (including the skeleton application) is organized in the same recommended way.
@@ -372,10 +371,11 @@ the modules a little bit later.</p>
 Laminas Framework library files. This directory is typically populated by Composer.</p>
 <p>The <code>public</code> directory contains data publicly accessible by the web-user. As you can see, web-users
 will mainly communicate with the <code>index.php</code>, which is also called the <em>entry point</em> of your website.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Your website will have a single entry point, <em>index.php</em>, because this is more secure than allowing
 anyone to access all your PHP files.</p>
-</blockquote>
+</div>
 <p>Inside of the <code>public</code> directory, you can also find hidden <code>.htaccess</code> file. Its main purpose is to define
 URL rewriting rules.</p>
 <p>The <code>public</code> directory contains several subdirectories also publicly accessible by web-users:</p>
@@ -386,12 +386,12 @@ URL rewriting rules.</p>
 <li>and <code>js</code> subdirectory stores publicly accessible JavaScript files used by your web-pages.
   Typically, files of <a href="http://jquery.com/">jQuery</a> library are placed here, but you can put your own JavaScript files here, too.</li>
 </ul>
-<blockquote>
-<p><strong>What is jQuery library?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">What is jQuery library?</p>
 <p>jQuery is a JavaScript library which was created to simplify the client-side scripting of HTML
 pages. jQuery's selector mechanism allows to easily attach event handlers to certain HTML elements, making
 it really simple to make your HTML pages interactive.</p>
-</blockquote>
+</div>
 <p>Because the Laminas Skeleton Application is stored on GitHub, inside of the directory structure,
 you can find hidden <code>.gitignore</code> file. This is a <a href="http://git-scm.com/">GIT</a> version control
 system's files. You can ignore it (or even remove them if you do not plan to store your code in a GIT repository).</p>
@@ -401,7 +401,7 @@ system's files. You can ignore it (or even remove them if you do not plan to sto
 are registered on <a href="https://packagist.org/">Packagist.org</a> site.
 With Composer, you can identify the packages that your app requires and have Composer to download and install them automatically.</p>
 <p>The dependencies of the skeleton application are declared in <code>APP_DIR/composer.json</code> file (see below):</p>
-<pre><code class="language-text">{
+<pre><code class="language-json">{
     &quot;name&quot;: &quot;laminas/skeleton-application&quot;,
     &quot;description&quot;: &quot;Skeleton Application for Laminas Framework laminas-mvc applications&quot;,
     &quot;type&quot;: &quot;project&quot;,
@@ -442,13 +442,13 @@ With Composer, you can identify the packages that your app requires and have Com
     }
 }
 </code></pre>
-<blockquote>
-<p><strong>What is JSON?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">What is JSON?</p>
 <p>JSON (JavaScript Object Notation), is a text-based file format used for human-readable
 representation of simple structures and nested associative arrays. Although JSON
 originates from JavaScript, it is used in PHP and in other languages, because
 it is convenient for storing configuration data.</p>
-</blockquote>
+</div>
 <p>In that file, we see some basic info on the skeleton application (its name,
 description, license, keywords and home page). You will typically change this info for your future
 websites. This information is optional, so you can even safely remove it,
@@ -470,12 +470,13 @@ it just ensures PHP has an appropriate version, and if not, it will warn you.</p
 Laminas Framework files can be found inside the <code>APP_DIR/vendor/laminas/</code>
 directory (figure 2.2).</p>
 <p><img alt="Figure 2.2. Vendor directory" src="../images/skeleton/vendor_dir.png" /></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In some other frameworks, another (conventional) way of dependency installation is used.
 You just download the dependency library as an archive, unpack it and put it somewhere inside of your
-directory structure (typically, to <code>vendor</code> directory). This approach was used in Laminas Framework 1.
+directory structure (typically, to <code>vendor</code> directory). This approach was used in Zend Framework 1.
 But, in Laminas Framework, you are recommended to install dependencies with Composer.</p>
-</blockquote>
+</div>
 <h2 id="apache-virtual-host">Apache Virtual Host</h2>
 <p>Now we are almost ready to get our skeleton website live! The last thing we
 are going to do is configure an Apache virtual host. A virtual host term means
@@ -486,11 +487,12 @@ transparently for site users, that means users have no idea whether the sites ar
 working on the same machine or on different ones.</p>
 <p>Currently, we have the skeleton application inside of your home directory. To let Apache know
 about it, we need to edit the virtual host file.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Virtual host file may be located at a different path, depending on your operating system type.
 For example, in Linux Ubuntu it is located in <code>/etc/apache2/sites-available/000-default.conf</code> file.
 For OS- and server-specific information about virtual hosts, please refer to <a href="#devenv">Appendix A. Configuring Web Development Environment</a>.</p>
-</blockquote>
+</div>
 <p>Let's now edit the default virtual host file to make it look like below (we assume you use Apache v2.4):</p>
 <pre><code class="language-text">&lt;VirtualHost *:80&gt;
     ServerAdmin webmaster@localhost
@@ -520,13 +522,17 @@ security of the website.</p>
 directive tells Apache that <em>index.php</em> should be used as the default index file. The <code>AllowOverride All</code> directive
 allows to define any rules in <code>.htaccess</code> files. The <code>Require all granted</code> directive allows
 everyone to visit the website.</p>
-<p>W&gt; Laminas Framework utilizes Apache's URL rewriting module for redirecting
-W&gt; web-users to entry script of your website. Please ensure that your web server
-W&gt; has <code>mod_rewrite</code> module enabled. For instructions on how to enable the module, please
-W&gt; refer to <a href="#devenv">Appendix A. Configuring Web Development Environment</a>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Laminas Framework utilizes Apache's URL rewriting module for redirecting
+web-users to entry script of your website. Please ensure that your web server
+has <code>mod_rewrite</code> module enabled. For instructions on how to enable the module, please
+refer to <a href="#devenv">Appendix A. Configuring Web Development Environment</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>After editing the config file, do not forget to restart Apache to apply your changes.</p>
-</blockquote>
+</div>
 <h2 id="opening-the-website-in-your-browser">Opening the Website in Your Browser</h2>
 <p>To open the website, type "http://localhost" in your browser's navigation bar and press Enter.
 Figure 2.3 shows the site in action.</p>
@@ -567,12 +573,10 @@ part of the window, you can see the code of the <code>index.php</code> entry fil
 <p>Please refer to <a href="#netbeans">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
 for more NetBeans usage tips, including launching and interactively debugging
 laminas-based websites.</p>
-<blockquote>
 <p><strong>It's time for some advanced stuff...</strong></p>
 <p>Congratulations! We've done the hard work of installing and running
 the Laminas Skeleton Application, and now it's time to have a rest
 and read about some advanced things in the last part of this chapter.</p>
-</blockquote>
 <h2 id="hypertext-access-file-htaccess">Hypertext Access File (.htaccess)</h2>
 <p>We've mentioned the <code>APP_DIR/public/.htaccess</code> file when talking about typical
 directory structure. Now let's try to understand the role of this file.</p>
@@ -642,12 +646,12 @@ you may not want to let Google or other search engines to index your website.</p
 <p>To forbid access to your site, you can modify the virtual host and add the following line to it:</p>
 <pre><code class="language-text">Require ip &lt;your_ip_address&gt;
 </code></pre>
-<blockquote>
-<p><strong>How do I determine my IP address?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">How do I determine my IP address?</p>
 <p>You can use the <a href="http://www.whatismyip.com/">http://www.whatismyip.com</a> website to determine
 your external IP address. The external IP address is the address by which other
 computers on the Internet may access your site.</p>
-</blockquote>
+</div>
 <h2 id="http-authentication">HTTP Authentication</h2>
 <p>You may want to allow access to your site to certain users. For example, when you are
 demonstrating your website to your boss, you will give her username and password for
@@ -678,23 +682,24 @@ with the <code>htpasswd</code> utility.</p>
 <p>Line 8  will allow anyone to log in that is listed in the password file,
 and who correctly enters their password.</p>
 <p>To create <code>passwords</code> file, type the following command:</p>
-<pre><code>htpasswd -c /usr/local/apache/passwd/passwords &lt;username&gt;
+<pre><code class="language-bash">htpasswd -c /usr/local/apache/passwd/passwords &lt;username&gt;
 </code></pre>
 <p>In the command above, you should replace the <code>&lt;username&gt;</code> placeholder
 with the name of the user. You can choose an arbitrary name, for example "admin".
 The command will request the user's password and write the password to the file:</p>
-<pre><code class="language-text"># htpasswd -c /usr/local/apache/passwd/passwords &lt;username&gt;
+<pre><code class="language-bash"># htpasswd -c /usr/local/apache/passwd/passwords &lt;username&gt;
 New password:
 Re-type new password:
 Adding password for user &lt;username&gt;
 </code></pre>
 <p>When the user tries to visit the site, he/she sees the HTTP authentication dialog.
 To log into your site, the visitor should enter the correct username and password.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>For additional information on HTTP authentication, you can refer to
 <a href="http://httpd.apache.org/docs/current/howto/auth.html">Authentication and Authorization</a>
 topic of Apache documentation.</p>
-</blockquote>
+</div>
 <h2 id="having-multiple-virtual-hosts">Having Multiple Virtual Hosts</h2>
 <p>When developing several websites on the same machine, you will want to create
 several virtual hosts. For each virtual host you need to specify a domain name (like <code>site1.mydomain.com</code>).
@@ -708,9 +713,10 @@ Listen 8080
 &lt;/VirtualHost&gt;
 </code></pre>
 <p>To access the website, in your browser's navigation bar, enter "http://localhost:8080".</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>After editing the virtual host config file, you should restart Apache to apply changes.</p>
-</blockquote>
+</div>
 <h2 id="hosts-file">Hosts File</h2>
 <p>When you have multiple local websites mapped to different ports, it becomes difficult
 to remember on which port each site presents. To simplify this, you can use name-based
@@ -732,23 +738,27 @@ shown in the example below.</p>
 </code></pre>
 <p>So now you'll be able to simply enter "site1.localhost" in your browser's address bar
 instead of remembering the port number.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In Linux, the hosts file is located in <code>/etc/hosts</code>.
 In Windows, the file is typically located in <code>C:\Windows\System32\drivers\etc\hosts</code>.
 To edit the file, you need to be an administrator. Please also note that some
 anti-virus software may block changes to hosts file, so you'll have to temporarily disable
 your anti-virus to edit the file, and enable it after.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you have purchased a real domain name for your website (like <code>example.com</code>), you do not
 need to modify your <code>hosts</code> file, because Apache will be able to resolve the IP address of
 your website using the DNS system. You modify your <code>hosts</code> file only when DNS system knows nothing
 about the domain name and can't resolve the IP address of your website.</p>
-</blockquote>
+</div>
 <h2 id="advanced-composer-usage">Advanced Composer Usage</h2>
 <p>Earlier in this chapter, we have used Composer to install Laminas Framework library code.
 Now let's briefly describe some advanced Composer usage examples.</p>
 <p>As we already know, the only required key in the <code>composer.json</code> file is <code>require</code>. This key
 tells what packages are required by your application:</p>
-<pre><code class="language-text">{
+<pre><code class="language-json">{
     &quot;require&quot;: {
         &quot;php&quot;: &quot;^5.6 || ^7.0&quot;,
         &quot;laminas/laminas-component-installer&quot;: &quot;^1.0 || ^0.3 || ^1.0.0-dev@dev&quot;,
@@ -826,48 +836,67 @@ backward compatibility). In table 2.2, possible ways of specifying acceptable ve
 <h3 id="installing-and-updating-packages">Installing and Updating Packages</h3>
 <p>We've seen how to use the <code>php composer.phar install</code> command to install our dependencies. As soon as you call this
 command, Composer will find, download and install the dependencies to your <code>vendor</code> subdirectory.</p>
-<blockquote>
-<p><strong>Is it safe to install dependencies with Composer?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Is it safe to install dependencies with Composer?</p>
 <p>Well, some people may be afraid of Composer-style dependency management,
 because they think someone can update the dependencies system-wide by mistake or intentionally,
-causing the web application to
-break. Note, that Composer <em>never</em> installs these
+causing the web application to break. Note, that Composer <em>never</em> installs these
 system-wide, instead it installs them into your <code>APP_DIR/vendor/</code> directory.</p>
-</blockquote>
+</div>
 <p>After installation, Composer also creates the <code>APP_DIR/composer.lock</code> file. This file now contains
 actual versions of the packages that were installed. If you run the <code>install</code> command again,
 Composer will encounter the <code>composer.lock</code> file, check which dependencies already installed and
 as all packages already installed, it just exits without doing anything.</p>
 <p>Now assume that in some period of time new security updates for your dependency packages are released.
 You will want to update your packages to keep your website secure. You can do that by typing the following:</p>
-<p><code>php composer.phar update</code></p>
+<pre><code class="language-bash">php composer.phar update
+</code></pre>
 <p>If you want to update only a single dependency, type its name as the following:</p>
-<p><code>php composer.phar update laminas/laminas-mvc</code></p>
+<pre><code class="language-bash">php composer.phar update laminas/laminas-mvc
+</code></pre>
 <p>After the <code>update</code> command, your <code>composer.lock</code> file will be updated, too.</p>
-<blockquote>
-<p><strong>What do I do if I want to roll back to a previous version of the package?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">What do I do if I want to roll back to a previous version of the package?</p>
 <p>If the update procedure resulted in unwanted problems with your system, you can roll back
 by reverting the changes to your <code>composer.lock</code> file and issuing the <code>install</code> command again.
 Reverting changes to <code>composer.lock</code> is easy if you use a version control system, like GIT or SVN.
 If you don't use a version control system, make a backup copy of <code>composer.lock</code> before updating.</p>
-</blockquote>
+</div>
 <h3 id="adding-a-new-dependency">Adding a New Dependency</h3>
 <p>If you want to add new dependency to the application, you can either edit <code>composer.json</code>
 manually, or issue <code>require</code> command. For example, to install Doctrine ORM module to your web
 site (to add the "doctrine/doctrine-module" package to the
 application dependencies), type the following:</p>
-<p><code>php composer.phar require doctrine/doctrine-module 2.*</code></p>
+<pre><code class="language-bash">php composer.phar require doctrine/doctrine-module 2.*
+</code></pre>
 <p>The command above edits <code>composer.json</code> file, and downloads and installs the package. We will use this command
 later in chapter <a href="#doctrine">Managing Database with Doctrine</a>, when becoming familiar with database management.</p>
 <h3 id="virtual-packages">Virtual Packages</h3>
 <p>Composer can be used to require some functionality to present on your system. You've already seen
 how we require "php:^5.6". PHP package is a virtual package representing PHP itself. You can also
 require other stuff, like PHP extensions (see table 2.3 below).</p>
-<p>| <em>Definition Example</em>    | <em>Description</em>                                                              |
-|------------------------------------------------------------------------------------------------------|
-| "php":"^5.6"            | Require PHP version greater or equal than 5.6, but lower than 6.0.         |
-| ext-dom, ext-pdo-mysql  | Require PHP DOM and PDO MySQL extensions                                   |
-| lib-openssl             | Require OpenSSL library                                                    |</p>
+<table>
+<thead>
+<tr>
+<th><em>Definition Example</em></th>
+<th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"php":"^5.6"</td>
+<td>Require PHP version greater or equal than 5.6, but lower than 6.0.</td>
+</tr>
+<tr>
+<td>ext-dom, ext-pdo-mysql</td>
+<td>Require PHP DOM and PDO MySQL extensions</td>
+</tr>
+<tr>
+<td>lib-openssl</td>
+<td>Require OpenSSL library</td>
+</tr>
+</tbody>
+</table>
 <p>Table 2.3. Virtual Composer Packages</p>
 <p>You can use <code>php composer.phar show --platform</code> command to display a list of available virtual packages
 for your machine.</p>
@@ -882,13 +911,13 @@ file guarantees that everyone will install the same versions of dependencies as 
 This is useful in development teams having more than one developer, because all
 developers should have the same code to avoid unwanted issues with environment
 misconfiguration.</p>
-<blockquote>
-<p><strong>What if some dependence will be declared obsolete and removed from Packagist.org?</strong></p>
+<div class="admonition note">
+<p class="admonition-title">What if some dependence will be declared obsolete and removed from Packagist.org?</p>
 <p>Well, the possibility of package removal is minimum. All packages are free and open-source,
 and the community of users can always restore the dependency even if it is removed from packagist.
 By the way, the same concept of dependency installation is used in Linux (remember APT or RPM manager?),
 so did anyone see any Linux package lost?</p>
-</blockquote>
+</div>
 <p>But there may be situations when you <em>should</em> store some dependent libraries under
 version control:</p>
 <ul>

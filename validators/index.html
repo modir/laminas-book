@@ -236,16 +236,17 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="checking-input-data-with-validators">Checking Input Data with Validators</h1>
-<p>In this chapter, we will provide an overview of standard ZF validators that
+<p>In this chapter, we will provide an overview of standard Laminas validators that
 can be used with your forms, and will also show how to write a custom validator.
 A validator is a class designed to take some input data, check it
 for correctness, and return a boolean result telling whether the data is correct
 (and error messages if the data has some errors).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In general, you even can use validators <em>outside</em> forms to process an arbitrary data.
 For example, validators may be used in a controller action to ensure that data passed
 as GET and/or POST variables is secure and conform to certain format.</p>
-</blockquote>
+</div>
 <p>Laminas components covered in this chapter:</p>
 <table>
 <thead>
@@ -291,10 +292,11 @@ interface ValidatorInterface
 value (the <code>$value</code> parameter). If the validation of the <code>$value</code> passes, the
 <code>isValid()</code> method returns boolean <code>true</code>. If the <code>$value</code> fails validation, then
 this method returns <code>false</code>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>A concrete validator class implementing the @<code>ValidatorInterface</code>[Laminas\Validator\ValidatorInterface] interface may have additional methods.
 For example, many validator classes have methods allowing to configure the validator (set validation options).</p>
-</blockquote>
+</div>
 <h2 id="standard-validators-overview">Standard Validators Overview</h2>
 <p>Standard Laminas validators are provided by the @<code>Laminas\Validator</code> component <sup id="fnref:standard_validators"><a class="footnote-ref" href="#fn:standard_validators">1</a></sup>. Standard validator
 classes inheritance is shown in figure 9.1. As you can see from the figure, most of them are derived
@@ -432,7 +434,7 @@ internally creates the list of error messages that can be retrieved with the <co
 For example, look below for possible validation errors that the @<code>EmailAdrress</code>[Laminas\Validator\EmailAddress]
 returns if you pass it the "abc@ewr" value (the back-slash ('\') character indicates line breaks where
 code doesn't fit book page):</p>
-<pre><code class="language-text">array(3) {
+<pre><code class="language-php">array(3) {
   [&quot;emailAddressInvalidHostname&quot;] =&gt;
     string(51) &quot;'ewr' is not a valid hostname for the email address&quot;
   [&quot;hostnameInvalidHostname&quot;] =&gt;
@@ -451,10 +453,11 @@ call.</p>
 <p>Some validators may work with input data in certain format only (for example, a validator may require
 that the input data be a string, but not an array). If you pass it data in unacceptable format,
 the validator may throw an @<code>Laminas\Validator\Exception\RuntimeException</code> exception or raise a PHP warning.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>It is recommended to check certain validator's documentation to be aware of its actual behaviour
 in case of inacceptable data.</p>
-</blockquote>
+</div>
 <h2 id="instantiating-a-validator">Instantiating a Validator</h2>
 <p>In Laminas Framework, there are several methods of creating a validator:</p>
 <ul>
@@ -474,13 +477,14 @@ an E-mail address for conformance to <a href="https://tools.ietf.org/html/rfc282
 An E-mail address typically consists of the local part (user name)
 followed by the "at" character (@), which is in turn followed by the host name. For example,
 in the "name@example.com" E-mail address, "name" is the local part, and "example.com" is the host name.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>EmailAddress</code> validator is useful for checking an user-entered E-mail addresses on
 your forms for correctness.
 The validator will check for the correctness of the local part and the host name,
 for presence of the "at" character (@) and, optionally, will connect to the recipient's
 host and query the DNS service for existence of the MX (Mail Exchanger) record <sup id="fnref:mx_record"><a class="footnote-ref" href="#fn:mx_record">2</a></sup>.</p>
-</blockquote>
+</div>
 <p>The methods provided by the @<code>EmailAddress</code> validator are listed in table 9.2:</p>
 <table>
 <thead>
@@ -556,10 +560,8 @@ host and query the DNS service for existence of the MX (Mail Exchanger) record <
 <p>As you can see from the table, the @<code>EmailAddress</code> validator, additionally to the
 <code>isValid()</code> and <code>getMessages()</code> methods, provides the constructor method to which
 you can (optionally) pass the complete list of options for initializing the validator.</p>
-<blockquote>
 <p>All standard validators have the constructor method (optionally) accepting an array of options
 for configuring the validator when instantiating it manually.</p>
-</blockquote>
 <p>The @<code>EmailAddress</code> class also provides a number of methods that can be used for
 setting specific validator options.</p>
 <p>The <code>useDomainCheck()</code> method tells whether to check the host name for correctness, or not.
@@ -572,20 +574,22 @@ of the <code>ALLOW_</code>-prefixed constants <sup id="fnref:allow_constants"><a
 <li><code>ALLOW_LOCAL</code> Allow local network name,</li>
 <li><code>ALLOW_ALL</code>  Allow all of the above.</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Internally, the @<code>EmailAddress</code> validator uses the @<code>Hostname</code>[Laminas\Validator\Hostname] validator for checking the host name part
 of an E-mail address. Optionally, you can attach a custom host name validator by using the <code>setHostnameValidator()</code>
 method, however it is unlikely you will need to do such.</p>
-</blockquote>
+</div>
 <p>The <code>useMxCheck()</code> method tells whether the validator should connect to the recipient's
 host and query the DNS server for the MX record(s). If the server has no MX records, than the validation fails.
 You can additionally use the <code>useDeepMxCheck()</code> method to tell the validator to compare the mail
 server addresses extracted from the MX records against the black list of reserved domain names, and perform
 additional checks per each detected address.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>It is not recommended to perform MX check (and deep MX check), because that may take a lot of time and
 increase the web page load time. By default, these checks are disabled.</p>
-</blockquote>
+</div>
 <p>Below, we provide code examples showing two equivalent methods of manual creating of an instance of
 the @<code>EmailAddress</code> validator, setting its options and checking an input value:</p>
 <p><strong>Example 1. Passing options to the constructor method.</strong></p>
@@ -681,12 +685,13 @@ filter-specific options.</p>
 validator, call its <code>setAllowDns()</code>, <code>useMxCheck()</code> and <code>useDeepMxCheck()</code> methods,
 and pass the input value to its <code>isValid()</code> method. This is very useful, because
 can be accomplished in a single call.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>StaticValidator</code> doesn't provide an ability to extract the list
 of human-readable validation errors. However, since the @<code>StaticValidator</code>
 is designed to be used outside forms, and not intended for displaying results to a human,
 this seems to be not a big disadvantage.</p>
-</blockquote>
+</div>
 <h3 id="method-3-using-an-array-configuration">Method 3. Using an Array Configuration</h3>
 <p>When using validators with form's validation rules, you typically do not construct a
 validator object explicitly as we did in the previous section, instead you pass an
@@ -727,9 +732,10 @@ the validator as needed.</p>
 <p>When creating a validator with a factory, you can use either the fully qualified validator class
 name or its short alias. The short aliases for the standard validators are defined by the
 @<code>ValidatorPluginManager</code> class.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>ValidatorPluginManager</code> class defines validator aliases.</p>
-</blockquote>
+</div>
 <p>A standard validator's alias is typically the same as class name. For example, the class
 @<code>Laminas\Validator\EmailAddress</code> has the short alias @<code>EmailAddress</code>.</p>
 <p>The validator plugin manager is internally used by the @<code>InputFilter</code>[Laminas\InputFilter\InputFilter] container class for
@@ -921,9 +927,10 @@ $isValid2 = $validator-&gt;isValid('abc');
 <p>The @<code>Uri</code>[Laminas\Validator\Uri] validator is designed to check whether the input value is a
 Uniform Resource Identifier (URI) <sup id="fnref:uri"><a class="footnote-ref" href="#fn:uri">9</a></sup>. On failure, error messages can be
 extracted with the validator's <code>getMessages()</code> method.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Don't be confused with the term URI. In most cases, you may think of URI as of a usual URL.</p>
-</blockquote>
+</div>
 <p>The public methods provided by the @<code>Uri</code>[Laminas\Validator\Uri] validator are listed in table 9.5:</p>
 <table>
 <thead>
@@ -1033,10 +1040,11 @@ in a given format. On failure, error messages can be extracted with the validato
 </table>
 <p>Table 9.6. Public methods of the Date validator</p>
 <p>To set the expected date format, you can use the <code>setFormat()</code> method.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Internally, the @<code>DateTimeFormatter</code> filter uses the <code>DateTime</code> class from the PHP standard library for converting
 and formatting dates. For available date formats, please refer to the PHP documentation for the <code>DateTime</code> class.</p>
-</blockquote>
+</div>
 <p>Below, a code example demonstrating the usage of the @<code>Date</code>[Laminas\Validator\Date] validator is provided.</p>
 <pre><code class="language-php">&lt;?php
 use Laminas\Validator\Date;
@@ -1089,10 +1097,11 @@ On failure, error messages can be extracted with the validator's
 </table>
 <p>Table 9.7. Public methods of the Regex validator</p>
 <p>The <code>setPattern()</code> method allows to set the regular expression to match against.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>For regular expressions syntax and examples, it is recommended that your refer to the <em>PCRE Patterns</em>
 section of the PHP documentation.</p>
-</blockquote>
+</div>
 <p>Below, a code example demonstrating the usage of the @<code>Regex</code>[Laminas\Validator\Regex] validator is provided. It uses the
 regular expression to check if the input string is a valid IPv4 address (such address typically
 consists of four groups of digits separated with dots).</p>
@@ -1497,10 +1506,12 @@ $isValid3 = $validator-&gt;isValid(&quot;a very long string&quot;); // returns f
 such a compound validator is run, the input value is passed to all validators in turn. The
 @<code>ValidatorChain</code>[Laminas\Validator\ValidatorChain] validator's <code>isValid()</code> method returns <code>true</code> if all validators in the chain return
 <code>true</code>; otherwise it returns <code>false</code>.</p>
-<blockquote>
-<p>The @<code>ValidatorChain</code>[Laminas\Validator\ValidatorChain] class is internally used by the @<code>InputFilter</code>[Laminas\InputFilter\InputFilter] container class for storing the
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The @<code>ValidatorChain</code>[Laminas\Validator\ValidatorChain] class is internally used by the @<code>InputFilter</code>[Laminas\InputFilter\InputFilter]
+container class for storing the
 sequence of validators attached to a form model's field.</p>
-</blockquote>
+</div>
 <p>Public methods provided by the @<code>ValidatorChain</code>[Laminas\Validator\ValidatorChain] class are presented in table 9.13:</p>
 <table>
 <thead>
@@ -1708,10 +1719,8 @@ implementing the @<code>ValidatorInterface</code>[Laminas\Validator\ValidatorInt
 forms of your web application.</p>
 <p>To demonstrate how to create your own validator, we will write the <code>PhoneValidator</code> class encapsulating
 the phone validation algorithm we used with the @<code>Callback</code>[Laminas\Validator\Callback] validator example.</p>
-<blockquote>
 <p>As you might remember, the base concrete class for all standard validators is the @<code>AbstractValidator</code>
 class. By analogy, we will also derive our custom <code>PhoneValidator</code> validator from that base class.</p>
-</blockquote>
 <p>We plan to have the following methods in our <code>PhoneValidator</code> validator class (see table 9.15):</p>
 <table>
 <thead>
@@ -1882,17 +1891,21 @@ algorithm. It takes the <code>$value</code> parameter, performs the regular expr
 on success.</p>
 <p>On failure, the <code>isValid()</code> method it returns the boolean <code>false</code>, and the list of errors can be
 retrieved by the <code>getMessages()</code> method.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>You might notice that we didn't define the <code>getMessages()</code> method in our <code>PhoneValidator</code> class.
 This is because we inherited this method from the @<code>AbstractValidator</code> base class. Inside of our
 <code>isValid()</code> method, for generating error messages, we also used the <code>error()</code> protected method
 provided by the base class (lines 61, 91, 93).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <code>PhoneValidator</code> is only for demonstration of how to write custom validators in Laminas.
 Implementing a validator that will work correctly against all possible phone numbers in
 the world is beyond the scope of this book. If you'd like to use this validator in a real-life
 app, you will definitely need to improve it. For example, take a look at the <code>libphonenumber</code>
 PHP library from Google.</p>
-</blockquote>
+</div>
 <h3 id="using-the-phonevalidator-class">Using the PhoneValidator Class</h3>
 <p>When the <code>PhoneValidator</code> validator class is ready, you can easily start using it in the feedback form
 (or in another form) as follows. It is assumed that you call the following code inside of the

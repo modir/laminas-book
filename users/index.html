@@ -273,9 +273,7 @@ source code of the <em>User Demo</em> web application:</p>
   ...
 </code></pre>
 <p>The <em>User Demo</em> is a website which can be installed on your machine.</p>
-<blockquote>
 <p>Detailed instructions on how to install the <em>User Demo</em> sample can be found in <em>README.md</em> file located in the sample directory.</p>
-</blockquote>
 <h2 id="creating-the-user-module">Creating the User Module</h2>
 <p>In the <em>User Demo</em> sample, we create a new module called <em>User</em> and add all functionality
 related to user management and authentication to that module. If you are new
@@ -283,12 +281,13 @@ to the concept of modules, refer to chapter <a href="#modules">Creating a New Mo
 <p>The <em>User</em> module will have very few dependencies on other
 modules of the website. The idea behind the <em>User</em> module is to give you a reusable unit that you can use in your own web
 application, without any changes or with some modifications.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Ideally, you will be able to use the <em>User</em> module in your own website without any changes. But, in real-life
 websites, you'll probably have to add some fields to the <code>user</code> table, modify the user creation workflow, or
 modify the access filtering algorithm. It this case, you'll have to customize the code of the <em>User</em> module
 to feet your needs.</p>
-</blockquote>
+</div>
 <p>The <em>User</em> module will have the following structure (see figure 16.1 below):</p>
 <p><img alt="Figure 16.1 Structure of the User module" src="../images/users/user_module_structure.png" /></p>
 <p>Let's briefly describe what classes we will have inside module's directory.</p>
@@ -337,12 +336,13 @@ storing data associated with users of our website (see figure 16.2 below).</p>
 <li>the <code>date_created</code> contains date and time when the user was created.</li>
 <li>the <code>pwd_reset_token</code> and <code>pwd_reset_token_creation_date</code> fields are used for password resetting (when the user forgets his/her password and needs to reset it).</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In your own website, you will likely want to add more fields to the <code>user</code> table.
 In this sample, we only define some minimum set of fields.</p>
-</blockquote>
+</div>
 <p>You can create the <code>user</code> table with the following SQL statement:</p>
-<pre><code>CREATE TABLE `user` (
+<pre><code class="language-sql">CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(128) NOT NULL,
   `full_name` varchar(512) NOT NULL,
@@ -356,9 +356,10 @@ In this sample, we only define some minimum set of fields.</p>
 );
 </code></pre>
 <p>You can find a migration, which creates the <code>user</code> table, in the <em>User Demo</em> sample application.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you are new to migrations, refer to chapter <a href="#migrations">Database Migrations</a>.</p>
-</blockquote>
+</div>
 <h2 id="implementing-user-entity">Implementing User Entity</h2>
 <p>The <em>User Demo</em> sample uses Doctrine ORM for managing the database. We have already learned how to use Doctrine in
 <a href="#doctrine">Database Management with Doctrine ORM</a>.</p>
@@ -671,14 +672,19 @@ accordingly.</p>
 <p>What is interesting here is how we save the user's password to the database. For security reasons, we do not
 save the password as is, but calculate a hash of it with the @<code>Bcrypt</code> class provided by @<code>Laminas\Crypt</code> component of
 Laminas Framework (lines 18-19) .</p>
-<blockquote>
 <p>You can install @<code>Laminas\Crypt</code> with the following command:</p>
-<p><code>php composer.phar require laminas/laminas-crypt</code></p>
+<pre><code class="language-bash">php composer.phar require laminas/laminas-crypt
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The @<code>Laminas\Crypt</code> component also requires that you have <code>mcrypt</code> PHP extension installed.</p>
-</blockquote>
-<p>W&gt; The <em>Bcrypt</em> algorithm is a hashing algorithm that is widely used and recommended by the security community for storing user's password.
-W&gt; Encrypting password with @<code>Bcrypt</code> is considered secure nowadays. Some developers still encrypt passwords
-W&gt; with MD5 or SHA1 with salt, but this is not considered secure anymore (MD5 and SHA1 hashes can be hacked).</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <em>Bcrypt</em> algorithm is a hashing algorithm that is widely used and recommended by the security community for storing user's password.
+Encrypting password with @<code>Bcrypt</code> is considered secure nowadays. Some developers still encrypt passwords
+with MD5 or SHA1 with salt, but this is not considered secure anymore (MD5 and SHA1 hashes can be hacked).</p>
+</div>
 <h3 id="validating-encrypted-password">Validating Encrypted Password</h3>
 <p>When a user logs in, you'll need to check if the password hash stored in the database is the same as the hash
 calculated by the password entered by the visitor. You do that with the help of the <code>verify()</code> method provided
@@ -700,10 +706,8 @@ public function validatePassword($user, $password)
 </code></pre>
 <h3 id="creating-admin-user">Creating Admin User</h3>
 <p>The next important thing to note in <code>UserManager</code> is how we create the Admin user.</p>
-<blockquote>
 <p>The Admin user is an initial user that is created automatically when there are not existing users
 in the database and allows you to login for the first time.</p>
-</blockquote>
 <pre><code class="language-php">/**
  * This method checks if at least one user presents, and if not, creates
  * 'Admin' user with email 'admin@example.com' and password 'Secur1ty'.
@@ -738,10 +742,11 @@ securely change the password. Password resetting works as follows:</p>
 <li>The website validates the password reset token and checks it hasn't expired.</li>
 <li>The user is directed to the form allowing him to enter new password.</li>
 </ul>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>You typically do not store raw password reset tokens in database. Instead, you store a <em>hash</em> of the token. This is done for security reasons.
 Even if some malicious hacker steals the DB, they won't be able to reset passwords of the users.</p>
-</blockquote>
+</div>
 <p>The password reset token generation algorithm is implemented inside the <code>generatePasswordResetToken()</code> method of <code>UserManager</code>.
 To generate a random string, we use the @<code>Rand</code> class provided by @<code>Laminas\Math</code> component.</p>
 <pre><code class="language-php">/**
@@ -806,10 +811,9 @@ public function generatePasswordResetToken($user)
     $transport-&gt;send($mail);
 }
 </code></pre>
-<blockquote>
-<p>Configuring mail system for your web server typically
-requires acquiring subscription of some mail service (like <a href="https://sendgrid.com/">SendGrid</a> or <a href="https://aws.amazon.com/en/ses">Amazon SES</a>).</p>
-</blockquote>
+<p>If your web server is as at the same time configured as a mail server then you can send the emails from it.
+In our example we are sending now the emails over an external SMTP server like e.g.
+<a href="https://sendgrid.com/">SendGrid</a> or <a href="https://aws.amazon.com/en/ses">Amazon SES</a>.</p>
 <p>Password reset token validation is implemented inside the <code>validatePasswordResetToken()</code> method.
 We check that the token's hash is the same as we saved in database and that the token has not expired
 (it expires in 1 day since creation).</p>
@@ -883,20 +887,22 @@ public function setNewPasswordByToken($email, $passwordResetToken, $newPassword)
 <p><em>Authentication</em> is the process performed when a user provides his login and password and you decide whether these credentials
 are correct. Authentication typically means you check your database for the given login, and if such login exists, you
 check if the hash calculated by the given password matches the hash of the password stored in the database.</p>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>You typically do not store raw passwords in database. Instead, you store a <em>hash</em> of the password. This is done for security reasons.</p>
-</blockquote>
+</div>
 <p>Once the authentication algorithm determines that the login and password are correct, it returns user <em>identity</em> - a unique
 ID of the user. The identity is typically stored to session, so the visitor doesn't need to pass authentication for every
 HTTP request.</p>
 <p>In Laminas, there is a special component allowing you to implement user authentication - @<code>Laminas\Authentication</code>.
 You can install this component with Composer by typing the following command:</p>
-<pre><code>php composer.phar require laminas/laminas-authentication
+<pre><code class="language-bash">php composer.phar require laminas/laminas-authentication
 </code></pre>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>For authentication to work, you also need to have @<code>Laminas\Session</code> component installed and session manager configured. For information
 on how to do that, refer to <a href="#session">Working with Sessions</a> chapter.</p>
-</blockquote>
+</div>
 <h3 id="authenticationservice">AuthenticationService</h3>
 <p>The @<code>Laminas\Authentication</code> component provides the special service class called <code>AuthenticationService</code> living
 in @<code>Laminas\Authentication</code> namespace. Most useful methods of this service are shown in table 16.1 below.</p>
@@ -972,10 +978,8 @@ The @<code>Result</code>[Laminas\Authentication\Result] class contains the authe
 <p>The adapter can also have additional methods. For example, we will add the <code>setEmail()</code> and <code>setPassword()</code> methods
 that we will use to pass user email and password to the adapter.</p>
 <p>To create the authentication adapter, add the file <em>AuthAdapter.php</em> to the <em>Service</em> directory of the module's source directory.</p>
-<blockquote>
 <p>In the <em>User Demo</em> sample, we create a separate module called <em>User</em> and add functionality related to authentication
 and user management to that module.</p>
-</blockquote>
 <p>Put the following code into that file:</p>
 <pre><code class="language-php">&lt;?php
 namespace User\Service;
@@ -1348,10 +1352,11 @@ $form-&gt;get('password')-&gt;setAttributes([
     &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The view template uses the <em>Sign In</em> page template provided by Bootstrap CSS Framework.
 You can find the original template <a href="https://getbootstrap.com/examples/signin/">here</a>.</p>
-</blockquote>
+</div>
 <h3 id="adding-authmanager-service">Adding AuthManager Service</h3>
 <p>The <code>AuthController</code> works with the <code>AuthManager</code> service. The main business logic behind the authentication
 is implemented in the service. Let's describe the <code>AuthManager</code> in detail.</p>
@@ -1464,11 +1469,12 @@ of the key is presented below:</p>
     character (*) means that everyone will be able to access the web page. The "at" character (@) means that only authenticated
     users will be able to access the page.</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The access filter implementation is very simple. It can't, for example, allow access based on username or by user role. However,
 you can easily modify and extend it as you wish. If you plan to introduce role-based access control (RBAC), refer to the
 <a href="#roles">Role-Based Access Control</a> chapter.</p>
-</blockquote>
+</div>
 <h3 id="adding-dispatch-event-listener">Adding Dispatch Event Listener</h3>
 <p>To implement access filtering, we will use an event listener. You have already become familiar with event listening
 in the <a href="#modules">Creating a New Module</a> chapter.</p>
@@ -1606,10 +1612,9 @@ will direct you to <em>Login</em> page. However, you can easily visit the "http:
 <h2 id="identity-controller-plugin-and-view-helper">Identity Controller Plugin and View Helper</h2>
 <p>One last thing we will discuss is how to check in your website if the user is logged in
 or not and retrieve the user identity. You can do that with the help of the @<code>Identity</code>[Laminas\Mvc\Plugin\Identity] controller plugin and the @<code>Identity</code>[Laminas\View\Helper\Identity] view helper.</p>
-<blockquote>
 <p>To use the @<code>Identity</code>[Laminas\Mvc\Plugin\Identity] plugin, you need to install <code>laminas/laminas-mvc-plugins</code> package with Composer, as follows:</p>
-<p><code>php composer.phar require laminas/laminas-mvc-plugins</code></p>
-</blockquote>
+<pre><code class="language-bash">`php composer.phar require laminas/laminas-mvc-plugins`
+</code></pre>
 <p>In your controller action method, you can check if user is logged in with the following code:</p>
 <pre><code class="language-php">if ($this-&gt;identity()!=null) {
     // User is logged in

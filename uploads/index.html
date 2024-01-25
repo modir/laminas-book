@@ -314,24 +314,25 @@ however it has the following important differences:</p>
   (line 12), and that allows to reduce the content size to its minimum.</p>
 </li>
 </ul>
-<p>W&gt; By default, PHP engine's settings do not allow to upload large files (larger than 2MB). In order to upload
-W&gt; large files, you may need to edit the <em>php.ini</em> configuration file and modify the <code>post_max_size</code>
-W&gt; and <code>upload_max_filesize</code> parameters (please refer to <a href="#devenv">Appendix A. Configuring Web Development Environment</a> for information on how to do that).
-W&gt; Setting these with <code>100M</code> allows to upload files up to 100 Mb in size, and this would typically be sufficient.
-W&gt; If you plan to upload very large files up to 1 GB in size, than better set these with 1024M.
-W&gt; Do not forget to restart your Apache Web Server after editing the configuration file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, PHP engine's settings do not allow to upload large files (larger than 2MB). In order to upload
+large files, you may need to edit the <em>php.ini</em> configuration file and modify the <code>post_max_size</code>
+and <code>upload_max_filesize</code> parameters (please refer to <a href="#devenv">Appendix A. Configuring Web Development Environment</a> for information on how to do that).
+Setting these with <code>100M</code> allows to upload files up to 100 Mb in size, and this would typically be sufficient.
+If you plan to upload very large files up to 1 GB in size, than better set these with 1024M.
+Do not forget to restart your Apache Web Server after editing the configuration file.</p>
+</div>
 <h3 id="_files-super-global-array-in-php">$_FILES Super-Global Array in PHP</h3>
 <p>When a site visitor uploads some files to your Apache Web Server, the files are placed to a temporary location
 (usually to system temporary directory that is <em>/tmp</em> in Linux and <em>C:\Windows\Temp</em> in Windows).
 The PHP script receives the file information to the special super-global array named <code>$_FILES</code>.</p>
-<blockquote>
 <p>The <code>$_FILES</code> array is analogous to the <code>$_GET</code> and <code>$_POST</code> super-globals. The latter two
 are used to store the GET and POST variables, respectively, while the first one is used
 to store information about uploaded files.</p>
-</blockquote>
 <p>For example, for the above mentioned simple upload form, the <code>$_FILES</code> super-global array will look
 as follows (the output is generated with the <code>var_dump()</code> PHP function):</p>
-<pre><code class="language-text">array (size=1)
+<pre><code class="language-php">array (size=1)
     'myfile' =&gt;
         array (size=5)
             'name' =&gt; string 'somefile.txt' (length=12)
@@ -355,13 +356,14 @@ script execution ends. So, if you want to save the uploaded files to some direct
 you need to utilize the <code>move_uploaded_file()</code> PHP function. The <code>move_uploaded_file()</code> function
 takes two arguments: the first one is the name of the temporary file, and the second one is the
 destination file name.</p>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>You might be confused why you cannot use the usual <code>rename()</code> PHP function for moving the
 temporary uploaded file to its destination path. PHP has special function for moving
 uploaded files for security reasons. The <code>move_uploaded_file()</code> function is analogous to
 <code>rename()</code> function, but it takes some additional checks to ensure the file was really transferred
 through HTTP POST request, and that the upload process has finished without errors.</p>
-</blockquote>
+</div>
 <p>The following code example shows how to move the file uploaded with the
 simple form we have considered above:</p>
 <pre><code class="language-php">$destPath = '/path/to/your/upload/dir';
@@ -374,11 +376,12 @@ if(!$result) {
 uploaded file.</p>
 <p>In line 2, we call the <code>move_uploaded_file()</code> function and pass it two arguments: the path to the
 temporary file and the destination path.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Specifying the directory name as the second argument of the <code>move_uploaded_file()</code> function
 is suitable when you do not want to rename the file. If you need to save the uploaded file
 under another name than its original name, you can specify the full file path instead of the directory name.</p>
-</blockquote>
+</div>
 <p>In line 3, we check the returned value of the function. If the operation is successful,
 the function will return <code>true</code>. If some error occurs (for example, if directory permissions
 are insufficient to save the file), the boolean <code>false</code> will be returned.</p>
@@ -570,11 +573,12 @@ Those validator classes belong to @<code>Laminas\Validator</code> component and 
 <li>validators checking whether the file is a graphical image and checking image dimensions;</li>
 <li>and validators checking the file hash (or check sum) <sup id="fnref:hash"><a class="footnote-ref" href="#fn:hash">4</a></sup>.</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note that since file validators live in @<code>Laminas\Validator\File</code>[Laminas\Validator] namespace, their short aliases
 (that you use when creating a validator with the factory) start with <code>File</code> prefix. For example,
 the @<code>IsImage</code> validator has <code>FileIsImage</code> alias.</p>
-</blockquote>
+</div>
 <p>We will show how to use some of these file validators in the <em>Image Gallery</em>
 code example later in this chapter.</p>
 <h2 id="filtering-uploaded-files">Filtering Uploaded Files</h2>
@@ -628,11 +632,12 @@ classes (listed in table 10.2) belong to @<code>Laminas\Filter</code> component 
 <li>filters for encryption and decryption of files;</li>
 <li>filters for converting text files to upper-case and lower-case letters.</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note that since file filters live in @<code>Laminas\Filter\File</code>[Laminas\Filter] namespace, their short aliases
 (that you use when creating a filter with the factory) start with <code>File</code> prefix. For example,
 the @<code>RenameUpload</code> filter has <code>FileRenameUpload</code> alias.</p>
-</blockquote>
+</div>
 <p>The @<code>Encrypt</code>[Laminas\Filter\File\Encrypt] and @<code>Decrypt</code>[Laminas\Filter\File\Decrypt] filters allow to apply various encryption/decryption algorithms
 to the uploaded file (concrete algorithm is attached by specifying the certain adapter). The @<code>LowerCase</code> and
 @<code>UpperCase</code> filters are suitable for converting text files to lower- and upper-case, respectively <sup id="fnref:four"><a class="footnote-ref" href="#fn:four">5</a></sup>.</p>
@@ -691,10 +696,11 @@ rest of keys is analogous to those we used before when adding validation rules f
 <h3 id="executing-validators-before-filters">Executing Validators before Filters</h3>
 <p>For usual form fields, the filters are typically executed <em>before</em> validators, and validators are
 executed <em>after</em> filters. However, for file uploads, this sequence is opposite.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>For file uploads, validators are executed <em>before</em> filters. This behaviour is inverse to the usual
 behaviour.</p>
-</blockquote>
+</div>
 <p>When working with uploaded files, we first need to check that data extracted from <code>$_FILES</code>
 super-global array is correct, and then do anything else with the files (moving the file into a
 storage directory, renaming it, etc.) Because of that, file validators need to be run first turn, and
@@ -716,10 +722,11 @@ happens on each of its steps:</p>
    and validated data from the input filter attached to form.</li>
 <li>On failure, call the <code>getMessages()</code> to retrieve the validation error messages.</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note that for @<code>FileInput</code> input, the attached filters are only run if the <code>getData()</code>
 method is called.</p>
-</blockquote>
+</div>
 <p>When you use both @<code>Input</code>[Laminas\InputFilter\Input] and @<code>FileInput</code> inputs in your form's input filter (which is a common case),
 the filters are still executed first for usual inputs, but validators are executed first for file inputs.</p>
 <h2 id="controller-action-file-uploads">Controller Action &amp; File Uploads</h2>
@@ -794,24 +801,21 @@ with <strong>bold</strong>):</p>
 <p>On success, in line 31, we redirect the user to the "index" action of the controller.</p>
 </li>
 </ul>
-<blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>In the controller action above, you should remember three things: 1) merge <code>$_POST</code> and <code>$_FILES</code> super-global
 arrays before you pass them to the form's <code>setData()</code> method; 2) use <code>isValid()</code> form's method to
 check uploaded files for correctness (run validators); 3) use <code>getData()</code> form's method to run
 file filters.</p>
-</blockquote>
+</div>
 <h2 id="example-image-gallery">Example: Image Gallery</h2>
 <p>To demonstrate the usage of file uploads in Laminas Framework, we will create an Image Gallery that
 will consist of two web pages: the image upload page allowing to upload an image (figure 10.2); and
 the gallery page containing the list of uploaded images (figure 10.3).</p>
-<blockquote>
 <p>You can see the working <em>Image Gallery</em> example in the <em>Form Demo</em> sample application
 bundled with this book.</p>
-</blockquote>
-<p>{width=80%}
-<img alt="Figure 10.2. Image Upload Page" src="../images/uploads/upload_image_form.png" /></p>
-<p>{width=80%}
-<img alt="Figure 10.3. Image Gallery Page" src="../images/uploads/image_gallery.png" /></p>
+<p><img alt="Figure 10.2. Image Upload Page" src="../images/uploads/upload_image_form.png" /></p>
+<p><img alt="Figure 10.3. Image Gallery Page" src="../images/uploads/image_gallery.png" /></p>
 <p>For this example, we will create the following things:</p>
 <ul>
 <li>the <code>ImageForm</code> form model capable of image file uploads;</li>
@@ -825,12 +829,8 @@ bundled with this book.</p>
 that form model class the <code>ImageForm</code>. This class will allow us to upload an image file to the
 server. The form will have the following fields:</p>
 <ul>
-<li>
-<p>the <code>file</code> field will allow the user to pick an image file for upload;</p>
-</li>
-<li>
-<p>and the <code>submit</code> button field allowing to send the form data to server.</p>
-</li>
+<li>the <code>file</code> field will allow the user to pick an image file for upload;</li>
+<li>and the <code>submit</code> button field allowing to send the form data to server.</li>
 </ul>
 <p>The code of the <code>ImageForm</code> form model is presented below. It should be put to <em>ImageForm.php</em> file
 stored in <em>Form</em> directory under the module's source directory:</p>
@@ -888,11 +888,12 @@ class ImageForm extends Form
 in its understanding. We just want to attract the attention of the reader that in line 19, we set
 the "multipart/form-data" value for the "enctype" attribute of the form to make the form use binary
 encoding for its data.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Actually, explicitly setting the "enctype" attribute in form's constructor is optional, because
 @<code>Laminas\Form\Element\File</code> element performs that automatically when you call form's <code>prepare()</code>
 method.</p>
-</blockquote>
+</div>
 <h3 id="adding-validation-rules-to-imageform-model">Adding Validation Rules to ImageForm Model</h3>
 <p>To demonstrate the usage of validators and filters designed to work with file uploads, we will
 add those to the <code>ImageForm</code> form model class. We want to achieve the following goals:</p>
@@ -992,8 +993,11 @@ class ImageForm extends Form
 the <em>APP_DIR/data/upload</em> directory. The filter will use the same file name for the destination file
 as the name of the original file (<code>useUploadName</code> option). If the file with such name already
 exists, the filter will overwrite it (<code>overwrite</code> option).</p>
-<p>W&gt; For the @<code>MimeType</code> and @<code>IsImage</code> validator to work, you have to enable PHP <code>fileinfo</code> extension. This extension
-W&gt; is already enabled in Linux Ubuntu, but not in Windows. After that, do not forget to restart Apache HTTP Server.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the @<code>MimeType</code> and @<code>IsImage</code> validator to work, you have to enable PHP <code>fileinfo</code> extension. This extension
+is already enabled in Linux Ubuntu, but not in Windows. After that, do not forget to restart Apache HTTP Server.</p>
+</div>
 <h3 id="writing-imagemanager-service">Writing ImageManager Service</h3>
 <p>Because we strive to write code conforming to Domain Driven Design pattern, we will
 create a service model class encapsulating the functionality for image management. We will
@@ -1035,11 +1039,12 @@ register this service in the service manager component of the web application.</
 </tbody>
 </table>
 <p>Table 10.3. Public methods of the ImageManager class.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In fact, we could put the code we plan to add into the service into the controller actions, but that
 would make the controller fat and poorly testable. By introducing the service class, we improve
 the separation of concerns and code reusability.</p>
-</blockquote>
+</div>
 <p>Add the <em>ImageManager.php</em> file to the <em>Service</em> directory under the module's
 source directory. Add the following code to the file:</p>
 <pre><code class="language-php">&lt;?php
@@ -1399,11 +1404,12 @@ $form-&gt;prepare();
 apply nice-looking Twitter Bootstrap styles to the form's <em>Submit</em> button.</p>
 <p>Then, we render the form with the common view helpers that we discussed in <a href="#forms">Collecting User Input with Forms</a>.
 For rendering the "file" field, we use the generic @<code>FormElement</code> view helper.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Typically, you use the @<code>FormElement</code> generic view helper for rendering the file field.
 The @<code>FormElement</code> internally calls the @<code>FormFile</code> view helper, which performs the actual
 rendering.</p>
-</blockquote>
+</div>
 <h4 id="adding-index-action-corresponding-view-template">Adding Index Action &amp; Corresponding View Template</h4>
 <p>The second action method we will complete is the <code>indexAction()</code>. This action will handle the
 <em>Image Gallery</em> page containing the list of uploaded files and their small thumbnails. For each
@@ -1429,10 +1435,11 @@ class ImageController extends AbstractActionController
 </code></pre>
 <p>In the code above, we use the <code>getSavedFiles()</code> method of the <code>ImageManager</code> class for retrieving
 the list of uploaded images and pass them to the view for rendering.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please note how "slim" and clear this controller action is! We achieved this by moving the
 image management functionality to the <code>ImageManager</code> service model.</p>
-</blockquote>
+</div>
 <p>Add the <em>index.phtml</em> view template to <em>application/image</em> directory under the module's
 <em>view</em> directory. The contents of the file is shown below:</p>
 <pre><code class="language-php">&lt;h1&gt;Image Gallery&lt;/h1&gt;
@@ -1492,10 +1499,11 @@ the thumbnails of each uploaded images.</p>
 to the "file" action of our <code>ImageController</code> controller. We pass two parameters to the action via
 the query part of the URL: the image name and thumbnail flag.</p>
 <p>For styling the thumbnails, we use the Twitter Bootstrap provided ".img-thumbnail" CSS class.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>For additional information about these Twitter Bootstrap styles, please refer to the
 Bootstrap official documentation.</p>
-</blockquote>
+</div>
 <p>Below each thumbnail, we put the "Show in Natural Size" link, which points to the "file" action
 of our <code>ImageController</code> controller. When site visitor clicks the link, he will be shown with the
 image in natural size, and the image will be opened in another browser's tab (note the
@@ -1577,10 +1585,11 @@ get the absolute path to the image by its name.</p>
 <p>Finally, we create a @<code>Response</code>[Laminas\Http\PhpEnvironment\Response] object, fill its headers with image information,
 set its content with data of the image file (lines 32-45), and return the @<code>Response</code>[Laminas\Http\PhpEnvironment\Response] object from the controller
 action (line 53).</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Note that returning the @<code>Response</code>[Laminas\Http\PhpEnvironment\Response] object disables the default rendering of the view template for
 this action method. By this reason, we do not create the <em>file.phtml</em> view template file.</p>
-</blockquote>
+</div>
 <h4 id="creating-factory-for-the-controller">Creating Factory for the Controller</h4>
 <p>Because our <code>ImageController</code> uses the <code>ImageManager</code> service, we need to somehow pass it the instance of
 the <code>ImageManager</code> (to inject the dependency into the controller's constructor). We do this with the help
@@ -1658,28 +1667,24 @@ return [
 <p>Finally, adjust directory permissions to make the <em>APP_DIR/data</em> directory writeable by the Apache Web Server.
 In Linux Ubuntu, this is typically accomplished by the following shell commands (replace the <code>APP_DIR</code>
 placeholder with the actual directory name of your web application):</p>
-<p><code>chown -R www-data:www-data APP_DIR/data</code></p>
-<p><code>chmod -R 775 APP_DIR/data</code></p>
+<pre><code class="language-bash">chown -R www-data:www-data APP_DIR/data
+chmod -R 775 APP_DIR/data
+</code></pre>
 <p>Above, the <code>chown</code> and <code>chmod</code> commands set the Apache user to be the owner of the directory and
 allow the web server to write to the directory, respectively.</p>
 <p>If you now enter the URL <em>http://localhost/images</em> into your web browser's
 navigation bar, you will see the image gallery page like shown in figure 10.4.</p>
-<p>{width=80%}
-<img alt="Figure 10.4. Image Gallery Page" src="../images/uploads/empty_image_gallery.png" /></p>
+<p><img alt="Figure 10.4. Image Gallery Page" src="../images/uploads/empty_image_gallery.png" /></p>
 <p>Clicking the <em>Upload More</em> button will open the <em>Upload a New Image</em> page where you can peek an image file
 for upload. If you pick an unacceptable file (not an image, or too big image), you will see validation
 errors (see the figure 10.5 below).</p>
-<p>{width=80%}
-<img alt="Figure 10.5. File Validation Errors" src="../images/uploads/image_validation_errors.png" /></p>
+<p><img alt="Figure 10.5. File Validation Errors" src="../images/uploads/image_validation_errors.png" /></p>
 <p>If the upload is completed successfully, you will be redirected back to the <em>Image Gallery</em> page
 and see the uploaded image in the list of thumbnails. Clicking the <em>View Full Size</em> button will
 open the image in a new browser tab (see the figure 10.6 below for example).</p>
-<p>{width=80%}
-<img alt="Figure 10.6. Opening an Image in Natural Size" src="../images/uploads/image_preview.png" /></p>
-<blockquote>
+<p><img alt="Figure 10.6. Opening an Image in Natural Size" src="../images/uploads/image_preview.png" /></p>
 <p>You may find the <em>Image Gallery</em> complete example in the <em>Form Demo</em> sample web application
 bundled with this book.</p>
-</blockquote>
 <h2 id="summary">Summary</h2>
 <p>File uploads is a standard HTML form feature. Uploading files is accomplished by setting form
 content encoding to binary encoding type. Laminas Framework provides convenient functionality
