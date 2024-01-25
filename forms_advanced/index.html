@@ -118,7 +118,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#using-validation-groups">Using Validation Groups</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#implementing-multi-step-forms-multi-step-forms">Implementing Multi-Step Forms {#multi-step-forms}</a>
+    <li class="toctree-l2"><a class="reference internal" href="#implementing-multi-step-forms">Implementing Multi-Step Forms</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#enabling-sessions">Enabling Sessions</a>
     </li>
@@ -690,7 +690,7 @@ if ($form-&gt;isValid())
 </code></pre>
 <p>You can see this example in action in the <em>Form Demo</em> sample web application bundled with this book. Just type
 "http://localhost/payment" URL in your browser.</p>
-<h2 id="implementing-multi-step-forms-multi-step-forms">Implementing Multi-Step Forms {#multi-step-forms}</h2>
+<h2 id="implementing-multi-step-forms">Implementing Multi-Step Forms</h2>
 <p>In this section, we will provide instructions on how to implement a <em>multi-step</em> form with Laminas. A multi-step form
 is a form having a lot of fields, and which is displayed in several steps. To store the current step and user-entered data
 between page requests, PHP <em>sessions</em> are utilized.</p>
@@ -704,7 +704,7 @@ This form would have as many steps as many questions are in the survey.</p>
 <h3 id="enabling-sessions">Enabling Sessions</h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are new to the PHP sessions feature, please refer to <a href="#session">Working with Sessions</a> before reading this section.</p>
+<p>If you are new to the PHP sessions feature, please refer to <a href="../session/">Working with Sessions</a> before reading this section.</p>
 </div>
 <p>Session support is implemented in @<code>Laminas\Session</code> component, so you have to install it if you hadn't done that before.</p>
 <p>Next, modify your <em>APP_DIR/config/global.php</em> config file as follows:</p>

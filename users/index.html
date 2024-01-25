@@ -277,7 +277,7 @@ source code of the <em>User Demo</em> web application:</p>
 <h2 id="creating-the-user-module">Creating the User Module</h2>
 <p>In the <em>User Demo</em> sample, we create a new module called <em>User</em> and add all functionality
 related to user management and authentication to that module. If you are new
-to the concept of modules, refer to chapter <a href="#modules">Creating a New Module</a>.</p>
+to the concept of modules, refer to chapter <a href="../modules/">Creating a New Module</a>.</p>
 <p>The <em>User</em> module will have very few dependencies on other
 modules of the website. The idea behind the <em>User</em> module is to give you a reusable unit that you can use in your own web
 application, without any changes or with some modifications.</p>
@@ -358,11 +358,11 @@ In this sample, we only define some minimum set of fields.</p>
 <p>You can find a migration, which creates the <code>user</code> table, in the <em>User Demo</em> sample application.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are new to migrations, refer to chapter <a href="#migrations">Database Migrations</a>.</p>
+<p>If you are new to migrations, refer to chapter <a href="../doctrine_migrations/">Database Migrations</a>.</p>
 </div>
 <h2 id="implementing-user-entity">Implementing User Entity</h2>
 <p>The <em>User Demo</em> sample uses Doctrine ORM for managing the database. We have already learned how to use Doctrine in
-<a href="#doctrine">Database Management with Doctrine ORM</a>.</p>
+<a href="../doctrine/">Database Management with Doctrine ORM</a>.</p>
 <p>For storing information about users in the database, we will create the <code>User</code> entity. The <code>User</code> entity is mapped
 onto the <code>user</code> database table. It is a typical Doctrine entity class.</p>
 <p>Create the <em>User.php</em> file inside the <em>Entity</em> directory under the module's source directory. Put
@@ -901,7 +901,7 @@ You can install this component with Composer by typing the following command:</p
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>For authentication to work, you also need to have @<code>Laminas\Session</code> component installed and session manager configured. For information
-on how to do that, refer to <a href="#session">Working with Sessions</a> chapter.</p>
+on how to do that, refer to <a href="../session/">Working with Sessions</a> chapter.</p>
 </div>
 <h3 id="authenticationservice">AuthenticationService</h3>
 <p>The @<code>Laminas\Authentication</code> component provides the special service class called <code>AuthenticationService</code> living
@@ -960,8 +960,13 @@ algorithms (see figure 16.9), and several <em>storage handlers</em> allowing you
 <p><img alt="Figure 16.9 Standard authentication adapters" src="../images/users/std_auth_adapters.png" /></p>
 <p><img alt="Figure 16.10 Standard storage handlers" src="../images/users/std_auth_storage_handlers.png" /></p>
 <p>For our purposes, we can use @<code>Session</code>[Laminas\Authentication\Storage\Session] storage handler without needing to change any code. However, standard authentication
-adapters are not suitable for us, because we use Doctrine ORM. We will have to write our custom authentication adapter.
-Luckily, this is rather simple to do.</p>
+adapters are not suitable for us, because we use Doctrine ORM.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The following chapters will be rewritten. Since the first version of this book a proper DoctrineModule was written for Laminas\Authentication.
+Because of this we do not need to write an adapter. The documentation for the DoctrineModule can be found at:
+<a href="https://www.doctrine-project.org/projects/doctrine-module/en/6.1/authentication.html">DoctrineModule</a></p>
+</div>
 <h3 id="writing-authentication-adapter">Writing Authentication Adapter</h3>
 <p>An authentication adapter must implement the @<code>AdapterInterface</code>[Laminas\Authentication\Adapter\AdapterInterface] interface, which has the single method <code>authenticate()</code>.
 This method should check the user email and password against the database. We will do this as follows:</p>
@@ -1473,11 +1478,11 @@ of the key is presented below:</p>
 <p class="admonition-title">Note</p>
 <p>The access filter implementation is very simple. It can't, for example, allow access based on username or by user role. However,
 you can easily modify and extend it as you wish. If you plan to introduce role-based access control (RBAC), refer to the
-<a href="#roles">Role-Based Access Control</a> chapter.</p>
+<a href="../roles/">Role-Based Access Control</a> chapter.</p>
 </div>
 <h3 id="adding-dispatch-event-listener">Adding Dispatch Event Listener</h3>
 <p>To implement access filtering, we will use an event listener. You have already become familiar with event listening
-in the <a href="#modules">Creating a New Module</a> chapter.</p>
+in the <a href="../modules/">Creating a New Module</a> chapter.</p>
 <p>Particularly, we will listen to the <em>Dispatch</em> event. The <em>Dispatch</em> event is triggered after the <em>Route</em> event, when the
 controller and action are already determined. To implement the listener, we modify the <em>Module.php</em> file of the <em>User</em> module
 as follows:</p>

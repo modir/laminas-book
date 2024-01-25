@@ -207,7 +207,7 @@
 <p>Laminas Framework provides you with the so called "skeleton application" to make it easier to create
 your new websites from scratch. In this chapter, we will show how to install the skeleton
 application and how to create an Apache virtual host. It is recommended that you refer to
-<a href="#devenv">Appendix A. Configuring Web Development Environment</a> before reading this chapter to get your development
+<a href="../devenv/">Appendix A. Configuring Web Development Environment</a> before reading this chapter to get your development
 environment configured.</p>
 <h2 id="getting-laminas-skeleton-application">Getting Laminas Skeleton Application</h2>
 <p>The Skeleton Application is a simple laminas-based application that contains
@@ -340,7 +340,7 @@ there are several files:</p>
 </li>
 <li>
 <p><code>LICENSE.md</code> is a text file containing Laminas license (you had a chance to read it in
- <a href="#intro">Introduction to Laminas Framework</a>).
+ <a href="../intro/">Introduction to Laminas Framework</a>).
   Do not remove or modify this file, because Laminas license doesn't allow to do so.</p>
 </li>
 <li>
@@ -491,7 +491,7 @@ about it, we need to edit the virtual host file.</p>
 <p class="admonition-title">Note</p>
 <p>Virtual host file may be located at a different path, depending on your operating system type.
 For example, in Linux Ubuntu it is located in <code>/etc/apache2/sites-available/000-default.conf</code> file.
-For OS- and server-specific information about virtual hosts, please refer to <a href="#devenv">Appendix A. Configuring Web Development Environment</a>.</p>
+For OS- and server-specific information about virtual hosts, please refer to <a href="../devenv/">Appendix A. Configuring Web Development Environment</a>.</p>
 </div>
 <p>Let's now edit the default virtual host file to make it look like below (we assume you use Apache v2.4):</p>
 <pre><code class="language-text">&lt;VirtualHost *:80&gt;
@@ -527,7 +527,7 @@ everyone to visit the website.</p>
 <p>Laminas Framework utilizes Apache's URL rewriting module for redirecting
 web-users to entry script of your website. Please ensure that your web server
 has <code>mod_rewrite</code> module enabled. For instructions on how to enable the module, please
-refer to <a href="#devenv">Appendix A. Configuring Web Development Environment</a>.</p>
+refer to <a href="../devenv/">Appendix A. Configuring Web Development Environment</a>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -546,7 +546,7 @@ applications.</p>
 <p>Now that we have the skeleton application set up and working, we will want to change something
 with it in the future. To easily navigate the directory structure, edit files and debug the
 website, the common practice is to use an IDE (Integrated Development Environment). In this book, we
-use NetBeans IDE (see <a href="#devenv">Appendix A. Configuring Web Development Environment</a> for more information on how to install NetBeans).</p>
+use NetBeans IDE (see <a href="../devenv/">Appendix A. Configuring Web Development Environment</a> for more information on how to install NetBeans).</p>
 <p>To create NetBeans project for our skeleton application, run NetBeans and open menu
 <em>File-&gt;New Project...</em>. The <em>New Project</em> dialog appears (see figure 2.4).</p>
 <p><img alt="Figure 2.4. Creating NetBeans Project - Choose Project Page" src="../images/skeleton/netbeans_create_project.png" /></p>
@@ -570,7 +570,7 @@ has been successfully created, you should see the project window (see the figure
 <p>In the project window, you can see the menu bar, the tool bar,
 the <em>Projects</em> pane where your project files are listed, and, in the right
 part of the window, you can see the code of the <code>index.php</code> entry file.</p>
-<p>Please refer to <a href="#netbeans">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
+<p>Please refer to <a href="../netbeans/">Appendix B. Introduction to PHP Development in NetBeans IDE</a>
 for more NetBeans usage tips, including launching and interactively debugging
 laminas-based websites.</p>
 <p><strong>It's time for some advanced stuff...</strong></p>
@@ -870,7 +870,7 @@ application dependencies), type the following:</p>
 <pre><code class="language-bash">php composer.phar require doctrine/doctrine-module 2.*
 </code></pre>
 <p>The command above edits <code>composer.json</code> file, and downloads and installs the package. We will use this command
-later in chapter <a href="#doctrine">Managing Database with Doctrine</a>, when becoming familiar with database management.</p>
+later in chapter <a href="../doctrine/">Managing Database with Doctrine</a>, when becoming familiar with database management.</p>
 <h3 id="virtual-packages">Virtual Packages</h3>
 <p>Composer can be used to require some functionality to present on your system. You've already seen
 how we require "php:^5.6". PHP package is a virtual package representing PHP itself. You can also
