@@ -1,14 +1,15 @@
 # Checking Input Data with Validators
 
-In this chapter, we will provide an overview of standard ZF validators that
+In this chapter, we will provide an overview of standard Laminas validators that
 can be used with your forms, and will also show how to write a custom validator.
 A validator is a class designed to take some input data, check it
 for correctness, and return a boolean result telling whether the data is correct
 (and error messages if the data has some errors).
 
-> In general, you even can use validators *outside* forms to process an arbitrary data.
-> For example, validators may be used in a controller action to ensure that data passed
-> as GET and/or POST variables is secure and conform to certain format.
+!!! note
+    In general, you even can use validators *outside* forms to process an arbitrary data.
+    For example, validators may be used in a controller action to ensure that data passed
+    as GET and/or POST variables is secure and conform to certain format.
 
 Laminas components covered in this chapter:
 
@@ -51,8 +52,9 @@ value (the `$value` parameter). If the validation of the `$value` passes, the
 `isValid()` method returns boolean `true`. If the `$value` fails validation, then
 this method returns `false`.
 
-> A concrete validator class implementing the @`ValidatorInterface`[Laminas\Validator\ValidatorInterface] interface may have additional methods.
-> For example, many validator classes have methods allowing to configure the validator (set validation options).
+!!! note
+    A concrete validator class implementing the @`ValidatorInterface`[Laminas\Validator\ValidatorInterface] interface may have additional methods.
+    For example, many validator classes have methods allowing to configure the validator (set validation options).
 
 ## Standard Validators Overview
 
@@ -112,7 +114,7 @@ For example, look below for possible validation errors that the @`EmailAdrress`[
 returns if you pass it the "abc@ewr" value (the back-slash ('\') character indicates line breaks where
 code doesn't fit book page):
 
-~~~text
+~~~php
 array(3) {
   ["emailAddressInvalidHostname"] =>
     string(51) "'ewr' is not a valid hostname for the email address"
@@ -136,8 +138,9 @@ Some validators may work with input data in certain format only (for example, a 
 that the input data be a string, but not an array). If you pass it data in unacceptable format,
 the validator may throw an @`Laminas\Validator\Exception\RuntimeException` exception or raise a PHP warning.
 
-> It is recommended to check certain validator's documentation to be aware of its actual behaviour
-> in case of inacceptable data.
+!!! note
+    It is recommended to check certain validator's documentation to be aware of its actual behaviour
+    in case of inacceptable data.
 
 ## Instantiating a Validator
 
@@ -163,11 +166,12 @@ An E-mail address typically consists of the local part (user name)
 followed by the "at" character (@), which is in turn followed by the host name. For example,
 in the "name@example.com" E-mail address, "name" is the local part, and "example.com" is the host name.
 
-> The @`EmailAddress` validator is useful for checking an user-entered E-mail addresses on
-> your forms for correctness.
-> The validator will check for the correctness of the local part and the host name,
-> for presence of the "at" character (@) and, optionally, will connect to the recipient's
-> host and query the DNS service for existence of the MX (Mail Exchanger) record [^mx_record].
+!!! note
+    The @`EmailAddress` validator is useful for checking an user-entered E-mail addresses on
+    your forms for correctness.
+    The validator will check for the correctness of the local part and the host name,
+    for presence of the "at" character (@) and, optionally, will connect to the recipient's
+    host and query the DNS service for existence of the MX (Mail Exchanger) record [^mx_record].
 
 [^mx_record]: An MX record is a type of record used in the Domain Name System (DNS).
               MX records define one or several mail server addresses assigned to recipient's domain.
@@ -198,8 +202,8 @@ As you can see from the table, the @`EmailAddress` validator, additionally to th
 `isValid()` and `getMessages()` methods, provides the constructor method to which
 you can (optionally) pass the complete list of options for initializing the validator.
 
-> All standard validators have the constructor method (optionally) accepting an array of options
-> for configuring the validator when instantiating it manually.
+All standard validators have the constructor method (optionally) accepting an array of options
+for configuring the validator when instantiating it manually.
 
 The @`EmailAddress` class also provides a number of methods that can be used for
 setting specific validator options.
@@ -216,9 +220,10 @@ of the `ALLOW_`-prefixed constants [^allow_constants] to the `setAllow()` method
 
 [^allow_constants]: The `ALLOW_`-prefixed constants are provided by the @`Hostname`[Laminas\Validator\Hostname] validator.
 
-> Internally, the @`EmailAddress` validator uses the @`Hostname`[Laminas\Validator\Hostname] validator for checking the host name part
-> of an E-mail address. Optionally, you can attach a custom host name validator by using the `setHostnameValidator()`
-> method, however it is unlikely you will need to do such.
+!!! note
+    Internally, the @`EmailAddress` validator uses the @`Hostname`[Laminas\Validator\Hostname] validator for checking the host name part
+    of an E-mail address. Optionally, you can attach a custom host name validator by using the `setHostnameValidator()`
+    method, however it is unlikely you will need to do such.
 
 The `useMxCheck()` method tells whether the validator should connect to the recipient's
 host and query the DNS server for the MX record(s). If the server has no MX records, than the validation fails.
@@ -226,8 +231,9 @@ You can additionally use the `useDeepMxCheck()` method to tell the validator to 
 server addresses extracted from the MX records against the black list of reserved domain names, and perform
 additional checks per each detected address.
 
-> It is not recommended to perform MX check (and deep MX check), because that may take a lot of time and
-> increase the web page load time. By default, these checks are disabled.
+!!! note
+    It is not recommended to perform MX check (and deep MX check), because that may take a lot of time and
+    increase the web page load time. By default, these checks are disabled.
 
 Below, we provide code examples showing two equivalent methods of manual creating of an instance of
 the @`EmailAddress` validator, setting its options and checking an input value:
@@ -344,10 +350,11 @@ validator, call its `setAllowDns()`, `useMxCheck()` and `useDeepMxCheck()` metho
 and pass the input value to its `isValid()` method. This is very useful, because
 can be accomplished in a single call.
 
-> The @`StaticValidator` doesn't provide an ability to extract the list
-> of human-readable validation errors. However, since the @`StaticValidator`
-> is designed to be used outside forms, and not intended for displaying results to a human,
-> this seems to be not a big disadvantage.
+!!! note
+    The @`StaticValidator` doesn't provide an ability to extract the list
+    of human-readable validation errors. However, since the @`StaticValidator`
+    is designed to be used outside forms, and not intended for displaying results to a human,
+    this seems to be not a big disadvantage.
 
 ### Method 3. Using an Array Configuration
 
@@ -398,7 +405,8 @@ When creating a validator with a factory, you can use either the fully qualified
 name or its short alias. The short aliases for the standard validators are defined by the
 @`ValidatorPluginManager` class.
 
-> The @`ValidatorPluginManager` class defines validator aliases.
+!!! note
+    The @`ValidatorPluginManager` class defines validator aliases.
 
 A standard validator's alias is typically the same as class name. For example, the class
 @`Laminas\Validator\EmailAddress` has the short alias @`EmailAddress`.
@@ -565,7 +573,8 @@ The @`Uri`[Laminas\Validator\Uri] validator is designed to check whether the inp
 Uniform Resource Identifier (URI) [^uri]. On failure, error messages can be
 extracted with the validator's `getMessages()` method.
 
-> Don't be confused with the term URI. In most cases, you may think of URI as of a usual URL.
+!!! note
+    Don't be confused with the term URI. In most cases, you may think of URI as of a usual URL.
 
 [^uri]: A Uniform Resource Identifier (URI) is a compact sequence of characters
         that identifies an abstract or physical resource. An Uniform Resource Locator (URL)
@@ -636,8 +645,9 @@ Table 9.6. Public methods of the Date validator
 
 To set the expected date format, you can use the `setFormat()` method.
 
-> Internally, the @`DateTimeFormatter` filter uses the `DateTime` class from the PHP standard library for converting
-> and formatting dates. For available date formats, please refer to the PHP documentation for the `DateTime` class.
+!!! note
+    Internally, the @`DateTimeFormatter` filter uses the `DateTime` class from the PHP standard library for converting
+    and formatting dates. For available date formats, please refer to the PHP documentation for the `DateTime` class.
 
 Below, a code example demonstrating the usage of the @`Date`[Laminas\Validator\Date] validator is provided.
 
@@ -677,8 +687,9 @@ Table 9.7. Public methods of the Regex validator
 
 The `setPattern()` method allows to set the regular expression to match against.
 
-> For regular expressions syntax and examples, it is recommended that your refer to the *PCRE Patterns*
-> section of the PHP documentation.
+!!! note
+    For regular expressions syntax and examples, it is recommended that your refer to the *PCRE Patterns*
+    section of the PHP documentation.
 
 Below, a code example demonstrating the usage of the @`Regex`[Laminas\Validator\Regex] validator is provided. It uses the
 regular expression to check if the input string is a valid IPv4 address (such address typically
@@ -924,8 +935,10 @@ such a compound validator is run, the input value is passed to all validators in
 @`ValidatorChain`[Laminas\Validator\ValidatorChain] validator's `isValid()` method returns `true` if all validators in the chain return
 `true`; otherwise it returns `false`.
 
-> The @`ValidatorChain`[Laminas\Validator\ValidatorChain] class is internally used by the @`InputFilter`[Laminas\InputFilter\InputFilter] container class for storing the
-> sequence of validators attached to a form model's field.
+!!! note
+    The @`ValidatorChain`[Laminas\Validator\ValidatorChain] class is internally used by the @`InputFilter`[Laminas\InputFilter\InputFilter]
+    container class for storing the
+    sequence of validators attached to a form model's field.
 
 Public methods provided by the @`ValidatorChain`[Laminas\Validator\ValidatorChain] class are presented in table 9.13:
 
@@ -1097,8 +1110,8 @@ forms of your web application.
 To demonstrate how to create your own validator, we will write the `PhoneValidator` class encapsulating
 the phone validation algorithm we used with the @`Callback`[Laminas\Validator\Callback] validator example.
 
-> As you might remember, the base concrete class for all standard validators is the @`AbstractValidator`
-> class. By analogy, we will also derive our custom `PhoneValidator` validator from that base class.
+As you might remember, the base concrete class for all standard validators is the @`AbstractValidator`
+class. By analogy, we will also derive our custom `PhoneValidator` validator from that base class.
 
 We plan to have the following methods in our `PhoneValidator` validator class (see table 9.15):
 
@@ -1266,16 +1279,18 @@ on success.
 On failure, the `isValid()` method it returns the boolean `false`, and the list of errors can be
 retrieved by the `getMessages()` method.
 
-> You might notice that we didn't define the `getMessages()` method in our `PhoneValidator` class.
-> This is because we inherited this method from the @`AbstractValidator` base class. Inside of our
-> `isValid()` method, for generating error messages, we also used the `error()` protected method
-> provided by the base class (lines 61, 91, 93).
+!!! note
+    You might notice that we didn't define the `getMessages()` method in our `PhoneValidator` class.
+    This is because we inherited this method from the @`AbstractValidator` base class. Inside of our
+   `isValid()` method, for generating error messages, we also used the `error()` protected method
+    provided by the base class (lines 61, 91, 93).
 
-> The `PhoneValidator` is only for demonstration of how to write custom validators in Laminas.
-> Implementing a validator that will work correctly against all possible phone numbers in
-> the world is beyond the scope of this book. If you'd like to use this validator in a real-life
-> app, you will definitely need to improve it. For example, take a look at the `libphonenumber`
-> PHP library from Google.
+!!! note
+    The `PhoneValidator` is only for demonstration of how to write custom validators in Laminas.
+    Implementing a validator that will work correctly against all possible phone numbers in
+    the world is beyond the scope of this book. If you'd like to use this validator in a real-life
+    app, you will definitely need to improve it. For example, take a look at the `libphonenumber`
+    PHP library from Google.
 
 ### Using the PhoneValidator Class
 
